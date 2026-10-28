@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -16,6 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#01000F">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>.gather .vlab,.gather h3,.gather p{text-shadow:0 1px 2px rgba(1,0,15,.55),0 0 18px rgba(1,0,15,.45)}</style>
 </head>
 <body>
 
@@ -28,7 +29,7 @@
    Type: Oswald condensed caps (Founders Grotesk X-Condensed stand-in) for display; Inter for reading. */
 :root{
   --black:#01000F; --white:#FFFFFF; --teal:#09E1CD; --dteal:#026771; --lteal:#DCFBFA; --peach:#F4B693; --cream:#FBF7F2;
-  --ink:var(--black); --ink-2:rgba(1,0,15,.72); --ink-3:rgba(1,0,15,.5); --rule:rgba(1,0,15,.14);
+  --ink:var(--black); --ink-2:rgba(1,0,15,.72); --ink-3:rgba(1,0,15,.64); --rule:rgba(1,0,15,.14);
   --display:'Oswald','Liberation Sans Narrow',Impact,sans-serif; --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
   --max:1240px; --gutter:clamp(16px,4.5vw,64px);
   --hero:url(/frontier-tech-summit/assets/hero.jpg); --close:url(/frontier-tech-summit/assets/img-9bd5b5f3d8.jpg);
@@ -1123,7 +1124,7 @@ h1[tabindex="-1"]:focus{outline:none}
   var root=document.documentElement,tb=document.getElementById('themeBtn');
   function applyTheme(t){if(t)root.setAttribute('data-theme',t);else root.removeAttribute('data-theme');var dark=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);tb.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');tb.innerHTML=dark?'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>':'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6z"/></svg>';}
   var saved=null;try{saved=localStorage.getItem('eftw-theme');}catch(e){}
-  applyTheme(saved);
+  applyTheme(saved||'light');
   tb.addEventListener('click',function(){var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches);var next=dark?'light':'dark';applyTheme(next);try{localStorage.setItem('eftw-theme',next);}catch(e){}});
   
   document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.fr[data-fi]');if(a)window.__eftwFr=a.getAttribute('data-fi');},true);
