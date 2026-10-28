@@ -19,6 +19,17 @@ site's rewrite to a redirect, and update the `canonical` / `og:` URLs at the top
 Short links on the main site (/frontier, /fts, /frontier-tech-summit-2027) redirect to
 /frontier-tech-summit; those redirects live in the main site's config.
 
+## Source of truth
+This repo is the master copy of the site. The Claude design artifact
+(claude.ai/artifact/8CCXewQn8oL7o8u55Dwpew) is a mirror with a "Draft copy" banner;
+refresh it from this repo after changes, never the other way around.
+
+## To do when the Luma event exists
+Switch the three "Request an invitation" buttons on the Who attends page (Founders,
+Corporate innovators, Investors) from email links to the Luma event links, opening in a new
+tab. Plain links only: Luma embeds or widgets are blocked by endeavorcolorado.org's security
+policy unless the Website project allows them.
+
 ## Rules
 - Content only. No attendee data, prices, budget or unconfirmed names in this public repo.
   Registration runs through Luma; contacts live in Salesforce.
