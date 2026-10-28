@@ -1,1 +1,15 @@
-{ "cleanUrls": true, "rewrites": [ { "source": "/hero.jpg", "destination": "/image.jpg" } ] }
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/", "destination": "/frontier", "permanent": false },
+    { "source": "/coming-soon", "destination": "/frontier", "permanent": false },
+    { "source": "/hero.jpg", "destination": "/frontier/assets/hero.jpg", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/frontier/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+    }
+  ]
+}
