@@ -2,13 +2,17 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/frontier", "permanent": false },
-    { "source": "/coming-soon", "destination": "/frontier", "permanent": false },
-    { "source": "/hero.jpg", "destination": "/frontier/assets/hero.jpg", "permanent": true }
+    { "source": "/", "destination": "/frontier-tech-summit", "permanent": false },
+    { "source": "/frontier", "destination": "/frontier-tech-summit", "permanent": false },
+    { "source": "/frontier/:path*", "destination": "/frontier-tech-summit", "permanent": false },
+    { "source": "/fts", "destination": "/frontier-tech-summit", "permanent": false },
+    { "source": "/frontier-tech-summit-2027", "destination": "/frontier-tech-summit", "permanent": false },
+    { "source": "/coming-soon", "destination": "/frontier-tech-summit", "permanent": false },
+    { "source": "/hero.jpg", "destination": "/frontier-tech-summit/assets/hero.jpg", "permanent": true }
   ],
   "headers": [
     {
-      "source": "/frontier/assets/(.*)",
+      "source": "/frontier-tech-summit/assets/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     }
   ]
