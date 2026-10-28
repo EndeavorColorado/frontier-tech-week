@@ -956,8 +956,8 @@ h1[tabindex="-1"]:focus{outline:none}
         <li class="ag-row" data-ag="f b p"><time>12:00–1:30</time><div class="ag-main"><h4>Lunch</h4></div><span class="ag-where">Walnut, Level One</span></li>
         <li class="ag-row" data-ag="f b p"><time>1:30–2:00</time><div class="ag-main"><h4>Break</h4></div><span class="ag-where">Pearl West</span></li>
         <li class="ag-row" data-ag="f b p"><time>2:00–2:15</time><div class="ag-main"><h4>Keynote: A Lead Investor in Conversation</h4></div><span class="ag-where">Tulagi Underground</span></li>
-        <li class="ag-row" data-ag="f b p"><time>2:20–2:55</time><div class="ag-main"><h4>Frontier Panel: Physical AI &amp; Manufacturing</h4></div><span class="ag-where">Tulagi Underground</span></li>
-        <li class="ag-row" data-ag="f b p"><time>3:00–3:30</time><div class="ag-main"><h4>Frontier Panel: Bio &amp; Health</h4></div><span class="ag-where">Tulagi Underground</span></li>
+        <li class="ag-row" data-ag="f b p"><time>2:20–2:55</time><div class="ag-main"><h4>Frontier Panel: Physical AI</h4></div><span class="ag-where">Tulagi Underground</span></li>
+        <li class="ag-row" data-ag="f b p"><time>3:00–3:30</time><div class="ag-main"><h4>Frontier Panel: Bio Tech</h4></div><span class="ag-where">Tulagi Underground</span></li>
         <li class="ag-row" data-ag="f b p"><time>3:45–5:00</time><div class="ag-main"><h4>Investor Meetings (Second Look)</h4></div><span class="ag-where">Walnut, Levels One and Two</span></li>
         <li class="ag-row" data-ag="f b p"><time>6:30–9:00</time><div class="ag-main"><h4>Dinner at Dan's</h4></div><span class="ag-where">The Caruso Home, Address Shared with Guests</span></li>
       </ol></div>
@@ -1063,7 +1063,7 @@ h1[tabindex="-1"]:focus{outline:none}
   var R=[
     {id:'tulagi',img:IMG.tulagi,lab:'Lower Level · 1048 Pearl',name:'Tulagi Underground',size:'14,482 sq ft',
      lede:'A double-height room under the plaza, up to 22 feet clear, with daylight through skylights above. The main stage: keynotes and every Frontier panel. The whole week starts and ends here.',
-     when:[['Wednesday 9:00 AM','Welcome and Opening Keynote'],['Wednesday 9:45 AM','Aerospace & Defense, Then Energy, Compute & Critical Minerals Panels'],['Wednesday 11:30 AM','Buyer Briefing for Investors and Buyers'],['Wednesday 2:30 PM','Quantum Panel'],['Thursday 2:00 PM','Keynote, Then Physical AI and Bio & Health Panels']],
+     when:[['Wednesday 9:00 AM','Welcome and Opening Keynote'],['Wednesday 9:45 AM','Aerospace & Defense, Then Energy, Compute & Critical Minerals Panels'],['Wednesday 11:30 AM','Buyer Briefing for Investors and Buyers'],['Wednesday 2:30 PM','Quantum Panel'],['Thursday 2:00 PM','Keynote, Then Physical AI and Bio Tech Panels']],
      facts:['14,482 sq ft event space','Up to 22 ft clear','Stage, seating for all 150']},
     {id:'walnut',img:IMG.walnut,lab:'Suite 100 · 1023 Walnut',name:'Walnut, Level One',size:'10,282 sq ft',
      lede:'The ground floor of 1023 Walnut and the meeting floor. On Wednesday afternoon founders hold their tables while buyers and investors move between meetings.',
@@ -1105,8 +1105,8 @@ h1[tabindex="-1"]:focus{outline:none}
     {n:'02',name:'Energy & Compute',line:'Where affordable power and the compute build-out reach the scale to compete.',ex:'Grid, storage, nuclear, data-center power and cooling',route:'Thursday · Site Visit'},
     {n:'03',name:'Quantum',line:'Where quantum sensing, networking and computing leave the lab for the field.',ex:'Sensors, cryogenics, photonics, control systems',route:'Thursday · Site Visit'},
     {n:'04',name:'Critical Minerals',line:'Where the materials the next decade runs on get found, refined and recycled onshore.',ex:'Extraction, processing, recycling, advanced materials',route:'Thursday · Site Visit'},
-    {n:'05',name:'Physical AI & Manufacturing',line:'Where robotics, AI and automation make manufacturing competitive again.',ex:'Robotics, industrial AI, additive, factory software',route:'Thursday · Site Visit'},
-    {n:'06',name:'Bio & Health',line:'Where discoveries, patient data and bioprocesses turn into therapies and tools.',ex:'Diagnostics, genomics, biomanufacturing, health AI',route:'Thursday · Site Visit'}
+    {n:'05',name:'Physical AI',line:'Where robotics, AI and automation make manufacturing competitive again.',ex:'Robotics, industrial AI, additive, factory software',route:'Thursday · Site Visit'},
+    {n:'06',name:'Bio Tech',line:'Where discoveries, patient data and bioprocesses turn into therapies and tools.',ex:'Diagnostics, genomics, biomanufacturing, health AI',route:'Thursday · Site Visit'}
   ];
   document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){return '<a class="fr" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><span class="num n">'+f.n+'</span><div class="cap"><h3>'+f.name+'</h3><span class="meta">'+f.route+'</span><p>'+f.ex+'</p></div></a>';}).join('');
   document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<div class="frow" id="fr-'+i+'"><div class="pic"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><span class="num n">'+f.n+'</span></div><div class="fmid"><div><h3>'+f.name+'</h3><p>'+f.line+'</p></div></div><div class="info"><div class="fblk"><span class="fk">Thursday Tour</span><span class="fsub">Site visits across the Front Range</span></div><div class="fblk fprob"><span class="fk">Focus Areas</span><span class="fsub">'+f.ex+'</span></div></div></div>';}).join('');
