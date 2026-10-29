@@ -101,6 +101,93 @@
 <style>.wrap.thesis{align-items:center}</style>
 <style>.who .w-tag{display:block;font-family:var(--display);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}</style>
 <style>body>footer,footer.site-foot,footer{position:relative;z-index:1;background:#01000F}</style>
+<style>
+.thesis .hi{color:var(--teal)}
+.ag-lite .ag-days{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.ag-arrive{margin:0 0 16px;font-size:15px;color:var(--ink-2)}
+@media (max-width:860px){.ag-lite .ag-days{grid-template-columns:minmax(0,1fr)}}
+.section-head h2,.thesis h2{font-size:clamp(36px,5vw,64px);line-height:1.04}
+.program-acts{display:none}
+.prog-hero{padding-bottom:clamp(8px,1vw,16px)}
+.bld-dlg .size,.bld-lab-size{display:none}
+</style>
+<style>
+/* Frontier tiles, DTM style */
+.frs{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fr{aspect-ratio:16/10;border:0;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);transition:transform .35s ease,box-shadow .35s ease}
+.fr:nth-child(3n+1){clip-path:polygon(0 0,96% 0,100% 100%,4% 100%)}
+.fr img{opacity:.55;mix-blend-mode:luminosity;filter:saturate(.2) contrast(1.05)}
+.fr.t-teal{background:#09E1CD}.fr.t-teal img{mix-blend-mode:multiply;opacity:.75}
+.fr.t-ink{background:#01000F}.fr.t-ink img{opacity:.7;mix-blend-mode:screen}
+.fr.t-night{background:#121A3A}.fr.t-night img{opacity:.6;mix-blend-mode:screen}
+.fr.t-off{background:#F2F0EA}.fr.t-off img{mix-blend-mode:multiply;opacity:.8}
+.fr .scrim{background:linear-gradient(180deg,rgba(1,0,15,0) 35%,rgba(1,0,15,.72) 100%)}
+.fr.t-teal .scrim,.fr.t-off .scrim{background:linear-gradient(180deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.8) 100%)}
+.fr .cap{left:9%;right:9%;bottom:18px;gap:6px}
+.fr .cap h3{font-size:clamp(18px,1.7vw,24px);color:#fff}
+.fr .cap p.line{display:block;max-height:none;opacity:1;font-size:13.5px;color:rgba(255,255,255,.85)}
+.fr .cap .go{font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+.fr.t-teal .cap h3,.fr.t-off .cap h3{color:#01000F}.fr.t-teal .cap p.line,.fr.t-off .cap p.line{color:rgba(1,0,15,.8)}.fr.t-teal .cap .go,.fr.t-off .cap .go{color:#01000F}
+.fr:hover,.fr:focus-visible{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,0,15,.45)}
+@media (max-width:860px){.frs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.frs{grid-template-columns:minmax(0,1fr)}.fr,.fr:nth-child(3n+1){clip-path:none}}
+/* Flat logos */
+.pc.flat{background:transparent;border:0}
+.pc.flat .mark{background:transparent;border:0;aspect-ratio:auto;padding:18px 0}
+.pc.flat .mark.b-caruso img{width:46%;max-width:240px}
+.pc.flat .mark.b-ec svg.ewm-tile{color:var(--teal);height:clamp(28px,3vw,40px)}
+.pc.flat .body{padding-top:4px}
+/* Who attends shaped tiles */
+.who.shaped{grid-template-columns:1.1fr .9fr 1.1fr;gap:18px;align-items:stretch}
+.who.shaped .w{display:grid;gap:8px;align-content:center;justify-items:center;text-align:center;text-decoration:none;color:#fff;min-height:200px;padding:28px 24px;border:1px solid rgba(9,225,205,.5);background:rgba(1,0,15,.35);transition:transform .35s ease,background .35s ease,box-shadow .35s ease}
+.who.shaped .w.pill{border-radius:999px}
+.who.shaped .w.circle{border-radius:50%;aspect-ratio:1;background:var(--teal);color:#01000F;border-color:var(--teal)}
+.who.shaped .w.circle .w-tag,.who.shaped .w.circle .go{color:#01000F}
+.who.shaped .w h3{margin:0;font-size:clamp(22px,2.2vw,30px)}
+.who.shaped .w .go{font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-top:4px}
+.who.shaped .w:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,0,15,.4);background:rgba(9,225,205,.12)}
+.who.shaped .w.circle:hover{background:#2FEAD9}
+@media (max-width:860px){.who.shaped{grid-template-columns:1fr}.who.shaped .w.circle{aspect-ratio:auto;border-radius:999px}}
+/* Brand texture */
+.has-tex{position:relative;isolation:isolate}
+.has-tex>.tex{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.08;pointer-events:none}
+#page-partners.has-tex>.tex{height:auto;min-height:100%}
+/* Scroll reveal + hover lift */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+.tier4,.sx-tile,.seg2,.gcard,.fmt{transition:transform .35s ease,box-shadow .35s ease}
+.tier4:hover,.sx-tile:hover,.seg2:hover,.gcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,0,15,.4)}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.fr,.who.shaped .w,.tier4,.sx-tile,.seg2,.gcard{transition:none}.fr:hover,.who.shaped .w:hover,.tier4:hover,.sx-tile:hover,.seg2:hover,.gcard:hover{transform:none}}
+</style>
+<style>
+.sxd{border:0;padding:0;width:100vw;max-width:100vw;height:100vh;max-height:100vh;background:#01000F;color:#fff}
+.sxd::backdrop{background:rgba(1,0,15,.9)}
+.sxd-in{max-width:1100px;margin:0 auto;padding:clamp(56px,8vw,96px) 24px 48px}
+.sxd-x{position:fixed;top:18px;right:22px;background:none;border:0;color:#fff;font-size:40px;line-height:1;cursor:pointer;z-index:2}
+.sxd-pane{display:grid;gap:20px}
+.sxd-pane .sx-ph p{font-size:clamp(20px,2.4vw,30px);font-weight:600;color:#fff;max-width:28ch}
+.sxd-pane .sx-rooms{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sxd-pane .sx-room .sx-img{aspect-ratio:16/9}
+@media (max-width:760px){.sxd-pane .sx-rooms{grid-template-columns:minmax(0,1fr)}}
+.sx-link{margin-left:24px}
+</style>
+<style>.inq-chk{display:flex!important;align-items:center;gap:10px;font-size:14px;color:var(--ink-2)}.inq-chk input{width:16px;height:16px;accent-color:var(--teal)}</style>
+<style>
+.hero .year{color:var(--teal)!important}
+.fr.t-off .cap h3,.fr.t-off .cap p.line,.fr.t-off .cap .go{color:#01000F}
+.fr.t-off .scrim{background:linear-gradient(180deg,rgba(242,240,234,0) 25%,rgba(242,240,234,.92) 100%)}
+.fr.t-night{background:#1B2A6B}.fr.t-night img{opacity:.5}
+.fr.t-ink img{opacity:.55}
+.pc.flat.rv,.who .w.rv,.day.rv{opacity:1;transform:none}
+</style>
+<style>
+.pc.flat .mark.b-caruso,.pc.flat .mark.b-ec,:root[data-theme="dark"] .pc.flat .mark.b-caruso,:root[data-theme="dark"] .pc.flat .mark.b-ec{background:transparent!important;border:0}
+.pc.flat .mark{justify-items:start;padding:10px 0 14px}
+.pc.flat .mark.b-caruso img{width:52%;max-width:260px}
+.pc.flat .mark.b-ec svg.ewm-tile{color:var(--teal)!important;height:clamp(30px,3.2vw,44px)}
+.pc.flat .body b{font-size:15px}
+</style>
+<style>.ag-arrive{margin:0 0 18px}@media (max-width:860px){.frs{grid-template-columns:minmax(0,1fr)}.fr{aspect-ratio:16/9}.fr,.fr:nth-child(3n+1){clip-path:none}}@media (max-width:520px){.fr .cap p.line{display:none}}</style>
 </head>
 <body>
 
@@ -218,7 +305,7 @@ section.tight{padding-top:clamp(40px,5vw,64px)}
 .hero .date b{color:var(--teal);font-weight:500}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
 .hero .next{font-size:13px;color:rgba(255,255,255,.78);max-width:52ch}
-@media (max-width:900px){.hero{height:auto;min-height:0;padding-top:120px}.hero .art{background-position:center}}@media (max-width:760px){.hero .year{display:none}}
+@media (max-width:900px){.hero{height:auto;min-height:0;padding-top:120px}.hero .art{background-position:center}}@media (max-width:760px){.hero .year{display:block;color:var(--teal)}}
 
 /* thesis */
 .thesis{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:start}
@@ -853,17 +940,16 @@ h1[tabindex="-1"]:focus{outline:none}
       <div class="year num">2027</div>
       <p class="date"><b>June 16–17</b><span>Boulder, Colorado</span><span>Invitation Only</span></p><p class="hosted">Hosted by Caruso Ventures and Endeavor Colorado</p>
       <div class="actions"><a class="btn btn-primary" href="#attend">Request an Invitation <span class="arrow">→</span></a><a class="btn btn-ghost onhero" href="#program">How the Summit Works</a></div>
-      <p class="next">Invitations now open.</p>
-    </div>
+          </div>
   </section>
 
   <section class="on-cream">
     <div class="wrap thesis">
-      <div class="stack"><p class="eyebrow">Why We Built It</p><h2>Sit Across From the Investors Who Fund Your Frontier.</h2></div>
+      <div class="stack"><h2>Sit Across From the Investors Who Fund Your Frontier.</h2></div>
       <div class="cols">
-        <p><strong>Founders</strong> from Endeavor's network in 45+ markets, many building far from the usual hubs, get one-on-one time with investors and buyers in their Frontier, a seat at a small roundtable, and the chance at a second look.</p>
-        <p><strong>Investors, buyers and strategics</strong> meet founders hand-picked by Endeavor, then see the work in person on tours of labs, factories and clean rooms across the Front Range.</p>
-        <p><strong>Colorado</strong> hosts. Caruso Ventures opens Pearl West as home base for two days of panels, roundtables and meetings.</p>
+        <p><strong class="hi">Founders</strong> from Endeavor's network in 45+ markets, many building far from the usual hubs, get one-on-one time with investors and buyers in their Frontier, a seat at a small roundtable, and the chance at a second look.</p>
+        <p><strong class="hi">Investors, buyers and strategics</strong> meet founders hand-picked by Endeavor, then see the work in person on tours of labs, factories and clean rooms across the Front Range.</p>
+        <p><strong class="hi">Colorado</strong> hosts. Caruso Ventures opens Pearl West as home base for two days of panels, roundtables and meetings.</p>
       </div>
     </div>
   </section>
@@ -871,7 +957,7 @@ h1[tabindex="-1"]:focus{outline:none}
   <div class="fade f-cream-lteal" aria-hidden="true"></div>
   <section class="on-lteal">
     <div class="wrap">
-      <div class="section-head compact"><div class="top"><p class="eyebrow">Six Frontiers</p><span class="meta">Pick Yours · Move Between Them</span></div><h2>Find Your Frontier.</h2><p class="lede">Panels, meetings and site visits in six Frontiers.</p></div>
+      <div class="section-head compact"><h2>Find Your Frontier.</h2><p class="lede">Panels, meetings and site visits in six Frontiers.</p></div>
       <div class="frontiers" id="homeFrontiers"></div>
     </div>
   </section>
@@ -879,9 +965,9 @@ h1[tabindex="-1"]:focus{outline:none}
   <div class="fade f-lteal-white" aria-hidden="true"></div>
   <section class="on-white">
     <div class="wrap">
-      <div class="section-head"><div class="top"><p class="eyebrow">Two Days</p><span class="meta">Times Firm Up Spring 2027</span></div><h2>Outline of the Summit</h2></div>
+      <div class="section-head"><h2>Outline of the Summit</h2></div>
       <div class="days">
-        <div class="day"><span class="d">Wednesday · June 16</span><h3>Frontier Day</h3><ul>
+        <div class="rv day"><span class="d">Wednesday · June 16</span><h3>Frontier Day</h3><ul>
           <li><time>8:00 AM</time><span>Check-In and Breakfast</span></li>
           <li><time>9:00 AM</time><span><b>Welcome and Opening Keynote</b></span></li>
           <li><time>9:45 AM</time><span><b>Frontier Panels</b></span></li>
@@ -891,7 +977,7 @@ h1[tabindex="-1"]:focus{outline:none}
           <li><time>3:15 PM</time><span><b>Matched Meetings</b></span></li>
           <li><time>5:00 PM</time><span><b>Boulder Hour</b></span></li>
           <li><time>7:00 PM</time><span>Dinner at Corrida</span></li></ul></div>
-        <div class="day"><span class="d">Thursday · June 17</span><h3>Colorado Day</h3><ul>
+        <div class="rv day"><span class="d">Thursday · June 17</span><h3>Colorado Day</h3><ul>
           <li><time>7:45 AM</time><span>Breakfast</span></li>
           <li><time>9:00 AM</time><span><b>Colorado Tours</b> (Six Frontiers)</span></li>
           <li><time>12:00 PM</time><span>Lunch</span></li>
@@ -904,13 +990,13 @@ h1[tabindex="-1"]:focus{outline:none}
   </section>
 
   <div class="fade f-white-dteal" aria-hidden="true"></div>
-  <section class="on-dteal">
+  <section class="on-dteal has-tex"><svg class="tex" aria-hidden="true" viewBox="0 0 1440 600" preserveAspectRatio="none"><g fill="none" stroke="#09E1CD" stroke-width="1"><path d="M-20 120 C 300 20, 700 260, 1460 160"/><path d="M-20 420 C 400 560, 900 300, 1460 480"/><path d="M-20 300 C 500 120, 1000 520, 1460 320"/></g><g fill="#09E1CD"><circle cx="1240" cy="110" r="150" opacity=".35"/><circle cx="180" cy="520" r="120" opacity=".35"/></g></svg>
     <div class="wrap">
       <div class="section-head"><div class="top"><p class="eyebrow">Who Attends</p></div><h2>150 People. 70 Founders. 80 Investors and Buyers.</h2></div>
-      <div class="who">
-        <div class="w"><span class="w-tag">Building the Frontier</span><h3>Founders</h3></div>
-        <div class="w"><span class="w-tag">Buying the Frontier</span><h3>Corporate Innovators</h3></div>
-        <div class="w"><span class="w-tag">Backing the Frontier</span><h3>Investors</h3></div>
+      <div class="who shaped">
+        <a class="w pill rv" href="#attend"><span class="w-tag">Building the Frontier</span><h3>Founders</h3><span class="go">Who Attends →</span></a>
+        <a class="w circle rv" href="#attend"><span class="w-tag">Backing the Frontier</span><h3>Investors</h3><span class="go">Who Attends →</span></a>
+        <a class="w pill rv" href="#attend"><span class="w-tag">Buying the Frontier</span><h3>Corporate Innovators</h3><span class="go">Who Attends →</span></a>
       </div>
       <div class="proof"><span class="num big">45+</span><p>Markets in Endeavor's network. Every founder is hand-picked from it.</p></div>
     </div>
@@ -921,7 +1007,7 @@ h1[tabindex="-1"]:focus{outline:none}
     <div class="wrap">
       <div class="section-head"><p class="eyebrow">Hosts</p><h2>Brought to Boulder by Caruso Ventures and Endeavor Colorado.</h2></div>
       <div class="tiers">
-        <div class="tier"><div class="logos two"><div class="pc"><div class="mark b-caruso logo"><img src="/frontier-tech-summit/assets/img-d5c16cea1b.webp" alt="Caruso Ventures" loading="lazy"></div><div class="body"><b>Caruso Ventures</b><span class="meta">Host</span></div></div><div class="pc"><div class="mark b-ec logo"><span class="ec"><svg class="ewm ewm-tile" viewBox="0 0 216 28" role="img" aria-label="Endeavor" focusable="false"><g fill="currentColor"><path d="M39.161 11.179v-3.75l-5.183.41v19.768h5.183V16.875c0-1.893.702-3.464 1.944-4.571 1.242-1.107 3.023-1.75 5.237-1.75 1.494 0 2.681.5 3.491 1.375s1.278 2.16 1.278 3.732v11.946h5.183V14.304c0-2.107-.756-3.857-2.195-5.054-1.458-1.196-3.546-1.803-6.083-1.803-1.908 0-3.744.375-5.345 1.089-1.422.643-2.628 1.553-3.51 2.643z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M85.162 27.59V0l-5.183.41v10.108c-2.196-1.982-5.057-3.072-8.135-3.072-3.095 0-5.74.911-7.612 2.679-1.908 1.786-2.898 4.34-2.898 7.357 0 3.16 1.026 5.804 2.897 7.643C66.085 26.965 68.75 28 71.934 28c3.42 0 6.497-1.232 8.495-3.429v3.036l4.733-.018zM68.587 12.374c1.134-1.304 2.717-2.107 4.571-2.107 1.98 0 3.69.803 4.913 2.107 1.224 1.304 1.98 3.143 1.98 5.304 0 2.232-.72 4.089-1.926 5.41-1.206 1.304-2.915 2.072-4.949 2.072-1.89 0-3.491-.768-4.625-2.09-1.134-1.321-1.818-3.214-1.818-5.482.018-2.107.738-3.91 1.854-5.214zm61.261-4.928c-3.221 0-6.821.429-10.258 1.143l-.324.072.864 2.196.216-.036a66.137 66.137 0 018.656-.553c2.106 0 3.528.232 4.41.696.432.232.738.518.917.84.198.339.288.75.288 1.232v1.428s-6.73.393-8.962.554c-2.394.232-4.355.946-5.705 2.089-1.368 1.143-2.106 2.714-2.106 4.571 0 2.054.828 3.661 2.448 4.75 1.53 1.036 3.761 1.554 6.407 1.554 2.555 0 5.777-.625 8.332-3.59v3.197h4.752V12.821c0-.964-.18-1.785-.576-2.464-.396-.696-1.008-1.25-1.818-1.66-1.566-.858-4.067-1.25-7.541-1.25zm4.787 13.232v-3.91s-5.507.357-7.324.5c-1.278.125-2.304.571-2.988 1.268-.684.696-1.08 1.642-1.08 2.803 0 1.16.468 2.036 1.368 2.625.864.554 2.124.857 3.761.857 2.016 0 3.33-.553 4.5-1.357 1.134-.803 1.763-1.84 1.763-2.786z"></path><path d="M149.159 7.839h-5.975l10.366 19.768h4.032l10.582-19.768h-3.474l-7.882 14.732-7.649-14.732z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M181.895 7.446c-3.581 0-6.694.911-8.944 2.661-2.358 1.84-3.599 4.482-3.599 7.607s1.241 5.75 3.599 7.59c2.268 1.767 5.363 2.696 8.944 2.696 3.564 0 6.659-.929 8.891-2.697 2.34-1.839 3.563-4.482 3.563-7.589 0-3.125-1.241-5.768-3.563-7.607-2.25-1.75-5.327-2.66-8.891-2.66zm-5.093 4.822c1.26-1.34 3.006-2.25 5.057-2.25 4.122 0 7.019 3.16 7.019 7.625.018 2.25-.756 4.125-1.997 5.464-1.242 1.357-2.988 2.286-5.022 2.286-2.051 0-3.797-.929-5.057-2.286-1.259-1.357-2.033-3.232-2.033-5.464 0-2.197.792-4.054 2.033-5.375z"></path><path d="M204.356 12.143V7.429l-5.183.41v19.768h5.183v-8.303c0-2.268.684-4.197 1.962-5.554 1.331-1.428 2.249-2.232 3.905-2.732 1.26-.375 2.178-.393 3.239-.393h.972L216 7.643l-.378-.054c-.612-.089-1.818-.142-2.717-.142a10.099 10.099 0 00-8.549 4.696z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M5.993 15.84c.936-4.93 5.993-8.394 11.356-8.394 8.099 0 11.014 5.786 11.014 8.911 0 .643-.126 1.143-.486 1.482-.36.34-.863.447-1.475.447H10.96c.27 2.25 1.296 3.964 2.772 5.125 1.548 1.232 3.617 1.857 5.849 1.857 2.717 0 5.129-.607 7.559-1.607l.251-.108.918 2.197-.252.107c-3.563 1.59-6.766 2.125-10.42 2.125-3.113 0-6.065-.875-8.243-2.625-2.015-1.625-3.347-4-3.545-7.09H0l1.314-2.428h4.679zm4.985 0h9.97c.99 0 1.602-.144 1.962-.358.324-.196.468-.5.468-.893 0-2.107-2.268-4.66-6.01-4.66-1.999 0-3.51.75-4.59 1.91-.972 1.072-1.584 2.518-1.8 4zm91.137-8.394c-5.957 0-11.5 4.268-11.5 10.054 0 3.482 1.386 6.125 3.563 7.875 2.178 1.75 5.13 2.625 8.243 2.625 3.653 0 6.857-.554 10.42-2.125l.252-.107-.918-2.197-.252.107c-2.429 1-4.841 1.608-7.559 1.608-2.231 0-4.283-.643-5.849-1.858-1.475-1.16-2.52-2.875-2.771-5.125h15.423c.612 0 1.134-.107 1.476-.446.36-.34.486-.84.486-1.482.018-3.143-2.916-8.929-11.014-8.929zm3.617 8.393h-9.97c.216-1.5.81-2.928 1.818-4 1.061-1.143 2.591-1.91 4.589-1.91 3.725 0 6.011 2.553 6.011 4.66 0 .393-.126.697-.468.893-.36.232-.972.375-1.98.357z"></path></g></svg><small>Colorado</small></span></div><div class="body"><b>Endeavor Colorado</b><span class="meta">Host</span></div></div></div></div>
+        <div class="tier"><div class="logos two"><div class="pc flat rv"><div class="mark b-caruso logo"><img src="/frontier-tech-summit/assets/caruso-white.png" alt="Caruso Ventures" loading="lazy"></div><div class="body"><b>Caruso Ventures</b><span class="meta">Host</span></div></div><div class="pc flat rv"><div class="mark b-ec logo"><span class="ec"><svg class="ewm ewm-tile" viewBox="0 0 216 28" role="img" aria-label="Endeavor" focusable="false"><g fill="currentColor"><path d="M39.161 11.179v-3.75l-5.183.41v19.768h5.183V16.875c0-1.893.702-3.464 1.944-4.571 1.242-1.107 3.023-1.75 5.237-1.75 1.494 0 2.681.5 3.491 1.375s1.278 2.16 1.278 3.732v11.946h5.183V14.304c0-2.107-.756-3.857-2.195-5.054-1.458-1.196-3.546-1.803-6.083-1.803-1.908 0-3.744.375-5.345 1.089-1.422.643-2.628 1.553-3.51 2.643z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M85.162 27.59V0l-5.183.41v10.108c-2.196-1.982-5.057-3.072-8.135-3.072-3.095 0-5.74.911-7.612 2.679-1.908 1.786-2.898 4.34-2.898 7.357 0 3.16 1.026 5.804 2.897 7.643C66.085 26.965 68.75 28 71.934 28c3.42 0 6.497-1.232 8.495-3.429v3.036l4.733-.018zM68.587 12.374c1.134-1.304 2.717-2.107 4.571-2.107 1.98 0 3.69.803 4.913 2.107 1.224 1.304 1.98 3.143 1.98 5.304 0 2.232-.72 4.089-1.926 5.41-1.206 1.304-2.915 2.072-4.949 2.072-1.89 0-3.491-.768-4.625-2.09-1.134-1.321-1.818-3.214-1.818-5.482.018-2.107.738-3.91 1.854-5.214zm61.261-4.928c-3.221 0-6.821.429-10.258 1.143l-.324.072.864 2.196.216-.036a66.137 66.137 0 018.656-.553c2.106 0 3.528.232 4.41.696.432.232.738.518.917.84.198.339.288.75.288 1.232v1.428s-6.73.393-8.962.554c-2.394.232-4.355.946-5.705 2.089-1.368 1.143-2.106 2.714-2.106 4.571 0 2.054.828 3.661 2.448 4.75 1.53 1.036 3.761 1.554 6.407 1.554 2.555 0 5.777-.625 8.332-3.59v3.197h4.752V12.821c0-.964-.18-1.785-.576-2.464-.396-.696-1.008-1.25-1.818-1.66-1.566-.858-4.067-1.25-7.541-1.25zm4.787 13.232v-3.91s-5.507.357-7.324.5c-1.278.125-2.304.571-2.988 1.268-.684.696-1.08 1.642-1.08 2.803 0 1.16.468 2.036 1.368 2.625.864.554 2.124.857 3.761.857 2.016 0 3.33-.553 4.5-1.357 1.134-.803 1.763-1.84 1.763-2.786z"></path><path d="M149.159 7.839h-5.975l10.366 19.768h4.032l10.582-19.768h-3.474l-7.882 14.732-7.649-14.732z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M181.895 7.446c-3.581 0-6.694.911-8.944 2.661-2.358 1.84-3.599 4.482-3.599 7.607s1.241 5.75 3.599 7.59c2.268 1.767 5.363 2.696 8.944 2.696 3.564 0 6.659-.929 8.891-2.697 2.34-1.839 3.563-4.482 3.563-7.589 0-3.125-1.241-5.768-3.563-7.607-2.25-1.75-5.327-2.66-8.891-2.66zm-5.093 4.822c1.26-1.34 3.006-2.25 5.057-2.25 4.122 0 7.019 3.16 7.019 7.625.018 2.25-.756 4.125-1.997 5.464-1.242 1.357-2.988 2.286-5.022 2.286-2.051 0-3.797-.929-5.057-2.286-1.259-1.357-2.033-3.232-2.033-5.464 0-2.197.792-4.054 2.033-5.375z"></path><path d="M204.356 12.143V7.429l-5.183.41v19.768h5.183v-8.303c0-2.268.684-4.197 1.962-5.554 1.331-1.428 2.249-2.232 3.905-2.732 1.26-.375 2.178-.393 3.239-.393h.972L216 7.643l-.378-.054c-.612-.089-1.818-.142-2.717-.142a10.099 10.099 0 00-8.549 4.696z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M5.993 15.84c.936-4.93 5.993-8.394 11.356-8.394 8.099 0 11.014 5.786 11.014 8.911 0 .643-.126 1.143-.486 1.482-.36.34-.863.447-1.475.447H10.96c.27 2.25 1.296 3.964 2.772 5.125 1.548 1.232 3.617 1.857 5.849 1.857 2.717 0 5.129-.607 7.559-1.607l.251-.108.918 2.197-.252.107c-3.563 1.59-6.766 2.125-10.42 2.125-3.113 0-6.065-.875-8.243-2.625-2.015-1.625-3.347-4-3.545-7.09H0l1.314-2.428h4.679zm4.985 0h9.97c.99 0 1.602-.144 1.962-.358.324-.196.468-.5.468-.893 0-2.107-2.268-4.66-6.01-4.66-1.999 0-3.51.75-4.59 1.91-.972 1.072-1.584 2.518-1.8 4zm91.137-8.394c-5.957 0-11.5 4.268-11.5 10.054 0 3.482 1.386 6.125 3.563 7.875 2.178 1.75 5.13 2.625 8.243 2.625 3.653 0 6.857-.554 10.42-2.125l.252-.107-.918-2.197-.252.107c-2.429 1-4.841 1.608-7.559 1.608-2.231 0-4.283-.643-5.849-1.858-1.475-1.16-2.52-2.875-2.771-5.125h15.423c.612 0 1.134-.107 1.476-.446.36-.34.486-.84.486-1.482.018-3.143-2.916-8.929-11.014-8.929zm3.617 8.393h-9.97c.216-1.5.81-2.928 1.818-4 1.061-1.143 2.591-1.91 4.589-1.91 3.725 0 6.011 2.553 6.011 4.66 0 .393-.126.697-.468.893-.36.232-.972.375-1.98.357z"></path></g></svg><small>Colorado</small></span></div><div class="body"><b>Endeavor Colorado</b><span class="meta">Host</span></div></div></div></div>
       </div>
     </div>
   </section>
@@ -941,9 +1027,9 @@ h1[tabindex="-1"]:focus{outline:none}
   <section class="page-hero"><div class="wrap"><h1>Who Attends</h1></div></section><h2 class="vh">Ways to Attend</h2>
   <section class="tight"><div class="wrap">
     <div class="segs segs2">
-      <div class="seg seg2"><span class="seg-tag">Building the Frontier</span><h3>Founders</h3><p class="seg-line">Commercially ready, from everywhere.</p><ul class="seg-checks"><li>A seat at your Frontier's table</li><li>Matched meetings with capital</li><li>Your work seen up close</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
-      <div class="seg seg2"><span class="seg-tag">Buying the Frontier</span><h3>Corporate Innovators</h3><p class="seg-line">Leaders looking to buy, partner or pilot.</p><ul class="seg-checks"><li>A briefing built for buyers</li><li>Founders grouped by Frontier</li><li>Site visits across the Front Range</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
-      <div class="seg seg2"><span class="seg-tag">Backing the Frontier</span><h3>Investors</h3><p class="seg-line">Funds and family offices in deep tech.</p><ul class="seg-checks"><li>Founders matched to your thesis</li><li>The whole field in one place</li><li>A second look before you leave</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
+      <div class="rv seg seg2"><span class="seg-tag">Building the Frontier</span><h3>Founders</h3><p class="seg-line">Commercially ready, from everywhere.</p><ul class="seg-checks"><li>A seat at your Frontier's table</li><li>Matched meetings with capital</li><li>Your work seen up close</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
+      <div class="rv seg seg2"><span class="seg-tag">Buying the Frontier</span><h3>Corporate Innovators</h3><p class="seg-line">Leaders looking to buy, partner or pilot.</p><ul class="seg-checks"><li>A briefing built for buyers</li><li>Founders grouped by Frontier</li><li>Site visits across the Front Range</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
+      <div class="rv seg seg2"><span class="seg-tag">Backing the Frontier</span><h3>Investors</h3><p class="seg-line">Funds and family offices in deep tech.</p><ul class="seg-checks"><li>Founders matched to your thesis</li><li>The whole field in one place</li><li>A second look before you leave</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
     </div>
     
   </div></section>
@@ -956,7 +1042,7 @@ h1[tabindex="-1"]:focus{outline:none}
 
 <div class="page has-reel" id="page-program"><div class="reel" aria-hidden="true"></div>
   <section class="page-hero prog-hero"><div class="wrap"><p class="eyebrow">Program</p><h1>How the Summit Works</h1></div></section><h2 class="vh">The Six Formats</h2>
-  <section class="tight program-acts"><div class="wrap"><p class="acts-lead">Frontier founders from around the world.<br>The capital to back them. Two days in Boulder.</p><div class="acts"><div class="act"><div class="act-h"><span class="act-n num">01</span><h3>Be Heard</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">One Stage · Six Frontiers</span></div><h4>Frontier Panels</h4><p class="fmt-what">The founders building it, in their own words.</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Small Tables · One per Frontier</span></div><h4>Roundtables <span class="fmt-tag">Sign-Ups Open Soon</span></h4><p class="fmt-what">Intimate, off the record conversations.</p></article></div><div class="act"><div class="act-h"><span class="act-n num">02</span><h3>Get Matched</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Founder + Investor · One on One</span></div><h4>Matched Meetings</h4><p class="fmt-what">Short meetings, paired before you land.</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Hike · Bike · Spa</span></div><h4>Boulder Hour</h4><p class="fmt-what">The conversation keeps going outside.</p></article></div><div class="act"><div class="act-h"><span class="act-n num">03</span><h3>Make It Real</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">One Coach per Frontier</span></div><h4>Colorado Tours</h4><p class="fmt-what">Labs, factories and clean rooms, close by.</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Investors + Founders</span></div><h4>Second Look</h4><p class="fmt-what">A second meeting with founders you liked.</p></article></div></div></div></section>
+  
   <style>
 /* Full agenda: one ruled list per day, time / session / place; a role filter dims rows that are not yours. */
 .ag{padding-bottom:clamp(48px,7vw,96px)}
@@ -997,22 +1083,20 @@ h1[tabindex="-1"]:focus{outline:none}
   </style>
   <style>.ag-lite .ag-day>.ag-dh{flex-direction:column;align-items:flex-start;gap:6px;padding:22px 22px 18px}.ag-lite .ag-day>.ag-dh h3{font-size:clamp(26px,2.8vw,36px)}.ag-lite .ag-row{grid-template-columns:118px minmax(0,1fr)}@media (max-width:760px){.ag-lite .ag-row{grid-template-columns:minmax(0,1fr)}}</style>
   <section class="tight ag ag-lite" id="agendaSec"><div class="wrap">
-    <div class="section-head"><div class="top"><p class="eyebrow">The Agenda</p><span class="meta">Working Plan · Times Firm Up Spring 2027</span></div><h2>At a Glance.</h2></div>
-    <div class="ag-days" id="agDays">
-<div class="ag-day" aria-labelledby="agD0"><div class="ag-dh"><span class="d">Day 0</span><h3 id="agD0">Arrive</h3><span class="ag-sub">Tuesday, June 15, 2027</span></div><ol><li class="ag-row"><time>Afternoon</time><div class="ag-main"><h4>Land in Boulder</h4><p>Settle in downtown.</p></div></li></ol></div>
-<div class="ag-day" aria-labelledby="agD1"><div class="ag-dh"><span class="d">Day 1</span><h3 id="agD1">Frontier Day</h3><span class="ag-sub">Wednesday, June 16, 2027</span></div><ol><li class="ag-row"><time>8:00 AM</time><div class="ag-main"><h4>Check-In and Breakfast</h4><p>Badges, coffee, first hellos.</p></div></li><li class="ag-row"><time>9:00 AM</time><div class="ag-main"><h4>Welcome and Opening Keynote</h4><p>Why frontier tech, why now.</p></div></li><li class="ag-row"><time>9:45 AM</time><div class="ag-main"><h4>Frontier Panels: Aerospace &amp; Defense; Energy, Compute &amp; Critical Minerals</h4><p>Founders on what they're building.</p></div></li><li class="ag-row"><time>11:30 AM</time><div class="ag-main"><h4>Roundtables and Buyer Briefing</h4><p>Small tables, one per Frontier.</p></div></li><li class="ag-row"><time>12:30 PM</time><div class="ag-main"><h4>Lunch</h4><p>Mix across Frontiers.</p></div></li><li class="ag-row"><time>2:30 PM</time><div class="ag-main"><h4>Frontier Panel: Quantum</h4><p>Quantum founders on stage.</p></div></li><li class="ag-row"><time>3:15 PM</time><div class="ag-main"><h4>Founder and Investor Matched Meetings</h4><p>Paired one on one.</p></div></li><li class="ag-row"><time>5:00 PM</time><div class="ag-main"><h4>Boulder Hour: Hike, Bike or Spa</h4><p>Get outside, or slow down.</p></div></li><li class="ag-row"><time>7:00 PM</time><div class="ag-main"><h4>Dinner at Corrida</h4><p>Rooftop dinner downtown.</p></div></li></ol></div>
-<div class="ag-day" aria-labelledby="agD2"><div class="ag-dh"><span class="d">Day 2</span><h3 id="agD2">Colorado Day</h3><span class="ag-sub">Thursday, June 17, 2027</span></div><ol><li class="ag-row"><time>7:45 AM</time><div class="ag-main"><h4>Breakfast</h4><p>Fuel up before the coaches.</p></div></li><li class="ag-row"><time>9:00 AM</time><div class="ag-main"><h4>Colorado Tours (Six Frontiers)</h4><p>See the work up close.</p></div></li><li class="ag-row"><time>12:00 PM</time><div class="ag-main"><h4>Lunch</h4><p>Trade notes from the road.</p></div></li><li class="ag-row"><time>2:00 PM</time><div class="ag-main"><h4>Keynote and Frontier Panels: Physical AI, Bio Tech</h4><p>Closing conversations on stage.</p></div></li><li class="ag-row"><time>3:45 PM</time><div class="ag-main"><h4>Second Look</h4><p>Pick up where you left off.</p></div></li><li class="ag-row"><time>6:30 PM</time><div class="ag-main"><h4>Dinner Under the Flatirons</h4><p>Live music and the closing party.</p></div></li></ol></div>
+    <div class="section-head"><h2>At a Glance.</h2></div>
+    <p class="ag-arrive">Arrive Tuesday, June 15. No program that night.</p><div class="ag-days" id="agDays">
+<div class="rv ag-day" aria-labelledby="agD1"><div class="ag-dh"><h3 id="agD1">Frontier Day</h3><span class="ag-sub">Wednesday, June 16, 2027</span></div><ol><li class="ag-row"><time>8:00 AM</time><div class="ag-main"><h4>Check-In and Breakfast</h4><p>Badges, coffee, first hellos.</p></div></li><li class="ag-row"><time>9:00 AM</time><div class="ag-main"><h4>Welcome and Opening Keynote</h4><p>Why frontier tech, why now.</p></div></li><li class="ag-row"><time>9:45 AM</time><div class="ag-main"><h4>Frontier Panels: Aerospace &amp; Defense; Energy, Compute &amp; Critical Minerals</h4><p>Founders on what they're building.</p></div></li><li class="ag-row"><time>11:30 AM</time><div class="ag-main"><h4>Roundtables and Buyer Briefing</h4><p>Small tables, one per Frontier.</p></div></li><li class="ag-row"><time>12:30 PM</time><div class="ag-main"><h4>Lunch</h4><p>Mix across Frontiers.</p></div></li><li class="ag-row"><time>2:30 PM</time><div class="ag-main"><h4>Frontier Panel: Quantum</h4><p>Quantum founders on stage.</p></div></li><li class="ag-row"><time>3:15 PM</time><div class="ag-main"><h4>Founder and Investor Matched Meetings</h4><p>Paired one on one.</p></div></li><li class="ag-row"><time>5:00 PM</time><div class="ag-main"><h4>Boulder Hour: Hike, Bike or Spa</h4><p>Get outside, or slow down.</p></div></li><li class="ag-row"><time>7:00 PM</time><div class="ag-main"><h4>Dinner at Corrida</h4><p>Rooftop dinner downtown.</p></div></li></ol></div>
+<div class="rv ag-day" aria-labelledby="agD2"><div class="ag-dh"><h3 id="agD2">Colorado Day</h3><span class="ag-sub">Thursday, June 17, 2027</span></div><ol><li class="ag-row"><time>7:45 AM</time><div class="ag-main"><h4>Breakfast</h4><p>Fuel up before the coaches.</p></div></li><li class="ag-row"><time>9:00 AM</time><div class="ag-main"><h4>Colorado Tours (Six Frontiers)</h4><p>See the work up close.</p></div></li><li class="ag-row"><time>12:00 PM</time><div class="ag-main"><h4>Lunch</h4><p>Trade notes from the road.</p></div></li><li class="ag-row"><time>2:00 PM</time><div class="ag-main"><h4>Keynote and Frontier Panels: Physical AI, Bio Tech</h4><p>Closing conversations on stage.</p></div></li><li class="ag-row"><time>3:45 PM</time><div class="ag-main"><h4>Second Look</h4><p>Pick up where you left off.</p></div></li><li class="ag-row"><time>6:30 PM</time><div class="ag-main"><h4>Dinner Under the Flatirons</h4><p>Live music and the closing party.</p></div></li></ol></div>
     </div>
   </div></section>
 </div>
 
-<div class="page" id="page-partners">
+<div class="page has-tex" id="page-partners"><svg class="tex" aria-hidden="true" viewBox="0 0 1440 600" preserveAspectRatio="none"><g fill="none" stroke="#09E1CD" stroke-width="1"><path d="M-20 120 C 300 20, 700 260, 1460 160"/><path d="M-20 420 C 400 560, 900 300, 1460 480"/><path d="M-20 300 C 500 120, 1000 520, 1460 320"/></g><g fill="#09E1CD"><circle cx="1240" cy="110" r="150" opacity=".35"/><circle cx="180" cy="520" r="120" opacity=".35"/></g></svg>
   <section class="page-hero"><div class="wrap"><p class="eyebrow">Partners</p><h1>Own a Piece of the Summit.</h1><p class="lede">Every partnership comes with its own part of the program, and there are only as many as the summit holds.</p></div></section><h2 class="vh">Partnerships</h2>
   <section class="tight pt-simple"><div class="wrap">
-    <div class="sp-hosts"><span class="sp-k">Hosts</span><p>Caruso Ventures <span aria-hidden="true">·</span> Endeavor Colorado</p></div>
-    <div class="tiers4"><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit Partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="sx-link" href="#partners" data-space-open="summit">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge Partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="sx-link" href="#partners" data-space-open="ridge">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead Partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="sx-link" href="#partners" data-space-open="trailhead">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
-    <div class="sx" id="yourSpace"><div class="sx-head"><span class="sp-k">Your Space at Pearl West</span><h2>Every Partnership Comes With a Place to Host.</h2></div><div class="sx-tiles"><button type="button" class="sx-tile" data-space="summit" aria-expanded="false" aria-controls="sx-summit"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-4aea14ecb5.jpg" alt="" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><span class="sx-k">Summit Partner</span><span class="sx-name">Private Office</span><span class="sx-line">Private space to host, both days.</span><span class="sx-go">See the Space →</span></button><button type="button" class="sx-tile" data-space="ridge" aria-expanded="false" aria-controls="sx-ridge"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-171fe57753.jpg" alt="" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><span class="sx-k">Ridge Partner</span><span class="sx-name">Main Stage</span><span class="sx-line">Your Frontier, on the main stage.</span><span class="sx-go">See the Space →</span></button><button type="button" class="sx-tile" data-space="trailhead" aria-expanded="false" aria-controls="sx-trailhead"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-roundtable.webp" alt="" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><span class="sx-k">Trailhead Partner</span><span class="sx-name">Roundtable Room</span><span class="sx-line">Your table, your question.</span><span class="sx-go">See the Space →</span></button></div><div class="sx-panel" id="sx-summit" hidden><div class="sx-ph"><div><span class="sx-k">Summit Partner · Private Office</span><p>Private space for both days. Host meetings, take calls, bring your team.</p></div><button type="button" class="sx-close" data-space-close>Close −</button></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-4aea14ecb5.jpg" alt="Concept rendering of The Corner Boardroom" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Corner Boardroom</b><span>Floor-to-ceiling windows over Pearl Street.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-offices.webp" alt="Concept rendering of The Partner Offices" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Partner Offices</b><span>Quiet rooms for one-on-ones.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></div><div class="sx-panel" id="sx-ridge" hidden><div class="sx-ph"><div><span class="sx-k">Ridge Partner · Main Stage</span><p>Your Frontier takes the main stage, with your name on it.</p></div><button type="button" class="sx-close" data-space-close>Close −</button></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-171fe57753.jpg" alt="Concept rendering of Tulagi Underground" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Tulagi Underground</b><span>The main stage, under the plaza.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-352b940d1b.jpg" alt="Concept rendering of Walnut, Level One" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Walnut, Level One</b><span>The meeting floor.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></div><div class="sx-panel" id="sx-trailhead" hidden><div class="sx-ph"><div><span class="sx-k">Trailhead Partner · Roundtable Room</span><p>Your roundtable, in a room of its own.</p></div><button type="button" class="sx-close" data-space-close>Close −</button></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-roundtable.webp" alt="Concept rendering of The Roundtable Rooms" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Roundtable Rooms</b><span>Torreys, Grays and Ouray.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-352b940d1b.jpg" alt="Concept rendering of Walnut, Level One" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Walnut, Level One</b><span>The meeting floor.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></div></div>
-    <div class="sp-contact"><div><span class="sp-k">Become a Partner</span><p>Pricing and availability on request. Email the Endeavor Colorado team and we’ll send the partnership details.</p></div><a class="btn btn-dark" id="partnerBtn" href="#partners" data-inquire="">Request Partnership Details <span class="arrow">→</span></a></div>
+    <div class="tiers4"><article class="rv tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit Partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="sx-link" href="#partners" data-space-open="summit">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="rv tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge Partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="sx-link" href="#partners" data-space-open="ridge">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="rv tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead Partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="sx-link" href="#partners" data-space-open="trailhead">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
+    <dialog class="sxd" id="sxDlg" aria-label="Your space at Pearl West"><button type="button" class="sxd-x" id="sxdX" aria-label="Close">×</button><div class="sxd-in"><div class="sxd-pane" id="sxd-summit" hidden><span class="sp-k">Your Space at Pearl West</span><div class="sx-ph"><div><span class="sx-k">Summit Partner · Private Office</span><p>Private space for both days. Host meetings, take calls, bring your team.</p></div></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-4aea14ecb5.jpg" alt="Concept rendering of The Corner Boardroom" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Corner Boardroom</b><span>Floor-to-ceiling windows over Pearl Street.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-offices.webp" alt="Concept rendering of The Partner Offices" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Partner Offices</b><span>Quiet rooms for one-on-ones.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></div><div class="sxd-pane" id="sxd-ridge" hidden><span class="sp-k">Your Space at Pearl West</span><div class="sx-ph"><div><span class="sx-k">Ridge Partner · Main Stage</span><p>Your Frontier takes the main stage, with your name on it.</p></div></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-171fe57753.jpg" alt="Concept rendering of Tulagi Underground" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Tulagi Underground</b><span>The main stage, under the plaza.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-352b940d1b.jpg" alt="Concept rendering of Walnut, Level One" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Walnut, Level One</b><span>The meeting floor.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></div><div class="sxd-pane" id="sxd-trailhead" hidden><span class="sp-k">Your Space at Pearl West</span><div class="sx-ph"><div><span class="sx-k">Trailhead Partner · Roundtable Room</span><p>Your roundtable, in a room of its own.</p></div></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-roundtable.webp" alt="Concept rendering of The Roundtable Rooms" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Roundtable Rooms</b><span>Torreys, Grays and Ouray.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-352b940d1b.jpg" alt="Concept rendering of Walnut, Level One" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Walnut, Level One</b><span>The meeting floor.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></div></div></dialog>
+<div class="sp-contact"><div><span class="sp-k">Become a Partner</span><p>Pricing and availability on request. Email the Endeavor Colorado team and we’ll send the partnership details.</p></div><a class="btn btn-dark" id="partnerBtn" href="#partners" data-inquire="">Request Partnership Details <span class="arrow">→</span></a></div>
     
   </div></section>
 <dialog class="inq" id="inqDlg" aria-labelledby="inqTitle">
@@ -1025,6 +1109,7 @@ h1[tabindex="-1"]:focus{outline:none}
     <label>Company<input name="company" autocomplete="organization" required></label>
     <label>Interested In<select name="tier"><option value="">Not sure yet</option><option>Summit</option><option>Ridge</option><option>Trailhead</option></select></label>
     <label><span>Anything Else <span class="opt">(optional)</span></span><textarea name="note" rows="3"></textarea></label>
+    <label class="inq-chk"><input type="checkbox" name="newsletter"> Also send me the Endeavor Colorado newsletter</label>
     <input class="inq-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn btn-primary" type="submit" id="inqSend">Send Request <span class="arrow">→</span></button>
     <p class="inq-msg" id="inqMsg" role="status"></p>
@@ -1053,12 +1138,12 @@ h1[tabindex="-1"]:focus{outline:none}
   <section class="gather-info"><div class="wrap">
     <div class="section-head"><p class="eyebrow">Before You Fly</p><h2>The Practical Details.</h2></div>
     <div class="guide">
-      <div class="gcard"><span class="fact">45 min</span><h3>Getting Here</h3><ul><li><b>Fly into Denver (DEN).</b> Boulder is 45 minutes northwest by shuttle or rideshare.</li><li><b>Arrive Tuesday June 15.</b> No program that night; you’ll find most of the room at the St Julien bar. The summit opens Wednesday with breakfast at 8:00.</li><li><b>Leave Friday.</b> The program ends with dinner Thursday night, so plan a Friday flight home.</li></ul></div>
-      <div class="gcard"><span class="fact">On Foot</span><h3>Getting Around</h3><ul><li><b>Walk downtown.</b> Hotel, sessions and Wednesday's dinner are a few blocks apart.</li><li><b>Coaches on Thursday.</b> Tours leave from Pearl West at 9:00 and bring you back for lunch at noon; shuttles take you to dinner and home.</li><li><b>Shuttles for Boulder Hour.</b> To the Chautauqua trailheads and back.</li></ul></div>
-      <div class="gcard"><span class="fact">3 Hotels</span><h3>Where to Stay</h3><ul><li><b>St Julien Hotel &amp; Spa.</b> Host hotel, two blocks from the sessions.</li><li><b>Hotel Boulderado.</b> Boulder's 1909 landmark, three blocks away.</li><li><b>Boulder Marriott.</b> A short drive or a 20-minute walk.</li></ul></div>
-      <div class="gcard"><span class="fact">5,430 ft</span><h3>Altitude and Weather</h3><ul><li><b>Drink more water than you think.</b> Arrive a day early if you can.</li><li><b>June is warm and bright.</b> Highs near 80°F, cool evenings.</li><li><b>Afternoon storms happen.</b> Bring a light layer.</li></ul></div>
-      <div class="gcard"><span class="fact">Thursday</span><h3>Thursday's Routes</h3><ul><li><b>One coach per Frontier.</b> Site visits across the Front Range.</li><li><b>Some sites have rules.</b> Some sites need your details weeks ahead; we will ask in the spring.</li><li><b>We confirm your route</b> before you arrive.</li></ul></div>
-      <div class="gcard"><span class="fact">Smart Casual</span><h3>What to Wear</h3><ul><li><b>Boulder runs casual.</b> Leave the tie at home.</li><li><b>Thursday is on site.</b> Closed-toe shoes; labs and plants have safety rules.</li><li><b>Evenings cool quickly.</b> A jacket for dinner.</li></ul></div>
+      <div class="rv gcard"><span class="fact">45 min</span><h3>Getting Here</h3><ul><li><b>Fly into Denver (DEN).</b> Boulder is 45 minutes northwest by shuttle or rideshare.</li><li><b>Arrive Tuesday June 15.</b> No program that night; you’ll find most of the room at the St Julien bar. The summit opens Wednesday with breakfast at 8:00.</li><li><b>Leave Friday.</b> The program ends with dinner Thursday night, so plan a Friday flight home.</li></ul></div>
+      <div class="rv gcard"><span class="fact">On Foot</span><h3>Getting Around</h3><ul><li><b>Walk downtown.</b> Hotel, sessions and Wednesday's dinner are a few blocks apart.</li><li><b>Coaches on Thursday.</b> Tours leave from Pearl West at 9:00 and bring you back for lunch at noon; shuttles take you to dinner and home.</li><li><b>Shuttles for Boulder Hour.</b> To the Chautauqua trailheads and back.</li></ul></div>
+      <div class="rv gcard"><span class="fact">3 Hotels</span><h3>Where to Stay</h3><ul><li><b>St Julien Hotel &amp; Spa.</b> Host hotel, two blocks from the sessions.</li><li><b>Hotel Boulderado.</b> Boulder's 1909 landmark, three blocks away.</li><li><b>Boulder Marriott.</b> A short drive or a 20-minute walk.</li></ul></div>
+      <div class="rv gcard"><span class="fact">5,430 ft</span><h3>Altitude and Weather</h3><ul><li><b>Drink more water than you think.</b> Arrive a day early if you can.</li><li><b>June is warm and bright.</b> Highs near 80°F, cool evenings.</li><li><b>Afternoon storms happen.</b> Bring a light layer.</li></ul></div>
+      <div class="rv gcard"><span class="fact">Thursday</span><h3>Thursday's Routes</h3><ul><li><b>One coach per Frontier.</b> Site visits across the Front Range.</li><li><b>Some sites have rules.</b> Some sites need your details weeks ahead; we will ask in the spring.</li><li><b>We confirm your route</b> before you arrive.</li></ul></div>
+      <div class="rv gcard"><span class="fact">Smart Casual</span><h3>What to Wear</h3><ul><li><b>Boulder runs casual.</b> Leave the tie at home.</li><li><b>Thursday is on site.</b> Closed-toe shoes; labs and plants have safety rules.</li><li><b>Evenings cool quickly.</b> A jacket for dinner.</li></ul></div>
     </div>
   </div></section>
 </div>
@@ -1099,7 +1184,7 @@ h1[tabindex="-1"]:focus{outline:none}
       <div><h4>Take Part</h4><ul><li><a href="#attend">Request an Invitation</a></li><li>Interested in partnering? <a href="#partners">See Partnerships</a></li><li><a href="https://endeavorcolorado.org" target="_blank" rel="noopener">Endeavor Colorado</a></li><li><a href="https://endeavor.org" target="_blank" rel="noopener">Endeavor Global</a></li></ul></div>
       <div><h4>Newsletter</h4><p class="small">Names and dates as they land, once a month.</p><p style="margin-top:10px"><a class="btn btn-primary" href="https://www.endeavorcolorado.org/newsletter" target="_blank" rel="noopener">Get the Newsletter <span class="arrow">→</span></a></p></div>
     </div>
-    <div class="legal"><span>© 2026 Endeavor Colorado. Dates, venues and program subject to change.</span><nav class="legal-links" aria-label="Housekeeping"><a href="mailto:breanna.real@endeavor.org?subject=Endeavor%20Frontier%20Tech%20Summit">Contact</a><a href="mailto:breanna.real@endeavor.org?subject=Press%20%E2%80%94%20Endeavor%20Frontier%20Tech%20Summit">Press</a><a href="https://www.endeavorcolorado.org/privacy" target="_blank" rel="noopener">Privacy</a><a class="team-login" href="https://claude.ai/artifact/9Vyham9ix83SwpEbyMhZej" target="_blank" rel="noopener" title="For the host team. Invited people only."><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="1"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Team Login</a></nav></div><style>.team-login{display:inline-flex;align-items:center;gap:6px}.team-login svg{flex:none}
+    <div class="legal"><span>© 2026 Endeavor Colorado. Dates, venues and program subject to change.</span><nav class="legal-links" aria-label="Housekeeping"><a href="mailto:breanna.real@endeavor.org?subject=Endeavor%20Frontier%20Tech%20Summit">Contact</a><a href="https://www.endeavorcolorado.org/privacy" target="_blank" rel="noopener">Privacy</a></nav></div><style>.team-login{display:inline-flex;align-items:center;gap:6px}.team-login svg{flex:none}
 /* BRAND-MARK-OCT11 */
 .ewm{display:block;width:auto;overflow:visible}
 .ewm-head{height:20px}
@@ -1116,11 +1201,11 @@ h1[tabindex="-1"]:focus{outline:none}
 (function(){
   var IMG={"tulagi": "/frontier-tech-summit/assets/img-171fe57753.jpg", "walnut": "/frontier-tech-summit/assets/img-352b940d1b.jpg", "boardroom": "/frontier-tech-summit/assets/img-4aea14ecb5.jpg"};
   var R=[
-    {id:'tulagi',img:IMG.tulagi,lab:'Lower Level · 1048 Pearl',name:'Tulagi Underground',size:'14,482 sq ft',
+    {id:'tulagi',img:IMG.tulagi,lab:'Lower Level · 1048 Pearl',name:'Tulagi Underground',size:'',
      lede:'A double-height room under the plaza, up to 22 feet clear, with daylight through skylights above. The main stage: keynotes and every Frontier panel. The whole summit starts and ends here.',
      when:[['Wednesday 9:00 AM','Welcome and Opening Keynote'],['Wednesday 9:45 AM','Aerospace & Defense, Then Energy, Compute & Critical Minerals Panels'],['Wednesday 11:30 AM','Buyer Briefing for Investors and Buyers'],['Wednesday 2:30 PM','Quantum Panel'],['Thursday 2:00 PM','Keynote, Then Physical AI and Bio Tech Panels']],
      facts:['14,482 sq ft event space','Up to 22 ft clear','Stage, seating for all 150']},
-    {id:'walnut',img:IMG.walnut,lab:'Suite 100 · 1023 Walnut',name:'Walnut, Level One',size:'10,282 sq ft',
+    {id:'walnut',img:IMG.walnut,lab:'Suite 100 · 1023 Walnut',name:'Walnut, Level One',size:'',
      lede:'The ground floor of 1023 Walnut and the meeting floor. On Wednesday afternoon founders hold their tables while buyers and investors move between meetings.',
      when:[['Wednesday 8:00 AM','Check-In and Breakfast'],['Wednesday 12:30 PM','Lunch, With One Line From Each Roundtable Host'],['Wednesday 3:15 PM','Matched Meetings'],['Thursday 12:00 PM','Lunch After the Tours'],['Thursday 3:45 PM','Investor Meetings (Second Look)']],
      facts:['10,282 sq ft','Receptions and lounge','A table for every founder']},
@@ -1136,7 +1221,7 @@ h1[tabindex="-1"]:focus{outline:none}
   function show(id){
     var r=R.filter(function(x){return x.id===id;})[0]||R[0];
     document.getElementById('bldDlgFig').innerHTML='<img src="'+r.img+'" alt="Concept rendering of '+esc(r.name)+'"><span class="bld-badge">Concept Rendering · Room to Scale</span>';
-    document.getElementById('bldDlgLab').textContent=r.lab+' · '+r.size;
+    document.getElementById('bldDlgLab').textContent=r.lab+(r.size?' · '+r.size:'');
     document.getElementById('bldDlgTitle').textContent=r.name;
     document.getElementById('bldDlgLede').textContent=r.lede;
     document.getElementById('bldDlgWhen').innerHTML=r.when.map(function(w){return '<li><time>'+w[0]+'</time><span>'+esc(w[1])+'</span></li>';}).join('');
@@ -1163,8 +1248,8 @@ h1[tabindex="-1"]:focus{outline:none}
     {n:'05',name:'Physical AI',line:'Where robots and AI take on real work in the physical world.',ex:'Robotics, industrial AI, additive, factory software',route:'Thursday · Site Visit'},
     {n:'06',name:'Bio Tech',line:'Where biology becomes products.',ex:'Diagnostics, genomics, biomanufacturing',route:'Thursday · Site Visit'}
   ];
-  document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){return '<a class="fr" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><span class="num n">'+f.n+'</span><div class="cap"><h3>'+f.name+'</h3><p>'+f.ex+'</p></div></a>';}).join('');
-  document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<div class="frow" id="fr-'+i+'"><div class="pic"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><span class="num n">'+f.n+'</span></div><div class="fmid"><div><h3>'+f.name+'</h3><p>'+f.line+'</p></div></div><div class="info"><div class="fblk fprob"><span class="fk">Focus Areas</span><span class="fsub">'+f.ex+'</span></div></div></div>';}).join('');
+  document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){var tone=['t-teal','t-ink','t-night','t-off','t-night','t-teal'][i];return '<a class="fr '+tone+' rv" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><div class="cap"><h3>'+f.name+'</h3><p class="line">'+f.line+'</p><span class="go">Enter →</span></div></a>';}).join('');
+  document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<div class="frow" id="fr-'+i+'"><div class="pic"><img src="'+IMG[i+1]+'" alt="" loading="lazy"></div><div class="fmid"><div><h3>'+f.name+'</h3><p>'+f.line+'</p></div></div><div class="info"><div class="fblk fprob"><span class="fk">Focus Areas</span><span class="fsub">'+f.ex+'</span></div></div></div>';}).join('');
   var pages=['home','attend','frontiers','program','boulder','partners'],titles={partners:'Partners',attend:'Who Attends',frontiers:'Frontiers',program:'Program',boulder:'Where We\'ll Gather'};
   var hdr=document.getElementById('siteHeader');
   function onScroll(){hdr.classList.toggle('solid',window.scrollY>60||!document.getElementById('page-home').classList.contains('active'));}
@@ -1232,7 +1317,7 @@ f.addEventListener('submit',function(e){e.preventDefault();
  if(!name||!co||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){m.className='inq-msg';m.textContent='Please add your name, a valid email and your company.';return}
  var tier=E('tier').value||'Not sure yet',note=E('note').value.trim();
  b.disabled=true;m.className='inq-msg';m.textContent='Sending…';
- fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,company:co,subject:'partnership',website:E('website').value,
+ fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,company:co,subject:'partnership',website:E('website').value,subscribe:E('newsletter').checked,
   message:'Frontier Tech Summit partnership inquiry\nInterested in: '+tier+(note?'\n\n'+note:'')})})
  .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw new Error(j.error||'fail')})})
  .then(function(){m.className='inq-msg ok';m.textContent='Thank you. The Endeavor Colorado team will be in touch with partnership details.';b.style.display='none'})
@@ -1240,13 +1325,19 @@ f.addEventListener('submit',function(e){e.preventDefault();
 })();
 </script>
 <script>
-(function(){var sx=document.getElementById('yourSpace');if(!sx)return;
-var tilesEl=sx.querySelector('.sx-tiles');function place(k){var p=document.getElementById('sx-'+k),t=sx.querySelector('.sx-tile[data-space="'+k+'"]');if(!p||!t)return;if(matchMedia('(max-width:760px)').matches){t.after(p)}else{sx.appendChild(p)}}
-function show(k,scroll){place(k);sx.querySelectorAll('.sx-panel').forEach(function(p){p.hidden=(p.id!=='sx-'+k)});sx.querySelectorAll('.sx-tile').forEach(function(t){t.setAttribute('aria-expanded',String(t.getAttribute('data-space')===k))});
- if(scroll){var p=document.getElementById('sx-'+k);if(p)setTimeout(function(){(scroll==='sec'?sx:p).scrollIntoView({behavior:'smooth',block:'start'})},30)}}
-sx.querySelectorAll('.sx-tile').forEach(function(t){t.addEventListener('click',function(){var k=t.getAttribute('data-space');if(t.getAttribute('aria-expanded')==='true')show('');else show(k,'panel')})});
-sx.querySelectorAll('[data-space-close]').forEach(function(b){b.addEventListener('click',function(){show('')})});
-document.querySelectorAll('[data-space-open]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(a.getAttribute('data-space-open'),'sec')})});
+(function(){var d=document.getElementById('sxDlg');if(!d)return;
+function open(k){d.querySelectorAll('.sxd-pane').forEach(function(p){p.hidden=(p.id!=='sxd-'+k)});if(d.showModal){if(!d.open)d.showModal()}else d.setAttribute('open','');d.scrollTop=0}
+document.querySelectorAll('[data-space-open]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();open(a.getAttribute('data-space-open'))})});
+document.getElementById('sxdX').addEventListener('click',function(){d.close()});
+d.addEventListener('click',function(e){if(e.target===d)d.close()});
+d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('click',function(){d.close()})});
+})();
+</script>
+<script>
+(function(){if(!('IntersectionObserver' in window)){document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var el=en.target,sibs=[].slice.call(el.parentNode.children).filter(function(c){return c.classList&&c.classList.contains('rv')&&!c.classList.contains('in')});var k=sibs.indexOf(el);el.style.transitionDelay=(Math.max(0,k)*80)+'ms';el.classList.add('in');io.unobserve(el)})},{rootMargin:'0px 0px -8% 0px',threshold:.1});
+function arm(){document.querySelectorAll('.rv:not(.in)').forEach(function(e){io.observe(e)})}
+arm();window.addEventListener('hashchange',function(){setTimeout(arm,50)});new MutationObserver(function(){arm()}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 </body>
