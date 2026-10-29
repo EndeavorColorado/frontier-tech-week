@@ -18,6 +18,16 @@
 <meta name="color-scheme" content="dark">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <style>.gather .vlab,.gather h3,.gather p{text-shadow:0 1px 2px rgba(1,0,15,.55),0 0 18px rgba(1,0,15,.45)}</style>
+<style>
+.has-reel{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(440px,64vh,660px);display:grid;align-items:end;color:#fff}
+.reel{position:absolute;inset:0;z-index:-2;background:#01000F}
+.reel i{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transform:scale(1.08);transition:opacity 1.6s ease,transform 9s linear}
+.reel i.on{opacity:1;transform:scale(1)}
+.has-reel::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(1,0,15,.62) 0%,rgba(1,0,15,.2) 60%,rgba(1,0,15,.05) 100%),linear-gradient(180deg,rgba(1,0,15,.5) 0%,rgba(1,0,15,.1) 35%,rgba(1,0,15,.55) 75%,#01000F 100%)}
+.has-reel>.wrap{width:100%;box-sizing:border-box;justify-self:stretch}
+.has-reel h1{color:#fff;text-shadow:0 2px 28px rgba(1,0,15,.55)}
+.has-reel .eyebrow{text-shadow:0 1px 10px rgba(1,0,15,.8)}
+</style>
 </head>
 <body>
 
@@ -857,7 +867,7 @@ h1[tabindex="-1"]:focus{outline:none}
 </div>
 
 <div class="page" id="page-attend">
-  <section class="page-hero"><div class="wrap"><h1>Who Attends</h1></div></section><h2 class="vh">Ways to Attend</h2>
+  <section class="page-hero has-reel"><div class="reel" aria-hidden="true"></div><div class="wrap"><h1>Who Attends</h1></div></section><h2 class="vh">Ways to Attend</h2>
   <section class="tight"><div class="wrap">
     <div class="segs segs2">
       <div class="seg seg2"><h3>Founders</h3><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
@@ -874,7 +884,7 @@ h1[tabindex="-1"]:focus{outline:none}
 </div>
 
 <div class="page" id="page-program">
-  <section class="page-hero prog-hero"><div class="wrap"><p class="eyebrow">Program</p><h1>How the Summit Works</h1></div></section><h2 class="vh">The Six Formats</h2>
+  <section class="page-hero has-reel prog-hero"><div class="reel" aria-hidden="true"></div><div class="wrap"><p class="eyebrow">Program</p><h1>How the Summit Works</h1></div></section><h2 class="vh">The Six Formats</h2>
   <section class="tight program-acts"><div class="wrap"><div class="acts"><div class="act"><div class="act-h"><span class="act-n num">01</span><h3>Be Heard</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday – Thursday</span></div><h4>Frontier Panels</h4></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday · 11:30 AM</span></div><h4>Roundtables</h4></article></div><div class="act"><div class="act-h"><span class="act-n num">02</span><h3>Get Matched</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday · 3:15 PM</span></div><h4>Matched Meetings</h4></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday · 5:00 PM</span></div><h4>Boulder Hour</h4></article></div><div class="act"><div class="act-h"><span class="act-n num">03</span><h3>Make It Real</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Thursday · 9:00 AM</span></div><h4>Colorado Tours</h4></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Thursday · 3:45 PM</span></div><h4>Second Look</h4></article></div></div></div></section>
   <style>
 /* Full agenda: one ruled list per day, time / session / place; a role filter dims rows that are not yours. */
@@ -1157,5 +1167,15 @@ h1[tabindex="-1"]:focus{outline:none}
 </script>
 
 
+<script>
+(function(){var B='/frontier-tech-summit/assets/',S=['reel-01-panel','reel-02-bus','reel-03-onbus','reel-04-space','reel-05-dinner','reel-06-quantum','reel-07-cafe','reel-08-turbine','reel-09-bio'];
+var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.reel').forEach(function(r){var i=0,els=S.map(function(){var e=document.createElement('i');r.appendChild(e);return e});
+function load(k){if(!els[k].style.backgroundImage)els[k].style.backgroundImage='url('+B+S[k]+'.webp)'}
+function reset(){els.forEach(function(e){e.classList.remove('on')});i=0;load(0);void els[0].offsetWidth;els[0].classList.add('on');load(1)}
+reset();var shown=false;window.addEventListener('hashchange',function(){setTimeout(function(){if(r.offsetParent){shown=true;reset()}else shown=false},60)});
+setInterval(function(){var vis=!!r.offsetParent;if(!vis){shown=false;return}if(!shown){shown=true;reset();return}if(still)return;
+els[i].classList.remove('on');i=(i+1)%S.length;els[i].classList.add('on');load((i+1)%S.length)},5000)})})();
+</script>
 </body>
 </html>
