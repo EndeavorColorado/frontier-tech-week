@@ -50,6 +50,21 @@
 .pt-simple .t4-tag{margin-bottom:22px}
 .pt-simple .sp-contact{margin-top:16px}
 </style>
+<style>
+.inq{border:1px solid var(--rule);background:#0B0B22;color:#fff;padding:0;width:min(520px,calc(100vw - 32px));max-height:calc(100vh - 32px)}
+.inq::backdrop{background:rgba(1,0,15,.75);backdrop-filter:blur(4px)}
+.inq-form{position:relative;display:grid;gap:14px;padding:30px 28px 26px}
+.inq-form h3{font-size:clamp(22px,2.4vw,28px);margin:0 0 4px}
+.inq-form label{display:grid;gap:6px;font-size:13px;color:var(--ink-2)}
+.inq-form .opt{color:var(--ink-3)}
+.inq-form input,.inq-form select,.inq-form textarea{font:inherit;font-size:16px;color:#fff;background:#01000F;border:1px solid rgba(255,255,255,.22);padding:11px 12px;border-radius:0}
+.inq-form input:focus,.inq-form select:focus,.inq-form textarea:focus{outline:2px solid var(--teal);outline-offset:0;border-color:transparent}
+.inq-form .btn{justify-content:space-between;margin-top:6px}
+.inq-x{position:absolute;top:12px;right:14px;background:none;border:0;color:var(--ink-2);font-size:28px;line-height:1;cursor:pointer;padding:4px 8px}
+.inq-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.inq-msg{margin:0;font-size:14px;color:var(--ink-2);min-height:1.2em}
+.inq-msg.ok{color:var(--teal)}
+</style>
 </head>
 <body>
 
@@ -961,11 +976,27 @@ h1[tabindex="-1"]:focus{outline:none}
   <section class="page-hero"><div class="wrap"><p class="eyebrow">Partners</p><h1>Own a piece of the summit.</h1><p class="lede">Every partnership owns a part of the program no one else can buy, and there are only as many as the summit holds.</p></div></section><h2 class="vh">Partnerships</h2>
   <section class="tight pt-simple"><div class="wrap">
     <div class="sp-hosts"><span class="sp-k">Hosts</span><p>Caruso Ventures <span aria-hidden="true">·</span> Endeavor Colorado</p></div>
-    <div class="tiers4"><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="btn btn-primary" href="mailto:colorado@endeavor.org?subject=Endeavor%20Frontier%20Tech%20Summit%20partnership%3A%20Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="btn btn-primary" href="mailto:colorado@endeavor.org?subject=Endeavor%20Frontier%20Tech%20Summit%20partnership%3A%20Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="btn btn-primary" href="mailto:colorado@endeavor.org?subject=Endeavor%20Frontier%20Tech%20Summit%20partnership%3A%20Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
-    <div class="sp-contact"><div><span class="sp-k">Become a Partner</span><p>Pricing and availability on request. Email the Endeavor Colorado team and we’ll send the partnership details.</p></div><a class="btn btn-dark" id="partnerBtn" href="mailto:colorado@endeavor.org?subject=Endeavor%20Frontier%20Tech%20Summit%20partnership">Request Partnership Details <span class="arrow">→</span></a></div>
+    <div class="tiers4"><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="btn btn-primary" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="btn btn-primary" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="btn btn-primary" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
+    <div class="sp-contact"><div><span class="sp-k">Become a Partner</span><p>Pricing and availability on request. Email the Endeavor Colorado team and we’ll send the partnership details.</p></div><a class="btn btn-dark" id="partnerBtn" href="#partners" data-inquire="">Request Partnership Details <span class="arrow">→</span></a></div>
     
   </div></section>
+<dialog class="inq" id="inqDlg" aria-labelledby="inqTitle">
+  <form class="inq-form" id="inqForm" novalidate>
+    <button type="button" class="inq-x" id="inqClose" aria-label="Close">×</button>
+    <span class="sp-k">Become a Partner</span>
+    <h3 id="inqTitle">Request Partnership Details</h3>
+    <label>Name<input name="name" autocomplete="name" required></label>
+    <label>Work Email<input name="email" type="email" autocomplete="email" required></label>
+    <label>Company<input name="company" autocomplete="organization" required></label>
+    <label>Interested In<select name="tier"><option value="">Not sure yet</option><option>Summit</option><option>Ridge</option><option>Trailhead</option></select></label>
+    <label><span>Anything Else <span class="opt">(optional)</span></span><textarea name="note" rows="3"></textarea></label>
+    <input class="inq-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn btn-primary" type="submit" id="inqSend">Send Request <span class="arrow">→</span></button>
+    <p class="inq-msg" id="inqMsg" role="status"></p>
+  </form>
+</dialog>
 </div>
+
 <div class="page" id="page-boulder">
   <section class="page-hero gather-hero"><div class="wrap">
     <p class="eyebrow">Boulder Guide</p>
@@ -1155,6 +1186,23 @@ function reset(){els.forEach(function(e){e.classList.remove('on')});i=0;load(0);
 reset();var shown=false;window.addEventListener('hashchange',function(){setTimeout(function(){if(r.parentNode.classList.contains('active')){shown=true;reset()}else shown=false},60)});
 setInterval(function(){var vis=r.parentNode.classList.contains('active');if(!vis){shown=false;return}if(!shown){shown=true;reset();return}if(still)return;
 els[i].classList.remove('on');i=(i+1)%S.length;els[i].classList.add('on');load((i+1)%S.length)},5000)})})();
+</script>
+<script>
+(function(){var d=document.getElementById('inqDlg');if(!d||!d.showModal)return;var f=document.getElementById('inqForm'),E=function(n){return f.elements[n]},m=document.getElementById('inqMsg'),b=document.getElementById('inqSend');
+document.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();f.reset();m.textContent='';m.className='inq-msg';b.disabled=false;b.style.display='';E('tier').value=a.getAttribute('data-inquire');d.showModal();setTimeout(function(){E('name').focus()},30)})});
+document.getElementById('inqClose').addEventListener('click',function(){d.close()});
+d.addEventListener('click',function(e){if(e.target===d)d.close()});
+f.addEventListener('submit',function(e){e.preventDefault();
+ var name=E('name').value.trim(),email=E('email').value.trim(),co=E('company').value.trim();
+ if(!name||!co||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){m.className='inq-msg';m.textContent='Please add your name, a valid email and your company.';return}
+ var tier=E('tier').value||'Not sure yet',note=E('note').value.trim();
+ b.disabled=true;m.className='inq-msg';m.textContent='Sending…';
+ fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,company:co,subject:'partnership',website:E('website').value,
+  message:'Frontier Tech Summit partnership inquiry\nInterested in: '+tier+(note?'\n\n'+note:'')})})
+ .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw new Error(j.error||'fail')})})
+ .then(function(){m.className='inq-msg ok';m.textContent='Thank you. The Endeavor Colorado team will be in touch with partnership details.';b.style.display='none'})
+ .catch(function(){b.disabled=false;m.className='inq-msg';m.innerHTML='That didn\u2019t go through. Please email <a href="mailto:colorado@endeavor.org">colorado@endeavor.org</a>.'})});
+})();
 </script>
 </body>
 </html>
