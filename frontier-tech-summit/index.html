@@ -65,6 +65,39 @@
 .inq-msg{margin:0;font-size:14px;color:var(--ink-2);min-height:1.2em}
 .inq-msg.ok{color:var(--teal)}
 </style>
+<style>
+.sx{margin-top:16px;border:1px solid var(--rule);background:var(--card);padding:clamp(22px,3vw,34px)}
+.sx-head{display:grid;gap:8px;margin-bottom:20px}
+.sx-head h2{font-size:clamp(22px,2.4vw,30px);margin:0}
+.sx-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sx-tile{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:6px;align-content:start;border:1px solid var(--rule);background:#01000F;padding:0 0 18px;transition:border-color .2s}
+.sx-tile[aria-expanded="true"]{border-color:var(--teal)}@media (hover:hover){.sx-tile:hover{border-color:var(--teal)}}
+.sx-tile:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.sx-tile>span:not(.sx-img){padding-inline:18px}
+.sx-img{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#0B0B22}
+.sx-img img{width:100%;height:100%;object-fit:cover;display:block}
+.sx-tile .sx-img{margin-bottom:10px}
+.sx-badge{position:absolute;left:10px;top:10px;font-family:var(--display);font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:rgba(1,0,15,.78);color:#fff;padding:4px 8px}
+.sx-k{font-family:var(--display);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+.sx-name{font-size:21px;font-weight:600;color:#fff}
+.sx-line{font-size:15px;color:var(--ink-2)}
+.sx-go{margin-top:6px;font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+.sx-panel{margin-top:18px;padding-top:20px;border-top:1px solid var(--rule);display:grid;gap:18px}
+.sx-ph{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.sx-ph p{margin:6px 0 0;font-size:16px;color:var(--ink);max-width:60ch}
+.sx-close{all:unset;cursor:pointer;font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);white-space:nowrap;padding:4px 0}
+.sx-close:focus-visible{outline:2px solid var(--teal)}
+.sx-rooms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.sx-room{margin:0;border:1px solid var(--rule);background:#01000F}
+.sx-room figcaption{display:grid;gap:4px;padding:14px 16px 16px}
+.sx-room b{font-size:17px;color:#fff}
+.sx-room figcaption span{font-size:14px;color:var(--ink-2)}
+.sx-cta{justify-self:start}
+.sx,.sx-panel{scroll-margin-top:96px}
+.sx-link{display:inline-block;margin:0 24px 14px;font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);text-decoration:none}
+.sx-link:hover{text-decoration:underline}
+@media (max-width:760px){.sx-tiles,.sx-rooms{grid-template-columns:minmax(0,1fr)}.sx-cta{justify-self:stretch;justify-content:space-between}}
+</style>
 </head>
 <body>
 
@@ -976,7 +1009,8 @@ h1[tabindex="-1"]:focus{outline:none}
   <section class="page-hero"><div class="wrap"><p class="eyebrow">Partners</p><h1>Own a piece of the summit.</h1><p class="lede">Every partnership owns a part of the program no one else can buy, and there are only as many as the summit holds.</p></div></section><h2 class="vh">Partnerships</h2>
   <section class="tight pt-simple"><div class="wrap">
     <div class="sp-hosts"><span class="sp-k">Hosts</span><p>Caruso Ventures <span aria-hidden="true">·</span> Endeavor Colorado</p></div>
-    <div class="tiers4"><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="btn btn-primary" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="btn btn-primary" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="btn btn-primary" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
+    <div class="tiers4"><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="sx-link" href="#partners" data-space-open="summit">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="sx-link" href="#partners" data-space-open="ridge">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="sx-link" href="#partners" data-space-open="trailhead">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
+    <div class="sx" id="yourSpace"><div class="sx-head"><span class="sp-k">Your Space at Pearl West</span><h2>Every partnership comes with a place to host.</h2></div><div class="sx-tiles"><button type="button" class="sx-tile" data-space="summit" aria-expanded="false" aria-controls="sx-summit"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-4aea14ecb5.jpg" alt="" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><span class="sx-k">Summit Partner</span><span class="sx-name">Private Office</span><span class="sx-line">Private space to host, both days.</span><span class="sx-go">See the Space →</span></button><button type="button" class="sx-tile" data-space="ridge" aria-expanded="false" aria-controls="sx-ridge"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-171fe57753.jpg" alt="" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><span class="sx-k">Ridge Partner</span><span class="sx-name">Main Stage</span><span class="sx-line">Your Frontier, on the main stage.</span><span class="sx-go">See the Space →</span></button><button type="button" class="sx-tile" data-space="trailhead" aria-expanded="false" aria-controls="sx-trailhead"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-classrooms.webp" alt="" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><span class="sx-k">Trailhead Partner</span><span class="sx-name">Roundtable Room</span><span class="sx-line">Your table, your question.</span><span class="sx-go">See the Space →</span></button></div><div class="sx-panel" id="sx-summit" hidden><div class="sx-ph"><div><span class="sx-k">Summit Partner · Private Office</span><p>Private space for both days. Host meetings, take calls, bring your team.</p></div><button type="button" class="sx-close" data-space-close>Close −</button></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-4aea14ecb5.jpg" alt="Concept rendering of The Corner Boardroom" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Corner Boardroom</b><span>Floor-to-ceiling windows over Pearl Street.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-offices.webp" alt="Concept rendering of The Partner Offices" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Partner Offices</b><span>Quiet rooms for one-on-ones.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></div><div class="sx-panel" id="sx-ridge" hidden><div class="sx-ph"><div><span class="sx-k">Ridge Partner · Main Stage</span><p>Your Frontier takes the main stage, with your name on it.</p></div><button type="button" class="sx-close" data-space-close>Close −</button></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-171fe57753.jpg" alt="Concept rendering of Tulagi Underground" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Tulagi Underground</b><span>The main stage, under the plaza.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-352b940d1b.jpg" alt="Concept rendering of Walnut, Level One" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Walnut, Level One</b><span>The meeting floor.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></div><div class="sx-panel" id="sx-trailhead" hidden><div class="sx-ph"><div><span class="sx-k">Trailhead Partner · Roundtable Room</span><p>Your roundtable, in a room of its own.</p></div><button type="button" class="sx-close" data-space-close>Close −</button></div><div class="sx-rooms"><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/space-classrooms.webp" alt="Concept rendering of The Roundtable Rooms" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>The Roundtable Rooms</b><span>Torreys, Grays and Ouray.</span></figcaption></figure><figure class="sx-room"><span class="sx-img"><img src="/frontier-tech-summit/assets/img-352b940d1b.jpg" alt="Concept rendering of Walnut, Level One" loading="lazy"><span class="sx-badge">Concept Rendering</span></span><figcaption><b>Walnut, Level One</b><span>The meeting floor.</span></figcaption></figure></div><a class="btn btn-primary sx-cta" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></div></div>
     <div class="sp-contact"><div><span class="sp-k">Become a Partner</span><p>Pricing and availability on request. Email the Endeavor Colorado team and we’ll send the partnership details.</p></div><a class="btn btn-dark" id="partnerBtn" href="#partners" data-inquire="">Request Partnership Details <span class="arrow">→</span></a></div>
     
   </div></section>
@@ -1202,6 +1236,16 @@ f.addEventListener('submit',function(e){e.preventDefault();
  .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw new Error(j.error||'fail')})})
  .then(function(){m.className='inq-msg ok';m.textContent='Thank you. The Endeavor Colorado team will be in touch with partnership details.';b.style.display='none'})
  .catch(function(){b.disabled=false;m.className='inq-msg';m.innerHTML='That didn\u2019t go through. Please email <a href="mailto:colorado@endeavor.org">colorado@endeavor.org</a>.'})});
+})();
+</script>
+<script>
+(function(){var sx=document.getElementById('yourSpace');if(!sx)return;
+var tilesEl=sx.querySelector('.sx-tiles');function place(k){var p=document.getElementById('sx-'+k),t=sx.querySelector('.sx-tile[data-space="'+k+'"]');if(!p||!t)return;if(matchMedia('(max-width:760px)').matches){t.after(p)}else{sx.appendChild(p)}}
+function show(k,scroll){place(k);sx.querySelectorAll('.sx-panel').forEach(function(p){p.hidden=(p.id!=='sx-'+k)});sx.querySelectorAll('.sx-tile').forEach(function(t){t.setAttribute('aria-expanded',String(t.getAttribute('data-space')===k))});
+ if(scroll){var p=document.getElementById('sx-'+k);if(p)setTimeout(function(){(scroll==='sec'?sx:p).scrollIntoView({behavior:'smooth',block:'start'})},30)}}
+sx.querySelectorAll('.sx-tile').forEach(function(t){t.addEventListener('click',function(){var k=t.getAttribute('data-space');if(t.getAttribute('aria-expanded')==='true')show('');else show(k,'panel')})});
+sx.querySelectorAll('[data-space-close]').forEach(function(b){b.addEventListener('click',function(){show('')})});
+document.querySelectorAll('[data-space-open]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(a.getAttribute('data-space-open'),'sec')})});
 })();
 </script>
 </body>
