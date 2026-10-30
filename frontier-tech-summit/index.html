@@ -177,7 +177,58 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .has-tex2::before{opacity:.1}
 #page-partners.has-tex>.tex{display:none}
 </style>
-<style>.frow .pic .n{background:rgba(1,0,15,.7);padding:2px 10px;border-radius:2px}</style>
+<style>.frow .pic .n{background:rgba(1,0,15,.7);padding:2px 10px;border-radius:2px}
+/* Frontiers: tiles + full-screen pop-up */
+#page-frontiers .page-hero.tight-hero{padding-bottom:clamp(10px,1.4vw,18px)}
+#page-frontiers .tight-hero+.vh+section.tight{padding-bottom:clamp(20px,3vh,36px)}
+.ftiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(190px,calc((100vh - 372px)/2)));gap:clamp(10px,1.2vw,16px)}
+.ftile{position:relative;overflow:hidden;border:1px solid var(--rule);background:#07071C;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit;isolation:isolate;min-height:0;transition:border-color .35s ease,box-shadow .35s ease}
+.ftile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.9);transition:transform 1.4s cubic-bezier(.2,.8,.2,1),filter .5s ease}
+.ftile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,0,15,.05) 0%,rgba(1,0,15,0) 35%,rgba(1,0,15,.88) 100%)}
+.ftile .cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;display:grid;gap:6px}
+.ftile h3{margin:0;font-size:clamp(20px,1.8vw,26px);letter-spacing:-.01em;line-height:1.1;padding:0;border:0}
+.ftile p{margin:0;color:var(--ink-2);font-size:clamp(13px,1vw,14.5px);line-height:1.4;max-width:34ch}
+.ftile .see{display:inline-flex;align-items:center;gap:10px;justify-self:start;color:#fff;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding-bottom:6px;border-bottom:2px solid var(--teal);max-height:0;opacity:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.8,.2,1),opacity .35s ease,margin .45s ease}
+.ftile .see span{color:var(--teal);transition:transform .3s}.ftile:hover .see span{transform:translateX(4px)}
+.ftile:hover img,.ftile:focus-visible img{transform:scale(1.05);filter:brightness(.8) saturate(1)}
+.ftile:hover .see,.ftile:focus-visible .see{max-height:40px;opacity:1;margin-top:8px}
+.ftile:hover,.ftile:focus-visible{border-color:rgba(9,225,205,.7);outline:none;box-shadow:0 0 0 1px rgba(9,225,205,.25) inset}
+.fmodal{position:fixed;inset:0;z-index:90;pointer-events:none;isolation:isolate}
+.fmodal .veil{position:absolute;inset:0;background:#01000F;opacity:0;transition:opacity .45s ease}
+.fmodal .veil::after{content:"";position:absolute;inset:0;background:url(/frontier-tech-summit/assets/brand-flow.png) right bottom/min(90%,1200px) auto no-repeat;opacity:.1}
+.fmodal.open{pointer-events:auto}.fmodal.open .veil{opacity:1}
+.fmodal .mx{position:absolute;top:22px;right:26px;z-index:5;width:48px;height:48px;border:1px solid var(--rule);background:rgba(7,7,28,.7);color:#fff;font-size:22px;cursor:pointer;opacity:0;transform:translateY(-8px);transition:opacity .4s ease .25s,transform .4s ease .25s,border-color .3s;font-family:inherit}
+.fmodal .mx:hover{border-color:var(--teal)}.fmodal.open .mx{opacity:1;transform:none}
+.fmodal .mwrap{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,64px);align-items:center;max-width:1440px;margin:0 auto;padding:clamp(56px,8vh,80px) clamp(24px,4vw,64px) clamp(28px,5vh,56px)}
+.fmodal .mcol{display:grid;gap:10px;align-content:center;min-width:0}
+.fmodal .ey{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-family:var(--display)}
+.fmodal h2{margin:0;font-size:clamp(34px,4.4vw,64px);letter-spacing:-.02em;line-height:1}
+.fmodal .lede{margin:0 0 6px;font-size:clamp(15px,1.3vw,18px);line-height:1.5;color:var(--ink-2);max-width:52ch}
+.fmodal .fblk{display:grid;grid-template-columns:128px minmax(0,1fr);gap:14px;padding:clamp(8px,1.3vh,13px) 0;border-top:1px solid var(--rule);align-items:start}
+.fmodal .bk{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);padding-top:3px;font-family:var(--display)}
+.fmodal .bv{font-size:14.5px;line-height:1.45;color:var(--ink)}
+.fmodal .bv small{display:block;color:var(--ink-3);font-size:13px;margin-top:2px}
+.fmodal .bv .tbd{display:table;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--rule);padding:3px 8px;color:var(--ink-3);margin-top:5px}
+.fmodal .fchips{display:flex;flex-wrap:wrap;gap:6px}.fmodal .fchips span{font-size:12.5px;padding:4px 9px;border:1px solid var(--rule);color:var(--ink-2)}
+.fmodal .mcta{display:flex;align-items:center;gap:28px;padding-top:12px;border-top:1px solid var(--rule);flex-wrap:wrap}
+.fmodal .mcta .btn{padding:12px 16px;font-size:14px}
+.fmodal .nav{display:flex;gap:22px;margin-left:auto}
+.fmodal .nav button{background:transparent;border:0;color:#fff;font:inherit;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:0 0 6px;border-bottom:2px solid var(--teal);cursor:pointer;display:inline-flex;gap:10px}
+.fmodal .nav button span{color:var(--teal)}
+.fmodal .mpic{position:relative;aspect-ratio:4/3;min-width:0;align-self:center}
+.fmodal .mpic .frame{position:absolute;inset:0;border:1px solid rgba(9,225,205,.7);background:#07071C;padding:10px;transform:rotate(2.5deg);box-shadow:0 30px 80px rgba(1,0,15,.7)}
+.fmodal .mpic img{width:100%;height:100%;object-fit:cover;display:block}
+.fmodal .mpic .tag{position:absolute;left:-14px;bottom:26px;background:var(--teal);color:#01000F;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;padding:8px 12px;transform:rotate(-2deg);font-family:var(--display)}
+.fmodal .in{opacity:0;transform:translateY(26px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.fmodal .mpic.in{transform:translate(60px,0) rotate(4deg)}
+.fmodal.open .in{opacity:1;transform:none}.fmodal.open .mpic.in{transform:none}
+.fmodal.open .in:nth-child(1){transition-delay:.15s}.fmodal.open .in:nth-child(2){transition-delay:.22s}.fmodal.open .in:nth-child(3){transition-delay:.29s}.fmodal.open .in:nth-child(4){transition-delay:.36s}.fmodal.open .in:nth-child(5){transition-delay:.43s}.fmodal.open .in:nth-child(6){transition-delay:.5s}.fmodal.open .in:nth-child(7){transition-delay:.57s}.fmodal.open .in:nth-child(8){transition-delay:.64s}.fmodal.open .in:nth-child(9){transition-delay:.71s}
+.fmodal.open .mpic.in{transition-delay:.2s;transition-duration:.9s}
+.fmodal.swap .in{transition:none;opacity:0;transform:translateY(26px)}
+@media (max-width:900px){.ftiles{grid-template-columns:1fr 1fr;grid-template-rows:none}.ftile{aspect-ratio:4/3}.ftile .see{max-height:40px;opacity:1;margin-top:8px}.fmodal .mwrap{grid-template-columns:1fr;align-items:start;overflow:auto;padding-top:76px;display:block}.fmodal .mpic{display:none}.fmodal h2{font-size:34px}.fmodal .mcol{padding-bottom:40px}}
+@media (max-width:560px){.ftiles{grid-template-columns:1fr}}
+@media (max-height:760px){.fmodal .mcol{gap:6px}.fmodal h2{font-size:clamp(30px,3.6vw,44px)}.fmodal .lede{font-size:15px}.fmodal .fblk{padding:6px 0}.fmodal .bv small{display:none}.fmodal .mwrap{padding-top:56px}}
+</style>
 <style>.pc .mark.b-caruso.flat,:root[data-theme="dark"] .pc .mark.b-caruso.flat,.pc .mark.b-ec,:root[data-theme="dark"] .pc .mark.b-ec{background:#fff!important}.pc .mark.b-ec svg.ewm-tile{color:#01000F!important}.pc .mark.b-ec .ec *{color:#01000F}</style>
 <style>.pc .mark.b-caruso.flat,:root[data-theme="dark"] .pc .mark.b-caruso.flat,.pc .mark.b-ec,:root[data-theme="dark"] .pc .mark.b-ec{background:transparent!important;border:0}.pc .mark.b-ec svg.ewm-tile{color:var(--teal)!important}.pc .mark.b-ec .ec *{color:var(--teal)}.pc{background:transparent;border:0}.pc .body{padding-left:0}.pc .mark{aspect-ratio:auto;padding:22px 0 16px;justify-items:start}.pc .mark.b-caruso.flat img{width:48%;max-width:250px}</style>
 <style>.inq-form .inq-chk{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-3);margin-top:-2px;cursor:pointer}.inq-form .inq-chk input{width:15px;height:15px;margin:0;accent-color:var(--teal);cursor:pointer}</style>
@@ -1058,7 +1109,7 @@ h1[tabindex="-1"]:focus{outline:none}
 
 <div class="page has-tex3" id="page-frontiers">
   <section class="page-hero tight-hero"><div class="wrap"><h1>Six Frontiers Shaping What’s Next.</h1></div></section><h2 class="vh">The Six Frontiers</h2>
-  <section class="tight"><div class="wrap"><div class="frs" id="allFrontiers"></div></div></section>
+  <section class="tight"><div class="wrap"><div class="ftiles" id="allFrontiers"></div></div></section>
 </div>
 
 <div class="page has-reel" id="page-program"><div class="reel" aria-hidden="true"></div>
@@ -1255,7 +1306,18 @@ h1[tabindex="-1"]:focus{outline:none}
     {n:'06',name:'Bio Tech',line:'Where biology becomes products.',ex:'Diagnostics, genomics, biomanufacturing',route:'Thursday · Site Visit'}
   ];
   document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){return '<a class="fr" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><span class="num n">'+f.n+'</span><div class="cap"><h3>'+f.name+'</h3><p>'+f.ex+'</p></div></a>';}).join('');
-  document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<div class="frow" id="fr-'+i+'"><div class="pic"><img src="'+IMG[i+1]+'" alt="" loading="lazy"></div><div class="fmid"><div><h3>'+f.name+'</h3><p>'+f.line+'</p></div></div><div class="info"><div class="fblk"><span class="fk">Thursday Tour</span><span class="fsub tbd">Site announced in January</span></div><div class="fblk"><span class="fk">Frontier Lead</span><span class="fsub tbd">Announced in January</span></div><div class="fblk fprob"><span class="fk">Focus Areas</span><span class="fsub">'+f.ex+'</span></div></div></div>';}).join('');
+  document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<button type="button" class="ftile" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="cap"><h3>'+f.name+'</h3><p>'+f.line+'</p><span class="see">Enter <span>→</span></span></div></button>';}).join('');
+  function initFModal(){var m=document.getElementById('fmodal');if(!m)return;var cur=0,E=function(i){return document.getElementById(i)};
+  function fill(i){cur=(i+F.length)%F.length;var f=F[cur];E('fmImg').src=IMG[cur+1];E('fmName').textContent=f.name;E('fmLine').textContent=f.line;E('fmChips').innerHTML=f.ex.split(',').map(function(x){x=x.trim();return '<span>'+x.charAt(0).toUpperCase()+x.slice(1)+'</span>'}).join('')}
+  function openF(i){fill(i);if(m.classList.contains('open')){m.classList.add('swap');void m.offsetWidth;requestAnimationFrame(function(){m.classList.remove('swap')});return}m.classList.add('open');m.setAttribute('aria-hidden','false');document.documentElement.style.overflow='hidden';if(window.__lenis)window.__lenis.stop()}
+  function closeF(){m.classList.remove('open');m.setAttribute('aria-hidden','true');document.documentElement.style.overflow='';if(window.__lenis)window.__lenis.start()}
+  document.getElementById('allFrontiers').addEventListener('click',function(e){var t=e.target.closest('.ftile');if(t)openF(+t.getAttribute('data-fi'))});
+  m.querySelectorAll('[data-fclose]').forEach(function(b){b.addEventListener('click',closeF)});
+  E('fmPrev').onclick=function(){openF(cur-1)};E('fmNext').onclick=function(){openF(cur+1)};
+  document.addEventListener('keydown',function(e){if(!m.classList.contains('open'))return;if(e.key==='Escape')closeF();if(e.key==='ArrowRight')openF(cur+1);if(e.key==='ArrowLeft')openF(cur-1)});
+  window.addEventListener('hashchange',closeF);
+  }
+  if(document.getElementById('fmodal'))initFModal();else document.addEventListener('DOMContentLoaded',initFModal);
   var pages=['home','attend','frontiers','program','boulder','partners'],titles={partners:'Partners',attend:'Who Attends',frontiers:'Frontiers',program:'Program',boulder:'Where We\'ll Gather'};
   var hdr=document.getElementById('siteHeader');
   function onScroll(){hdr.classList.toggle('solid',window.scrollY>60||!document.getElementById('page-home').classList.contains('active'));}
@@ -1313,6 +1375,24 @@ reset();var shown=false;window.addEventListener('hashchange',function(){setTimeo
 setInterval(function(){var vis=r.parentNode.classList.contains('active');if(!vis){shown=false;return}if(!shown){shown=true;reset();return}if(still)return;
 els[i].classList.remove('on');i=(i+1)%S.length;els[i].classList.add('on');load((i+1)%S.length)},5000)})})();
 </script>
+<div class="fmodal" id="fmodal" aria-hidden="true">
+  <div class="veil" data-fclose></div>
+  <button class="mx" data-fclose aria-label="Close">×</button>
+  <div class="mwrap" role="dialog" aria-modal="true" aria-labelledby="fmName">
+    <div class="mcol">
+      <span class="ey in">Frontier</span>
+      <h2 class="in" id="fmName"></h2>
+      <p class="lede in" id="fmLine"></p>
+      <div class="fblk in"><span class="bk">Focus Areas</span><div class="bv"><div class="fchips" id="fmChips"></div></div></div>
+      <div class="fblk in"><span class="bk">Wednesday Panel</span><div class="bv">Founders on what they're building, in their own words.<small>One stage · six Frontiers</small></div></div>
+      <div class="fblk in"><span class="bk">Thursday Tour</span><div class="bv">Labs, factories and clean rooms, close by.<span class="tbd">Site announced in January</span></div></div>
+      <div class="fblk in"><span class="bk">Frontier Lead</span><div class="bv"><span class="tbd">Announced in January</span></div></div>
+      <div class="fblk in"><span class="bk">Roundtable</span><div class="bv">Small table, one per Frontier. Off the record.<small>Sign-ups open soon</small></div></div>
+      <div class="mcta in"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a><div class="nav"><button type="button" id="fmPrev"><span>←</span> Previous</button><button type="button" id="fmNext">Next <span>→</span></button></div></div>
+    </div>
+    <div class="mpic in"><div class="frame"><img id="fmImg" src="" alt=""></div><span class="tag">Thursday Tour</span></div>
+  </div>
+</div>
 <dialog class="inq" id="inqDlg" aria-labelledby="inqTitle">
   <form class="inq-form" id="inqForm" novalidate>
     <button type="button" class="inq-x" id="inqClose" aria-label="Close">×</button>
@@ -1375,7 +1455,7 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   // other pages
   tag('.page-hero .wrap > *');
   tag('#page-attend .seg2');
-  tag('#allFrontiers .frow');
+  tag('#allFrontiers .ftile');
   tag('#agDays .ag-day');tag('.ag-arrive');
   tag('#page-partners .tier4');tag('#page-partners .sx-head');tag('#page-partners .sx-tile');tag('#page-partners .sp-contact');
   tag('#page-boulder .venue');tag('#page-boulder .vbanner');tag('#page-boulder .gather-info .section-head');tag('#page-boulder .gcard');
