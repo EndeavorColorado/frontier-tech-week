@@ -910,7 +910,7 @@ h1[tabindex="-1"]:focus{outline:none}
       <h1 class="title">Endeavor Frontier<small>Tech Summit</small></h1>
       <div class="year num">2027</div>
       <p class="date"><b>June 16–17</b><span>Boulder, Colorado</span><span>Invitation Only</span></p><p class="hosted">Hosted by Endeavor Colorado and Caruso Ventures</p>
-      <div class="actions"><a class="btn btn-primary" href="#attend">Request an Invitation <span class="arrow">→</span></a><a class="btn btn-ghost onhero" href="#program">How the Summit Works</a></div>
+      <div class="actions"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a><a class="btn btn-ghost onhero" href="#partners" data-inquire="">Become a Partner</a></div>
           </div>
   </section>
 
@@ -1071,21 +1071,6 @@ h1[tabindex="-1"]:focus{outline:none}
     <div class="sp-contact"><div><span class="sp-k">Become a Partner</span><p>Pricing and availability on request. Email the Endeavor Colorado team and we’ll send the partnership details.</p></div><a class="btn btn-dark" id="partnerBtn" href="#partners" data-inquire="">Request Partnership Details <span class="arrow">→</span></a></div>
     
   </div></section>
-<dialog class="inq" id="inqDlg" aria-labelledby="inqTitle">
-  <form class="inq-form" id="inqForm" novalidate>
-    <button type="button" class="inq-x" id="inqClose" aria-label="Close">×</button>
-    <span class="sp-k">Become a Partner</span>
-    <h3 id="inqTitle">Request Partnership Details</h3>
-    <label>Name<input name="name" autocomplete="name" required></label>
-    <label>Work Email<input name="email" type="email" autocomplete="email" required></label>
-    <label>Company<input name="company" autocomplete="organization" required></label>
-    <label>Interested In<select name="tier"><option value="">Not sure yet</option><option>Summit</option><option>Ridge</option><option>Trailhead</option></select></label>
-    <label><span>Anything Else <span class="opt">(optional)</span></span><textarea name="note" rows="3"></textarea></label>
-    <input class="inq-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button class="btn btn-primary" type="submit" id="inqSend">Send Request <span class="arrow">→</span></button>
-    <p class="inq-msg" id="inqMsg" role="status"></p>
-  </form>
-</dialog>
 </div>
 
 <div class="page has-tex3" id="page-boulder">
@@ -1278,9 +1263,24 @@ reset();var shown=false;window.addEventListener('hashchange',function(){setTimeo
 setInterval(function(){var vis=r.parentNode.classList.contains('active');if(!vis){shown=false;return}if(!shown){shown=true;reset();return}if(still)return;
 els[i].classList.remove('on');i=(i+1)%S.length;els[i].classList.add('on');load((i+1)%S.length)},5000)})})();
 </script>
+<dialog class="inq" id="inqDlg" aria-labelledby="inqTitle">
+  <form class="inq-form" id="inqForm" novalidate>
+    <button type="button" class="inq-x" id="inqClose" aria-label="Close">×</button>
+    <span class="sp-k">Become a Partner</span>
+    <h3 id="inqTitle">Request Partnership Details</h3>
+    <label>Name<input name="name" autocomplete="name" required></label>
+    <label>Work Email<input name="email" type="email" autocomplete="email" required></label>
+    <label>Company<input name="company" autocomplete="organization" required></label>
+    <label>Interested In<select name="tier"><option value="">Not sure yet</option><option>Summit</option><option>Ridge</option><option>Trailhead</option></select></label>
+    <label><span>Anything Else <span class="opt">(optional)</span></span><textarea name="note" rows="3"></textarea></label>
+    <input class="inq-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn btn-primary" type="submit" id="inqSend">Send Request <span class="arrow">→</span></button>
+    <p class="inq-msg" id="inqMsg" role="status"></p>
+  </form>
+</dialog>
 <script>
 (function(){var d=document.getElementById('inqDlg');if(!d||!d.showModal)return;var f=document.getElementById('inqForm'),E=function(n){return f.elements[n]},m=document.getElementById('inqMsg'),b=document.getElementById('inqSend');
-document.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();f.reset();m.textContent='';m.className='inq-msg';b.disabled=false;b.style.display='';E('tier').value=a.getAttribute('data-inquire');d.showModal();setTimeout(function(){E('name').focus()},30)})});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-inquire]');if(!a)return;e.preventDefault();f.reset();m.textContent='';m.className='inq-msg';b.disabled=false;b.style.display='';E('tier').value=a.getAttribute('data-inquire');d.showModal();setTimeout(function(){E('name').focus()},30)});
 document.getElementById('inqClose').addEventListener('click',function(){d.close()});
 d.addEventListener('click',function(e){if(e.target===d)d.close()});
 f.addEventListener('submit',function(e){e.preventDefault();
@@ -1338,7 +1338,7 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   if(hero){
     var goHero=function(){setTimeout(function(){hero.classList.add('hero-in')},120)};if(document.readyState==='complete')goHero();else window.addEventListener('load',goHero)}
   // --- smooth scroll (Lenis), a touch lighter than DTM ---
-  function startLenis(){if(!window.Lenis||window.__lenis)return;var l=new Lenis({lerp:0.12,wheelMultiplier:1,smoothWheel:true,syncTouch:false});window.__lenis=l;function raf(t){l.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}
+  function startLenis(){if(!window.Lenis||window.__lenis)return;var l=new Lenis({lerp:0.085,wheelMultiplier:0.9,smoothWheel:true,syncTouch:false});window.__lenis=l;function raf(t){l.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}
   if(document.readyState==='complete')startLenis();else window.addEventListener('load',startLenis);
   // page switches: reset scroll via lenis and re-arm
   window.addEventListener('hashchange',function(){setTimeout(function(){if(window.__lenis)window.__lenis.scrollTo(0,{immediate:true});arm()},40)});
