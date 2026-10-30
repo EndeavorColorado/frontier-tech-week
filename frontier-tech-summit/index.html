@@ -159,6 +159,7 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 <style>.frow .pic .n{background:rgba(1,0,15,.7);padding:2px 10px;border-radius:2px}</style>
 <style>.pc .mark.b-caruso.flat,:root[data-theme="dark"] .pc .mark.b-caruso.flat,.pc .mark.b-ec,:root[data-theme="dark"] .pc .mark.b-ec{background:#fff!important}.pc .mark.b-ec svg.ewm-tile{color:#01000F!important}.pc .mark.b-ec .ec *{color:#01000F}</style>
 <style>.pc .mark.b-caruso.flat,:root[data-theme="dark"] .pc .mark.b-caruso.flat,.pc .mark.b-ec,:root[data-theme="dark"] .pc .mark.b-ec{background:transparent!important;border:0}.pc .mark.b-ec svg.ewm-tile{color:var(--teal)!important}.pc .mark.b-ec .ec *{color:var(--teal)}.pc{background:transparent;border:0}.pc .body{padding-left:0}.pc .mark{aspect-ratio:auto;padding:22px 0 16px;justify-items:start}.pc .mark.b-caruso.flat img{width:48%;max-width:250px}</style>
+<style>.inq-form .inq-chk{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-3);margin-top:-2px;cursor:pointer}.inq-form .inq-chk input{width:15px;height:15px;margin:0;accent-color:var(--teal);cursor:pointer}</style>
 </head>
 <body>
 
@@ -1275,6 +1276,7 @@ els[i].classList.remove('on');i=(i+1)%S.length;els[i].classList.add('on');load((
     <label><span>Anything Else <span class="opt">(optional)</span></span><textarea name="note" rows="3"></textarea></label>
     <input class="inq-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="btn btn-primary" type="submit" id="inqSend">Send Request <span class="arrow">→</span></button>
+    <label class="inq-chk"><input type="checkbox" name="newsletter" checked> Subscribe to the Endeavor Colorado newsletter</label>
     <p class="inq-msg" id="inqMsg" role="status"></p>
   </form>
 </dialog>
@@ -1288,7 +1290,7 @@ f.addEventListener('submit',function(e){e.preventDefault();
  if(!name||!co||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){m.className='inq-msg';m.textContent='Please add your name, a valid email and your company.';return}
  var tier=E('tier').value||'Not sure yet',note=E('note').value.trim();
  b.disabled=true;m.className='inq-msg';m.textContent='Sending…';
- fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,company:co,subject:'partnership',website:E('website').value,
+ fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,company:co,subject:'partnership',website:E('website').value,subscribe:!!E('newsletter').checked,
   message:'Frontier Tech Summit partnership inquiry\nInterested in: '+tier+(note?'\n\n'+note:'')})})
  .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw new Error(j.error||'fail')})})
  .then(function(){m.className='inq-msg ok';m.textContent='Thank you. The Endeavor Colorado team will be in touch with partnership details.';b.style.display='none'})
