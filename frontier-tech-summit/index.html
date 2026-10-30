@@ -780,6 +780,9 @@ h1[tabindex="-1"]:focus{outline:none}
 .page-hero .wrap,.gather-hero .wrap{max-width:var(--max);gap:14px}
 .page-hero h1,.prog-hero h1,.gather-hero h1{font-size:clamp(38px,5vw,68px);line-height:1.04;max-width:900px}
 .page-hero .lede,.prog-hero .lede,.gather-hero .lede{font-size:clamp(17px,1.4vw,19px);max-width:62ch;text-wrap:pretty}
+/* uniform page titles */
+.page-hero,.prog-hero,.gather-hero,#page-attend .page-hero,#page-frontiers .page-hero.tight-hero,#page-program .prog-hero{padding-top:clamp(96px,10vw,124px)}
+.page-hero h1,.prog-hero h1,.gather-hero h1,#page-attend .page-hero h1{font-size:clamp(38px,5vw,68px);line-height:1.04;letter-spacing:-.02em}
 /* home closing: centered composition, like the hero */
 .close .wrap{max-width:var(--max);justify-items:center;text-align:center}
 .close p{margin-inline:auto}
@@ -1115,7 +1118,7 @@ h1[tabindex="-1"]:focus{outline:none}
 </div>
 
 <div class="page has-reel" id="page-program"><div class="reel" aria-hidden="true"></div>
-  <section class="page-hero prog-hero"><div class="wrap"><p class="eyebrow">Program</p><h1>How the Summit Works</h1></div></section><h2 class="vh">The Six Formats</h2>
+  <section class="page-hero prog-hero"><div class="wrap"><h1>How the Summit Works</h1></div></section><h2 class="vh">The Six Formats</h2>
   <section class="tight program-acts"><div class="wrap"><div class="acts"><div class="act"><div class="act-h"><h3>Be Heard</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">One Stage · Six Frontiers</span></div><h4>Frontier Panels</h4><p class="fmt-what">The founders building it, in their own words.</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Small Tables · One per Frontier</span></div><h4>Roundtables <span class="fmt-tag">Sign-Ups Open Soon</span></h4><p class="fmt-what">Intimate, off the record conversations.</p></article></div><div class="act"><div class="act-h"><h3>Get Matched</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Founder + Investor · One on One</span></div><h4>Matched Meetings</h4><p class="fmt-what">Short meetings, paired before you land.</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Hike · Bike · Spa</span></div><h4>Boulder Hour</h4><p class="fmt-what">The conversation keeps going outside.</p></article></div><div class="act"><div class="act-h"><h3>Make It Real</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">One Coach per Frontier</span></div><h4>Colorado Tours</h4><p class="fmt-what">Labs, factories and clean rooms, close by.</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Investors + Founders</span></div><h4>Second Look</h4><p class="fmt-what">A second meeting with founders you liked.</p></article></div></div></div></section>
   <style>
 /* Full agenda: one ruled list per day, time / session / place; a role filter dims rows that are not yours. */
@@ -1178,7 +1181,6 @@ h1[tabindex="-1"]:focus{outline:none}
 
 <div class="page has-tex3" id="page-boulder">
   <section class="page-hero gather-hero"><div class="wrap">
-    <p class="eyebrow">Boulder Guide</p>
     <h1>Where We'll <em>Gather.</em></h1>
     
     <p class="gmeta"><span>June 16–17, 2027</span><span>Boulder, Colorado</span><span>5,430 ft</span></p>
@@ -1307,7 +1309,7 @@ h1[tabindex="-1"]:focus{outline:none}
     {n:'05',name:'Physical AI',line:'Where robots and AI take on real work in the physical world.',ex:'Robotics, industrial AI, additive, factory software',route:'Thursday · Site Visit'},
     {n:'06',name:'Bio Tech',line:'Where biology becomes products.',ex:'Diagnostics, genomics, biomanufacturing',route:'Thursday · Site Visit'}
   ];
-  document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){return '<a class="fr" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><span class="num n">'+f.n+'</span><div class="cap"><h3>'+f.name+'</h3><p>'+f.ex+'</p></div></a>';}).join('');
+  document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){return '<a class="fr" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><div class="cap"><h3>'+f.name+'</h3><p>'+f.ex+'</p></div></a>';}).join('');
   document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<button type="button" class="ftile" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="cap"><h3>'+f.name+'</h3><p>'+f.line+'</p><span class="see">Enter <span>→</span></span></div></button>';}).join('');
   function initFModal(){var m=document.getElementById('fmodal');if(!m)return;var cur=0,E=function(i){return document.getElementById(i)};
   function fill(i){cur=(i+F.length)%F.length;var f=F[cur];E('fmImg').src=IMG[cur+1];E('fmName').textContent=f.name;E('fmLine').textContent=f.line;E('fmChips').innerHTML=f.ex.split(',').map(function(x){x=x.trim();return '<span>'+x.charAt(0).toUpperCase()+x.slice(1)+'</span>'}).join('')}
@@ -1383,7 +1385,6 @@ els[i].classList.remove('on');i=(i+1)%S.length;els[i].classList.add('on');load((
   <button class="mx" data-fclose aria-label="Close">×</button>
   <div class="mwrap">
     <div class="mcol">
-      <span class="ey in">Frontier</span>
       <h2 class="in" id="fmName"></h2>
       <p class="lede in" id="fmLine"></p>
       <div class="fblk in"><span class="bk">Focus Areas</span><div class="bv"><div class="fchips" id="fmChips"></div></div></div>
