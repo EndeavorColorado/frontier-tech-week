@@ -172,6 +172,12 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .hl-rule{width:1px;height:clamp(48px,5.4vw,70px);background:var(--teal);opacity:.7}
 @media (max-width:520px){.hosts-lock{gap:20px}.hosts-lock .hl svg.ewm-tile{height:26px}.hosts-lock .hl img{height:42px}.hl-rule{height:42px}}
 </style>
+<style>
+.has-flow{position:relative;isolation:isolate}
+.has-flow::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-flow.png) right bottom/min(110%,1500px) auto no-repeat;opacity:.22}
+@media (max-width:760px){.has-flow::before{background-size:160% auto;opacity:.18}}
+.on-white.has-tex2::before{opacity:.06}
+</style>
 </head>
 <body>
 
@@ -974,7 +980,7 @@ h1[tabindex="-1"]:focus{outline:none}
   </section>
 
   <div class="fade f-white-dteal" aria-hidden="true"></div>
-  <section class="on-dteal has-tex2">
+  <section class="on-dteal has-flow">
     <div class="wrap">
       <div class="section-head"><div class="top"><p class="eyebrow">Who Attends</p></div><h2>150 People. Founders, Investors and Buyers.</h2></div>
       <div class="who">
