@@ -131,6 +131,21 @@
 #page-partners .page-hero+.vh+section.tight,#page-partners section.tight.pt-simple{padding-top:clamp(12px,1.5vw,20px)}
 .gather-hero .wrap{gap:10px}
 </style>
+<script>(function(){if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('mo')})();</script>
+<style>
+/* Motion system (DTM-style). Elements are visible until JS adds .mo to <html>. */
+html.mo .rv{opacity:0;transform:translateY(44px);transition:opacity .42s cubic-bezier(.2,.8,.2,1),transform .42s cubic-bezier(.2,.8,.2,1);will-change:opacity,transform}
+html.mo .rv.block{transform:translateY(60px)}
+html.mo .rv.from-l{transform:translateX(-80px)}
+html.mo .rv.from-r{transform:translateX(80px)}
+html.mo .rv.from-l,html.mo .rv.from-r{transition-duration:.9s;transition-timing-function:cubic-bezier(.45,0,.2,1);transition-delay:.2s}
+html.mo .rv.in{opacity:1;transform:none}
+html.mo .hero .tag,html.mo .hero .title,html.mo .hero .year,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
+html.mo .hero.hero-in .tag,html.mo .hero.hero-in .title,html.mo .hero.hero-in .year,html.mo .hero.hero-in .date,html.mo .hero.hero-in .hosted,html.mo .hero.hero-in .actions{opacity:1;transform:none}
+html.mo .hero .title{transition-delay:.18s}html.mo .hero .year{transition-delay:.24s}html.mo .hero .date{transition-delay:.3s}html.mo .hero .hosted{transition-delay:.36s}html.mo .hero .actions{transition-delay:.42s}html.mo .hero .tag{transition-delay:.12s}
+html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:hidden}
+@media (prefers-reduced-motion:reduce){html.mo .rv,html.mo .hero .tag,html.mo .hero .title,html.mo .hero .year,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:1!important;transform:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 
@@ -1196,7 +1211,7 @@ h1[tabindex="-1"]:focus{outline:none}
   var pages=['home','attend','frontiers','program','boulder','partners'],titles={partners:'Partners',attend:'Who Attends',frontiers:'Frontiers',program:'Program',boulder:'Where We\'ll Gather'};
   var hdr=document.getElementById('siteHeader');
   function onScroll(){hdr.classList.toggle('solid',window.scrollY>60||!document.getElementById('page-home').classList.contains('active'));}
-  function route(){var h=(location.hash||'#home').replace('#',''),sf=null;if(h==='spaces'||h.indexOf('spaces-')===0){sf=true;h='boulder';}if(pages.indexOf(h)<0)h='home';if(sf&&window.__eftwSpaces)setTimeout(window.__eftwSpaces,0);pages.forEach(function(p){document.getElementById('page-'+p).classList.toggle('active',p===h);});document.querySelectorAll('.nav-links a[data-page]').forEach(function(a){if(a.getAttribute('data-page')===h&&!a.classList.contains('nav-cta'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});document.getElementById('navLinks').classList.remove('open');document.getElementById('menuBtn').setAttribute('aria-expanded','false');window.scrollTo({top:0,left:0,behavior:'instant'});if(window.__eftwFr!=null){var fe=document.getElementById('fr-'+window.__eftwFr);window.__eftwFr=null;if(fe){window.scrollTo({top:fe.getBoundingClientRect().top+window.pageYOffset-96,left:0,behavior:'instant'});}}var hh=document.querySelector('#page-'+h+' h1');if(hh&&window.__eftwRouted){hh.setAttribute('tabindex','-1');hh.focus({preventScroll:true});}window.__eftwRouted=true;document.title=(h==='home'?'':titles[h]+' · ')+'Endeavor Frontier Tech Summit';onScroll();}
+  function route(){var h=(location.hash||'#home').replace('#',''),sf=null;if(h==='spaces'||h.indexOf('spaces-')===0){sf=true;h='boulder';}if(pages.indexOf(h)<0)h='home';if(sf&&window.__eftwSpaces)setTimeout(window.__eftwSpaces,0);pages.forEach(function(p){document.getElementById('page-'+p).classList.toggle('active',p===h);});document.querySelectorAll('.nav-links a[data-page]').forEach(function(a){if(a.getAttribute('data-page')===h&&!a.classList.contains('nav-cta'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});document.getElementById('navLinks').classList.remove('open');document.getElementById('menuBtn').setAttribute('aria-expanded','false');window.scrollTo({top:0,left:0,behavior:'instant'});if(window.__lenis)window.__lenis.scrollTo(0,{immediate:true});if(window.__eftwFr!=null){var fe=document.getElementById('fr-'+window.__eftwFr);window.__eftwFr=null;if(fe){window.scrollTo({top:fe.getBoundingClientRect().top+window.pageYOffset-96,left:0,behavior:'instant'});}}var hh=document.querySelector('#page-'+h+' h1');if(hh&&window.__eftwRouted){hh.setAttribute('tabindex','-1');hh.focus({preventScroll:true});}window.__eftwRouted=true;document.title=(h==='home'?'':titles[h]+' · ')+'Endeavor Frontier Tech Summit';onScroll();}
   window.addEventListener('hashchange',route);window.addEventListener('scroll',onScroll,{passive:true});
   var mb=document.getElementById('menuBtn');mb.addEventListener('click',function(){var nl=document.getElementById('navLinks');var o=nl.classList.toggle('open');mb.setAttribute('aria-expanded',String(o));});
   document.querySelectorAll('[data-luma]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();if(window.eftwToast)window.eftwToast('Invitations now open.');});});
@@ -1274,6 +1289,49 @@ document.querySelectorAll('[data-space-open],.sx-tile').forEach(function(a){a.ad
 document.getElementById('sxdX').addEventListener('click',function(){d.close()});
 d.addEventListener('click',function(e){if(e.target===d)d.close()});
 d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('click',function(){d.close()})});
+})();
+</script>
+<script src="/frontier-tech-summit/assets/lenis.min.js" defer></script>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  // --- tag reveal targets (per-page map) ---
+  function tag(sel,cls){document.querySelectorAll(sel).forEach(function(e){e.classList.add('rv');if(cls)e.classList.add(cls)})}
+  // home
+  tag('#page-home .thesis .stack');tag('#page-home .thesis .cols p');
+  tag('#page-home .section-head');tag('#homeFrontiers','block');
+  tag('#page-home .days .day');tag('#page-home .days-more');
+  tag('#page-home .who .w');tag('#page-home .proof');
+  tag('#page-home .tiers .pc');
+  tag('#page-home .close h2');tag('#page-home .close p');tag('#page-home .close .actions');
+  // meet-in-the-middle: Who Attends band (headline from left, columns from right)
+  var whoHead=document.querySelector('#page-home .on-dteal .section-head');if(whoHead){whoHead.classList.add('from-l')}
+  document.querySelectorAll('#page-home .who .w').forEach(function(e){e.classList.add('from-r')});
+  // other pages
+  tag('.page-hero .wrap > *');
+  tag('#page-attend .seg2');
+  tag('#allFrontiers .frow');
+  tag('#agDays .ag-day');tag('.ag-arrive');
+  tag('#page-partners .tier4');tag('#page-partners .sx-head');tag('#page-partners .sx-tile');tag('#page-partners .sp-contact');
+  tag('#page-boulder .venue');tag('#page-boulder .vbanner');tag('#page-boulder .gather-info .section-head');tag('#page-boulder .gcard');
+  // --- observer: fire at 85% of viewport, once, 15ms sibling stagger ---
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var el=en.target;var sibs=[].slice.call(el.parentNode.children).filter(function(c){return c.classList&&c.classList.contains('rv')&&!c.classList.contains('in')});var k=Math.max(0,sibs.indexOf(el));var base=parseFloat(getComputedStyle(el).transitionDelay)||0;el.style.transitionDelay=(base*1000+k*15)+'ms';el.classList.add('in');io.unobserve(el)})},{rootMargin:'0px 0px -15% 0px',threshold:0});
+  function arm(){document.querySelectorAll('.page.active .rv:not(.in)').forEach(function(e){io.observe(e)});
+    // anything already well inside the viewport on page switch shows at once (no scroll needed)
+    document.querySelectorAll('.page.active .rv:not(.in)').forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight*0.85&&r.bottom>0){e.classList.add('in');io.unobserve(e)}})}
+  // --- hero load-in ---
+  var hero=document.querySelector('#page-home .hero');
+  if(hero){
+    var goHero=function(){setTimeout(function(){hero.classList.add('hero-in')},120)};if(document.readyState==='complete')goHero();else window.addEventListener('load',goHero)}
+  // --- smooth scroll (Lenis), a touch lighter than DTM ---
+  function startLenis(){if(!window.Lenis||window.__lenis)return;var l=new Lenis({lerp:0.12,wheelMultiplier:1,smoothWheel:true,syncTouch:false});window.__lenis=l;function raf(t){l.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}
+  if(document.readyState==='complete')startLenis();else window.addEventListener('load',startLenis);
+  // page switches: reset scroll via lenis and re-arm
+  window.addEventListener('hashchange',function(){setTimeout(function(){if(window.__lenis)window.__lenis.scrollTo(0,{immediate:true});arm()},40)});
+  new MutationObserver(function(){arm()}).observe(document.body,{childList:true,subtree:true});
+  if(document.readyState!=='loading')arm();else document.addEventListener('DOMContentLoaded',arm);
+  window.addEventListener('load',function(){setTimeout(arm,50)});
 })();
 </script>
 </body>
