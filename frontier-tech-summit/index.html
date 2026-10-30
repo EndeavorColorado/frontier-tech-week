@@ -146,6 +146,17 @@ html.mo .hero .title{transition-delay:.18s}html.mo .hero .year{transition-delay:
 html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:hidden}
 @media (prefers-reduced-motion:reduce){html.mo .rv,html.mo .hero .tag,html.mo .hero .title,html.mo .hero .year,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
+<style>
+.tight-hero{padding-bottom:clamp(8px,1.2vw,18px)!important}
+#page-frontiers .tight-hero+.vh+section.tight{padding-top:clamp(8px,1vw,16px)}
+.fsub.tbd{color:var(--ink-3);font-style:italic}
+.has-tex3{position:relative;isolation:isolate}
+.has-tex3::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-waves.png) center/cover no-repeat;opacity:.07;mix-blend-mode:screen}
+#page-attend.has-tex2::before{opacity:.1}
+.has-tex2::before{opacity:.1}
+#page-partners.has-tex>.tex{display:none}
+</style>
+<style>.frow .pic .n{background:rgba(1,0,15,.7);padding:2px 10px;border-radius:2px}</style>
 </head>
 <body>
 
@@ -891,7 +902,7 @@ h1[tabindex="-1"]:focus{outline:none}
 <main>
 <div class="page active" id="page-home">
   <section class="hero" aria-label="Opening">
-    <div class="art" aria-hidden="true"></div><div class="scrim" aria-hidden="true"></div><div class="grid" aria-hidden="true"></div><div class="seam" aria-hidden="true"></div>
+    <div class="art" aria-hidden="true"></div><div class="scrim" aria-hidden="true"></div><div class="seam" aria-hidden="true"></div>
     <div class="wrap">
       <p class="tag">Sit Across From the Investors Who Fund Your Frontier</p>
       <h1 class="title">Endeavor Frontier<small>Tech Summit</small></h1>
@@ -993,8 +1004,8 @@ h1[tabindex="-1"]:focus{outline:none}
   </div></section>
   </div>
 
-<div class="page" id="page-frontiers">
-  <section class="page-hero"><div class="wrap"><p class="eyebrow">Six Frontiers</p><h1>Six Frontiers Shaping What’s Next.</h1></div></section><h2 class="vh">The Six Frontiers</h2>
+<div class="page has-tex3" id="page-frontiers">
+  <section class="page-hero tight-hero"><div class="wrap"><h1>Six Frontiers Shaping What’s Next.</h1></div></section><h2 class="vh">The Six Frontiers</h2>
   <section class="tight"><div class="wrap"><div class="frs" id="allFrontiers"></div></div></section>
 </div>
 
@@ -1049,7 +1060,7 @@ h1[tabindex="-1"]:focus{outline:none}
   </div></section>
 </div>
 
-<div class="page" id="page-partners">
+<div class="page has-tex3" id="page-partners">
   <section class="page-hero"><div class="wrap"><h1>Own a Piece of the Summit.</h1><p class="lede one">Every partnership comes with its own part of the program.</p></div></section><h2 class="vh">Partnerships</h2>
   <section class="tight pt-simple"><div class="wrap">
     <div class="tiers4"><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-summit.webp" alt="Painted mountaintop observatory at sunset with a rocket trail" decoding="async"></figure><div class="t4-head"><span class="t4-name">Summit Partner</span></div><h3 class="t4-tag">Present the summit.</h3><a class="sx-link" href="#partners" data-space-open="summit">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Summit">Inquire About Summit <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-ridge.webp" alt="Painted ridgeline with wind turbines and an electric shuttle" decoding="async"></figure><div class="t4-head"><span class="t4-name">Ridge Partner</span></div><h3 class="t4-tag">Own your Frontier.</h3><a class="sx-link" href="#partners" data-space-open="ridge">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Ridge">Inquire About Ridge <span class="arrow">→</span></a></article><article class="tier4"><figure><img src="/frontier-tech-summit/assets/partner-trailhead.webp" alt="Painted trailhead with a rover and a drone below the Flatirons" decoding="async"></figure><div class="t4-head"><span class="t4-name">Trailhead Partner</span></div><h3 class="t4-tag">Ask the question.</h3><a class="sx-link" href="#partners" data-space-open="trailhead">See Your Space →</a><a class="btn btn-primary" href="#partners" data-inquire="Trailhead">Inquire About Trailhead <span class="arrow">→</span></a></article></div>
@@ -1075,7 +1086,7 @@ h1[tabindex="-1"]:focus{outline:none}
 </dialog>
 </div>
 
-<div class="page" id="page-boulder">
+<div class="page has-tex3" id="page-boulder">
   <section class="page-hero gather-hero"><div class="wrap">
     <p class="eyebrow">Boulder Guide</p>
     <h1>Where We'll <em>Gather.</em></h1>
@@ -1207,7 +1218,7 @@ h1[tabindex="-1"]:focus{outline:none}
     {n:'06',name:'Bio Tech',line:'Where biology becomes products.',ex:'Diagnostics, genomics, biomanufacturing',route:'Thursday · Site Visit'}
   ];
   document.getElementById('homeFrontiers').innerHTML=F.map(function(f,i){return '<a class="fr" href="#frontiers" data-fi="'+i+'"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><div class="scrim" aria-hidden="true"></div><span class="num n">'+f.n+'</span><div class="cap"><h3>'+f.name+'</h3><p>'+f.ex+'</p></div></a>';}).join('');
-  document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<div class="frow" id="fr-'+i+'"><div class="pic"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><span class="num n">'+f.n+'</span></div><div class="fmid"><div><h3>'+f.name+'</h3><p>'+f.line+'</p></div></div><div class="info"><div class="fblk fprob"><span class="fk">Focus Areas</span><span class="fsub">'+f.ex+'</span></div></div></div>';}).join('');
+  document.getElementById('allFrontiers').innerHTML=F.map(function(f,i){return '<div class="frow" id="fr-'+i+'"><div class="pic"><img src="'+IMG[i+1]+'" alt="" loading="lazy"><span class="num n">'+f.n+'</span></div><div class="fmid"><div><h3>'+f.name+'</h3><p>'+f.line+'</p></div></div><div class="info"><div class="fblk"><span class="fk">Thursday Tour</span><span class="fsub tbd">Site announced in January</span></div><div class="fblk"><span class="fk">Frontier Lead</span><span class="fsub tbd">Announced in January</span></div><div class="fblk fprob"><span class="fk">Focus Areas</span><span class="fsub">'+f.ex+'</span></div></div></div>';}).join('');
   var pages=['home','attend','frontiers','program','boulder','partners'],titles={partners:'Partners',attend:'Who Attends',frontiers:'Frontiers',program:'Program',boulder:'Where We\'ll Gather'};
   var hdr=document.getElementById('siteHeader');
   function onScroll(){hdr.classList.toggle('solid',window.scrollY>60||!document.getElementById('page-home').classList.contains('active'));}
