@@ -126,6 +126,27 @@
 #page-attend.has-tex2{background:#01000F}
 #page-attend.has-tex2::before{position:fixed;opacity:.22}
 #page-attend .seg2{background:rgba(11,11,34,.85)}
+/* Who Attends: line-art cards, one screen */
+#page-attend.active{display:flex;flex-direction:column;min-height:100vh}#page-attend>section.tight{flex:1}
+#page-attend .page-hero{padding-block:clamp(84px,9vw,112px) clamp(10px,1.6vh,20px)}
+#page-attend .page-hero+.vh+section.tight{padding-top:clamp(8px,1.2vh,14px);padding-bottom:clamp(16px,3vh,32px)}
+#page-attend .segs.segs2{grid-auto-rows:auto;align-content:start}
+#page-attend .seg.seg2{grid-row:auto;grid-template-rows:auto auto;padding:0;border-top:1px solid var(--rule);overflow:hidden;transition:border-color .35s ease,box-shadow .35s ease}
+#page-attend .seg.seg2:hover{border-color:rgba(9,225,205,.55);box-shadow:0 22px 50px rgba(1,0,15,.55),0 0 0 1px rgba(9,225,205,.15) inset}
+#page-attend .seg-art{position:relative;aspect-ratio:16/9;background:#01000F;overflow:hidden}
+#page-attend .seg-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:.92;transition:transform 1.2s ease,opacity .5s ease}
+#page-attend .seg2:hover .seg-art img{transform:scale(1.04);opacity:1}
+#page-attend .seg-art::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(42% 55% at 50% 12%,rgba(255,224,170,.22),transparent 70%);opacity:.75;transition:opacity .5s ease}
+#page-attend .seg2:hover .seg-art::after{opacity:1}
+#page-attend .seg-art::before{content:"";position:absolute;left:0;right:0;bottom:0;height:18%;z-index:1;background:linear-gradient(180deg,rgba(11,11,34,0),rgba(11,11,34,.85));pointer-events:none}
+#page-attend .seg-body{padding:clamp(12px,1.8vh,20px) clamp(18px,1.8vw,26px) clamp(14px,2vh,22px);display:grid;gap:0;align-content:start}
+#page-attend .seg2 h3{margin-top:6px}
+#page-attend .seg2 .seg-line{margin-top:6px;font-size:15px}
+#page-attend .seg2 .seg-checks{margin-top:10px;padding-top:10px;gap:6px;font-size:14.5px}
+#page-attend .seg2 .seg-foot{margin-top:12px}
+#page-attend .seg2 .btn{padding-block:12px}
+@media (max-height:760px){#page-attend .page-hero h1{font-size:clamp(32px,4vw,44px)}#page-attend .seg2 .seg-checks{gap:4px}#page-attend .seg2 .btn{padding-block:10px}}
+
 .page-hero .wrap .lede.one{margin-top:6px}
 #page-partners .page-hero{padding-bottom:clamp(16px,2vw,28px)}
 #page-partners .page-hero+.vh+section.tight,#page-partners section.tight.pt-simple{padding-top:clamp(12px,1.5vw,20px)}
@@ -1025,9 +1046,9 @@ h1[tabindex="-1"]:focus{outline:none}
   <section class="page-hero"><div class="wrap"><h1>Who Attends</h1></div></section><h2 class="vh">Ways to Attend</h2>
   <section class="tight"><div class="wrap">
     <div class="segs segs2">
-      <div class="seg seg2"><span class="seg-tag">Building the Frontier</span><h3>Founders</h3><p class="seg-line">Commercially ready, from everywhere.</p><ul class="seg-checks"><li>A seat at your Frontier's table</li><li>Matched meetings with capital</li><li>Your work seen up close</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
-      <div class="seg seg2"><span class="seg-tag">Buying the Frontier</span><h3>Corporate Innovators</h3><p class="seg-line">Leaders looking to buy, partner or pilot.</p><ul class="seg-checks"><li>A briefing built for buyers</li><li>Founders grouped by Frontier</li><li>Site visits across the Front Range</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
-      <div class="seg seg2"><span class="seg-tag">Backing the Frontier</span><h3>Investors</h3><p class="seg-line">Funds and family offices in deep tech.</p><ul class="seg-checks"><li>Founders matched to your thesis</li><li>The whole field in one place</li><li>A second look before you leave</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div>
+      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-founder.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Building the Frontier</span><h3>Founders</h3><p class="seg-line">Commercially ready, from everywhere.</p><ul class="seg-checks"><li>A seat at your Frontier's table</li><li>Matched meetings with capital</li><li>Your work seen up close</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
+      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-corp.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Buying the Frontier</span><h3>Corporate Innovators</h3><p class="seg-line">Leaders looking to buy, partner or pilot.</p><ul class="seg-checks"><li>A briefing built for buyers</li><li>Founders grouped by Frontier</li><li>Site visits across the Front Range</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
+      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-investor.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Backing the Frontier</span><h3>Investors</h3><p class="seg-line">Funds and family offices in deep tech.</p><ul class="seg-checks"><li>Founders matched to your thesis</li><li>The whole field in one place</li><li>A second look before you leave</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
     </div>
     
   </div></section>
