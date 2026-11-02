@@ -50,7 +50,8 @@
 
   /* ---- editing ---- */
   function wireEditing(){
-    document.addEventListener('focusin',function(e){var el=e.target.closest&&e.target.closest('[data-rvk]');if(!el||MODE!=='dan')return;var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();el._before=el.innerHTML;el.classList.add('rvx-editing')});
+    var lastPtr=null,lastPtrAt=0;document.addEventListener('pointerdown',function(e){lastPtr=e.target;lastPtrAt=Date.now()},true);
+    document.addEventListener('focusin',function(e){var el=e.target.closest&&e.target.closest('[data-rvk]');if(!el||MODE!=='dan')return;if(!(lastPtr&&Date.now()-lastPtrAt<800&&el.contains(lastPtr))){el.blur();return}var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();el._before=el.innerHTML;el.classList.add('rvx-editing')});
     document.addEventListener('focusout',function(e){var el=e.target.closest&&e.target.closest('[data-rvk]');if(!el||MODE!=='dan')return;el.classList.remove('rvx-editing');
       var html=clean(el.innerHTML);var k=el.getAttribute('data-rvk');var cur=(EDITS[k]&&EDITS[k].body)||ORIG[k];
       if(html===cur||html===el._before){applyOne(el);return}
