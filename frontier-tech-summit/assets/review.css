@@ -81,3 +81,20 @@ html.rvx-pulse[data-rvmode="dan"] [data-rvk]{outline-color:rgba(255,179,71,.7)}
 .rvx-before{color:#999;text-decoration:line-through;margin:0 0 4px!important}.rvx-after{color:#01000F}
 .rvx-new{font-style:normal;background:#01000F;color:#FFB347;border-radius:10px;padding:1px 7px;font-size:11px;margin-left:4px}
 .rvx-flash{outline:3px solid #FFB347!important;outline-offset:4px;transition:outline-color 1.2s}
+/* phone */
+@media (max-width:700px){
+  .rvx-bar{height:auto;flex-wrap:wrap;padding:6px 8px;gap:6px;row-gap:6px}
+  .rvx-bar .rvx-l,.rvx-bar .rvx-r{flex:1 1 100%;justify-content:space-between}
+  .rvx-bar button{flex:1;text-align:center;padding:9px 6px;font-size:13px}
+  .rvx-bar .rvx-helpb{flex:0 0 36px}
+  html:not(.rvx-embed) body{padding-top:96px}
+  html:not(.rvx-embed) .site-header{top:96px!important}
+  .rvx-panel{top:96px}
+  .rvx-cmp{inset:96px 0 0 0}
+  .rvx-box{position:fixed!important;left:12px!important;right:12px!important;top:auto!important;bottom:12px!important;width:auto;z-index:1500}
+  .rvx-help{align-items:flex-start;overflow:auto;padding:12px}
+  .rvx-hc{padding:22px 20px 20px;margin:8px 0 24px}
+  .rvx-hc h2{font-size:22px}.rvx-hc ol{font-size:15px;gap:9px}.rvx-hf{font-size:13px}
+  .rvx-tag{top:-10px;font-size:9px}
+}
+@media (max-width:700px){.rvx-toast{bottom:auto;top:104px;transform:translate(-50%,-10px)}.rvx-toast.on{transform:translate(-50%,0)}}
