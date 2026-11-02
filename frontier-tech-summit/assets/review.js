@@ -41,7 +41,7 @@
     document.documentElement.setAttribute('data-rvmode',MODE);
     [].slice.call(document.querySelectorAll('[data-rvk]')).forEach(function(el){var k=el.getAttribute('data-rvk');var e=EDITS[k];
       var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();
-      if(MODE==='dan'&&e&&e.body!=null&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');el.appendChild(E('span','rvx-tag','Edited'))}
+      if(MODE==='dan'&&e&&e.body!=null&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');var tg=E('span','rvx-tag','Edited');tg.contentEditable='false';tg._el=el;el.appendChild(tg)}
       else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}
       el.contentEditable=(MODE==='dan'&&!EMBED)?'true':'false';
     });
@@ -60,9 +60,10 @@
     /* clicks on editable links/buttons shouldn't navigate in Dan mode */
     document.addEventListener('click',function(e){if(MODE!=='dan'||EMBED)return;var el=e.target.closest('[data-rvk]');if(!el||e.target.closest('.rvx-tag'))return;if(el.matches('a,.btn,.see')||el.closest('a,button,.ftile,[data-space-open],.sx-tile,.fr')){e.preventDefault();e.stopPropagation();if(document.activeElement!==el)el.focus()}},true);
     document.addEventListener('mousedown',function(e){if(MODE!=='dan'||EMBED)return;var el=e.target.closest('[data-rvk]');if(el&&el.closest('a,button,.ftile,[data-space-open],.sx-tile,.fr'))e.stopPropagation()},true);
-    document.addEventListener('click',function(e){var r=e.target.closest('.rvx-tag');if(!r)return;e.preventDefault();e.stopPropagation();var el=r.parentElement;var k=el.getAttribute('data-rvk');if(!confirm('Put this back to the live wording?'))return;api('POST',{kind:'edit',page:el.getAttribute('data-rvp'),key:k,body:ORIG[k],before:''}).then(function(x){ROWS.push(x.row);applyOne(el);toast('Restored')})});
+    document.addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.rvx-tag')){e.preventDefault();e.stopPropagation()}},true);
+    document.addEventListener('click',function(e){var r=e.target.closest('.rvx-tag');if(!r)return;e.preventDefault();e.stopPropagation();var el=r._el||r.parentElement;if(!el)return;var k=el.getAttribute('data-rvk');if(!confirm('Put this back to the live wording?'))return;api('POST',{kind:'edit',page:el.getAttribute('data-rvp'),key:k,body:ORIG[k],before:''}).then(function(x){ROWS.push(x.row);applyOne(el);toast('Restored')})});
   }
-  function applyOne(el){EDITS=latestEdits();var k=el.getAttribute('data-rvk');var e=EDITS[k];var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();if(e&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');el.appendChild(E('span','rvx-tag','Edited'))}else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}}
+  function applyOne(el){EDITS=latestEdits();var k=el.getAttribute('data-rvk');var e=EDITS[k];var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();if(e&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');var tg=E('span','rvx-tag','Edited');tg.contentEditable='false';tg._el=el;el.appendChild(tg)}else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}}
   function clean(h){var d=E('div');d.innerHTML=h;d.querySelectorAll('.rvx-tag,script,style').forEach(function(x){x.remove()});d.querySelectorAll('*').forEach(function(x){[].slice.call(x.attributes).forEach(function(a){if(/^on/i.test(a.name)||a.name==='contenteditable'||a.name==='style')x.removeAttribute(a.name)})});return d.innerHTML.replace(/&nbsp;/g,' ').trim()}
 
   /* ---- comments ---- */
