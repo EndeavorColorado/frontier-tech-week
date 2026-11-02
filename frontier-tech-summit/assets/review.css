@@ -71,3 +71,7 @@ html.rvx-cmpon{overflow:hidden}
 .rvx-gate{position:fixed;inset:0;z-index:3000;background:#01000F;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-family:Inter,sans-serif}
 html.rvx-embed .rvx-bar,html.rvx-embed .rvx-panel{display:none}
 html.rvx-embed .site-header{top:0!important}
+
+html.rvx-pulse[data-rvmode="dan"] [data-rvk]{outline-color:rgba(255,179,71,.7)}
+.rvx-pin{font-size:0}.rvx-pin span{font-size:13px}
+@media (hover:none){html[data-rvmode="dan"] [data-rvk]{outline-color:rgba(255,179,71,.35)}}
