@@ -102,3 +102,8 @@ html.rvx-pulse[data-rvmode="dan"] [data-rvk]{outline-color:rgba(255,179,71,.7)}
 .rvx-hint{font-size:13px;opacity:.85}.rvx-hint b{font-weight:700}@media (max-width:700px){.rvx-hint{display:none}.rvx-bar .rvx-l{display:none}}
 
 .fmodal.open .box{overflow:visible}
+
+.rvx-pin{width:26px;height:26px;margin:-13px 0 0 -13px;cursor:grab;touch-action:none}
+.rvx-pin.drag{cursor:grabbing;transform:rotate(-45deg) scale(1.15)}
+.rvx-pin span{display:block;width:8px;height:8px;border-radius:50%;background:#01000F}
+.rvx-pin,.rvx-pin *{user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
