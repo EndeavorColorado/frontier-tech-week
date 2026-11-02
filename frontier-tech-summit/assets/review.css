@@ -99,7 +99,7 @@ html.rvx-pulse[data-rvmode="dan"] [data-rvk]{outline-color:rgba(255,179,71,.7)}
 }
 @media (max-width:700px){.rvx-toast{bottom:auto;top:104px;transform:translate(-50%,-10px)}.rvx-toast.on{transform:translate(-50%,0)}}
 
-.rvx-hint{font-size:13px;opacity:.85}.rvx-hint b{font-weight:700}@media (max-width:700px){.rvx-hint{display:none}.rvx-bar .rvx-l{display:none}}
+.rvx-hint{display:none}.rvx-hint b{font-weight:700}@media (max-width:700px){.rvx-hint{display:none}.rvx-bar .rvx-l{display:none}}
 
 .fmodal.open .box{overflow:visible}
 
