@@ -1,0 +1,119 @@
+/* Review mode for the Frontier Tech Summit site.
+   Loaded only on /frontier-tech-summit/review/. Adds a bar with
+   Live · Dan's Version · Compare, click-to-edit text, pinned comments. */
+(function(){
+  var API='/api/summit-review';
+  var q=new URLSearchParams(location.search);
+  var TOKEN=q.get('t')||sessionStorage.getItem('rv_t')||'';
+  if(!TOKEN){document.body.insertAdjacentHTML('beforeend','<div class="rvx-gate"><div><h2>Review link needed</h2><p>Open this page from the link you were sent.</p></div></div>');return}
+  sessionStorage.setItem('rv_t',TOKEN);
+  var EMBED=q.get('embed')==='1';
+  var MODE=q.get('mode')||localStorage.getItem('rv_mode')||'dan';
+  if(EMBED)MODE=q.get('mode')||'live';
+  var ME='';var ROWS=[];var EDITS={};var ORIG={};var PINS=[];
+  var SEL='h1,h2,h3,h4,p,li,.eyebrow,.seg-tag,.k,.bk,.bv,.fk,.fsub,.lede,.tag,.gmeta span,.btn,.see,.ag-sub,.d,.fmt-when,.fmt-what,.w-tags span,.sxd-pane p,.sxd-pane h3';
+  var SKIP='.rvx-bar,.rvx-panel,.rvx-pin,.rvx-box,.rvx-help,footer,.nav-links,.brand,.rvx-tag';
+
+  function E(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function pageId(){var p=document.querySelector('.page.active');return p?p.id:'page-home'}
+  function pageName(id){return{ 'page-home':'Home','page-attend':'Who Attends','page-frontiers':'Frontiers','page-program':'Program','page-boulder':'Boulder','page-partners':'Partners','modal':'Frontier Pop-up'}[id]||id}
+  function api(method,body){var o={method:method,headers:{'Content-Type':'application/json'}};var u=API+'?t='+encodeURIComponent(TOKEN);if(body){body.t=TOKEN;o.body=JSON.stringify(body)}return fetch(u,o).then(function(r){if(!r.ok)throw new Error('api '+r.status);return r.json()})}
+  function toast(m){var t=document.querySelector('.rvx-toast');if(!t){t=E('div','rvx-toast');document.body.appendChild(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},1800)}
+
+  /* ---- stable keys for every text block ---- */
+  function keyAll(){
+    var pages=[].slice.call(document.querySelectorAll('.page'));pages.push(document.getElementById('fmodal'));
+    pages.forEach(function(pg){if(!pg)return;var pid=pg.id==='fmodal'?'modal':pg.id;var counts={};
+      [].slice.call(pg.querySelectorAll(SEL)).forEach(function(el){
+        if(el.closest(SKIP))return;if(el.querySelector(SEL)&&el.tagName!=='LI'&&!el.matches('h1,h2,h3,h4,p,.btn,.see'))return;
+        if(el.hasAttribute('data-rvk'))return;
+        var tag=el.tagName.toLowerCase();counts[tag]=(counts[tag]||0)+1;
+        var k=pid+'/'+tag+'#'+counts[tag];el.setAttribute('data-rvk',k);el.setAttribute('data-rvp',pid);ORIG[k]=el.innerHTML;
+      });
+    });
+  }
+
+  /* ---- apply edits ---- */
+  function latestEdits(){var m={};ROWS.forEach(function(r){if(r.kind==='edit'&&r.key)m[r.key]=r});return m}
+  function applyMode(){
+    EDITS=latestEdits();
+    document.documentElement.setAttribute('data-rvmode',MODE);
+    [].slice.call(document.querySelectorAll('[data-rvk]')).forEach(function(el){var k=el.getAttribute('data-rvk');var e=EDITS[k];
+      var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();
+      if(MODE==='dan'&&e&&e.body!=null&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');el.appendChild(E('span','rvx-tag','Edited'))}
+      else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}
+      el.contentEditable=(MODE==='dan'&&!EMBED)?'true':'false';
+    });
+    document.querySelectorAll('.rvx-bar [data-m]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-m')===MODE)});
+  }
+
+  /* ---- editing ---- */
+  function wireEditing(){
+    document.addEventListener('focusin',function(e){var el=e.target.closest&&e.target.closest('[data-rvk]');if(!el||MODE!=='dan')return;var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();el._before=el.innerHTML;el.classList.add('rvx-editing')});
+    document.addEventListener('focusout',function(e){var el=e.target.closest&&e.target.closest('[data-rvk]');if(!el||MODE!=='dan')return;el.classList.remove('rvx-editing');
+      var html=clean(el.innerHTML);var k=el.getAttribute('data-rvk');var cur=(EDITS[k]&&EDITS[k].body)||ORIG[k];
+      if(html===cur||html===el._before){applyOne(el);return}
+      api('POST',{kind:'edit',page:el.getAttribute('data-rvp'),key:k,body:html,before:cur.replace(/<[^>]+>/g,'')}).then(function(r){ROWS.push(r.row);toast('Saved');applyOne(el)}).catch(function(){toast('Could not save. Check your connection.')});
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey&&e.target.closest&&e.target.closest('[data-rvk]')&&!e.target.closest('li,p')){e.preventDefault();e.target.blur()}if(e.key==='Escape'&&e.target.closest&&e.target.closest('[data-rvk]')){e.target.innerHTML=e.target._before;e.target.blur()}});
+    /* clicks on editable links/buttons shouldn't navigate in Dan mode */
+    document.addEventListener('click',function(e){if(MODE!=='dan'||EMBED)return;var el=e.target.closest('[data-rvk]');if(el&&el.matches('a,.btn,.see')&&!e.target.closest('.rvx-tag')){e.preventDefault()}},true);
+    document.addEventListener('click',function(e){var r=e.target.closest('.rvx-tag');if(!r)return;e.preventDefault();e.stopPropagation();var el=r.parentElement;var k=el.getAttribute('data-rvk');if(!confirm('Put this back to the live wording?'))return;api('POST',{kind:'edit',page:el.getAttribute('data-rvp'),key:k,body:ORIG[k],before:''}).then(function(x){ROWS.push(x.row);applyOne(el);toast('Restored')})});
+  }
+  function applyOne(el){EDITS=latestEdits();var k=el.getAttribute('data-rvk');var e=EDITS[k];var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();if(e&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');el.appendChild(E('span','rvx-tag','Edited'))}else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}}
+  function clean(h){var d=E('div');d.innerHTML=h;d.querySelectorAll('.rvx-tag,script,style').forEach(function(x){x.remove()});d.querySelectorAll('*').forEach(function(x){[].slice.call(x.attributes).forEach(function(a){if(/^on/i.test(a.name)||a.name==='contenteditable'||a.name==='style')x.removeAttribute(a.name)})});return d.innerHTML.replace(/&nbsp;/g,' ').trim()}
+
+  /* ---- comments ---- */
+  var placing=false;
+  function comments(){var c=ROWS.filter(function(r){return r.kind==='comment'});var replies={},res={};ROWS.forEach(function(r){if(r.kind==='reply'&&r.parent){(replies[r.parent]=replies[r.parent]||[]).push(r)}if((r.kind==='resolve'||r.kind==='reopen')&&r.parent)res[r.parent]=r.kind==='resolve'});return c.map(function(x,i){x.n=i+1;x.replies=replies[x.id]||[];x.resolved=!!res[x.id];return x})}
+  function renderPins(){document.querySelectorAll('.rvx-pin').forEach(function(p){p.remove()});var pg=document.querySelector('.page.active');if(!pg)return;var pid=pg.id;pg.style.position='relative';
+    comments().forEach(function(c){if(c.page!==pid||c.resolved)return;var p=E('button','rvx-pin','<span>'+c.n+'</span>');p.style.left=c.x+'%';p.style.top=c.y+'px';p.title=c.author+': '+c.body.slice(0,80);p.setAttribute('data-cid',c.id);pg.appendChild(p)});
+    var n=comments().filter(function(c){return !c.resolved}).length;var b=document.querySelector('.rvx-bar .rvx-count');if(b)b.textContent=n?'Comments ('+n+')':'Comments'}
+  function startPlace(){placing=!placing;document.documentElement.classList.toggle('rvx-placing',placing);document.querySelector('.rvx-bar .rvx-add').classList.toggle('on',placing);if(placing)toast('Click the spot you want to comment on')}
+  function placeAt(e){var pg=document.querySelector('.page.active');if(!pg)return;var r=pg.getBoundingClientRect();var x=((e.clientX-r.left)/r.width)*100;var y=e.clientY-r.top;placing=false;document.documentElement.classList.remove('rvx-placing');document.querySelector('.rvx-bar .rvx-add').classList.remove('on');openBox(pg,x,y,null)}
+  function openBox(pg,x,y,cid){closeBox();var box=E('div','rvx-box');var c=cid?comments().filter(function(z){return z.id===cid})[0]:null;
+    if(c){box.innerHTML='<div class="rvx-th"><b>'+esc(c.author)+'</b><span>'+when(c.created_at)+'</span><button class="rvx-x" aria-label="Close">×</button></div><p class="rvx-body">'+esc(c.body)+'</p>'+c.replies.map(function(r){return '<div class="rvx-reply"><b>'+esc(r.author)+'</b> <span>'+when(r.created_at)+'</span><p>'+esc(r.body)+'</p></div>'}).join('')+'<textarea placeholder="Reply…"></textarea><div class="rvx-acts"><button class="rvx-post">Reply</button><button class="rvx-res">'+(c.resolved?'Reopen':'Resolve')+'</button></div>'}
+    else{box.innerHTML='<div class="rvx-th"><b>New comment</b><button class="rvx-x" aria-label="Close">×</button></div><textarea placeholder="Type your comment…" autofocus></textarea><div class="rvx-acts"><button class="rvx-post">Post Comment</button><button class="rvx-cancel">Cancel</button></div>'}
+    box.style.left=Math.min(x,70)+'%';box.style.top=(y+18)+'px';pg.appendChild(box);var ta=box.querySelector('textarea');setTimeout(function(){ta&&ta.focus()},50);
+    box.querySelector('.rvx-x').onclick=closeBox;var cn=box.querySelector('.rvx-cancel');if(cn)cn.onclick=closeBox;
+    box.querySelector('.rvx-post').onclick=function(){var v=ta.value.trim();if(!v)return;var body=c?{kind:'reply',page:pg.id,parent:c.id,body:v}:{kind:'comment',page:pg.id,x:x,y:y,body:v};api('POST',body).then(function(r){ROWS.push(r.row);closeBox();renderPins();renderPanel();toast(c?'Reply posted':'Comment posted')}).catch(function(){toast('Could not post. Try again.')})};
+    var rs=box.querySelector('.rvx-res');if(rs)rs.onclick=function(){api('POST',{kind:c.resolved?'reopen':'resolve',page:pg.id,parent:c.id}).then(function(r){ROWS.push(r.row);closeBox();renderPins();renderPanel()})};
+  }
+  function closeBox(){document.querySelectorAll('.rvx-box').forEach(function(b){b.remove()})}
+  function when(s){var d=new Date(s);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+  function renderPanel(){var pn=document.querySelector('.rvx-panel');if(!pn)return;var list=comments();var open=list.filter(function(c){return !c.resolved}),done=list.filter(function(c){return c.resolved});
+    function item(c){return '<div class="rvx-it'+(c.resolved?' done':'')+'" data-cid="'+c.id+'" data-page="'+c.page+'"><span class="rvx-n">'+c.n+'</span><div><div class="rvx-meta"><b>'+esc(c.author)+'</b> · '+esc(pageName(c.page))+' · '+when(c.created_at)+'</div><p>'+esc(c.body)+'</p>'+(c.replies.length?'<div class="rvx-rc">'+c.replies.length+' repl'+(c.replies.length>1?'ies':'y')+'</div>':'')+'</div></div>'}
+    pn.querySelector('.rvx-list').innerHTML=(open.length?open.map(item).join(''):'<p class="rvx-empty">No open comments yet. Click <b>+ Comment</b>, then click anywhere on the page.</p>')+(done.length?'<h4>Resolved</h4>'+done.map(item).join(''):'')}
+
+  /* ---- compare ---- */
+  function compare(){var base=location.pathname+'?t='+encodeURIComponent(TOKEN)+'&embed=1&mode=';var h=location.hash||'#home';
+    var w=E('div','rvx-cmp','<div><span>Live</span><iframe src="'+base+'live'+h+'"></iframe></div><div><span>Dan\'s Version</span><iframe src="'+base+'dan'+h+'"></iframe></div>');document.body.appendChild(w);document.documentElement.classList.add('rvx-cmpon');
+    var fr=w.querySelectorAll('iframe');var lock=false;function sync(a,b){try{a.contentWindow.addEventListener('scroll',function(){if(lock)return;lock=true;b.contentWindow.scrollTo(0,a.contentWindow.scrollY);setTimeout(function(){lock=false},30)})}catch(e){}}
+    fr[0].onload=function(){sync(fr[0],fr[1])};fr[1].onload=function(){sync(fr[1],fr[0])};
+    window.addEventListener('hashchange',function(){fr.forEach(function(f){try{f.contentWindow.location.hash=location.hash}catch(e){}})});
+  }
+  function uncompare(){var w=document.querySelector('.rvx-cmp');if(w)w.remove();document.documentElement.classList.remove('rvx-cmpon')}
+
+  /* ---- bar, panel, help ---- */
+  function build(){
+    if(EMBED){document.documentElement.classList.add('rvx-embed');return}
+    var bar=E('div','rvx-bar','<div class="rvx-l"><span class="rvx-brand">Site Review</span><button data-m="live">Live</button><button data-m="dan">Dan\'s Version</button><button data-m="cmp">Compare</button></div><div class="rvx-r"><button class="rvx-add">+ Comment</button><button class="rvx-count">Comments</button><button class="rvx-helpb" title="How this works">?</button></div>');
+    document.body.appendChild(bar);
+    bar.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){setMode(b.getAttribute('data-m'))}});
+    bar.querySelector('.rvx-add').onclick=function(){if(MODE==='cmp')setMode('live');startPlace()};
+    bar.querySelector('.rvx-count').onclick=function(){document.querySelector('.rvx-panel').classList.toggle('on')};
+    bar.querySelector('.rvx-helpb').onclick=showHelp;
+    var pn=E('div','rvx-panel','<div class="rvx-ph"><b>Comments</b><button class="rvx-x" aria-label="Close">×</button></div><div class="rvx-list"></div>');document.body.appendChild(pn);
+    pn.querySelector('.rvx-x').onclick=function(){pn.classList.remove('on')};
+    pn.addEventListener('click',function(e){var it=e.target.closest('.rvx-it');if(!it)return;var pg=it.getAttribute('data-page');var hash='#'+pg.replace('page-','');if(location.hash!==hash){location.hash=hash}setTimeout(function(){var pin=document.querySelector('.rvx-pin[data-cid="'+it.getAttribute('data-cid')+'"]');var c=comments().filter(function(z){return z.id===it.getAttribute('data-cid')})[0];var p=document.querySelector('.page.active');if(c&&p){var top=p.getBoundingClientRect().top+window.scrollY+c.y-160;if(window.__lenis)window.__lenis.scrollTo(top,{immediate:true});else window.scrollTo(0,top);openBox(p,c.x,c.y,c.id)}},300)});
+    document.addEventListener('click',function(e){if(placing&&!e.target.closest('.rvx-bar,.rvx-panel,.rvx-box,.rvx-pin')){e.preventDefault();e.stopPropagation();placeAt(e);return}var pin=e.target.closest('.rvx-pin');if(pin){e.preventDefault();var c=comments().filter(function(z){return z.id===pin.getAttribute('data-cid')})[0];if(c)openBox(document.querySelector('.page.active'),c.x,c.y,c.id)}},true);
+    if(!localStorage.getItem('rv_help'))showHelp();
+  }
+  function setMode(m){uncompare();MODE=m;localStorage.setItem('rv_mode',m);if(m==='cmp'){document.querySelectorAll('.rvx-bar [data-m]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-m')==='cmp')});compare();return}applyMode();renderPins()}
+  function showHelp(){localStorage.setItem('rv_help','1');var h=E('div','rvx-help','<div class="rvx-hc"><button class="rvx-x" aria-label="Close">×</button><p class="rvx-hk">Frontier Tech Summit · Site Review</p><h2>How this works</h2><ol><li><b>Dan\'s Version</b> is yours to edit. Click any headline, sentence, bullet or button label, type your change, then click anywhere else. It saves on its own and gets a small <i>Edited</i> tag. Click the tag to put the original wording back.</li><li><b>+ Comment</b> lets you pin a note anywhere. Click the button, then click the spot on the page, type, and post. Your pins stay where you put them. <b>Comments</b> lists every one.</li><li><b>Compare</b> shows the live site and your version side by side. <b>Live</b> shows the site exactly as the public sees it today.</li></ol><p class="rvx-hf">Breanna gets an email each time you edit or comment. Nothing here changes the public site until she combines the two versions.</p><button class="rvx-go">Got it</button></div>');document.body.appendChild(h);h.querySelector('.rvx-x').onclick=h.querySelector('.rvx-go').onclick=function(){h.remove()}}
+
+  /* ---- boot ---- */
+  function boot(){keyAll();build();api('GET').then(function(d){ME=d.me;ROWS=d.rows||[];document.documentElement.setAttribute('data-rvme',ME);if(ME==='Bre'){var b=document.querySelector('.rvx-bar [data-m="dan"]');if(b)b.textContent="Dan's Version"}if(MODE==='cmp'&&!EMBED){setMode('cmp')}else{applyMode();renderPins()}renderPanel();wireEditing();window.addEventListener('hashchange',function(){setTimeout(function(){closeBox();renderPins();if(!EMBED&&MODE!=='cmp'){var m=document.getElementById('fmodal');}},80)});setInterval(function(){api('GET').then(function(d){if(d.rows&&d.rows.length!==ROWS.length){ROWS=d.rows;if(MODE!=='cmp'){applyMode();renderPins()}renderPanel()}}).catch(function(){})},20000)}).catch(function(e){document.body.insertAdjacentHTML('beforeend','<div class="rvx-gate"><div><h2>This review link isn\'t working</h2><p>Ask Breanna for a fresh link.</p></div></div>')})}
+  if(document.readyState==='complete')setTimeout(boot,300);else window.addEventListener('load',function(){setTimeout(boot,300)});
+})();
