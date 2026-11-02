@@ -12,7 +12,7 @@
   if(EMBED)MODE=q.get('mode')||'live';
   var ME='';var ROWS=[];var EDITS={};var ORIG={};var PINS=[];
   var SEL='h1,h2,h3,h4,p,li,.eyebrow,.seg-tag,.k,.bk,.bv,.fk,.fsub,.lede,.tag,.gmeta span,.btn,.see,.ag-sub,.d,.fmt-when,.fmt-what,.w-tags span,.sxd-pane p,.sxd-pane h3';
-  var SKIP='.rvx-bar,.rvx-panel,.rvx-pin,.rvx-box,.rvx-help,footer,.nav-links,.brand,.rvx-tag';
+  var SKIP='.rvx-bar,.rvx-panel,.rvx-pin,.rvx-box,.rvx-help,footer,.nav-links,.brand,.rvx-tag,#fmName,#fmLine,#fmChips,.fmodal .nav,.fmodal .mx';
 
   function E(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -25,6 +25,7 @@
   function toast(m){var t=document.querySelector('.rvx-toast');if(!t){t=E('div','rvx-toast');document.body.appendChild(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},1800)}
 
   /* ---- stable keys for every text block ---- */
+  function lockArrows(el){el.querySelectorAll('.arrow,.fmt-tag').forEach(function(a){a.contentEditable='false'})}
   function keyAll(){
     var pages=[].slice.call(document.querySelectorAll('.page'));pages.push(document.getElementById('fmodal'));
     pages.forEach(function(pg){if(!pg)return;var pid=pg.id==='fmodal'?'modal':pg.id;var counts={};
@@ -32,7 +33,7 @@
         if(el.closest(SKIP))return;if(el.querySelector(SEL)&&el.tagName!=='LI'&&!el.matches('h1,h2,h3,h4,p,.btn,.see'))return;
         if(el.hasAttribute('data-rvk'))return;
         var tag=el.tagName.toLowerCase();counts[tag]=(counts[tag]||0)+1;
-        var k=pid+'/'+tag+'#'+counts[tag];el.setAttribute('data-rvk',k);el.setAttribute('data-rvp',pid);ORIG[k]=el.innerHTML;
+        var k=pid+'/'+tag+'#'+counts[tag];el.setAttribute('data-rvk',k);el.setAttribute('data-rvp',pid);ORIG[k]=el.innerHTML;lockArrows(el);
       });
     });
   }
@@ -45,7 +46,7 @@
     [].slice.call(document.querySelectorAll('[data-rvk]')).forEach(function(el){var k=el.getAttribute('data-rvk');var e=EDITS[k];
       var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();
       if(MODE==='dan'&&e&&e.body!=null&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');var tg=E('span','rvx-tag','Edited');tg.contentEditable='false';tg._el=el;el.appendChild(tg)}
-      else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}
+      else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}lockArrows(el);
       el.contentEditable=(MODE==='dan'&&!EMBED)?'true':'false';
     });
     document.querySelectorAll('.rvx-bar [data-m]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-m')===MODE)});
@@ -67,7 +68,7 @@
     document.addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.rvx-tag')){e.preventDefault();e.stopPropagation()}},true);
     document.addEventListener('click',function(e){var r=e.target.closest('.rvx-tag');if(!r)return;e.preventDefault();e.stopPropagation();var el=r._el||r.parentElement;if(!el)return;var k=el.getAttribute('data-rvk');if(!confirm('Put this back to the live wording?'))return;api('POST',{kind:'edit',page:el.getAttribute('data-rvp'),key:k,body:ORIG[k],before:''}).then(function(x){ROWS.push(x.row);applyOne(el);toast('Restored')})});
   }
-  function applyOne(el){EDITS=latestEdits();var k=el.getAttribute('data-rvk');var e=EDITS[k];var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();if(e&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');var tg=E('span','rvx-tag','Edited');tg.contentEditable='false';tg._el=el;el.appendChild(tg)}else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}}
+  function applyOne(el){EDITS=latestEdits();var k=el.getAttribute('data-rvk');var e=EDITS[k];var tag=el.querySelector(':scope > .rvx-tag');if(tag)tag.remove();if(e&&e.body!==ORIG[k]){el.innerHTML=e.body;el.classList.add('rvx-edited');var tg=E('span','rvx-tag','Edited');tg.contentEditable='false';tg._el=el;el.appendChild(tg)}else{el.innerHTML=ORIG[k];el.classList.remove('rvx-edited')}lockArrows(el)}
   function clean(h){var d=E('div');d.innerHTML=h;d.querySelectorAll('.rvx-tag,script,style').forEach(function(x){x.remove()});d.querySelectorAll('*').forEach(function(x){[].slice.call(x.attributes).forEach(function(a){if(/^on/i.test(a.name)||a.name==='contenteditable'||a.name==='style')x.removeAttribute(a.name)})});return d.innerHTML.replace(/&nbsp;/g,' ').trim()}
 
   /* ---- comments ---- */
