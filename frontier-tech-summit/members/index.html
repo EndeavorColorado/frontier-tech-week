@@ -1,0 +1,822 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Members · Endeavor Frontier Tech Summit</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/frontier-tech-summit/assets/favicon.svg"><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=1a71005"></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
+<style id="css">
+:root{
+  --bg:#f6f7f8; --card:#ffffff; --ink:#01000f; --body:#3b3f4a; --muted:#7a7f8c; --line:#e5e8ec;
+  --label:#026771; --teal:#09e1cd; --teal-lt:#dcfbfa; --yellow-lt:#fff3c4; --warn:#a13d1f; --panel:#f4f6f8;
+  --shadow:0 12px 40px rgba(1,0,15,.06);
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0b0c12; --card:#141621; --ink:#f3f4f6; --body:#c9ccd6; --muted:#8b90a0; --line:#262a35; --label:#4fe0d0; --teal-lt:#0f2f2e; --yellow-lt:#3a2f10; --warn:#ff9a7a; --panel:#1b1e2b; --shadow:0 12px 40px rgba(0,0,0,.4); color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#0b0c12; --card:#141621; --ink:#f3f4f6; --body:#c9ccd6; --muted:#8b90a0; --line:#262a35; --label:#4fe0d0; --teal-lt:#0f2f2e; --yellow-lt:#3a2f10; --warn:#ff9a7a; --panel:#1b1e2b; --shadow:0 12px 40px rgba(0,0,0,.4); color-scheme:dark; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.65;padding-block:0 64px;padding-inline:16px}
+.wrap{max-width:820px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--label);margin:0 0 10px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,52px);line-height:1.05;color:var(--ink);margin:0 0 10px;letter-spacing:-.01em;text-wrap:balance}
+.sub{font-family:var(--serif);font-size:20px;color:var(--body);margin:0 0 8px}
+.meta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--body);margin:0}
+header{padding-block:56px 26px}
+.tabs{display:flex;gap:26px;margin:26px 0 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs button{font:inherit;font-weight:600;font-size:15px;background:none;border:0;padding:8px 2px 12px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tabs button:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:3px}
+.tabs.sub2{margin:0 0 18px;border-bottom:0;gap:20px}
+.tabs.sub2 button{font-size:13px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:4px 0 6px}
+.card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:clamp(22px,4vw,44px)}
+section.purpose{margin-bottom:26px}
+.opt{border-top:1px solid var(--line);padding:22px 0 6px}
+.opt:first-of-type{border-top:0;padding-top:4px}
+.opt .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--label);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.opt h3{font-family:var(--serif);font-weight:500;font-size:26px;color:var(--ink);margin:8px 0 8px;line-height:1.2}
+.opt p{margin:0 0 10px}
+.opt p.why{font-size:14px;color:var(--muted)}
+.day{margin-bottom:38px}
+.day-head{margin-bottom:22px}
+.day h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,42px);line-height:1.08;color:var(--ink);margin:6px 0 6px;letter-spacing:-.01em}
+.date{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.frame{margin-top:14px}
+.frame p{margin:0 0 12px}
+.frame .q{font-style:italic;color:var(--ink)}
+.block{padding:22px 0 8px;border-top:1px solid var(--line)}
+.block .lab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--label);margin:0}
+.block .time{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--muted);margin:6px 0 2px}
+.block h4{font-family:var(--serif);font-weight:500;font-size:24px;color:var(--ink);margin:0 0 10px;line-height:1.2}
+.block p{margin:0 0 10px}
+.block b{color:var(--ink);font-weight:600}
+.short .day{margin-bottom:30px}
+.row{display:grid;grid-template-columns:118px 1fr;gap:6px 18px;padding:10px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row .t{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);padding-top:3px}
+.row .w{color:var(--ink);font-weight:500}
+.row .w span{display:block;color:var(--body);font-weight:400;font-size:14px}
+.ph{color:var(--muted)}
+footer{margin-top:44px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:2}
+/* budget */
+.hero{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:stretch;margin:0 0 22px}
+.lead{background:var(--teal);color:#01000f;border-radius:10px;padding:20px 22px}
+.lead .k{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
+.lead .v{font-family:var(--serif);font-weight:600;font-size:clamp(40px,8vw,58px);line-height:1;margin-top:8px;font-variant-numeric:tabular-nums}
+.lead .d{font-size:14px;margin-top:10px;line-height:1.5}
+.ctrls{display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:210px}
+.ctl{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+input[type=number]{font:inherit;font-family:var(--sans);font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:5px 7px;text-align:right;width:104px}
+input[type=number]:focus{outline:2px solid var(--teal);outline-offset:0;border-color:transparent}
+input.dirty{background:var(--yellow-lt)}
+button.save{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:6px;padding:9px 12px;cursor:pointer}
+button.save:disabled{opacity:.5;cursor:default}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-align:center;min-height:16px}
+.status.ok{color:var(--label)} .status.err{color:var(--warn)}
+table.bt{width:100%;border-collapse:collapse}
+table.bt th,table.bt td{padding:11px 8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+table.bt th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+table.bt td.num,table.bt th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.bt td .note{display:block;color:var(--muted);font-size:13px;margin-top:3px;line-height:1.5}
+table.bt td .cell{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+table.bt td .cell .x{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+tr.sub td{color:var(--muted)}
+tr.tot td{font-weight:700;font-size:17px;color:var(--ink);border-top:2px solid var(--ink);border-bottom:0;padding-top:14px}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+.tag.q{background:var(--teal-lt);color:var(--label)}
+.tag.est{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+.vcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:6px 0 4px}
+.vc{border:1px solid var(--line);border-radius:10px;padding:16px 17px}
+.vc.pick{border-color:var(--teal);border-width:2px}
+.vc .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--label)}
+.vc .a{font-family:var(--serif);font-size:30px;color:var(--ink);margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.vc .r{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:8px}
+.vc p{margin:0;font-size:13.5px;line-height:1.55}
+h3.sec{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--ink);margin:36px 0 6px;line-height:1.2}
+h3.sec:first-of-type{margin-top:0}
+p.lede{margin:0 0 16px}
+.flag{background:var(--teal-lt);border-radius:8px;padding:14px 16px;margin:16px 0 0}
+.flag .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--label);margin:0 0 6px}
+.flag p{margin:0 0 8px;font-size:14px}
+.flag p:last-child{margin-bottom:0}
+dl.terms{margin:0;display:grid;grid-template-columns:170px 1fr;gap:0}
+dl.terms dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px 12px 10px 0;border-top:1px solid var(--line)}
+dl.terms dd{margin:0;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
+@media (max-width:560px){
+  .hero{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}.row .t{padding-top:0}
+  dl.terms{grid-template-columns:1fr}
+  dl.terms dd{border-top:0;padding-top:0}
+}
+.scroll{overflow-x:auto;max-width:100%}
+.scroll table.bt{min-width:520px}
+tr.net td{color:var(--label)}
+tr.net.neg td{color:var(--warn)}
+.warn{color:var(--warn)}
+/* investors */
+.ihero{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 22px}
+.ihero .lead .v{font-size:clamp(34px,6vw,48px)}
+.stat{border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.stat .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--label)}
+.stat .a{font-family:var(--serif);font-size:30px;color:var(--ink);margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.stat p{margin:0;font-size:13.5px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 18px}
+.chip{font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:var(--card);color:var(--body);border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--fc)}
+.chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--panel)}
+.chip:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+table.inv{width:100%;border-collapse:collapse}
+table.inv th,table.inv td{padding:10px 8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+table.inv th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+table.inv td.rk{font-family:var(--mono);font-size:12px;color:var(--muted);width:28px;padding-left:0}
+table.inv td.nm{color:var(--ink);font-weight:600;min-width:150px}
+table.inv td.nm small{display:block;font-weight:400;color:var(--muted);font-size:12px;font-family:var(--mono);letter-spacing:.04em;margin:2px 0 6px}
+table.inv{min-width:620px}table.inv td.nm{width:180px}table.inv td.why{min-width:220px}
+table.inv td.why{font-size:13.5px;line-height:1.5}
+table.inv td.why .wp{display:block;color:var(--label);font-size:12.5px;margin-top:4px}
+table.inv td.why .caps{display:block;margin-top:6px}
+table.inv td.why .caps span{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:1px 6px;margin:0 4px 4px 0;color:var(--ink)}
+table.inv td.nm .dots{display:inline-flex;margin-top:6px}
+table.inv td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:13px}
+table.inv tr.dim td{opacity:.28}
+table.inv tr.hit td.nm{color:var(--ink)}
+.dots{display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
+.dots b{width:12px;height:12px;border-radius:50%;display:inline-block;border:2px solid var(--fc);background:transparent;opacity:.22}
+.dots b.s{opacity:1}
+.dots b.p{opacity:1;background:var(--fc)}
+.dots .n{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px}
+.tier{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:2px 7px;border-radius:3px;white-space:nowrap}
+.tier.t1{background:var(--teal);color:#01000f}
+.tier.t2{background:var(--teal-lt);color:var(--label)}
+.tier.t3{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+/* tours */
+.tb-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.routes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:18px 0 8px}
+#spk-body .spk-inv{grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+#spk-body td.fl .dots,#spk-body td.fl .dots span,#spk-body td.fl .stars,#spk-body td.fl .stars em{border:0;padding:0;background:none;margin-right:0}
+#spk-body td.fl .stars{display:block;margin-bottom:6px}
+.route{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--panel);position:relative}
+.route .rf{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--label);display:flex;align-items:center;gap:8px}
+.route .rf i{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--fc)}
+.route .stop{display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start;margin-top:10px}
+.route .stop .sn{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:3px}
+.route .stop .sw{color:var(--ink);font-weight:600;font-size:14px;line-height:1.3}
+.route .stop .sw small{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.04em;margin-top:2px}
+.route .stop .sw small .st{margin-left:6px}
+.route .rd{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+.st{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;white-space:nowrap;border:1px solid var(--line);color:var(--muted);background:var(--card)}
+.st.s-locked{background:var(--teal);color:#01000f;border-color:var(--teal)}
+.st.s-talks{background:var(--teal-lt);color:var(--label);border-color:transparent}
+.st.s-blocked{background:var(--yellow-lt);color:var(--warn);border-color:transparent}
+table.tours{width:100%;border-collapse:collapse;min-width:620px}
+table.tours th,table.tours td{padding:10px 8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+table.tours th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+table.tours td.rk{font-family:var(--serif);font-size:22px;color:var(--ink);width:34px;padding-left:0;line-height:1.1}
+table.tours tr.pick td.rk{color:var(--label)}
+table.tours td.nm{color:var(--ink);font-weight:600;min-width:170px;width:200px}
+table.tours td.nm small{display:block;font-weight:400;color:var(--muted);font-size:12px;font-family:var(--mono);letter-spacing:.04em;margin-top:3px}
+table.tours td.nm .pk.alt{background:var(--panel);color:var(--muted);border:1px solid var(--line)}
+table.tours td.nm .pk{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#01000f;background:var(--teal);padding:2px 7px;border-radius:3px}
+table.tours td.wh{font-size:13.5px;line-height:1.5;min-width:240px}
+table.tours td.wh .ct{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+table.tours td.fl{white-space:nowrap;min-width:110px}
+table.tours td.fl .dv{display:block;border:0;padding:0;margin:0 0 6px;font-family:var(--mono);font-size:12px;color:var(--ink);text-transform:none;letter-spacing:0}
+.chips.chips3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:520px}
+.chips.chips3 .chip{justify-content:center}
+table.tours td.fl span{display:inline-block;white-space:nowrap;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:1px 5px;margin:0 4px 4px 0;color:var(--body)}
+table.tours td.fl span.f-ee,table.tours td.fl span.f-p{border-color:var(--label);color:var(--label)}
+table.tours td.fl span.f-fed,table.tours td.fl span.f-itar{border-color:var(--warn);color:var(--warn)}
+table.tours td.sel select{font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:4px 6px}
+table.tours td.sel small{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:.06em}
+table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:18px;border-bottom:0}
+.t-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.t-foot p{margin:0;font-size:13px;color:var(--muted)}
+.lede.t-lede{margin-top:8px}
+
+.fr{margin-top:34px;padding-top:8px}
+.fr .fh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.fr .fh h3.sec{margin:0}
+.fr .fh .cnt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fr .fh i{width:14px;height:14px;border-radius:50%;display:inline-block;background:var(--fc);position:relative;top:1px}
+.legend{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 14px}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend b{width:12px;height:12px;border-radius:50%;display:inline-block;border:2px solid var(--label)}
+.legend b.p{background:var(--label)}
+.legend b.o{opacity:.22}
+.more{font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--body);border-radius:6px;padding:7px 12px;cursor:pointer;margin-top:10px}
+.more:hover{border-color:var(--ink);color:var(--ink)}
+.ask{border-left:3px solid var(--teal);padding:4px 0 4px 16px;margin:18px 0 4px}
+.ask p{margin:0 0 8px;font-size:14.5px}
+.ask p:last-child{margin-bottom:0}
+@media (max-width:640px){.ihero{grid-template-columns:1fr}table.inv th.hide,table.inv td.hide{display:none}}
+
+.qbox{font:inherit;font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;width:100%;max-width:340px}
+.qbox:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:transparent}
+/* founders */
+.fctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:-6px 0 6px}
+.fctl select{font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.fctl select:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.frow .co .nt{display:block;font-weight:400;color:var(--warn);font-size:12px;margin-top:3px}
+.tg{display:flex;gap:5px;flex-wrap:wrap}
+.st.s-z{border-color:var(--ink);color:var(--ink)}
+.fgrp{margin-top:30px}
+.fgrp:first-of-type{margin-top:0}
+.fgrp .gh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.fgrp .gh i{width:12px;height:12px;border-radius:50%;display:inline-block;background:var(--fc);position:relative;top:1px}
+.fgrp .gh h3.sec{margin:0;font-size:24px}
+.fgrp .gh .cnt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.frow{display:grid;grid-template-columns:1fr 120px 150px;gap:8px 16px;padding:12px 0;border-top:1px solid var(--line);align-items:start}
+.frow:first-of-type{border-top:0}
+.frow .co{color:var(--ink);font-weight:600;line-height:1.3}
+.frow .co small{display:block;font-weight:400;color:var(--body);font-size:13.5px;margin-top:3px;line-height:1.45}
+.frow .co .wh{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px}
+.frow .of{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--body);padding-top:3px}
+.frow .sx{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding-top:2px}
+.stars{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--label);white-space:nowrap}
+.stars.dr{color:var(--muted)}
+.stars em{font-style:normal;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-left:6px;opacity:.8}
+.fdr-foot{margin-top:26px;font-size:13px;color:var(--muted)}
+.usband{margin:8px 0 4px;font-size:13.5px;color:var(--body);background:var(--teal-lt);border-radius:8px;padding:9px 13px}.usband b{color:var(--ink)}
+.frow .of .usr.solo{margin-top:0;font-size:12px;letter-spacing:.06em}.frow .of .usr{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.04em;color:var(--label);line-height:1.4}
+.fdr-foot p{margin:0 0 6px}
+@media (max-width:560px){.frow{grid-template-columns:1fr}.frow .sx{flex-direction:row;flex-wrap:wrap;gap:10px}}
+</style>
+
+<div class="wrap">
+<header class="mh">
+  <a class="mh-brand" href="/frontier-tech-summit/#home"><svg class="ewm" viewBox="0 0 216 28" role="img" aria-label="Endeavor" focusable="false"><g fill="currentColor"><path d="M39.161 11.179v-3.75l-5.183.41v19.768h5.183V16.875c0-1.893.702-3.464 1.944-4.571 1.242-1.107 3.023-1.75 5.237-1.75 1.494 0 2.681.5 3.491 1.375s1.278 2.16 1.278 3.732v11.946h5.183V14.304c0-2.107-.756-3.857-2.195-5.054-1.458-1.196-3.546-1.803-6.083-1.803-1.908 0-3.744.375-5.345 1.089-1.422.643-2.628 1.553-3.51 2.643z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M85.162 27.59V0l-5.183.41v10.108c-2.196-1.982-5.057-3.072-8.135-3.072-3.095 0-5.74.911-7.612 2.679-1.908 1.786-2.898 4.34-2.898 7.357 0 3.16 1.026 5.804 2.897 7.643C66.085 26.965 68.75 28 71.934 28c3.42 0 6.497-1.232 8.495-3.429v3.036l4.733-.018zM68.587 12.374c1.134-1.304 2.717-2.107 4.571-2.107 1.98 0 3.69.803 4.913 2.107 1.224 1.304 1.98 3.143 1.98 5.304 0 2.232-.72 4.089-1.926 5.41-1.206 1.304-2.915 2.072-4.949 2.072-1.89 0-3.491-.768-4.625-2.09-1.134-1.321-1.818-3.214-1.818-5.482.018-2.107.738-3.91 1.854-5.214zm61.261-4.928c-3.221 0-6.821.429-10.258 1.143l-.324.072.864 2.196.216-.036a66.137 66.137 0 018.656-.553c2.106 0 3.528.232 4.41.696.432.232.738.518.917.84.198.339.288.75.288 1.232v1.428s-6.73.393-8.962.554c-2.394.232-4.355.946-5.705 2.089-1.368 1.143-2.106 2.714-2.106 4.571 0 2.054.828 3.661 2.448 4.75 1.53 1.036 3.761 1.554 6.407 1.554 2.555 0 5.777-.625 8.332-3.59v3.197h4.752V12.821c0-.964-.18-1.785-.576-2.464-.396-.696-1.008-1.25-1.818-1.66-1.566-.858-4.067-1.25-7.541-1.25zm4.787 13.232v-3.91s-5.507.357-7.324.5c-1.278.125-2.304.571-2.988 1.268-.684.696-1.08 1.642-1.08 2.803 0 1.16.468 2.036 1.368 2.625.864.554 2.124.857 3.761.857 2.016 0 3.33-.553 4.5-1.357 1.134-.803 1.763-1.84 1.763-2.786z"></path><path d="M149.159 7.839h-5.975l10.366 19.768h4.032l10.582-19.768h-3.474l-7.882 14.732-7.649-14.732z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M181.895 7.446c-3.581 0-6.694.911-8.944 2.661-2.358 1.84-3.599 4.482-3.599 7.607s1.241 5.75 3.599 7.59c2.268 1.767 5.363 2.696 8.944 2.696 3.564 0 6.659-.929 8.891-2.697 2.34-1.839 3.563-4.482 3.563-7.589 0-3.125-1.241-5.768-3.563-7.607-2.25-1.75-5.327-2.66-8.891-2.66zm-5.093 4.822c1.26-1.34 3.006-2.25 5.057-2.25 4.122 0 7.019 3.16 7.019 7.625.018 2.25-.756 4.125-1.997 5.464-1.242 1.357-2.988 2.286-5.022 2.286-2.051 0-3.797-.929-5.057-2.286-1.259-1.357-2.033-3.232-2.033-5.464 0-2.197.792-4.054 2.033-5.375z"></path><path d="M204.356 12.143V7.429l-5.183.41v19.768h5.183v-8.303c0-2.268.684-4.197 1.962-5.554 1.331-1.428 2.249-2.232 3.905-2.732 1.26-.375 2.178-.393 3.239-.393h.972L216 7.643l-.378-.054c-.612-.089-1.818-.142-2.717-.142a10.099 10.099 0 00-8.549 4.696z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M5.993 15.84c.936-4.93 5.993-8.394 11.356-8.394 8.099 0 11.014 5.786 11.014 8.911 0 .643-.126 1.143-.486 1.482-.36.34-.863.447-1.475.447H10.96c.27 2.25 1.296 3.964 2.772 5.125 1.548 1.232 3.617 1.857 5.849 1.857 2.717 0 5.129-.607 7.559-1.607l.251-.108.918 2.197-.252.107c-3.563 1.59-6.766 2.125-10.42 2.125-3.113 0-6.065-.875-8.243-2.625-2.015-1.625-3.347-4-3.545-7.09H0l1.314-2.428h4.679zm4.985 0h9.97c.99 0 1.602-.144 1.962-.358.324-.196.468-.5.468-.893 0-2.107-2.268-4.66-6.01-4.66-1.999 0-3.51.75-4.59 1.91-.972 1.072-1.584 2.518-1.8 4zm91.137-8.394c-5.957 0-11.5 4.268-11.5 10.054 0 3.482 1.386 6.125 3.563 7.875 2.178 1.75 5.13 2.625 8.243 2.625 3.653 0 6.857-.554 10.42-2.125l.252-.107-.918-2.197-.252.107c-2.429 1-4.841 1.608-7.559 1.608-2.231 0-4.283-.643-5.849-1.858-1.475-1.16-2.52-2.875-2.771-5.125h15.423c.612 0 1.134-.107 1.476-.446.36-.34.486-.84.486-1.482.018-3.143-2.916-8.929-11.014-8.929zm3.617 8.393h-9.97c.216-1.5.81-2.928 1.818-4 1.061-1.143 2.591-1.91 4.589-1.91 3.725 0 6.011 2.553 6.011 4.66 0 .393-.126.697-.468.893-.36.232-.972.375-1.98.357z"></path></g></svg><span class="mh-lock"><span>Frontier Tech Summit</span><span>Members</span></span></a>
+  <div class="mh-right"><span class="mh-me" id="mhMe"></span><a class="mh-link" href="/frontier-tech-summit/review/" id="mhReview" hidden>Review the site</a><button class="mh-link" id="mhSettings" hidden>Settings</button><button class="mh-link" id="mhHelp" title="How this works">?</button><button class="mh-link" id="mhOut">Sign out</button></div>
+</header>
+<p class="stamp"><i></i>Members only · not public</p>
+
+
+<div class="tabs top" role="tablist">
+  <button role="tab" id="t-home" aria-selected="true">Home</button>
+  <button role="tab" id="t-inv" aria-selected="false">Investors</button>
+  <button role="tab" id="t-fdr" aria-selected="false">Founders</button>
+  <button role="tab" id="t-spk" aria-selected="false">Speakers</button>
+  <button role="tab" id="t-tours" aria-selected="false">Tours</button>
+  <button role="tab" id="t-budget" aria-selected="false">Budget</button>
+</div>
+
+<div id="pane-home" role="tabpanel"><div class="card" id="home-body"></div></div>
+
+<div id="pane-budget" role="tabpanel" hidden>
+  <div class="tabs sub2" role="tablist">
+    <button role="tab" id="t-bshort" aria-selected="true">Short form</button>
+    <button role="tab" id="t-blong" aria-selected="false">Long form</button>
+  </div>
+  <div class="card" id="budget-short" role="tabpanel"></div>
+  <div class="card" id="budget-long" role="tabpanel" hidden>
+
+<h3 class="sec">Who is in the room</h3>
+<p class="lede">150 seats: 70 founders and 80 investors and buyers. Staff, crew and speakers sit outside the 150. Founders stay the side people compete for, which is what makes a partner package worth buying.</p>
+<div class="scroll"><table class="bt">
+  <thead><tr><th>Group</th><th class="num">Seats</th><th>Who fills it</th></tr></thead>
+  <tbody>
+    <tr><td>Founders</td><td class="num">70</td><td>One per company. 42 from Endeavor and 28 from Caruso Ventures, flexible, every invite agreed jointly. About 4 EEs attend free.</td></tr>
+    <tr><td>Investors and corporate innovators</td><td class="num">80</td><td>Investors pay $2,000, corporate innovators $2,500. Partner seats come out of these 80. Up to 5 panel moderators and a handful of senior buyers are comped.</td></tr>
+  </tbody>
+</table></div>
+<p style="margin:14px 0 0">Founders pay $750 all-in, panelists included. Investors pay $2,000 and corporate innovators $2,500, all-in: every session, every scheduled meeting, both dinners and the tour. There is no cheaper way in, and the only upgrade is a partnership.</p>
+
+<h3 class="sec">Partners</h3>
+<p class="lede">Every slot owns something no one else can buy, and there are only as many slots as the week holds: three gatherings, five Frontier panels, five roundtables. Each tier is priced as its seats at the $2,500 pass value plus what it owns.</p>
+<div class="scroll"><table class="bt">
+  <thead><tr><th>&nbsp;</th><th class="num">Summit</th><th class="num">Ridge</th><th class="num">Trailhead</th></tr></thead>
+  <tbody>
+    <tr><td>Price</td><td class="num">$30,000</td><td class="num">$20,000</td><td class="num">$10,000</td></tr>
+    <tr><td>Slots</td><td class="num">3</td><td class="num">5, one per Frontier panel</td><td class="num">5, one per roundtable</td></tr>
+    <tr><td>All-access seats</td><td class="num">4</td><td class="num">2</td><td class="num">1</td></tr>
+    <tr><td>Scheduled meetings per seat</td><td class="num">5</td><td class="num">5</td><td class="num">5</td></tr>
+    <tr><td>Meeting pick order</td><td class="num">First</td><td class="num">Second</td><td class="num">Third</td></tr>
+    <tr><td>Owns</td><td class="num">A gathering, a private room, its category</td><td class="num">A Frontier panel</td><td class="num">A roundtable</td></tr>
+  </tbody>
+</table></div>
+<dl class="terms" style="margin-top:16px">
+  <dt>Summit · $30,000</dt><dd>Hosts one of Wednesday at Corrida, Thursday dinner at Dan's (co-hosted), or the Buyer Briefing plus Thursday's tours. No fireside: there is no room on the stage. Its own private room at Pearl West both days. The only partner in its category: banking, cloud or accelerated compute, and no other bank at any tier. "Presented with" billing, a deal-flow memo and a private debrief with Dan. Targets: J.P. Morgan (committed), Google, NVIDIA.</dd>
+  <dt>Ridge · $20,000</dt><dd>Five slots, one per Frontier panel; Energy &amp; Compute and Critical Minerals share one Ridge. Owns one Frontier panel: the buyer's seat on its panel, leads its Thursday coach (the shared Energy and Minerals Ridge leads one; Endeavor or Caruso Ventures leads the other), named as its partner, and gets its founder list two weeks before everyone else.</dd>
+  <dt>Trailhead · $10,000</dt><dd>Five slots. Hosts one Wednesday roundtable and names the question for about fourteen founders; operating VCs are the natural buyer. Logo on the site and program, and the full meeting list after the week.</dd>
+  <dt>Add-ons</dt><dd>Extra seat at the pass rate ($2,000 investor, $2,500 corporate) while seats last · present Matched Meetings $10,000, outside any Summit category · showcase pop-up $5,000 a day if the Pearl West floor plan allows · host Boulder Hour $7,500.</dd>
+  <dt>If a slot is unsold</dt><dd>Endeavor and Caruso Ventures host the gathering, a marquee investor hosts the table, an invited buyer takes the panel seat. The program never depends on sales.</dd>
+  <dt>Not sold</dt><dd>The attendee list, product-pitch stage time, naming of a Frontier for a Summit partner.</dd>
+</dl>
+
+<h3 class="sec">Does it make money?</h3>
+<p class="lede">No forecast is shown here until partners sign. Use the revenue what-if on the short form: change the partner, founder and pass counts and the net updates against the cost. Caruso Ventures' in-kind isn't counted yet; every $10,000 it covers adds $11,000 to net at 10% contingency.</p>
+<div class="flag">
+  <p class="k">Gates</p>
+  <p><b style="color:var(--ink)">Pearl West floor plan.</b> Three private rooms and a 70-table meeting floor. Summit and Matched Meetings both depend on it.</p>
+  <p><b style="color:var(--ink)">Before deposits.</b> Agree with Dan who covers a shortfall.</p>
+  <p><b style="color:var(--ink)">December 15.</b> Summits signed or in active talks. <b style="color:var(--ink)">February 15</b> go or no-go: fewer than two Summits signed means planning for 120.</p>
+  <p><b style="color:var(--ink)">April 15</b> Ridge and Trailhead closed · <b style="color:var(--ink)">May 15</b> meeting app opens · <b style="color:var(--ink)">June 1</b> schedules locked.</p>
+</div>
+
+
+<h3 class="sec">The venue question</h3>
+<p class="lede">Pearl West is the plan and it is in kind, so the daytime venue costs us nothing but the extras. Two Boulder hotels were open on our dates. Both have now been priced against the same agenda at the same headcount, so for the first time they are actually comparable. Both were quoted for the original four-day June 22 to 25 program; the figures below are reference only and would need re-quoting for two days, June 16 and 17.</p>
+<div class="vcards">
+  <div class="vc pick"><p class="n">Plan &middot; Pearl West</p><p class="a">In kind</p><p class="r">Hall and six breakout rooms</p><p>Dan's building, contributed by Caruso Ventures as co-host. We carry only cleaning, security, power and load-in, an independent AV crew and our own event staff. Nothing is contracted and the building is still being finished.</p></div>
+  <div class="vc"><p class="n">Fallback &middot; Hotel Boulderado</p><p class="a">$115,000</p><p class="r">Range $93,000 to $117,000</p><p>Space, food and beverage and AV across four days, priced at 150 people. Guest rooms excluded; attendees book direct.</p></div>
+  <div class="vc"><p class="n">Fallback &middot; Limelight Boulder</p><p class="a">$143,000</p><p class="r">Range $133,000 to $176,000</p><p>The same scope at the same headcount. About 24% more at the midpoint, and nearly all of that gap is audio visual.</p></div>
+</div>
+<div class="flag">
+  <p class="k">The $54,000 Boulderado figure is dead</p>
+  <p>The earlier one-pager priced the Boulderado at its contracted minimums. That was the wrong thing to plan against. The $28,800 food and beverage minimum was written for a 120 person group, and feeding this agenda at 150 costs roughly <b style="color:var(--ink)">$73,650</b>, two and a half times the minimum. A minimum is a floor, not a forecast. The real Boulderado number is $115,000.</p>
+  <p>Both hotels here are priced at 150 people, which is now our number, so these figures hold as a fallback.</p>
+  <p>With the dates moved a week earlier, the St Julien has rooms open for a block. Its event space isn't needed with Pearl West.</p>
+</div>
+
+<h3 class="sec">The two side by side</h3>
+<p class="lede">All-in, including each property's service charge and applicable sales tax, and tax on the service charge.</p>
+<table class="bt">
+  <thead><tr><th>Component</th><th class="num">Boulderado</th><th class="num">Limelight</th><th class="num">Difference</th></tr></thead>
+  <tbody>
+    <tr><td>Food and beverage, realistic at 150 heads against the contracted minimum</td><td class="num">$99,860</td><td class="num">$109,345</td><td class="num">+$9,485</td></tr>
+    <tr><td>Meeting room rental</td><td class="num">$8,237</td><td class="num">$0 waived</td><td class="num">&minus;$8,237</td></tr>
+    <tr><td>Audio visual</td><td class="num">$6,781</td><td class="num">$33,317</td><td class="num">+$26,536</td></tr>
+    <tr class="tot"><td>Total estimate</td><td class="num">$114,878</td><td class="num">$142,662</td><td class="num">+$27,784</td></tr>
+  </tbody>
+</table>
+<p style="margin:18px 0 6px">Service charge is 24% at the Boulderado and 25% at Limelight. Guest rooms, lodging tax, parking and transportation are excluded from both.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">The gap is audio visual, not food.</b> Once both are priced to actually feed 150 people the same agenda, food lands within $9,500 of itself, and Limelight wins on rental because it waives all space. Then AV swings $26,536 the other way. The Boulderado runs a house AV desk and comps the projection package. Limelight routes everything through Image AV, a full production house that charges $1,850 a day for ballroom projection alone.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">Limelight's minimum is close to our natural spend.</b> At $80,000 it sits about $6,350 above what this agenda would eat anyway, so there is little risk of paying for food nobody touches. One group dinner closes the gap entirely.</p>
+
+<h3 class="sec">What each venue gives you</h3>
+<table class="bt">
+  <thead><tr><th>&nbsp;</th><th class="num">Boulderado</th><th class="num">Limelight</th></tr></thead>
+  <tbody>
+    <tr><td>Contracted food and beverage minimum</td><td class="num">$28,800</td><td class="num">$80,000</td></tr>
+    <tr><td>Rental waived on the minimum</td><td class="num">No</td><td class="num">Yes</td></tr>
+    <tr><td>Projection comped in general session</td><td class="num">Yes</td><td class="num">No</td></tr>
+    <tr><td>AV provider</td><td class="num">In-house desk</td><td class="num">Image AV</td></tr>
+    <tr><td>Breakout rooms available</td><td class="num">6</td><td class="num">6</td></tr>
+    <tr><td>General session capacity</td><td class="num">120 to 150</td><td class="num">150</td></tr>
+    <tr><td>Outdoor space for meals</td><td class="num">Plaza and foyer</td><td class="num">The Lawn</td></tr>
+    <tr><td>Rooms held and rate</td><td class="num">70 a night, $319 and up</td><td class="num">100 a night, $299</td></tr>
+    <tr><td>Guest room attrition allowance</td><td class="num">Not stated</td><td class="num">20%</td></tr>
+    <tr><td>Opened or renovated</td><td class="num">1909, renovated 2017</td><td class="num">2025</td></tr>
+    <tr><td>Location</td><td class="num">Pearl Street</td><td class="num">The Hill, by CU</td></tr>
+  </tbody>
+</table>
+
+<h3 class="sec">How the food number was built</h3>
+<p class="lede">Per guest, from each property's published 2026 menus, against our own agenda.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">Boulderado, per guest.</b> Breakfast buffet $48, lunch buffet $55, two themed breaks $40, all-day deluxe beverage $36. A full day is $179. Friday ends at 11am and runs $88.</p>
+<table class="bt">
+  <thead><tr><th>Day</th><th class="num">Realistic at 150</th><th class="num">Contracted minimum</th></tr></thead>
+  <tbody>
+    <tr><td>Tuesday 6/22, happy hour at License No. 1, about $45 a guest</td><td class="num">$6,750</td><td class="num">$3,000</td></tr>
+    <tr><td>Wednesday 6/23, $179 &times; 150</td><td class="num">$26,850</td><td class="num">$10,500</td></tr>
+    <tr><td>Thursday 6/24, $179 &times; 150</td><td class="num">$26,850</td><td class="num">$10,500</td></tr>
+    <tr><td>Friday 6/25, $88 &times; 150</td><td class="num">$13,200</td><td class="num">$4,800</td></tr>
+    <tr><td>Subtotal</td><td class="num">$73,650</td><td class="num">$28,800</td></tr>
+    <tr><td>24% service charge</td><td class="num">$17,676</td><td class="num">$6,912</td></tr>
+    <tr><td>Sales tax 9.345%, including on the service charge</td><td class="num">$8,534</td><td class="num">$3,337</td></tr>
+    <tr class="tot"><td>Food and beverage all-in</td><td class="num">$99,860</td><td class="num">$39,049</td></tr>
+  </tbody>
+</table>
+<p style="margin:18px 0 6px"><b style="color:var(--ink)">Boulderado meeting rooms.</b> $2,025 a day discounted for Wednesday, Thursday and Friday, $6,075 in total, $8,237 with service and tax. Tuesday at License No. 1 carries no rental, only the bar minimum.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">Worth pricing at the Boulderado.</b> The Arapahoe Planner Package at $184 a guest bundles breakfast, lunch, two themed breaks, all-day beverage service, general session room rental, a projector or monitor and a flipchart. That is $5 a guest above the a la carte build while absorbing rental and display AV. On Wednesday and Thursday it could save roughly $4,000.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">Limelight is governed by its minimum, not its menu.</b> The $80,000 contracted minimum, net of a 10% catering discount, plus a 25% service charge and 9.345% tax, is $109,345 all-in. The same per guest build says this agenda's natural food spend at 150 is about $73,650, roughly $6,350 under. The 10% discount does not lower the minimum; it buys about 11% more food for the same $80,000. No dinners appear in the proposed agenda.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">Limelight rental.</b> Flatirons 1 to 4, Trailhead, the Flatirons Foyer and The Lawn, all four days, waived. Waived only on achievement of the $80,000 minimum.</p>
+
+<h3 class="sec">Audio visual, three scenarios all-in</h3>
+<table class="bt">
+  <thead><tr><th>Scenario</th><th class="num">Boulderado</th><th class="num">Limelight</th></tr></thead>
+  <tbody>
+    <tr><td>Lean. General session audio and projection, one technician, minimal breakout support</td><td class="num">$3,694</td><td class="num">$23,374</td></tr>
+    <tr><td>Realistic. Adds panel mics, confidence monitor, speaker timer, power, breakout projection, two technicians</td><td class="num">$6,781</td><td class="num">$33,317</td></tr>
+    <tr><td>Full production. Large-format projection, stage lighting, full breakout packages, multi-camera recording</td><td class="num">$8,980</td><td class="num">$66,840</td></tr>
+  </tbody>
+</table>
+<p style="margin:18px 0 6px">The Boulderado comps a four-screen ballroom projection package worth $800 a day and discounts additional in-house AV by 20%. Limelight discounts Image AV equipment 10% but excludes labor, billed at $125 an hour. If Image AV rebills days two and three at half rate, the realistic Limelight figure drops to about $25,400, which makes that roughly an $8,000 question.</p>
+<p style="margin:0 0 6px"><b style="color:var(--ink)">Neither scenario matches the Pearl West plan.</b> Mighty Fine carries a main stage plus six house rooms with recording at $30,000. Run that production at either hotel and the AV line goes up from what is shown here.</p>
+
+<h3 class="sec">Where the risk sits</h3>
+<div class="flag">
+  <p><b style="color:var(--ink)">Boulderado, the seventy room per night minimum.</b> Meeting space is contingent on 70 rooms across 3 nights with no stated attrition allowance. Endeavor is not paying for rooms, but if unsold rooms fall back to us that is roughly <b style="color:var(--ink)">$77,000</b> of unbudgeted exposure. This is the largest single unknown across both proposals.</p>
+  <p><b style="color:var(--ink)">Boulderado, the minimum is not the cost.</b> Any budget built on $28,800 of food and beverage will be short by roughly $45,000 once 150 people are actually fed.</p>
+  <p><b style="color:var(--ink)">Limelight, AV labor and multi-day rates.</b> Image AV bills technicians at $125 an hour with no discount and states its published prices are estimates. Whether equipment rebills at a reduced rate on days two and three is worth about $8,000.</p>
+  <p><b style="color:var(--ink)">Limelight, the waiver is conditional.</b> All space is free only if the $80,000 minimum is achieved. A shortfall becomes a charge and may reinstate rental.</p>
+  <p><b style="color:var(--ink)">Both, 150 is load bearing.</b> Limelight states material changes to attendee or room counts may change pricing, and the Boulderado proposal is written for 120 to 150.</p>
+</div>
+
+<h3 class="sec">Confirm before either goes to contract</h3>
+<dl class="terms">
+  <dt>Boulderado</dt><dd>Does the 70 room minimum carry attrition, and at what percentage? Does the 20% AV discount apply to the AV engineer at $750 a day? What sales tax rate applies to function space rental?</dd>
+  <dt>Limelight</dt><dd>A written Image AV quote against the real agenda. Multi-day equipment rates. Whether the $80,000 minimum moves if attendance moves off 150. Confirmation of applicable tax rates.</dd>
+  <dt>Both</dt><dd>Whether a group dinner is in scope, since it materially changes which venue is cheaper.</dd>
+</dl>
+<p style="margin:16px 0 0;font-size:13.5px;color:var(--muted)">Basis. Hotel Boulderado proposal dated 9/22 and its 2026 Corporate Meetings Menu. Limelight Boulder proposal from Lauren Rugala, Group Sales Manager, and the Limelight Boulder and Image AV 2026 price guide. Food estimates are built from published per guest menu rates against each proposed agenda at 150 attendees. AV estimates are built from published rate cards and are not quotes from either property. Limelight states only "applicable taxes," so Boulder rates from the Boulderado proposal, 9.345% on food and beverage and 9.195% on AV, are applied to both. Both proposals are valid 14 days and neither holds space. Excluded from both: guest rooms and lodging tax, destination amenity fees, parking, airport transportation, offsite events, group dinners beyond those noted, print and signage, speaker costs and staff travel.</p>
+
+<h3 class="sec">Corrida, from Jocelyn's emails</h3>
+<dl class="terms">
+  <dt>Per head</dt><dd>$275 a person for the Bold Summit menu, plus tax and gratuity (Jocelyn Sarnow, Sept 25). $33,000 at 120 before fees.</dd>
+  <dt>All-in</dt><dd>About <b style="color:var(--ink)">$378 a head</b>: $275 food and beverage, a 25% community fee ($68.75), a 3.25% admin fee ($8.94) and about 9.3% tax on food and beverage ($25.70). At 150 people, about $56,700. Ask Jocelyn to confirm whether tax also applies to the fees.</dd>
+  <dt>Wednesday minimum</dt><dd>$16,500 in food and beverage, plus tax, the community fee and the admin fee. All food and beverage counts toward it; no room fee unless it is missed. Thursday would be $19,500 on the same terms. At $275 a head, 150 people is $41,250, two and a half times the minimum.</dd>
+  <dt>Capacity</dt><dd>125 with house furniture. More with rented tables and chairs; the pergola is wrapped for rain. They recently hosted 150 on the patio plus 90 in the dining room with rentals, with limited room to mingle.</dd>
+  <dt>Deposit</dt><dd>25% to secure the date, about $14,200 at the all-in figure.</dd>
+  <dt>Cancellation</dt><dd>$1,000 at 60 or more days out. Half the food and beverage minimum inside 60 days. The full estimated total, with tax and community fee, inside 30 days. Management reviews extenuating circumstances case by case.</dd>
+  <dt>Availability</dt><dd>Quoted for the old dates (June 23). Confirm Wednesday, June 16 in writing, and take Jocelyn up on the full written proposal she offered.</dd>
+</dl>
+
+<h3 class="sec">What we took from the Bold Summit</h3>
+<p class="lede">Dan's own event in August, about 50 people, landed just under $100,000. It is the benchmark underneath almost every line here.</p>
+<dl class="terms">
+  <dt>Corrida</dt><dd>$22,810 all-in for about 50 people. Jocelyn has since quoted the same menu at $275 a person plus tax and gratuity, about $378 all-in, which is what we now carry.</dd>
+  <dt>Pizzeria Alberico</dt><dd>About $8,000 for 50, or $160 a head with wine. That is the Thursday benchmark.</dd>
+  <dt>Lunch</dt><dd>They ran $24 to $33 a head. We carry $46, because a $750 fee sets a higher bar.</dd>
+  <dt>AV</dt><dd>$2,000 to $8,000 for one room over two days. We carry $15,000 for the main stage and breakout mics over two days.</dd>
+  <dt>Talent</dt><dd>Dan's note on the original: talent is $15,000 to $25,000. We carry $2,000 for Thursday's live set, with John Street's offer to fund a band as the upside.</dd>
+  <dt>Welcome bags</dt><dd>$50 to $100 a person. Likely out: photo, signage, badges, app and any bags share one $5,000 line.</dd>
+  <dt>Liability</dt><dd>$500 to $1,500 for two indoor days. Raised here because the tours go into working facilities.</dd>
+  <dt>Contingency</dt><dd>About 10%. We carry the same 10%, with Caruso Ventures' in-kind as further room once it is itemized.</dd>
+  <dt>Room block</dt><dd>Their St. Julien block carried $299 a night with attrition. That is exactly why our rooms stay guest-paid.</dd>
+</dl>
+
+<h3 class="sec">What is not in the number</h3>
+<p class="lede">There is no Tuesday program, so no Tuesday costs. Not counted: the value of Pearl West itself, anything else Caruso Ventures covers in kind (not yet itemized), John Street's offer to fund the band, guest rooms, and the event lead we are asking Dan for from January.</p>
+<h3 class="sec">Still open</h3>
+<p class="lede">Quotes from Mighty Fine and Avant Garde at 150. What the Pearl West gift and Caruso Ventures' in-kind actually cover. Corrida's real per head and the June 16 date in writing. The Pearl West floor plan: three private rooms and a 70-table meeting floor. Who covers a shortfall. A matchmaking app that runs both Matched Meetings and Second Look.</p>
+
+  </div>
+</div>
+<div id="pane-inv" role="tabpanel" hidden>
+  <div class="tabs sub2" role="tablist">
+    <button role="tab" id="t-ishort" aria-selected="true">Investors</button>
+    <button role="tab" id="t-ilong" aria-selected="false">Strategics</button>
+    <button role="tab" id="t-ico" aria-selected="false">Colorado</button>
+  </div>
+  <div class="card" id="inv-body" role="tabpanel"></div>
+</div>
+
+<div id="pane-tours" role="tabpanel" hidden>
+  <div class="card" id="tours-body" role="tabpanel"></div>
+</div>
+
+<div id="pane-fdr" role="tabpanel" hidden>
+  <div class="card" id="fdr-body" role="tabpanel"></div>
+</div>
+
+<div id="pane-spk" role="tabpanel" hidden>
+  <div class="card" id="spk-body" role="tabpanel"></div>
+</div>
+
+<div id="pane-settings" role="tabpanel" hidden><div class="card" id="settings-body"></div></div>
+<footer>
+  Hosted by Endeavor Colorado and Caruso Ventures &middot; June 16 to 17, 2027 &middot; Boulder, Colorado<br>
+  Members area &middot; Nothing here is public &middot; Ratings and notes save on their own
+</footer>
+</div>
+
+<script id="state" type="application/json"></script>
+<script id="invdata" type="application/json"></script>
+<script id="toursdata" type="application/json"></script>
+<script id="fdrdata" type="application/json"></script>
+<script id="app" type="text/plain">
+(function(){
+  var S=JSON.parse(document.getElementById('state').textContent);
+  var artifactNS=null, canWrite=true, dirty=false;
+  function money(n){ return (n<0?'−':'')+'$'+Math.round(Math.abs(n)).toLocaleString('en-US'); }
+  function val(L){ return L.t==='ph' ? L.r*S.headcount : L.v; }
+  function qhit(q,arr){ if(!q) return true; q=q.toLowerCase(); return arr.join(' ').toLowerCase().indexOf(q)>-1; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function renderBudget(){
+    var sub=0; S.lines.forEach(function(L){ sub+=val(L)||0; });
+    var cont=sub*S.cont/100, total=sub+cont, R=S.rev, P=S.price;
+    ['investors','corporates'].forEach(function(k){ if(R[k]==null) R[k]=0; }); if(P.investor==null) P.investor=2000; if(P.corporate==null) P.corporate=2500;
+    var sp=R.summit*P.summit+R.ridge*P.ridge+R.trailhead*P.trailhead, fees=R.founders*P.founder+R.investors*P.investor+R.corporates*P.corporate, rev=sp+fees, net=rev-total;
+    var seats=R.summit*4+R.ridge*2+R.trailhead, people=R.founders+R.investors+R.corporates+seats;
+    var h='';
+    h+='<div class="hero"><div class="lead"><div class="k">What it costs</div><div class="v">'+money(total)+'</div>'+
+       '<div class="d">'+money(total/S.headcount)+' a head at '+S.headcount+' people. Target is about $1,000 a head ('+(total/S.headcount>1000?money(total/S.headcount-1000)+' over, '+money((total/S.headcount-1000)*S.headcount)+' in all':'on target')+'); much of the support is in kind.</div></div>'+
+       '<div class="ctrls">'+
+       '<label class="ctl">People <input type="number" id="hc" value="'+S.headcount+'" step="5" min="1"></label>'+
+       '<label class="ctl">Contingency % <input type="number" id="cont" value="'+S.cont+'" step="1" min="0"></label>'+
+       '<button class="save" id="save"'+(canWrite?'':' disabled')+'>Save changes</button>'+
+       '<div class="status" id="status">'+(canWrite?(dirty?'Unsaved edits':''):'Read-only view')+'</div></div></div>';
+    h+='<h3 class="sec">Cost</h3><div class="scroll"><table class="bt"><thead><tr><th>Line</th><th class="num">Estimate</th></tr></thead><tbody>';
+    S.lines.forEach(function(L,i){
+      var tag=L.s==='quote'?'<span class="tag q">quoted</span>':'<span class="tag est">estimate</span>';
+      h+='<tr><td>'+esc(L.l)+tag+(L.n?'<span class="note">'+esc(L.n)+'</span>':'')+'</td><td class="num">';
+      if(L.t==='ph'){ h+='<div class="cell"><input type="number" id="in-'+i+'" data-i="'+i+'" data-f="r" value="'+L.r+'" step="1" aria-label="per head"><span class="x">a head &times; '+S.headcount+' = <b>'+money(val(L))+'</b></span></div>'; }
+      else { h+='<div class="cell"><input type="number" id="in-'+i+'" data-i="'+i+'" data-f="v" value="'+L.v+'" step="500" aria-label="amount"></div>'; }
+      h+='</td></tr>';
+    });
+    h+='<tr class="sub"><td>Subtotal</td><td class="num">'+money(sub)+'</td></tr>';
+    h+='<tr class="sub"><td>Contingency, '+S.cont+'% (the Bold Summit ran about 10%)</td><td class="num">'+money(cont)+'</td></tr>';
+    h+='<tr class="tot"><td>Total cost</td><td class="num">'+money(total)+'</td></tr></tbody></table></div>';
+    function rrow(k,label,note,price){ return '<tr><td>'+label+'<span class="note">'+note+'</span></td><td class="num"><div class="cell"><input type="number" id="rv-'+k+'" data-k="'+k+'" value="'+R[k]+'" step="1" min="0" aria-label="'+label+'"><span class="x">&times; '+money(price)+' = <b>'+money(R[k]*price)+'</b></span></div></td></tr>'; }
+    h+='<h3 class="sec">Revenue, what-if</h3><p class="lede">Not a forecast. Nothing is signed except J.P. Morgan\'s commitment, with price not yet agreed. Change any count and the totals update. Save keeps your numbers.</p><div class="scroll"><table class="bt"><thead><tr><th>Source</th><th class="num">Count</th></tr></thead><tbody>';
+    h+=rrow('summit','Summit partners','Up to 3. A gathering, a private room, its category. 4 seats each.',P.summit);
+    h+=rrow('ridge','Ridge partners','Up to 5, one per Frontier panel. 2 seats each.',P.ridge);
+    h+=rrow('trailhead','Trailhead partners','Up to 5, one per roundtable. 1 seat each.',P.trailhead);
+    h+=rrow('founders','Paying founders','$750 all-in. EEs and comped founders are free and not counted here.',P.founder);
+    h+=rrow('investors','Investor passes','$2,000 all-in. Moderators and comped investors not counted.',P.investor);
+    h+=rrow('corporates','Corporate innovator passes','$2,500 all-in, partner seats not included.',P.corporate);
+    h+='<tr class="sub"><td>Partners '+money(sp)+' &middot; Fees '+money(fees)+'</td><td class="num">'+money(rev)+'</td></tr>';
+    h+='<tr class="sub"><td>Less total cost</td><td class="num">'+money(-total)+'</td></tr>';
+    h+='<tr class="tot net'+(net<0?' neg':'')+'"><td>Net at these counts</td><td class="num">'+(net>=0?'+':'')+money(net)+'</td></tr></tbody></table></div>';
+    var buyers=R.investors+R.corporates+seats;
+    h+='<p style="margin:20px 0 0;font-size:14px;color:var(--muted)">People in this scenario: '+R.founders+' paying founders of 70 founder seats, and '+buyers+' investors, corporates and partner seats of 80'+(buyers>80?' <b class="warn">(over by '+(buyers-80)+')</b>':'')+'. Caps: 3 Summit, 5 Ridge, 5 Trailhead. Cost is modeled at '+S.headcount+' people. Free EEs, moderators, speakers and staff sit on top. Pearl West is in kind for both days. Hotels are guest-paid. Venue fallbacks and sources are in the long form.</p>';
+    document.getElementById('budget-short').innerHTML=h;
+    bindBudget();
+  }
+  function markDirty(){ dirty=true; var s=document.getElementById('status'); if(s){ s.textContent='Unsaved edits'; s.className='status'; } }
+  function bindBudget(){
+    var root=document.getElementById('budget-short');
+    root.querySelectorAll('input[data-i]').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        var L=S.lines[+inp.dataset.i]; var v=parseFloat(inp.value); if(isNaN(v)) v=0;
+        L[inp.dataset.f]=v; markDirty(); renderBudget();
+        var a=document.getElementById(inp.id); if(a) a.classList.add('dirty');
+      });
+    });
+    var CAP={summit:3,ridge:5,trailhead:5,founders:70,investors:80,corporates:80};
+    root.querySelectorAll('input[data-k]').forEach(function(inp){ inp.addEventListener('change',function(){ var k=inp.dataset.k; S.rev[k]=Math.min(CAP[k]||9999,Math.max(0,parseInt(inp.value,10)||0)); markDirty(); renderBudget(); }); });
+    var hc=document.getElementById('hc'), ct=document.getElementById('cont');
+    hc.addEventListener('change',function(e){ S.headcount=Math.max(1,parseInt(e.target.value,10)||1); markDirty(); renderBudget(); });
+    ct.addEventListener('change',function(e){ S.cont=Math.max(0,parseFloat(e.target.value)||0); markDirty(); renderBudget(); });
+    document.getElementById('save').addEventListener('click',save);
+  }
+
+  /* tabs */
+  function group(btns, panes, def){
+    function show(i){
+      for(var k=0;k<btns.length;k++){
+        btns[k].setAttribute('aria-selected', k===i?'true':'false');
+        panes[k].hidden = (k!==i);
+      }
+    }
+    btns.forEach(function(b,i){ b.addEventListener('click',function(){ show(i); }); });
+    show(def);
+    return show;
+  }
+  var showTop=group([document.getElementById('t-agenda'),document.getElementById('t-budget'),document.getElementById('t-inv'),document.getElementById('t-tours'),document.getElementById('t-fdr'),document.getElementById('t-spk')],
+                    [document.getElementById('pane-agenda'),document.getElementById('pane-budget'),document.getElementById('pane-inv'),document.getElementById('pane-tours'),document.getElementById('pane-fdr'),document.getElementById('pane-spk')],0);
+  var invView='inv';
+  group([document.getElementById('t-ishort'),document.getElementById('t-ilong'),document.getElementById('t-ico')],[{},{},{}],0);
+  document.getElementById('t-ishort').addEventListener('click',function(){ invView='inv'; renderInv(); });
+  document.getElementById('t-ilong').addEventListener('click',function(){ invView='str'; renderInv(); });
+  document.getElementById('t-ico').addEventListener('click',function(){ invView='co'; renderInv(); });
+  if(location.hash==='#investors') showTop(2);
+  group([document.getElementById('t-along'),document.getElementById('t-ashort')],
+        [document.getElementById('agenda-long'),document.getElementById('agenda-short')],0);
+  group([document.getElementById('t-bshort'),document.getElementById('t-blong')],
+        [document.getElementById('budget-short'),document.getElementById('budget-long')],0);
+  if(location.hash==='#budget') showTop(1);
+  if(location.hash==='#tours') showTop(3);
+  if(location.hash==='#founders') showTop(4);
+  if(location.hash==='#speakers') showTop(5);
+
+  function buildDoc(){
+    var css=document.getElementById('css').textContent, app=document.getElementById('app').textContent;
+    var w=document.querySelector('.wrap').cloneNode(true);
+    w.querySelector('#budget-short').innerHTML=''; w.querySelector('#inv-body').innerHTML=''; w.querySelector('#tours-body').innerHTML=''; w.querySelector('#fdr-body').innerHTML=''; w.querySelector('#spk-body').innerHTML=''; w.querySelector('#pane-spk').hidden=true; w.querySelector('#t-spk').setAttribute('aria-selected','false');
+    w.querySelector('#pane-fdr').hidden=true; w.querySelector('#t-fdr').setAttribute('aria-selected','false');
+    w.querySelector('#pane-tours').hidden=true; w.querySelector('#t-tours').setAttribute('aria-selected','false');
+    var invj=document.getElementById('invdata').textContent.replace(/<\//g,'<\\/');
+    var toursj=JSON.stringify(TOURS).replace(/<\//g,'<\\/');
+    var fdrj=document.getElementById('fdrdata').textContent.replace(/<\//g,'<\\/');
+    w.querySelector('#pane-inv').hidden=true; w.querySelector('#t-inv').setAttribute('aria-selected','false');
+    w.querySelector('#t-ishort').setAttribute('aria-selected','true'); w.querySelector('#t-ilong').setAttribute('aria-selected','false'); w.querySelector('#t-ico').setAttribute('aria-selected','false');
+    w.querySelector('#pane-agenda').hidden=false; w.querySelector('#pane-budget').hidden=true;
+    w.querySelector('#agenda-long').hidden=false; w.querySelector('#agenda-short').hidden=true;
+    w.querySelector('#budget-short').hidden=false; w.querySelector('#budget-long').hidden=true;
+    w.querySelector('#t-agenda').setAttribute('aria-selected','true'); w.querySelector('#t-budget').setAttribute('aria-selected','false');
+    w.querySelector('#t-along').setAttribute('aria-selected','true'); w.querySelector('#t-ashort').setAttribute('aria-selected','false');
+    w.querySelector('#t-bshort').setAttribute('aria-selected','true'); w.querySelector('#t-blong').setAttribute('aria-selected','false');
+    var json=JSON.stringify(S).replace(/<\//g,'<\\/');
+    var fonts='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">';
+    return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Frontier Tech Week Plan</title>'+fonts+'<style id="css">'+css+'</style></head><body><div class="wrap">'+w.innerHTML+'</div><script id="state" type="application/json">'+json+'<\/script><script id="invdata" type="application/json">'+invj+'<\/script><script id="toursdata" type="application/json">'+toursj+'<\/script><script id="fdrdata" type="application/json">'+fdrj+'<\/script><script id="app">'+app+'<\/script></body></html>';
+  }
+  function save(ev,ids){
+    ids=ids||{s:'status',b:'save'};
+    var s=document.getElementById(ids.s), btn=document.getElementById(ids.b);
+    if(!artifactNS){ s.textContent='Saving is not available in this view'; s.className='status err'; return; }
+    btn.disabled=true; s.textContent='Saving…'; s.className='status';
+    artifactNS.publish(buildDoc()).then(function(){ s.textContent='Saved'; s.className='status ok'; dirty=false; })
+    .catch(function(e){ btn.disabled=false;
+      if(e&&e.code==='conflict'){ s.textContent='Someone else saved first, reloading'; return; }
+      if(e&&(e.code==='not_writer'||e.code==='not_granted'||e.code==='not_declared')){ canWrite=false; renderBudget(); return; }
+      s.textContent='Could not save ('+(e&&e.code||'error')+')'; s.className='status err'; });
+  }
+
+  /* investors */
+  var INV=JSON.parse(document.getElementById('invdata').textContent);
+  var FR=["Aerospace & Defense","Energy & Compute","Quantum","Critical Minerals","Physical AI & Manufacturing","Bio & Health"];
+  var FRS=["Aerospace","Energy","Quantum","Minerals","Physical AI","Bio"];
+  var FC=["#026771","#c2410c","#6d28d9","#92400e","#0f766e","#be185d"];
+  var FCd=["#4fe0d0","#fb923c","#c4b5fd","#fbbf24","#5eead4","#f9a8d4"];
+  var dark=matchMedia('(prefers-color-scheme: dark)');
+  function fc(i){ return (document.documentElement.getAttribute('data-theme')==='dark'||(dark.matches&&document.documentElement.getAttribute('data-theme')!=='light'))?FCd[i]:FC[i]; }
+  var invFilter=null, invOpen={}, invZ=false, invQ='';
+  function cov(r){ var a={}; r.p.forEach(function(i){a[i]='p';}); r.s2.forEach(function(i){ if(!a[i]) a[i]='s'; }); return a; }
+  function span(r){ return Object.keys(cov(r)).length; }
+  function dots(r){ var c=cov(r), h='<span class="dots">'; for(var i=0;i<6;i++){ h+='<b class="'+(c[i]||'')+'" style="--fc:'+fc(i)+'" title="'+FR[i]+(c[i]==='p'?' · core':c[i]==='s'?' · also active':'')+'"></b>'; } return h+'<span class="n">'+span(r)+'/6</span></span>'; }
+  function cap(r){ var v=r.aum||r.fund; if(!v) return '<span style="color:var(--muted)">n/a</span>'; var s=v>=1000?'$'+(v/1000).toFixed(v>=10000?0:1)+'B':'$'+Math.round(v)+'M'; return s+(r.aum?'':'<span style="color:var(--muted)"> fund</span>'); }
+  function tierTag(t){ return '<span class="tier t'+t+'">'+(t===1?'Must land':t===2?'Bench':'Ecosystem')+'</span>'; }
+  function leadTxt(r){ return r.lead===true?'Leads':r.lead===false?'Follows':'—'; }
+  function esc2(s){ return esc(s||''); }
+  function typeShort(t){ return t==='Sovereign/Family office'?'Sovereign / family':t==='Growth/PE'?'Growth / PE':t; }
+  function row(r,i,fi){
+    var c=cov(r), hit=invFilter===null||c[invFilter], cls=invFilter===null?'':(hit?'hit':'dim');
+    var wt=r.warm||''; if(wt.length>170) wt=wt.slice(0,168).replace(/\s+\S*$/,'')+'…'; var warm=wt?'<span class="wp">'+esc2(wt)+'</span>':'';
+    var role=fi!==undefined?(c[fi]==='p'?'Core':'Also active'):'';
+    return '<tr class="'+cls+'"><td class="rk">'+(i+1)+'</td><td class="nm">'+esc2(r.n)+'<small>'+typeShort(r.t)+(r.hq?' · '+esc2(r.hq):'')+'</small>'+tierTag(r.tier)+'</td>'+
+      '<td>'+dots(r)+'</td><td class="num hide">'+cap(r)+'</td><td class="num hide">'+(fi!==undefined?role:leadTxt(r))+'</td>'+
+      '<td class="why">'+esc2(r.why)+warm+'</td></tr>';
+  }
+  var COS=["Enveda","Watchmaker","Lunar Outpost","Maybell","Atom Computing","Ursa Major","True Anomaly","Electra","Alta Resource","Peak Energy","Xcimer","Crusoe","SonderMind","JumpCloud","Quantum Metric","Castelion","Albedo","Quindar","Muon Space","Vescent","Radia","Solid Power","Forge Nano","Terra CO2","USA Rare Earth","Sierra Space","Boom Supersonic","Infleqtion","Quantinuum","KoBold","Ceibo","Anduril","Varda","Impulse","Hadrian","Commonwealth Fusion","Helion","Fervo","Lilac","Sila","Group14","Nth Cycle","Boston Metal","Agility","Figure","Skild","Recursion","Illumina","Vantor","York Space"];
+  var COHQ={"Denver":1,"Boulder":1,"Louisville":1,"Broomfield":1,"Golden":1,"Fort Collins":1,"Littleton":1,"Centennial":1,"Englewood":1,"Colorado Springs":1,"Westminster":1,"Lafayette":1,"Lakewood":1,"Arvada":1,"Aurora, CO":1,"Durango":1,"Longmont":1,"Greenwood Village":1};
+  function isCO(r){ var q=r.hq||''; return Object.keys(COHQ).some(function(k){ return q.indexOf(k)>-1; }); }
+  function caps(r){ var txt=[r.co||'',r.warm||'',r.why||''].concat(r.deals||[]).join(' | '); var out=[]; COS.forEach(function(c){ if(new RegExp('\\b'+c.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(txt)) out.push(c); }); return out; }
+  function row(r,i){
+    var cv=cov(r), dots='<span class="dots">'; for(var f=0;f<6;f++){ dots+='<b class="'+(cv[f]==='p'?'p':cv[f]==='s'?'s':'')+'" style="--fc:'+fc(f)+'" title="'+FR[f]+'"></b>'; } dots+='</span>';
+    var cp=caps(r);
+    var tg=(r.zb?'<span class="st">Bench</span>':'')+(r.rel?'<span class="tier '+(r.rel==='Warm'?'t1':r.rel==='Known'?'t2':'t3')+'">'+esc(r.rel)+'</span>':'');
+    return '<tr><td class="rk">'+(i+1)+'</td><td class="nm">'+esc(r.n)+'<small>'+esc(r.t)+(r.hq?' · '+esc(r.hq):'')+'</small>'+dots+(tg?'<span class="tg" style="margin-top:6px">'+tg+'</span>':'')+'</td>'+
+      '<td class="num hide">'+(r.aum?('$'+(r.aum>=1000?(r.aum/1000).toFixed(r.aum>=10000?0:1)+'B':Math.round(r.aum)+'M')):'—')+'</td>'+
+      '<td class="why">'+esc(r.why||'')+(r.zp?'<span class="wp" style="color:var(--ink)">Invite: '+esc(r.zp)+'</span>':'')+(r.warm?'<span class="wp">'+esc(r.warm)+'</span>':'')+(r.op?'<span class="wp" style="color:var(--warn)">'+esc(r.op)+'</span>':'')+(r.deals&&r.deals.length?'<span class="wp" style="color:var(--muted)">'+r.deals.slice(0,2).map(esc).join(' · ')+'</span>':'')+(cp.length?'<span class="caps">'+cp.map(function(c){return '<span>'+esc(c)+'</span>';}).join('')+'</span>':'')+'</td></tr>';
+  }
+  function table(rows){
+    var h='<div class="scroll"><table class="inv"><thead><tr><th></th><th>Firm · Frontiers</th><th class="num hide">AUM</th><th>Why they matter · warm path · on the cap table</th></tr></thead><tbody>';
+    rows.forEach(function(r,i){ h+=row(r,i); }); return h+'</tbody></table></div>';
+  }
+  function renderInv(){
+    var rank=function(a,b){ return (b.score-a.score)||(span(b)-span(a))||((b.aum||0)-(a.aum||0)); };
+    var h='';
+    var filt=function(r){ return (invFilter===null || cov(r)[invFilter]) && (!invZ || r.z) && qhit(invQ,[r.n,r.who||'',r.zp||'',r.why||'',r.hq||'',(r.deals||[]).join(' ')]); };
+    h+='<div class="chips chips3" style="max-width:none;grid-template-columns:repeat(7,auto);justify-content:start">'; for(var i=0;i<6;i++){ h+='<button class="chip" data-f="'+i+'" aria-pressed="'+(invFilter===i)+'" style="--fc:'+fc(i)+'"><i></i>'+FRS[i]+'</button>'; } h+='<button class="chip" data-f="all" aria-pressed="'+(invFilter===null)+'">All</button></div>';
+    h+='<input type="search" id="inv-q" class="qbox" placeholder="Search firm, person or portfolio company" value="'+esc(invQ)+'" aria-label="Search investors" style="margin:0 0 10px">';
+    h+='<div class="legend"><span><b class="p"></b>Core Frontier</span><span><b></b>Also active</span><span><b class="o"></b>Not active</span></div>';
+    if(invView==='inv'){
+      var rows=INV.filter(function(r){ return r.t!=='CVC' && r.t!=='Anchor' && !isCO(r) && filt(r); }).sort(rank);
+      h+='<h3 class="sec">Investors, ranked</h3><p class="lede">'+rows.length+' funds outside Colorado, one list, best first. Score is capital weight, verified 2025 to 2026 frontier deals, ability to lead a $10M+ round and a warm path through our companies. The dots are the Frontiers each fund covers.</p>';
+      h+=table(rows);
+    } else if(invView==='str'){
+      var rows=INV.filter(function(r){ return (r.t==='CVC'||r.t==='Anchor') && filt(r); }).sort(rank);
+      h+='<h3 class="sec">Strategics and buyers, ranked</h3><p class="lede">'+rows.length+' corporate venture arms, primes, labs and Colorado anchors, best first. These are the seats that turn a meeting into a pilot or a purchase order.</p>';
+      h+=table(rows);
+    } else {
+      var rows=INV.filter(function(r){ return isCO(r) && filt(r); }).sort(rank);
+      h+='<h3 class="sec">Colorado investors</h3><p class="lede">'+rows.length+' Front Range funds, best first. Our own doors; lower priority than the lists above because we can reach them without help.</p>';
+      h+=table(rows);
+    }
+    h+='<p style="margin:28px 0 0;font-size:13.5px;color:var(--muted)">Public titles and company names only. Research input for human judgment, October 2026; about forty percent of fund sizes still want a confirming link.</p>';
+    document.getElementById('inv-body').innerHTML=h;
+    var root=document.getElementById('inv-body');
+    root.querySelectorAll('.chip[data-f]').forEach(function(b){ b.addEventListener('click',function(){ var f=b.dataset.f; invFilter=(f==='all'||invFilter===+f)?null:+f; renderInv(); }); });
+    root.querySelector('#inv-q').addEventListener('input',function(e){ invQ=e.target.value; renderInv(); var n=document.getElementById('inv-q'); n.focus(); n.setSelectionRange(invQ.length,invQ.length); });
+  }
+  dark.addEventListener&&dark.addEventListener('change',renderInv);
+  renderInv();
+  /* tours */
+  var TOURS=JSON.parse(document.getElementById('toursdata').textContent);
+  var tourFilter=0;
+  function flagCls(f){ return f==='EE'?'f-ee':(/^P[1-4]$|^Pipeline$/.test(f)?'f-p':f==='Federal'?'f-fed':f==='ITAR'?'f-itar':''); }
+  function routeStops(fi){
+    var rows=TOURS.filter(function(t){return t.f===fi;});
+    function find(p){ return rows.filter(function(t){return t.pick===p;})[0]; }
+    return [['1',find('Stop 1')],['2',find('Stop 2')]].filter(function(s){return s[1];});
+  }
+  function renderTours(){
+    var h='<div class="tb-head"><div><p class="eyebrow">§ 05 · Thursday tours</p><h3 class="sec" style="margin:0">Where the coaches go.</h3></div><span class="meta">Thursday June 17 · board 8:30 · depart 9:00 AM · back by 12:00 PM · six coaches · minutes from Pearl West</span></div>';
+    h+='<p class="lede t-lede">One coach per Frontier, one stop, and a second only when it is next door. Everything else is on the bench. Below the route board: ten sites per Frontier, ranked by wow factor.</p>';
+    h+='<div class="routes">';
+    FR.forEach(function(name,fi){
+      var st=routeStops(fi), far=0;
+      h+='<div class="route" style="--fc:'+fc(fi)+'"><div class="rf"><i></i>'+esc(name)+'</div>';
+      st.forEach(function(s){ var t=s[1]; if(!t){ h+='<div class="stop"><span class="sn">'+s[0]+'</span><span class="sw"><small>open</small></span></div>'; return; }
+        far=Math.max(far,t.d);
+        h+='<div class="stop"><span class="sn">'+s[0]+'</span><span class="sw">'+esc(t.n)+'<small>'+esc(t.c)+' · '+t.d+' min</small></span></div>'; });
+      h+='<div class="rd">Farthest stop '+far+' min</div></div>';
+    });
+    h+='</div>';
+    h+='<div class="chips chips3">'+FR.map(function(n,i){ return '<button class="chip" data-f="'+i+'" aria-pressed="'+(tourFilter===i)+'" style="--fc:'+fc(i)+'"><i></i>'+esc(FRS[i])+'</button>'; }).join('')+'</div>';
+    var rows=TOURS.filter(function(t){return t.f===tourFilter;}).sort(function(a,b){return a.r-b.r;});
+    h+='<div class="scroll"><table class="tours"><thead><tr><th></th><th>Site</th><th>What you see · the catch</th><th>Drive · flags</th></tr></thead><tbody>';
+    rows.forEach(function(t,i){
+      if(i===0) h+='<tr class="bench-head"><td colspan="4">Top three by wow</td></tr>';
+      if(i===3) h+='<tr class="bench-head"><td colspan="4">The bench</td></tr>';
+      h+='<tr class="'+(/^(Stop 1|Stop 2)$/.test(t.pick||'')?'pick':'')+'"><td class="rk">'+t.r+'</td>';
+      h+='<td class="nm">'+esc(t.n)+'<small>'+esc(t.c)+'</small>'+(t.pick?'<span class="pk'+(/^(Stop 1|Stop 2)$/.test(t.pick)?'':' alt')+'">'+esc(t.pick)+'</span>':'')+'</td>';
+      h+='<td class="wh">'+esc(t.w)+'<span class="ct">'+esc(t.k)+'</span></td>';
+      h+='<td class="fl"><span class="dv">'+t.d+' min</span>'+(t.fl||[]).map(function(f){return '<span class="'+flagCls(f)+'">'+esc(f)+'</span>';}).join('')+'</td></tr>';
+    });
+    h+='</tbody></table></div>';
+    h+='<div class="t-foot"><p>Rank is wow factor for an investor. Stop 1 and Stop 2 are the working route; Bench is everything we are not planning on. EE, P1 to P3 and Pipeline are our companies; Federal and ITAR need a US-person roster or a sponsor and 60 to 90 days. Nothing is contacted or contracted.</p></div>';
+    var root=document.getElementById('tours-body'); root.innerHTML=h;
+    root.querySelectorAll('.chip').forEach(function(b){ b.addEventListener('click',function(){ tourFilter=+b.dataset.f; renderTours(); }); });
+  }
+  dark.addEventListener&&dark.addEventListener('change',renderTours);
+  renderTours();
+
+  /* founders */
+  var FDR=JSON.parse(document.getElementById('fdrdata').textContent);
+  var fdrFilter=null, fdrOffice='', fdrEE=false, fdrZ=false, fdrQ='', fdrUS='';
+  var USR=[['Colorado','Zeb King','Colorado'],['Heartland','Canem Arkan','Arkansas, Oklahoma, Missouri, Kansas, Texas, Alabama'],['Miami','Claudia Dur\u00e1n','Florida'],['Midwest','Diana Callaghan','Michigan, Illinois, Wisconsin, Minnesota'],['Northeast','Alan Rosenhoch','Upstate New York, Northeast Ohio, Western Pennsylvania'],['Puerto Rico','Cristina Tamayo','Puerto Rico'],['Southeast','Justin Brown','Georgia, Indiana, Kentucky, Ohio, Tennessee'],['Other U.S.','','States without an Endeavor regional office (California, Massachusetts, New York City, Washington, North Carolina)']];
+  var OFF=[["North America", "Canada", "Kristjan Sigurdson"], ["Latin America", "Argentina", "María Julia Bearzi"], ["Latin America", "Brazil", "Maria Teresa (Tete) Fornea"], ["Latin America", "Chile", "Patricio Rojas"], ["Latin America", "Colombia", "Felipe Osso"], ["Latin America", "Ecuador", "Pablo Freund"], ["Latin America", "Mexico", "Vincent Speranza"], ["Latin America", "Peru", "Paloma Aramburu"], ["Latin America", "Uruguay", "Analia Migues"], ["Europe", "Bulgaria", "Momchil Vassilev"], ["Europe", "Greece", "Panagiotis Karampinis"], ["Europe", "Ireland", "Hilary Rushe"], ["Europe", "Italy", "Marco Rampazzo"], ["Europe", "Poland", "Bartosz Lipnicki"], ["Europe", "Portugal", "Ricardo Mesquita"], ["Europe", "Romania", "Mihnea Craciun"], ["Europe", "Spain", "Andrés Tallos"], ["Europe", "UK", ""], ["Europe", "Ukraine", "Sviat Sviatnenko"], ["Middle East & North Africa", "Egypt", "Amr El Abd"], ["Middle East & North Africa", "Jordan", "Tamer Al-Salah"], ["Middle East & North Africa", "Lebanon", "Vera Abouchar"], ["Middle East & North Africa", "Morocco", ""], ["Middle East & North Africa", "Saudi Arabia", "Lateefa Alwaalan"], ["Middle East & North Africa", "Tunisia", "Walid Bellagha"], ["Middle East & North Africa", "Türkiye", "Asli Kurul Turkmen"], ["Middle East & North Africa", "UAE", ""], ["Asia Pacific", "Australia", ""], ["Asia Pacific", "Indonesia", "Monika Rudijono"], ["Asia Pacific", "Japan", "Rina Otsuka"], ["Asia Pacific", "Malaysia", "Shan Li Tay"], ["Asia Pacific", "New Zealand", "Austin Teece"], ["Asia Pacific", "Pakistan", "Shehryar Hydri"], ["Asia Pacific", "Philippines", "Manny Ayala"], ["Asia Pacific", "Singapore", ""], ["Asia Pacific", "South Korea", ""], ["Asia Pacific", "Vietnam", "Lan Anh Nguyen"], ["Sub-Saharan Africa", "Kenya", ""], ["Sub-Saharan Africa", "Nigeria", "Ireayomide Oladunjoye"], ["Sub-Saharan Africa", "South Africa", "Alison Collier"]];
+  var OFFN={}; OFF.forEach(function(x){OFFN[x[1]]=x;});
+  function offCount(o){ return FDR.filter(function(r){ return r.o.split(' · ').indexOf(o)>-1; }).length; }
+  function usHit(r){ var fdrUS=fdrOffice.indexOf('us:')===0?fdrOffice.slice(3):''; if(!fdrUS) return true; var u=r.us||[]; return fdrUS==='*'?u.length>0:u.indexOf(fdrUS)>-1; }
+  function usCount(k){ return FDR.filter(function(r){ var u=r.us||[]; return k==='*'?u.length>0:u.indexOf(k)>-1; }).length; }
+  function offices(){ var o={}; FDR.forEach(function(r){ if(r.o) r.o.split(' · ').forEach(function(x){o[x]=1;}); }); return Object.keys(o).sort(); }
+  var FRX=FR, FRSX=FRS;
+  function fcx(i){ return i<6?fc(i):'var(--muted)'; }
+  function stars(r){ var h=''; for(var i=1;i<=5;i++){ h+=i<=r.r?'★':'☆'; } return '<span class="stars" title="Draw: how much this name pulls investors and other founders into the room">'+h+(r.ro?'<em>Office '+r.ro+'/5</em>':'')+'</span>'; }
+  function renderFdr(){
+    var h='<div class="tb-head"><div><p class="eyebrow">§ 06 · Founders</p><h3 class="sec" style="margin:0">Who we would fly in.</h3></div><span class="meta">'+FDR.length+' companies · '+usCount('*')+' in the U.S. · '+OFF.length+' international offices</span></div>';
+    h+='<p class="lede t-lede">Grouped by Frontier, biggest draw first. Stars rate how much each name pulls investors and other founders into the room.</p>';
+    h+='<div class="chips chips3" style="max-width:none;grid-template-columns:repeat(7,auto);justify-content:start">'+FRX.map(function(n,i){ return '<button class="chip" data-f="'+i+'" aria-pressed="'+(fdrFilter===i)+'" style="--fc:'+fcx(i)+'"><i></i>'+esc(FRSX[i])+'</button>'; }).join('')+'<button class="chip" data-f="all" aria-pressed="'+(fdrFilter===null)+'">All</button></div>';
+    h+='<div class="fctl"><input type="search" id="fdr-q" class="qbox" placeholder="Search company or founder" value="'+esc(fdrQ)+'" aria-label="Search founders"><select id="fdr-off" aria-label="Filter by office"><option value="">All offices</option><optgroup label="United States"><option value="us:*"'+(fdrOffice==='us:*'?' selected':'')+'>USA \u00b7 all regions ('+usCount('*')+')</option>'+USR.map(function(x){ return '<option value="us:'+esc(x[0])+'"'+(fdrOffice==='us:'+x[0]?' selected':'')+'>'+(x[0]==='Other U.S.'?'Other U.S. (no regional office)':esc(x[0]))+' ('+usCount(x[0])+')</option>'; }).join('')+'</optgroup>'+(function(){ var g='', reg=''; OFF.forEach(function(x){ if(x[0]!==reg){ if(reg) g+='</optgroup>'; reg=x[0]; g+='<optgroup label="'+esc(reg)+'">'; } g+='<option value="'+esc(x[1])+'"'+(fdrOffice===x[1]?' selected':'')+'>'+esc(x[1])+' ('+offCount(x[1])+')</option>'; }); g+='</optgroup>'; var oth=offices().filter(function(o){ return !OFFN[o]; }); if(oth.length){ g+='<optgroup label="Other countries (no Endeavor office)">'+oth.map(function(o){ return '<option value="'+esc(o)+'"'+(fdrOffice===o?' selected':'')+'>'+esc(o==='Network'?'Global network':o)+' ('+offCount(o)+')</option>'; }).join('')+'</optgroup>'; } return g; })()+'</select><button class="chip" id="fdr-ee" aria-pressed="'+fdrEE+'">EEs first</button></div>';
+    var fdrUS=fdrOffice.indexOf('us:')===0?fdrOffice.slice(3):''; if(fdrOffice && !fdrUS){ var ox=OFFN[fdrOffice], on=offCount(fdrOffice); h+='<p class="usband">'+(ox?'<b>Endeavor '+esc(fdrOffice)+'</b>'+(ox[2]?' · MD '+esc(ox[2]):'')+' · '+esc(ox[0]):'<b>'+esc(fdrOffice==='Network'?'Global network':fdrOffice)+'</b> · no Endeavor office here; listed by company home country')+' · '+on+(on===1?' company':' companies')+(on===0?' · no frontier-tech founders on the list yet':'')+'</p>'; }
+    if(fdrUS){ var ux=USR.filter(function(x){return x[0]===fdrUS;})[0]; var un=FDR.filter(usHit).length; h+='<p class="usband">'+(fdrUS==='*'?'<b>All U.S.</b> · every company with a U.S. headquarters or major U.S. site, across all seven Endeavor U.S. regions plus states without an office':'<b>'+(fdrUS==='Other U.S.'?'Other U.S.':'Endeavor '+esc(fdrUS))+'</b>'+(ux[1]?' · MD '+esc(ux[1]):'')+' · '+esc(ux[2]))+' · '+un+(un===1?' company':' companies')+(un===0?' · no frontier-tech founders on the list yet':'')+'</p>'; }
+    FRX.forEach(function(name,fi){
+      if(fdrFilter!==null && fdrFilter!==fi) return;
+      var rows=FDR.filter(function(r){return (r.f===fi || r.f2===fi) && qhit(fdrQ,[r.c,r.p||'',r.w||'',r.o]) && (!fdrZ || r.z) && (!fdrOffice || (fdrOffice.indexOf('us:')===0 ? usHit(r) : r.o.split(' · ').indexOf(fdrOffice)>-1));}).sort(function(a,b){ return (fdrEE?((b.s==='EE'?1:0)-(a.s==='EE'?1:0)):0)||(b.r-a.r)||(b.x?1:0)-(a.x?1:0)||a.c.localeCompare(b.c); });
+      if(!rows.length) return;
+      h+='<div class="fgrp" style="--fc:'+fcx(fi)+'"><div class="gh"><i></i><h3 class="sec">'+esc(name)+'</h3><span class="cnt">'+rows.length+(rows.length===1?' company':' companies')+'</span></div>';
+      rows.forEach(function(r){
+        h+='<div class="frow"><div class="co">'+esc(r.c)+'<small>'+(r.p?esc(r.p):'<span class="ph">founder to confirm</span>')+'</small>'+(r.w?'<span class="wh">'+esc(r.w)+'</span>':'')+(r.n?'<span class="nt">'+esc(r.n)+'</span>':'')+'</div>';
+        h+='<div class="of">'+esc(r.o)+((r.us&&r.us.length)?'<span class="usr'+(r.o?'':' solo')+'">U.S. · '+esc(r.us.join(' · '))+(r.ul?'<br>'+esc(r.ul):'')+'</span>':'')+'</div>';
+        h+='<div class="sx">'+stars(r)+'<span class="tg"><span class="st'+(r.s==='EE'?' s-locked':' s-talks')+'">'+esc(r.s)+'</span>'+(r.b?'<span class="st">Bench</span>':'')+'</span></div></div>';
+      });
+      h+='</div>';
+    });
+    h+='<div class="fdr-foot"><p>★★★★★ headliner investors would fly in for · ★★★★ strong draw · ★★★ solid in its niche · ★★ early or local · ★ weak pull. Rated on round size and lead, valuation, named customers and government contracts, and press. Where an office sent its own score, it shows as "Office n/5". EE is an Endeavor Entrepreneur; Pipeline, Scale-up and ScaleUp are on their way in; TBC means the office did not say.</p><p>Chile and Ukraine are from public sources until Nicolás and the Ukraine team confirm. Italy\'s pipeline names are ours, not the office\'s. Brazil\'s US-expansion names (Mercado Bitcoin, Wellhub, Pipefy, Stark Bank and others) are left off because they are not frontier tech. Nothing has gone to a founder.</p></div>';
+    var root=document.getElementById('fdr-body'); root.innerHTML=h;
+    root.querySelectorAll('.chip[data-f]').forEach(function(b){ b.addEventListener('click',function(){ var f=b.dataset.f; fdrFilter=(f==='all'||fdrFilter===+f)?null:+f; renderFdr(); }); });
+    root.querySelector('#fdr-off').addEventListener('change',function(e){ fdrOffice=e.target.value; renderFdr(); });
+    
+    root.querySelector('#fdr-q').addEventListener('input',function(e){ fdrQ=e.target.value; renderFdr(); var n=document.getElementById('fdr-q'); n.focus(); n.setSelectionRange(fdrQ.length,fdrQ.length); });
+    root.querySelector('#fdr-ee').addEventListener('click',function(){ fdrEE=!fdrEE; renderFdr(); });
+  }
+  dark.addEventListener&&dark.addEventListener('change',renderFdr);
+  renderFdr();
+
+  /* speakers */
+  var SPK=[[["ICEYE", "From a student project to the world's largest radar-satellite fleet, sold to defense ministries"], ["PLD Space", "Building Europe's private reusable rocket"], ["Tekever", "Selling autonomous drones to NATO and Ukraine"], ["Lunar Outpost", "The Colorado EE that won NASA's lunar rover"], ["UFORCE"], ["Starcloud"], ["Xoople"], ["D-Orbit"], ["Kepler Communications"], ["Astroscale"], ["Gilmour Space"], ["Advanced Navigation"], ["Terra Industries"], ["EnduroSat"]], [["Crusoe", "Building AI factories where the power is; Colorado's biggest name"], ["Energy Dome", "The CO2 Battery for long-duration storage"], ["Point2 Technology", "The rack-scale interconnect NVIDIA invested in; pairs with our NVIDIA anchor"], ["fal", "Generative-media inference cloud; an Endeavor Outlier"], ["Boom Supersonic"], ["newcleo"], ["Axelera AI"], ["Koloma"], ["Rebellions"], ["Kyoto Fusioneering"], ["Peak Energy"], ["Radia"], ["Submer"], ["Type One Energy"]], [["Infleqtion", "Colorado's public quantum company"], ["Q-CTRL", "Quantum navigation that works when GPS is jammed"], ["Pasqal", "Neutral-atom quantum from Paris, now building in Chicago"], ["PsiQuantum", "The most-funded quantum company; every investor will want this one"], ["Photonic"], ["Silicon Quantum Computing"], ["Riverlane"], ["Atom Computing"], ["Nu Quantum"], ["Equal1"], ["Maybell Quantum"], ["Vescent"], ["Diraq"], ["Quantum Brilliance"]], [["GeologicAI", "Endeavor EE whose customers are Newmont, BHP and Rio Tinto"], ["Fleet Space", "Maps ore bodies from orbit and from the ground"], ["Ceibo", "Copper from the ore others leave behind; BHP Ventures backed"], ["Electra", "Clean iron from ore with no blast furnace, from Boulder"], ["pH7 Technologies"], ["Atomionics"], ["MineSense"], ["Mangrove Lithium"], ["Alta Resource Technologies"], ["Giraffe Bio"], ["Aguamarina"], ["Endolith"], ["Mint Innovation"], ["Neptuno Pumps"]], [["Mujin", "The robot brain behind Japan's biggest robotics round"], ["Wayve", "Embodied AI licensed to automakers; $1.2B Series D"], ["Halter", "A $2B robotics-for-cattle company run from Boulder"], ["Skild AI", "One robot brain for every body; valued above $14B"], ["Gecko Robotics"], ["Walden Robotics"], ["Dexory"], ["HappyRobot"], ["Theker"], ["Generative Bionics"], ["Outrider"], ["Manna"], ["PhysicsX"], ["Telexistence"]], [["Enveda", "AI drug discovery from Boulder; $2B Series E"], ["XPANCEO", "The smart contact lens unicorn"], ["Universal DX", "A blood test for colon cancer in a US pivotal trial; Endeavor Spain"], ["Empatica", "FDA-cleared wearables out of an MIT lab; Endeavor Italy"], ["Quibim"], ["Watchmaker Genomics"], ["AAVantgarde Bio"], ["INBRAIN Neuroelectronics"], ["ProVerum"], ["Momentis Surgical"], ["Lifebit"], ["restor3d"], ["NanoPhoria"], ["Space Tango"]]];
+  var spkFilter=0, spkView='f';
+  var SPI=[["Lux Capital", "Josh Wolfe", "The best-known voice in deep tech investing, and Lux invests in all six Frontiers"], ["DCVC", "Matt Ocko or Zachary Bogue", "All six Frontiers, and on Atom Computing's and Alta's cap tables alongside Caruso Ventures: the warmest big-fund path we have"], ["a16z American Dynamism", "Katherine Boyle", "Named the American Dynamism category; the name that fills a hard-tech room"], ["Khosla Ventures", "Vinod Khosla", "A legend on stage, backing five of our six Frontiers, minerals and energy most of all"], ["Eclipse", "Lior Susan", "Led Ursa Major and True Anomaly: the national fund with the deepest Colorado footprint"], ["Founders Fund", "Trae Stephens", "Anduril co-founder; the defense and hard-tech view"], ["General Catalyst", "Hemant Taneja", "A $43B firm whose CEO speaks on frontier tech and applied AI"], ["In-Q-Tel", "Steve Bowsher", "The US intelligence community's venture arm; also on Maybell's and Atomionics' cap tables"], ["Breakthrough Energy Ventures", "Carmichael Roberts", "Bill Gates' climate fund; backs Electra and Koloma"], ["Prime Movers Lab", "Dakin Sloss", "Breakthrough-science fund, already a warm relationship"]];
+  function fdrBy(c){ return FDR.filter(function(r){return r.c===c;})[0]; }
+  function home(o){ return /Colorado/.test(o); }
+  function abroad(o){ return !/(Colorado|^US$|US ·|Chicago)/.test(o); }
+  function spkTags(r){ var t=[]; if(r.s==='EE') t.push(['EE','f-ee']); if(home(r.o)) t.push(['Colorado','f-p']); else if(abroad(r.o)) t.push(['Flies in','']); if(/too large/i.test(r.n||'')) t.push(['Big for Endeavor','']); return t; }
+  function invBy(n){ return INV.filter(function(r){return r.n===n;})[0]; }
+  function renderSpkInv(){
+    var h='<p class="lede t-lede">Five investors who would pull the rest of the room in. Ranked by stage draw, then by how many Frontiers they cover, since the broadest names can moderate or keynote for anyone. They take the opening keynote and moderate the Frontier panels.</p>';
+    h+='<div class="routes spk-inv">';
+    SPI.slice(0,5).forEach(function(x,i){ var r=invBy(x[0]);
+      h+='<div class="route"><div class="rf">No. '+(i+1)+'</div><div class="stop" style="grid-template-columns:1fr;margin-top:6px"><span class="sw" style="font-size:16px">'+esc(x[0])+'<small>'+esc(x[1])+'</small></span></div><div style="margin-top:10px">'+dots(r)+'</div><p style="margin:10px 0 0;font-size:13.5px;line-height:1.5">'+esc(x[2])+'</p></div>';
+    });
+    h+='</div>';
+    h+='<div class="scroll"><table class="tours"><thead><tr><th></th><th>Investor</th><th>Why them</th><th>Frontiers</th></tr></thead><tbody><tr class="bench-head"><td colspan="4">Backups, in order</td></tr>';
+    SPI.slice(5).forEach(function(x,i){ var r=invBy(x[0]);
+      h+='<tr><td class="rk">'+(i+6)+'</td><td class="nm">'+esc(x[0])+'<small>'+esc(x[1])+'</small></td><td class="wh">'+esc(x[2])+'</td><td class="fl">'+dots(r)+'</td></tr>';
+    });
+    h+='</tbody></table></div>';
+    h+='<div class="t-foot"><p>Dots are the six Frontiers: filled means it is a core focus, outlined means active there. JPMorgan, Google and NVIDIA are anchor partners with their own stage time, and Endeavor Catalyst is ours, so they are left off. Nobody has been asked.</p></div>';
+    return h;
+  }
+  function renderSpk(){
+    var h='<div class="tb-head"><div><p class="eyebrow">§ 07 · Speakers</p><h3 class="sec" style="margin:0">Who takes the stage.</h3></div><span class="meta">'+(spkView==='f'?'Six Frontiers · four founder seats each · ten backups each':'Top five investors · five backups')+'</span></div>';
+    h+='<div class="tabs sub2" role="tablist"><button role="tab" data-v="f" aria-selected="'+(spkView==='f')+'">Founders</button><button role="tab" data-v="i" aria-selected="'+(spkView==='i')+'">Investors</button></div>';
+    if(spkView==='i'){ h+=renderSpkInv(); var rt=document.getElementById('spk-body'); rt.innerHTML=h; rt.querySelectorAll('[data-v]').forEach(function(b){ b.addEventListener('click',function(){ spkView=b.dataset.v; renderSpk(); }); }); return; }
+    h+='<p class="lede t-lede">Four founders per Frontier, ranked by how many investors their name pulls in. Investors moderate the panels and give the Thursday keynote, so founder seats stay scarce. Founders flying in get first call: a speaking slot is what puts them on the plane.</p>';
+    h+='<div class="routes">';
+    FR.forEach(function(name,fi){
+      h+='<div class="route" style="--fc:'+fc(fi)+'"><div class="rf"><i></i>'+esc(name)+'</div>';
+      SPK[fi].slice(0,4).forEach(function(x,i){ var r=fdrBy(x[0])||{o:''}; h+='<div class="stop"><span class="sn">'+(i+1)+'</span><span class="sw">'+esc(x[0])+'<small>'+esc(r.o)+'</small></span></div>'; });
+      h+='<div class="rd">Plus an investor moderator</div></div>';
+    });
+    h+='</div>';
+    h+='<div class="chips chips3">'+FR.map(function(n,i){ return '<button class="chip" data-f="'+i+'" aria-pressed="'+(spkFilter===i)+'" style="--fc:'+fc(i)+'"><i></i>'+esc(FRS[i])+'</button>'; }).join('')+'</div>';
+    h+='<div class="scroll"><table class="tours"><thead><tr><th></th><th>Speaker</th><th>Why them</th><th>Draw · flags</th></tr></thead><tbody>';
+    SPK[spkFilter].forEach(function(x,i){
+      var r=fdrBy(x[0]); if(!r) return;
+      if(i===0) h+='<tr class="bench-head"><td colspan="4">First asks</td></tr>';
+      if(i===4) h+='<tr class="bench-head"><td colspan="4">Backups, in order</td></tr>';
+      h+='<tr class="'+(i<4?'pick':'')+'"><td class="rk">'+(i+1)+'</td>';
+      h+='<td class="nm">'+esc(r.c)+'<small>'+(r.p?esc(r.p):'founder to confirm')+' · '+esc(r.o)+'</small></td>';
+      h+='<td class="wh">'+esc(x[1]||r.w||'')+(r.n?'<span class="ct">'+esc(r.n)+'</span>':'')+'</td>';
+      h+='<td class="fl">'+stars(r)+spkTags(r).map(function(t){return '<span class="'+t[1]+'">'+esc(t[0])+'</span>';}).join('')+'</td></tr>';
+    });
+    h+='</tbody></table></div>';
+    h+='<div class="t-foot"><p>Rank is draw: how much the name pulls investors and other founders into the room. Stars come from the Founders tab. Flies in means the founder is based outside the US and needs a speaking slot to justify the trip. Colorado founders can moderate, host a roundtable or narrate a coach instead. One seat per company, and no two direct competitors on the same panel. Nobody has been asked.</p></div>';
+    var root=document.getElementById('spk-body'); root.innerHTML=h;
+    root.querySelectorAll('.chip').forEach(function(b){ b.addEventListener('click',function(){ spkFilter=+b.dataset.f; renderSpk(); }); });
+    root.querySelectorAll('[data-v]').forEach(function(b){ b.addEventListener('click',function(){ spkView=b.dataset.v; renderSpk(); }); });
+  }
+  dark.addEventListener&&dark.addEventListener('change',renderSpk);
+  renderSpk();
+
+  renderBudget();
+  if(window.claude&&window.claude.use){ window.claude.use('artifact').then(function(ns){ artifactNS=ns; if(!ns){ canWrite=false; renderBudget(); } }); }
+  else { canWrite=false; renderBudget(); }
+})();
+</script>
+
+<script src="/frontier-tech-summit/assets/members.js?v=1a71005"></script>
+</body></html>
