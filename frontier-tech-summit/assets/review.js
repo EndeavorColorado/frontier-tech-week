@@ -4,9 +4,10 @@
 (function(){
   var API='/api/summit-review';
   var q=new URLSearchParams(location.search);
-  var TOKEN=q.get('t')||sessionStorage.getItem('rv_t')||'';
-  if(!TOKEN){document.body.insertAdjacentHTML('beforeend','<div class="rvx-gate"><div><h2>Review link needed</h2><p>Open this page from the link you were sent.</p></div></div>');return}
-  sessionStorage.setItem('rv_t',TOKEN);
+  // one login for everything: the members sign-in (localStorage mb_t) also opens the review tool
+  var TOKEN=q.get('t')||sessionStorage.getItem('rv_t')||localStorage.getItem('mb_t')||sessionStorage.getItem('mb_t')||'';
+  if(!TOKEN){location.replace('/frontier-tech-summit/?login=1&msg='+encodeURIComponent('Log in first, then open Review the site from the Members menu.'));return}
+  sessionStorage.setItem('rv_t',TOKEN);try{if(!localStorage.getItem('mb_t'))localStorage.setItem('mb_t',TOKEN)}catch(e){}
   var EMBED=q.get('embed')==='1';
   var MODE=q.get('mode')||localStorage.getItem('rv_mode')||'dan';
   if(EMBED)MODE=q.get('mode')||'live';

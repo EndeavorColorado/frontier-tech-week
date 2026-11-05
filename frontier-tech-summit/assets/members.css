@@ -324,3 +324,5 @@ table.tours tr.fitrow .fitbar{justify-content:start}
 .mh-mem .mh-dd .dd-who b{color:var(--ink)}
 .mbar-in{justify-content:flex-start}
 .mbar-r[hidden]{display:none}
+
+table.tours tr.fitrow .chips5 button.no{width:auto;padding:0 10px;white-space:nowrap}
