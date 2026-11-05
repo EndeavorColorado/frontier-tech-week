@@ -251,3 +251,20 @@ tr.vh,.frow.vh,.irow.vh{display:none!important}
 @media (max-width:700px){.irow{grid-template-columns:1fr}.irow>*{grid-column:1}.irow .ir1{grid-template-columns:1fr}.irow .ir1 .nm,.irow .ir1 .meta{grid-column:1}.irow .rk{display:none}.chips5 button{width:42px;height:42px}.fside{min-width:0}.ihs-sel,.ihs-q{width:100%;min-width:0}.ihs-r label{width:100%}.ihs-r{width:100%}}
 #fdr-body>h3.sec:first-of-type,#fdr-body>.lede,#fdr-body .chips{display:none}
 .frow .fitwrap{background:transparent;margin-top:4px}
+/* research tag, office select, side by side */
+.rsrch{font-size:12px;color:var(--muted);border:1px dashed var(--line);padding:3px 7px;margin-left:8px;white-space:nowrap}
+.ihs-off{min-width:180px;font-weight:500;border-color:var(--line)}
+#fdr-body .m-intro{display:none}
+.side-on .ilist,.side-on .ifoot{display:none}
+.sbs-sum{font-size:15px;color:var(--body);margin:0 0 12px}.sbs-sum b{color:var(--ink)}
+.sbs-t{width:100%;border-collapse:collapse;font-size:15px}
+.sbs-t th{text-align:left;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600}
+.sbs-t td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.sbs-n b{display:block;color:var(--ink);font-family:var(--serif);font-size:18px;font-weight:600}.sbs-n small{color:var(--muted);font-size:13px}
+.sbs-t .muted{color:var(--muted)}
+.sbs-t tr.s-gap td{background:var(--warn-lt)}.sbs-t tr.s-wait td{background:var(--yellow-lt)}.sbs-t tr.s-final td{background:var(--teal-lt)}
+.sbs-chips{display:inline-flex;gap:4px}
+.sbs-chips button{font:inherit;font-size:14px;font-weight:700;width:34px;height:32px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;padding:0;border-radius:4px}
+.sbs-chips button.on{background:var(--ink);color:#fff}.sbs-chips button.no{width:auto;padding:0 8px;font-size:12px;border-color:var(--line);color:var(--body)}.sbs-chips button.no.on{background:var(--warn);border-color:var(--warn);color:#fff}
+.lnk{font:inherit;font-size:14px;font-weight:600;color:var(--teal-ink);background:transparent;border:0;padding:2px 4px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:800px){.sbs-t th:first-child,.sbs-t td.sbs-n{width:40%}.sbs-chips button{width:28px;height:28px;font-size:12px}}

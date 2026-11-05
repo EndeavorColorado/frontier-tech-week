@@ -239,7 +239,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 .frow .of .usr.solo{margin-top:0;font-size:12px;letter-spacing:.06em}.frow .of .usr{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.04em;color:var(--label);line-height:1.4}
 .fdr-foot p{margin:0 0 6px}
 @media (max-width:560px){.frow{grid-template-columns:1fr}.frow .sx{flex-direction:row;flex-wrap:wrap;gap:10px}}
-</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=2d12897">
+</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=a8f31ae">
 
 <div class="wrap">
 <header class="mh" id="mh">
@@ -710,37 +710,37 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   function offices(){ var o={}; FDR.forEach(function(r){ if(r.o) r.o.split(' · ').forEach(function(x){o[x]=1;}); }); return Object.keys(o).sort(); }
   var FRX=FR, FRSX=FRS;
   function fcx(i){ return i<6?fc(i):'var(--muted)'; }
-  function stars(r){ var h=''; for(var i=1;i<=5;i++){ h+=i<=r.r?'★':'☆'; } return '<span class="stars" title="Draw: how much this name pulls investors and other founders into the room">'+h+(r.ro?'<em>Office '+r.ro+'/5</em>':'')+'</span>'; }
-  function renderFdr(){
-    var h='<div class="tb-head"><div><p class="eyebrow">§ 06 · Founders</p><h3 class="sec" style="margin:0">Who we would fly in.</h3></div><span class="meta">'+FDR.length+' companies · '+usCount('*')+' in the U.S. · '+OFF.length+' international offices</span></div>';
-    h+='<p class="lede t-lede">Grouped by Frontier, biggest draw first. Stars rate how much each name pulls investors and other founders into the room.</p>';
-    h+='<div class="chips chips3" style="max-width:none;grid-template-columns:repeat(7,auto);justify-content:start">'+FRX.map(function(n,i){ return '<button class="chip" data-f="'+i+'" aria-pressed="'+(fdrFilter===i)+'" style="--fc:'+fcx(i)+'"><i></i>'+esc(FRSX[i])+'</button>'; }).join('')+'<button class="chip" data-f="all" aria-pressed="'+(fdrFilter===null)+'">All</button></div>';
-    h+='<div class="fctl"><input type="search" id="fdr-q" class="qbox" placeholder="Search company or founder" value="'+esc(fdrQ)+'" aria-label="Search founders"><select id="fdr-off" aria-label="Filter by office"><option value="">All offices</option><optgroup label="United States"><option value="us:*"'+(fdrOffice==='us:*'?' selected':'')+'>USA \u00b7 all regions ('+usCount('*')+')</option>'+USR.map(function(x){ return '<option value="us:'+esc(x[0])+'"'+(fdrOffice==='us:'+x[0]?' selected':'')+'>'+(x[0]==='Other U.S.'?'Other U.S. (no regional office)':esc(x[0]))+' ('+usCount(x[0])+')</option>'; }).join('')+'</optgroup>'+(function(){ var g='', reg=''; OFF.forEach(function(x){ if(x[0]!==reg){ if(reg) g+='</optgroup>'; reg=x[0]; g+='<optgroup label="'+esc(reg)+'">'; } g+='<option value="'+esc(x[1])+'"'+(fdrOffice===x[1]?' selected':'')+'>'+esc(x[1])+' ('+offCount(x[1])+')</option>'; }); g+='</optgroup>'; var oth=offices().filter(function(o){ return !OFFN[o]; }); if(oth.length){ g+='<optgroup label="Other countries (no Endeavor office)">'+oth.map(function(o){ return '<option value="'+esc(o)+'"'+(fdrOffice===o?' selected':'')+'>'+esc(o==='Network'?'Global network':o)+' ('+offCount(o)+')</option>'; }).join('')+'</optgroup>'; } return g; })()+'</select><button class="chip" id="fdr-ee" aria-pressed="'+fdrEE+'">EEs first</button></div>';
-    var fdrUS=fdrOffice.indexOf('us:')===0?fdrOffice.slice(3):''; if(fdrOffice && !fdrUS){ var ox=OFFN[fdrOffice], on=offCount(fdrOffice); h+='<p class="usband">'+(ox?'<b>Endeavor '+esc(fdrOffice)+'</b>'+(ox[2]?' · MD '+esc(ox[2]):'')+' · '+esc(ox[0]):'<b>'+esc(fdrOffice==='Network'?'Global network':fdrOffice)+'</b> · no Endeavor office here; listed by company home country')+' · '+on+(on===1?' company':' companies')+(on===0?' · no frontier-tech founders on the list yet':'')+'</p>'; }
-    if(fdrUS){ var ux=USR.filter(function(x){return x[0]===fdrUS;})[0]; var un=FDR.filter(usHit).length; h+='<p class="usband">'+(fdrUS==='*'?'<b>All U.S.</b> · every company with a U.S. headquarters or major U.S. site, across all seven Endeavor U.S. regions plus states without an office':'<b>'+(fdrUS==='Other U.S.'?'Other U.S.':'Endeavor '+esc(fdrUS))+'</b>'+(ux[1]?' · MD '+esc(ux[1]):'')+' · '+esc(ux[2]))+' · '+un+(un===1?' company':' companies')+(un===0?' · no frontier-tech founders on the list yet':'')+'</p>'; }
-    FRX.forEach(function(name,fi){
-      if(fdrFilter!==null && fdrFilter!==fi) return;
-      var rows=FDR.filter(function(r){return (r.f===fi || r.f2===fi) && qhit(fdrQ,[r.c,r.p||'',r.w||'',r.o]) && (!fdrZ || r.z) && (!fdrOffice || (fdrOffice.indexOf('us:')===0 ? usHit(r) : r.o.split(' · ').indexOf(fdrOffice)>-1));}).sort(function(a,b){ return (fdrEE?((b.s==='EE'?1:0)-(a.s==='EE'?1:0)):0)||(b.r-a.r)||(b.x?1:0)-(a.x?1:0)||a.c.localeCompare(b.c); });
-      if(!rows.length) return;
-      h+='<div class="fgrp" style="--fc:'+fcx(fi)+'"><div class="gh"><i></i><h3 class="sec">'+esc(name)+'</h3><span class="cnt">'+rows.length+(rows.length===1?' company':' companies')+'</span></div>';
-      rows.forEach(function(r){
-        h+='<div class="frow"><div class="co">'+esc(r.c)+'<small>'+(r.p?esc(r.p):'<span class="ph">founder to confirm</span>')+'</small>'+(r.w?'<span class="wh">'+esc(r.w)+'</span>':'')+(r.n?'<span class="nt">'+esc(r.n)+'</span>':'')+'</div>';
-        h+='<div class="of">'+esc(r.o)+((r.us&&r.us.length)?'<span class="usr'+(r.o?'':' solo')+'">U.S. · '+esc(r.us.join(' · '))+(r.ul?'<br>'+esc(r.ul):'')+'</span>':'')+'</div>';
-        h+='<div class="sx">'+stars(r)+'<span class="tg"><span class="st'+(r.s==='EE'?' s-locked':' s-talks')+'">'+esc(r.s)+'</span>'+(r.b?'<span class="st">Bench</span>':'')+'</span></div></div>';
-      });
-      h+='</div>';
-    });
-    h+='<div class="fdr-foot"><p>★★★★★ headliner investors would fly in for · ★★★★ strong draw · ★★★ solid in its niche · ★★ early or local · ★ weak pull. Rated on round size and lead, valuation, named customers and government contracts, and press. Where an office sent its own score, it shows as "Office n/5". EE is an Endeavor Entrepreneur; Pipeline, Scale-up and ScaleUp are on their way in; TBC means the office did not say.</p><p>Chile and Ukraine are from public sources until Nicolás and the Ukraine team confirm. Italy\'s pipeline names are ours, not the office\'s. Brazil\'s US-expansion names (Mercado Bitcoin, Wellhub, Pipefy, Stark Bank and others) are left off because they are not frontier tech. Nothing has gone to a founder.</p></div>';
-    var root=document.getElementById('fdr-body'); root.innerHTML=h;
-    root.querySelectorAll('.chip[data-f]').forEach(function(b){ b.addEventListener('click',function(){ var f=b.dataset.f; fdrFilter=(f==='all'||fdrFilter===+f)?null:+f; renderFdr(); }); });
-    root.querySelector('#fdr-off').addEventListener('change',function(e){ fdrOffice=e.target.value; renderFdr(); });
-    
-    root.querySelector('#fdr-q').addEventListener('input',function(e){ fdrQ=e.target.value; renderFdr(); var n=document.getElementById('fdr-q'); n.focus(); n.setSelectionRange(fdrQ.length,fdrQ.length); });
-    root.querySelector('#fdr-ee').addEventListener('click',function(){ fdrEE=!fdrEE; renderFdr(); });
+  /* founders: one plain list, biggest draw first (members build). The members script adds the rating line. */
+  function stars(r){ var h=''; for(var i=1;i<=5;i++){ h+=i<=r.r?'★':'☆'; } return '<span class="stars" title="Draw: how much this name pulls investors and other founders into the room">'+h+'</span>'; }
+  function statusWords(s){ return {EE:'Endeavor Entrepreneur',Pipeline:'in the pipeline','Scale-up':'ScaleUp',Prospect:'prospect',TBC:'status to confirm',Alumni:'alumni'}[s]||(/^Funnel/.test(s||'')?'Colorado funnel '+s.replace('Funnel ',''):s||''); }
+  function reachLine(r){
+    var parts=[];
+    if(r.us&&r.us.length){ r.us.forEach(function(u){ var x=USR.filter(function(y){return y[0]===u;})[0]; parts.push('Endeavor '+u+(x&&x[1]?' ('+x[1]+')':'')); }); }
+    (r.o||'').split(' · ').forEach(function(o){ if(!o) return; var x=OFFN[o]; if(x) parts.push('Endeavor '+o+(x[2]?' ('+x[2]+')':'')); else if(!r.us||!r.us.length) parts.push(o+' (no Endeavor office)'); });
+    return parts.length?'<b>Reach them through:</b> '+esc(parts.join(' · ')):'<span class="nowarm">No Endeavor office on this one yet</span>';
   }
-  dark.addEventListener&&dark.addEventListener('change',renderFdr);
+  function frow(r,i){
+    var h='<div class="irow frow" data-n="'+esc(r.c)+'">';
+    h+='<div class="ir1"><span class="rk">'+(i+1)+'</span><span class="nm co">'+esc(r.c)+'</span><span class="meta">'+esc(r.o||'')+(r.w?' · '+esc(r.w):'')+(r.s?' · '+statusWords(r.s):'')+'</span></div>';
+    h+='<p class="irwhy">'+(r.p?esc(r.p):'<span class="nowarm">Founder to confirm</span>')+(r.n?' <span class="muted">— '+esc(r.n)+'</span>':'')+'</p>';
+    h+='<p class="irpath">'+reachLine(r)+'</p>';
+    h+='<div class="irfit"></div>';
+    h+='<details class="irx"><summary>More about '+esc(r.c)+'</summary><div class="irxb"><p><b>Research draw:</b> '+stars(r)+' '+r.r+' of 5'+(r.ro?' · office score '+r.ro+'/5':'')+'</p><p><b>Frontier:</b> '+esc(FR[r.f]||'')+(r.f2!=null?' · '+esc(FR[r.f2]||''):'')+'</p>'+(r.ul?'<p>'+esc(r.ul)+'</p>':'')+(r.b?'<p>On the bench: not in the first wave.</p>':'')+'</div></details>';
+    return h+'</div>';
+  }
+  function renderFdr(){
+    var rows=FDR.filter(function(r){ return qhit(fdrQ,[r.c,r.p||'',r.w||'',r.o]) && (!fdrOffice || (fdrOffice.indexOf('us:')===0 ? usHit(r) : r.o.split(' · ').indexOf(fdrOffice)>-1)); })
+      .sort(function(a,b){ return (b.r-a.r)||((b.s==='EE'?1:0)-(a.s==='EE'?1:0))||((b.x?1:0)-(a.x?1:0))||a.c.localeCompare(b.c); });
+    var h='<div id="fdr-head"></div>';
+    h+='<input type="search" id="fdr-q" class="qbox" value="'+esc(fdrQ)+'" aria-label="Search founders" hidden>';
+    h+='<select id="fdr-off" class="ihs-sel ihs-off" aria-label="Office"><option value="">All offices</option><optgroup label="United States"><option value="us:*"'+(fdrOffice==='us:*'?' selected':'')+'>USA · all regions ('+usCount('*')+')</option>'+USR.map(function(x){ return '<option value="us:'+esc(x[0])+'"'+(fdrOffice==='us:'+x[0]?' selected':'')+'>'+esc(x[0])+' ('+usCount(x[0])+')</option>'; }).join('')+'</optgroup>'+(function(){ var g='', reg=''; OFF.forEach(function(x){ if(x[0]!==reg){ if(reg) g+='</optgroup>'; reg=x[0]; g+='<optgroup label="'+esc(reg)+'">'; } g+='<option value="'+esc(x[1])+'"'+(fdrOffice===x[1]?' selected':'')+'>'+esc(x[1])+' ('+offCount(x[1])+')</option>'; }); return g+(reg?'</optgroup>':''); })()+'</select>';
+    h+='<div class="ilist">'; rows.forEach(function(r,i){ h+=frow(r,i); }); h+='</div>';
+    h+='<p class="ifoot">Draw is rated on round size and lead, valuation, named customers and government contracts, and press. Nothing has gone to a founder.</p>';
+    var root=document.getElementById('fdr-body'); root.innerHTML=h;
+    root.querySelector('#fdr-off').addEventListener('change',function(e){ fdrOffice=e.target.value; renderFdr(); });
+    root.querySelector('#fdr-q').addEventListener('input',function(e){ fdrQ=e.target.value; renderFdr(); });
+  }
   renderFdr();
-
   /* speakers */
   var SPK=[[["ICEYE", "From a student project to the world's largest radar-satellite fleet, sold to defense ministries"], ["PLD Space", "Building Europe's private reusable rocket"], ["Tekever", "Selling autonomous drones to NATO and Ukraine"], ["Lunar Outpost", "The Colorado EE that won NASA's lunar rover"], ["UFORCE"], ["Starcloud"], ["Xoople"], ["D-Orbit"], ["Kepler Communications"], ["Astroscale"], ["Gilmour Space"], ["Advanced Navigation"], ["Terra Industries"], ["EnduroSat"]], [["Crusoe", "Building AI factories where the power is; Colorado's biggest name"], ["Energy Dome", "The CO2 Battery for long-duration storage"], ["Point2 Technology", "The rack-scale interconnect NVIDIA invested in; pairs with our NVIDIA anchor"], ["fal", "Generative-media inference cloud; an Endeavor Outlier"], ["Boom Supersonic"], ["newcleo"], ["Axelera AI"], ["Koloma"], ["Rebellions"], ["Kyoto Fusioneering"], ["Peak Energy"], ["Radia"], ["Submer"], ["Type One Energy"]], [["Infleqtion", "Colorado's public quantum company"], ["Q-CTRL", "Quantum navigation that works when GPS is jammed"], ["Pasqal", "Neutral-atom quantum from Paris, now building in Chicago"], ["PsiQuantum", "The most-funded quantum company; every investor will want this one"], ["Photonic"], ["Silicon Quantum Computing"], ["Riverlane"], ["Atom Computing"], ["Nu Quantum"], ["Equal1"], ["Maybell Quantum"], ["Vescent"], ["Diraq"], ["Quantum Brilliance"]], [["GeologicAI", "Endeavor EE whose customers are Newmont, BHP and Rio Tinto"], ["Fleet Space", "Maps ore bodies from orbit and from the ground"], ["Ceibo", "Copper from the ore others leave behind; BHP Ventures backed"], ["Electra", "Clean iron from ore with no blast furnace, from Boulder"], ["pH7 Technologies"], ["Atomionics"], ["MineSense"], ["Mangrove Lithium"], ["Alta Resource Technologies"], ["Giraffe Bio"], ["Aguamarina"], ["Endolith"], ["Mint Innovation"], ["Neptuno Pumps"]], [["Mujin", "The robot brain behind Japan's biggest robotics round"], ["Wayve", "Embodied AI licensed to automakers; $1.2B Series D"], ["Halter", "A $2B robotics-for-cattle company run from Boulder"], ["Skild AI", "One robot brain for every body; valued above $14B"], ["Gecko Robotics"], ["Walden Robotics"], ["Dexory"], ["HappyRobot"], ["Theker"], ["Generative Bionics"], ["Outrider"], ["Manna"], ["PhysicsX"], ["Telexistence"]], [["Enveda", "AI drug discovery from Boulder; $2B Series E"], ["XPANCEO", "The smart contact lens unicorn"], ["Universal DX", "A blood test for colon cancer in a US pivotal trial; Endeavor Spain"], ["Empatica", "FDA-cleared wearables out of an MIT lab; Endeavor Italy"], ["Quibim"], ["Watchmaker Genomics"], ["AAVantgarde Bio"], ["INBRAIN Neuroelectronics"], ["ProVerum"], ["Momentis Surgical"], ["Lifebit"], ["restor3d"], ["NanoPhoria"], ["Space Tango"]]];
   var spkFilter=0, spkView='f';
@@ -802,5 +802,5 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 })();
 };</script>
 
-<script src="/frontier-tech-summit/assets/members.js?v=2d12897"></script>
+<script src="/frontier-tech-summit/assets/members.js?v=a8f31ae"></script>
 </body></html>

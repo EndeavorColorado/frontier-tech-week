@@ -80,8 +80,12 @@
   document.querySelectorAll('.tabs.top button').forEach(function(b){b.addEventListener('click',function(){var m={'t-home':'#home','t-inv':'#investors','t-fdr':'#founders','t-spk':'#speakers','t-tours':'#tours','t-budget':'#budget'};if(!m[b.id])return;history.replaceState(null,'',m[b.id]);document.getElementById('pane-settings').hidden=true;document.getElementById('mhSettings').setAttribute('aria-selected','false');window.scrollTo(0,0)})});
 
   /* ---------- Fit ---------- */
-  function pid(el,kind){var t='';if(kind==='inv'){t=el.getAttribute('data-n')||''}else{var nm=el.querySelector('.co');if(!nm)return null;for(var i=0;i<nm.childNodes.length;i++){if(nm.childNodes[i].nodeType===3)t+=nm.childNodes[i].textContent}}t=t.trim();var r=BYID[(kind==='inv'?'n:':'c:')+t];return r?r.id:null}
-  function val(id,col){var f=FIT[id]&&FIT[id][col];return f&&f.v!=null?f.v:null}
+  function pid(el,kind){var t=(el.getAttribute('data-n')||'').trim();var r=BYID[(kind==='inv'?'n:':'c:')+t];return r?r.id:null}
+  // Endeavor's founder rating starts from the research stars until someone at Endeavor sets it by hand
+  function research(id){var r=BYID[id];return (r&&r.r&&/^fdr-/.test(id))?Math.max(1,Math.min(5,+r.r)):null}
+  function isResearch(id,col){return col==='endeavor'&&!(FIT[id]&&FIT[id][col]&&FIT[id][col].v!=null)&&research(id)!=null}
+  function val(id,col){var f=FIT[id]&&FIT[id][col];if(f&&f.v!=null)return f.v;if(col==='endeavor')return research(id);return null}
+  function valHand(id,col){var f=FIT[id]&&FIT[id][col];return f&&f.v!=null?f.v:null}
   function finalOf(id){return FINAL[id]||{}}
   function stageOf(id){var f=finalOf(id);if(f.stage==='Declined'||f.stage==='Do not invite'||f.fit===0)return 'Out';if(f.stage)return f.stage;if(f.fit!=null)return f.fit>=4?'Approved':'Rated';if(val(id,'endeavor')!=null||val(id,'dan')!=null)return 'Rated';return 'Unrated'}
   function word(v){return v==null?'':(v===0?'Don’t invite':v+' · '+FITW[v])}
@@ -90,23 +94,23 @@
   function fitHTML(id){
     var mine=ME.column, other=mine==='dan'?'endeavor':'dan', canRate=ME.role==='admin';
     var me=val(id,mine), them=val(id,other), f=finalOf(id);
-    var otherName=other==='dan'?'Dan':'Bre';
+    var otherName=other==='dan'?'Dan':'Endeavor';
     var h='<div class="fitbar" data-fid="'+id+'">';
-    if(canRate){h+='<div class="fme"><span class="fk">Your rating</span>'+chips('data-fit',me)+'</div>'}
+    var rs=isResearch(id,mine);
+    if(canRate){h+='<div class="fme"><span class="fk">Your rating</span>'+chips('data-fit',me)+(rs?'<span class="rsrch" title="Starts from the research stars. Click a number to make it yours.">from research</span>':'')+'</div>'}
     else h+='<div class="fme"><span class="fk">Endeavor</span>'+pill(val(id,'endeavor'))+' <span class="fk">Dan</span>'+pill(val(id,'dan'))+'</div>';
     h+='<div class="fside">';
-    if(canRate){h+='<div class="fthem"><span class="fk">'+otherName+':</span> '+(them==null?'<span class="muted">not yet</span>':'<b>'+word(them)+'</b>'+(me!=null?(me===them?' <span class="ok">✓ agree</span>':' <span class="diff">differs</span>'):''))+'</div>'}
+    if(canRate){h+='<div class="fthem"><span class="fk">'+otherName+':</span> '+(them==null?'<span class="muted">not yet</span>':'<b>'+word(them)+'</b>'+(isResearch(id,other)?' <span class="muted">(research)</span>':'')+(me!=null?(me===them?' <span class="ok">✓ agree</span>':' <span class="diff">differs</span>'):''))+'</div>'}
     h+='<div class="ffinal"><span class="fk">Final:</span> '+(f.fit!=null||f.stage?'<b>'+(f.fit!=null?word(f.fit):'')+(f.stage?(f.fit!=null?' — ':'')+esc(f.stage):'')+'</b>'+(f.note?' <span class="muted">'+esc(f.note)+'</span>':''):'<span class="muted">not yet</span>')+(canRate?' <button class="edit" data-final="1">'+(f.fit!=null||f.stage?'Edit':'Set')+'</button>':'')+'</div>';
     return h+'</div></div>';
   }
   function fillFit(el){var id=el.getAttribute('data-fid');el.outerHTML=fitHTML(id)}
   function augment(root,kind){
     if(!D.investors)return;
-    if(kind==='inv'){root.querySelectorAll('.irow').forEach(function(row){var slot=row.querySelector('.irfit');if(!slot||slot.firstChild)return;var id=pid(row,'inv');if(!id)return;row.setAttribute('data-pid',id);slot.innerHTML=fitHTML(id)})}
-    else{root.querySelectorAll('.frow').forEach(function(row){if(row.querySelector('.fitbar'))return;var id=pid(row,'fdr');if(!id)return;row.setAttribute('data-pid',id);var fb=E('div','fitwrap',fitHTML(id));fb.style.gridColumn='1 / -1';row.appendChild(fb)})}
+    root.querySelectorAll('.irow').forEach(function(row){var slot=row.querySelector('.irfit');if(!slot||slot.firstChild)return;var id=pid(row,kind);if(!id)return;row.setAttribute('data-pid',id);slot.innerHTML=fitHTML(id)});
     viewbar(root,kind);applyView(root,kind);
   }
-  function rate(id,v){var cur=val(id,ME.column);var nv=(cur===v)?null:v;
+  function rate(id,v){var cur=valHand(id,ME.column);var nv=(cur===v)?null:v;
     FIT[id]=FIT[id]||{};FIT[id][ME.column]={v:nv,by:ME.name,at:new Date().toISOString()};var bar=document.querySelector('.fitbar[data-fid="'+id+'"]');if(bar)fillFit(bar);
     api('POST',{action:'rate',id:id,fit:nv}).then(function(){toast(nv==null?'Cleared':'Saved: '+(nv===0?'Do not invite':nv+' · '+FITW[nv]));updateProg()}).catch(function(){toast('Did not save. Tap again.');FIT[id][ME.column]={v:cur,by:ME.name,at:''};var el=document.querySelector('.fitbar[data-fid="'+id+'"]');if(el)fillFit(el)})}
   document.addEventListener('click',function(e){
@@ -126,10 +130,10 @@
   var SHOW={inv:'all',fdr:'all'};
   function viewbar(root,kind){if(root.querySelector('.ihs'))return;
     var isInv=kind==='inv';
-    var opts=[['all','All'],['unrated','Not yet rated by me'],['rated','Rated by me'],['gap','Where Bre and Dan disagree'],['Approved','Approved'],['Reached out','Reached out'],['Confirmed','Confirmed'],['Out','Not inviting']];
+    var opts=[['all','All'],['side','Side by side: Endeavor · Dan · Final'],['unrated','Not yet rated by me'],['rated','Rated by me'],['gap','Where Bre and Dan disagree'],['waiting','Waiting on '+(ME.column==='dan'?'Bre':'Dan')],['Approved','Approved'],['Reached out','Reached out'],['Confirmed','Confirmed'],['Out','Not inviting']];if(!isInv&&ME.column==='endeavor')opts.splice(4,0,['research','Still on the research rating']);
     if(isInv)opts=opts.concat([['-','──────'],['t:vc','Venture funds only'],['t:str','Strategics & buyers only'],['t:co','Colorado funds only']]);
     var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r"><label>Show <select class="ihs-sel">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label><input type="search" class="ihs-q" placeholder="Search" aria-label="Search"></div>');
-    var anchor=root.querySelector('#inv-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);
+    var anchor=root.querySelector('#inv-head')||root.querySelector('#fdr-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);var off=root.querySelector('#fdr-off');if(off)hs.querySelector('.ihs-r').insertBefore(off,hs.querySelector('.ihs-q'));
     var sel=hs.querySelector('.ihs-sel');sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
     sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)};
     var q=hs.querySelector('.ihs-q');var inner=root.querySelector(isInv?'#inv-q':'#fdr-q');if(inner){q.value=inner.value;q.oninput=function(){inner.value=q.value;inner.dispatchEvent(new Event('input',{bubbles:true}));setTimeout(function(){var nq=root.querySelector('.ihs-q');if(nq){nq.focus();nq.setSelectionRange(nq.value.length,nq.value.length)}},0)}}else q.hidden=true;
@@ -138,12 +142,31 @@
   var invTypeCur='all';function setType(t){invTypeCur=t;window.__invType(t)}
   function rowsOf(root,kind){return [].slice.call(root.querySelectorAll('[data-pid]'))}
   function barProg(){var p=document.getElementById('mbProg');if(!p||!D||!D.investors||ME.role!=='admin')return;var ni=D.investors.filter(function(r){return val(r.id,ME.column)!=null}).length,nf=D.founders.filter(function(r){return val(r.id,ME.column)!=null}).length;p.innerHTML='Investors <b>'+ni+'</b>/'+D.investors.length+' &middot; Founders <b>'+nf+'</b>/'+D.founders.length}
-  function updateProg(){barProg();['inv','fdr'].forEach(function(kind){var n=document.getElementById('ihsn-'+kind);if(!n||!D.investors)return;var list=kind==='inv'?D.investors:D.founders;var rated=list.filter(function(r){return val(r.id,ME.column)!=null}).length;var vis=rowsOf(document.getElementById(kind==='inv'?'inv-body':'fdr-body')).filter(function(r){return !r.classList.contains('vh')}).length;n.innerHTML=(ME.role==='admin'?'<b>'+list.length+'</b> '+(kind==='inv'?'investors':'founders')+' &middot; you have rated <b>'+rated+'</b> &middot; <b>'+(list.length-rated)+'</b> to go':'<b>'+list.length+'</b> '+(kind==='inv'?'investors':'founders'))+(vis!==list.length?' &middot; showing '+vis:'')})}
+  function updateProg(){barProg();['inv','fdr'].forEach(function(kind){var n=document.getElementById('ihsn-'+kind);if(!n||!D.investors)return;var list=kind==='inv'?D.investors:D.founders;var rated=list.filter(function(r){return val(r.id,ME.column)!=null}).length;var rsn=list.filter(function(r){return isResearch(r.id,ME.column)}).length;var vis=rowsOf(document.getElementById(kind==='inv'?'inv-body':'fdr-body')).filter(function(r){return !r.classList.contains('vh')}).length;n.innerHTML=(ME.role==='admin'?'<b>'+list.length+'</b> '+(kind==='inv'?'investors':'founders')+' &middot; you have rated <b>'+rated+'</b>'+(rsn?' (<b>'+rsn+'</b> from research)':'')+' &middot; <b>'+(list.length-rated)+'</b> to go':'<b>'+list.length+'</b> '+(kind==='inv'?'investors':'founders'))+(vis!==list.length?' &middot; showing '+vis:'')})}
   function applyView(root,kind){var v=SHOW[kind];var mine=ME.column;
     rowsOf(root,kind).forEach(function(r){var id=r.getAttribute('data-pid');var e=val(id,'endeavor'),d=val(id,'dan');var gap=(e!=null&&d!=null&&e!==d);var st=stageOf(id);var hide=false;
-      if(v==='unrated')hide=val(id,mine)!=null;else if(v==='rated')hide=val(id,mine)==null;else if(v==='gap')hide=!gap;else if(v!=='all')hide=st!==v;
+      var other=mine==='dan'?'endeavor':'dan';
+      if(v==='unrated')hide=valHand(id,mine)!=null&&!isResearch(id,mine)?true:(valHand(id,mine)!=null);else if(v==='rated')hide=valHand(id,mine)==null;else if(v==='research')hide=!isResearch(id,'endeavor');else if(v==='gap')hide=!gap;else if(v==='waiting')hide=!(val(id,mine)!=null&&val(id,other)==null);else if(v!=='all'&&v!=='side')hide=st!==v;
       r.classList.toggle('vh',hide);r.classList.toggle('hasfinal',finalOf(id).fit!=null)});
-    var nb=root.querySelector('.nextun');if(nb)nb.hidden=ME.role!=='admin';updateProg();
+    var nb=root.querySelector('.nextun');if(nb)nb.hidden=ME.role!=='admin'||v==='side';root.classList.toggle('side-on',v==='side');if(v==='side')renderSide(root,kind);else{var sb=root.querySelector('.sbs');if(sb)sb.remove()}updateProg();
+  }
+  /* side by side */
+  function renderSide(root,kind){var list=(kind==='inv'?D.investors:D.founders).slice();var mine=ME.column,canRate=ME.role==='admin';
+    var vis={};rowsOf(root,kind).forEach(function(r){vis[r.getAttribute('data-pid')]=1});list=list.filter(function(r){return vis[r.id]});
+    function state(id){var e=val(id,'endeavor'),d=val(id,'dan'),f=finalOf(id);if(f.fit!=null)return 'final';if(e==null&&d==null)return 'none';if(e==null||d==null)return 'wait';return e===d?'agree':'gap'}
+    var order={gap:0,wait:1,none:2,agree:3,final:4};list.sort(function(a,b){return (order[state(a.id)]-order[state(b.id)])||((val(b.id,'endeavor')||0)-(val(a.id,'endeavor')||0))});
+    var c={gap:0,wait:0,none:0,agree:0,final:0};list.forEach(function(r){c[state(r.id)]++});
+    var h='<div class="sbs"><p class="sbs-sum"><b>'+c.gap+'</b> disagree · <b>'+c.wait+'</b> waiting on one of you · <b>'+c.agree+'</b> agree · <b>'+c.final+'</b> final</p>';
+    h+='<table class="sbs-t"><thead><tr><th>Name</th><th>Endeavor</th><th>Dan</th><th>Final</th></tr></thead><tbody>';
+    list.forEach(function(r){var id=r.id,e=val(id,'endeavor'),d=val(id,'dan'),f=finalOf(id),st=state(id);
+      function cell(col,v){if(canRate&&mine===col)return '<td class="c-'+col+'"><span class="sbs-chips" data-sid="'+id+'">'+[1,2,3,4,5].map(function(n){return '<button data-sfit="'+n+'" class="'+(v===n?'on':'')+'">'+n+'</button>'}).join('')+'<button data-sfit="0" class="no'+(v===0?' on':'')+'" title="Don’t invite">No</button></span>'+(isResearch(id,col)?'<span class="rsrch">research</span>':'')+'</td>';return '<td class="c-'+col+'">'+(v==null?'<span class="muted">—</span>':'<b>'+word(v)+'</b>'+(isResearch(id,col)?' <span class="muted">(research)</span>':''))+'</td>'}
+      h+='<tr class="s-'+st+'" data-sid="'+id+'"><td class="sbs-n"><b>'+esc(kind==='inv'?r.n:r.c)+'</b><small>'+esc(kind==='inv'?(r.hq||''):(r.o||''))+'</small></td>'+cell('endeavor',e)+cell('dan',d);
+      h+='<td class="sbs-f">'+(f.fit!=null||f.stage?'<b>'+(f.fit!=null?word(f.fit):'')+(f.stage?' — '+esc(f.stage):'')+'</b>'+(canRate?' <button class="lnk" data-sfinal="'+id+'" data-v="">Edit</button>':''):(canRate?(st==='agree'?'<button class="lnk" data-sfinal="'+id+'" data-v="'+e+'">Confirm '+e+'</button>':st==='gap'?'<button class="lnk" data-sfinal="'+id+'" data-v="'+e+'">Use Endeavor’s '+e+'</button> <button class="lnk" data-sfinal="'+id+'" data-v="'+d+'">Use Dan’s '+d+'</button>':'<span class="muted">'+(st==='wait'?'waiting':'—')+'</span>'):'<span class="muted">—</span>'))+'</td></tr>'});
+    h+='</tbody></table></div>';
+    var old=root.querySelector('.sbs');if(old)old.remove();root.querySelector('.ilist').insertAdjacentHTML('beforebegin',h);
+    root.querySelectorAll('[data-sfit]').forEach(function(b){b.onclick=function(){var id=b.closest('[data-sid]').getAttribute('data-sid');rate(id,+b.getAttribute('data-sfit'));renderSide(root,kind)}});
+    root.querySelectorAll('[data-sfinal]').forEach(function(b){b.onclick=function(){var id=b.getAttribute('data-sfinal'),v=b.getAttribute('data-v');if(v===''){SHOW[kind]='all';var sel=root.querySelector('.ihs-sel');if(sel)sel.value='all';applyView(root,kind);var bar=root.querySelector('.fitbar[data-fid="'+id+'"]');if(bar){editFinal(bar);bar.closest('.irow').scrollIntoView({block:'center'})}return}
+      var f=finalOf(id);var data={fit:+v,stage:f.stage||'Approved',owner:'',note:f.note||''};if(+v<4&&!f.stage)data.stage='';FINAL[id]=Object.assign({},data,{by:ME.name,at:new Date().toISOString()});var bar=root.querySelector('.fitbar[data-fid="'+id+'"]');if(bar)fillFit(bar);renderSide(root,kind);api('POST',Object.assign({action:'final',id:id},data)).then(function(){toast('Final saved');renderHome();updateProg()}).catch(function(){toast('Did not save. Try again.')})}});
   }
   /* keyboard rating */
   function setCur(row){if(!row)return;document.querySelectorAll('[data-pid].cur').forEach(function(r){r.classList.remove('cur')});row.classList.add('cur');var k=row.classList.contains('irow')?'inv':'fdr';CUR[k]=row}
@@ -155,7 +178,7 @@
     if(!CUR[kind]){nextUnrated(root,kind);return}
     var v=null;if(/^[1-5]$/.test(e.key))v=+e.key;else if(e.key==='n'||e.key==='N'||e.key==='0')v=0;if(v==null)return;e.preventDefault();var id=CUR[kind].getAttribute('data-pid');rate(id,v);setTimeout(function(){nextUnrated(root,kind)},150)});
   function tidy(){document.querySelectorAll('h3.sec,h2,h4').forEach(function(h){var t=h.textContent;var n=t.replace(/\s*\.$/,'');if(n!==t)h.textContent=n})}
-  function observe(){['inv-body','fdr-body'].forEach(function(id){var root=document.getElementById(id);var kind=id==='inv-body'?'inv':'fdr';var busy=false;new MutationObserver(function(){if(busy)return;busy=true;try{augment(root,kind);tidy()}finally{busy=false}}).observe(root,{childList:true});augment(root,kind)})}
+  function observe(){['inv-body','fdr-body'].forEach(function(id){var root=document.getElementById(id);var kind=id==='inv-body'?'inv':'fdr';var busy=false;new MutationObserver(function(muts){var real=muts.some(function(m){return [].concat([].slice.call(m.addedNodes),[].slice.call(m.removedNodes)).some(function(n){return !(n.classList&&(n.classList.contains('sbs')||n.classList.contains('nextun')||n.classList.contains('ihs')))})});if(!real||busy)return;busy=true;try{augment(root,kind);tidy()}finally{busy=false}}).observe(root,{childList:true});augment(root,kind)})}
 
   /* ---------- Home ---------- */
   var DECS=[{id:'thursday',k:'Agenda',t:'Thursday: tours, or showcase at Pearl West?',p:'Six coaches, 10 to 50 minutes each way, against five or six private rooms at Pearl West (and Google a mile away) where companies set up and people stay together.',b:['Tours: Lunar Outpost 35 min, NLR 20, JILA 10, Electra 10, AMP 15, Flatiron Park 10 (bench on the Tours tab)','Showcase: no drive time, more collisions, companies bring hardware to Pearl West','Hybrid: close-in sites only (10–15 min), showcase for the rest']},
@@ -168,7 +191,7 @@
     if(D.investors){h+='<div class="home-grid">';[['Investors & buyers',D.investors,D.targets.investors],['Founders',D.founders,D.targets.founders]].forEach(function(x){var list=x[1];var rated=list.filter(function(r){return val(r.id,'endeavor')!=null||val(r.id,'dan')!=null}).length;var ST=list.map(function(r){return stageOf(r.id)});var appr=ST.filter(function(x){return x!=='Unrated'&&x!=='Rated'&&x!=='Out'}).length;var inv=ST.filter(function(x){return x==='Reached out'||x==='In conversation'||x==='Soft yes'||x==='Confirmed'}).length;var conf=ST.filter(function(x){return x==='Confirmed'}).length;
       h+='<div class="hnum"><p class="hk">'+x[0]+' · target '+x[2]+'</p><div class="hrow"><div><div class="hv">'+rated+'</div><div class="hl">rated</div></div><div><div class="hv">'+appr+'</div><div class="hl">approved</div></div><div><div class="hv">'+inv+'</div><div class="hl">reached out</div></div><div><div class="hv">'+conf+'</div><div class="hl">confirmed</div></div></div><div class="ht">'+list.length+' on the list</div></div>'});h+='</div>';
       if(ME.role==='admin'){h+='<h3 class="sec">Needs you</h3><div class="needs">';var ui=D.investors.filter(function(r){return val(r.id,ME.column)==null}).length,uf=D.founders.filter(function(r){return val(r.id,ME.column)==null}).length;var dis=D.investors.concat(D.founders).filter(function(r){var e=val(r.id,'endeavor'),d=val(r.id,'dan');return e!=null&&d!=null&&e!==d&&finalOf(r.id).fit==null}).length;var nof=D.investors.concat(D.founders).filter(function(r){return stageOf(r.id)==='Approved'}).length;
-        h+='<a href="#investors">Investors you have not rated yet<b>'+ui+'</b></a><a href="#founders">Founders you have not rated yet<b>'+uf+'</b></a>'+(isDan?'':'<a href="#investors">Where Endeavor and Dan disagree, no Final yet<b>'+dis+'</b></a><a href="#investors">Approved, not yet reached out<b>'+nof+'</b></a>')+'</div>'}}
+        h+='<a href="#investors">Investors you have not rated yet<b>'+ui+'</b></a><a href="#founders">Founders you have not rated yet<b>'+uf+'</b></a>'+(isDan?'':'<a href="#founders">Founders waiting on Dan<b>'+D.founders.filter(function(r){return val(r.id,'dan')==null}).length+'</b></a>')+''+(isDan?'':'<a href="#investors">Where Endeavor and Dan disagree, no Final yet<b>'+dis+'</b></a><a href="#investors">Approved, not yet reached out<b>'+nof+'</b></a>')+'</div>'}}
     else{h+='<p class="m-intro">The public program is on the main site; your partnership page and Thursday\'s tours are here.</p>'}
     h+='<h3 class="sec">Open questions for Dan</h3><div class="decs">';DECS.forEach(function(d){var cur=(D.decisions||{})[d.id];h+='<div class="dec"><p class="dk">'+d.k+'</p><h4>'+esc(d.t)+'</h4><p>'+esc(d.p)+'</p><ul>'+d.b.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'+(ME.role==='admin'?'<textarea data-dec="'+d.id+'" placeholder="Dan\'s call, or anyone\'s view">'+esc(cur?cur.body:'')+'</textarea><div class="dmeta">'+(cur?esc(cur.by)+' · '+when(cur.at)+' · ':'')+'saves when you click away</div>':(cur?'<p class="fnote">'+esc(cur.body)+'</p>':''))+'</div>'});h+='</div>';
     var seen=localStorage.getItem('mb_seen_'+ME.name);var ch=[];Object.keys(FIT).forEach(function(id){Object.keys(FIT[id]).forEach(function(c){var f=FIT[id][c];if(f.by!==ME.name&&(!seen||f.at>seen)){var r=BYID[id];if(r)ch.push('<li><b>'+esc(f.by)+'</b> rated '+esc(r.n||r.c)+' '+(f.v!=null?f.v+' · '+FITW[f.v]:'cleared')+'</li>')}})});

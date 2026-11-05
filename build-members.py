@@ -37,6 +37,9 @@ app = app[:i0] + open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '
 # the three sub-tabs are gone
 app = re.sub(r"  group\(\[document\.getElementById\('t-ishort'\)[^\n]*\n(  document\.getElementById\('t-i[a-z]+'\)[^\n]*\n){3}", "", app)
 assert "t-ishort" not in app.split('function buildDoc')[0], 'sub-tab code still there'
+# founders: plain list render
+j0 = app.index('  function stars(r){'); j1 = app.index('  /* speakers */')
+app = app[:j0] + open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build', 'fdr-render.js'), encoding='utf-8').read() + app[j1:]
 for must in ("window.__showTop=showTop", "window.__saveBudget(S)", "window.__ME.role", "window.__S=S"):
     assert must in app, 'app patch failed: ' + must
 assert "t-along" not in app.split('function buildDoc')[0]
