@@ -4,11 +4,11 @@
   function typeWords(r){ if(isCO(r)) return 'Colorado fund'; return {VC:'venture fund',CVC:'corporate investor',Anchor:'strategic buyer','Growth/PE':'growth fund','Sovereign/Family office':'family office'}[r.t]||r.t; }
   function firstSentence(t){ t=(t||'').trim(); var m=t.match(/^.*?[.!?](\s|$)/); return m?m[0].trim():t; }
   function shortPath(t){ t=(t||'').trim(); var cut=t.split(/\s*\|\s*/)[0]; if(cut.length>150) cut=cut.slice(0,148).replace(/\s+\S*$/,'')+'\u2026'; return cut; }
-  function money(r){ return r.aum?('$'+(r.aum>=1000?(r.aum/1000).toFixed(r.aum>=10000?0:1)+'B':Math.round(r.aum)+'M')+' under management'):''; }
+  function aumTxt(r){ return r.aum?('$'+(r.aum>=1000?(r.aum/1000).toFixed(r.aum>=10000?0:1)+'B':Math.round(r.aum)+'M')+' under management'):''; }
   function row(r,i){
     var cp=caps(r);
     var h='<div class="irow" data-n="'+esc(r.n)+'" data-type="'+invTypeOf(r)+'">';
-    h+='<div class="ir1"><span class="rk">'+(i+1)+'</span><span class="nm">'+esc(r.n)+'</span><span class="meta">'+(r.hq?esc(r.hq)+' · ':'')+typeWords(r)+(money(r)?' · '+money(r):'')+'</span></div>';
+    h+='<div class="ir1"><span class="rk">'+(i+1)+'</span><span class="nm">'+esc(r.n)+'</span><span class="meta">'+(r.hq?esc(r.hq)+' · ':'')+typeWords(r)+(aumTxt(r)?' · '+aumTxt(r):'')+'</span></div>';
     h+='<p class="irwhy">'+esc(firstSentence(r.why))+'</p>';
     h+='<p class="irpath">'+(r.zp||r.warm?'<b>Reach them through:</b> '+esc(r.zp||'')+(r.zp&&r.warm?' <span class="sep">·</span> ':'')+esc(shortPath(r.warm)):'<span class="nowarm">No warm path yet</span>')+(r.op?'<span class="op">'+esc(r.op)+'</span>':'')+'</p>';
     h+='<div class="irfit"></div>';

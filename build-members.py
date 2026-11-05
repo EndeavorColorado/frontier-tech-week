@@ -53,7 +53,7 @@ header = '''<header class="mh" id="mh">
     <button class="mh-menu" id="mhMenu" aria-expanded="false" aria-controls="mhNav">Menu</button>
     <nav class="mh-nav" id="mhNav" aria-label="Site">
       <a href="/frontier-tech-summit/#attend">Who Attends</a><a href="/frontier-tech-summit/#frontiers">Frontiers</a><a href="/frontier-tech-summit/#program">Program</a><a href="/frontier-tech-summit/#boulder">Boulder</a><a href="/frontier-tech-summit/#partners">Partners</a>
-      <span class="mh-mem" id="mhMem"><a class="mh-pill" href="/frontier-tech-summit/members/#home" aria-current="page" aria-haspopup="true" aria-expanded="false">Members <i>&#9662;</i></a><span class="mh-dd"><a href="#home">Home</a><a href="#investors">Investors</a><a href="#founders">Founders</a><a href="#program">Program</a><a href="#budget">Budget</a><a href="#settings" id="ddSettings" hidden>Settings</a><a href="/frontier-tech-summit/review/" id="ddReview" hidden>Review the site</a><a href="#" id="ddOut" class="dd-out">Sign out</a></span></span>
+      <span class="mh-mem" id="mhMem"><a class="mh-pill" href="/frontier-tech-summit/members/#home" aria-current="page" aria-haspopup="true" aria-expanded="false">Members <i>&#9662;</i></a><span class="mh-dd"><span class="dd-who">Logged in as <b id="ddMe"></b></span><a href="#home">Home</a><a href="#investors">Investors</a><a href="#founders">Founders</a><a href="#program">Program</a><a href="#budget">Budget</a><a href="#settings" id="ddSettings" hidden>Settings</a><a href="/frontier-tech-summit/review/" id="ddReview" hidden>Review the site</a><a href="#" id="ddHelp">How this works</a><a href="#" id="ddOut" class="dd-out">Sign out</a></span></span>
     </nav>
   </div>
 </header>
@@ -67,7 +67,7 @@ header = '''<header class="mh" id="mh">
   <button role="tab" id="mhSettings" aria-selected="false" hidden>Settings</button>
   <a role="tab" id="mhReview" href="/frontier-tech-summit/review/" hidden style="display:none">Review the site</a>
 </div>
-<div class="mbar-r"><span class="prog" id="mbProg"></span><span class="who">Logged in as <b id="mhMe"></b></span><span class="role" id="mbRole"></span><button id="mhOut">Sign out</button><button class="helpb" id="mhHelp" title="How this works">?</button></div>
+<div class="mbar-r" hidden><span class="prog" id="mbProg"></span><span class="who">Logged in as <b id="mhMe"></b></span><span class="role" id="mbRole"></span><button id="mhOut">Sign out</button><button class="helpb" id="mhHelp" title="How this works">?</button></div>
 </div></div>'''
 s = s[:hdr_start] + header + s[hdr_end:]
 # the Endeavor wordmark paths from the public site
