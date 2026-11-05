@@ -1,4 +1,4 @@
-<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Members · Endeavor Frontier Tech Summit</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/frontier-tech-summit/assets/favicon.svg"><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=0e89792"></head><body>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Members · Endeavor Frontier Tech Summit</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/frontier-tech-summit/assets/favicon.svg"></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
 <style id="css">
@@ -239,7 +239,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 .frow .of .usr.solo{margin-top:0;font-size:12px;letter-spacing:.06em}.frow .of .usr{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.04em;color:var(--label);line-height:1.4}
 .fdr-foot p{margin:0 0 6px}
 @media (max-width:560px){.frow{grid-template-columns:1fr}.frow .sx{flex-direction:row;flex-wrap:wrap;gap:10px}}
-</style>
+</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=0ec382f">
 
 <div class="wrap">
 <header class="mh" id="mh">
@@ -249,13 +249,10 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
     <nav class="mh-nav" id="mhNav" aria-label="Site">
       <a href="/frontier-tech-summit/#attend">Who Attends</a><a href="/frontier-tech-summit/#frontiers">Frontiers</a><a href="/frontier-tech-summit/#program">Program</a><a href="/frontier-tech-summit/#boulder">Boulder</a><a href="/frontier-tech-summit/#partners">Partners</a>
       <a class="mh-pill" href="/frontier-tech-summit/members/" aria-current="page">Members</a>
-      <div class="mh-acct" id="mhAcct" hidden><button class="mh-me" id="mhMe" aria-haspopup="true" aria-expanded="false"></button><div class="mh-drop" id="mhDrop"><button id="mhSettings" hidden>Settings</button><a href="/frontier-tech-summit/review/" id="mhReview" hidden>Review the site</a><button id="mhHelp">How this works</button><button id="mhOut">Sign out</button></div></div>
     </nav>
   </div>
 </header>
-<p class="stamp"><i></i>Members only &middot; not public</p>
-
-
+<div class="mbar" id="mbar" hidden><div class="mbar-in">
 <div class="tabs top" role="tablist">
   <button role="tab" id="t-home" aria-selected="true">Home</button>
   <button role="tab" id="t-inv" aria-selected="false">Investors</button>
@@ -263,7 +260,14 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   <button role="tab" id="t-spk" aria-selected="false">Speakers</button>
   <button role="tab" id="t-tours" aria-selected="false">Tours</button>
   <button role="tab" id="t-budget" aria-selected="false">Budget</button>
+  <button role="tab" id="mhSettings" aria-selected="false" hidden>Settings</button>
+  <a role="tab" id="mhReview" href="/frontier-tech-summit/review/" hidden style="display:none">Review the site</a>
 </div>
+<div class="mbar-r"><span class="prog" id="mbProg"></span><span class="who">Logged in as <b id="mhMe"></b></span><span class="role" id="mbRole"></span><button id="mhOut">Sign out</button><button class="helpb" id="mhHelp" title="How this works">?</button></div>
+</div></div>
+
+
+
 
 <div id="pane-home" role="tabpanel"><div class="card" id="home-body"></div></div>
 
@@ -812,5 +816,5 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 })();
 };</script>
 
-<script src="/frontier-tech-summit/assets/members.js?v=0e89792"></script>
+<script src="/frontier-tech-summit/assets/members.js?v=0ec382f"></script>
 </body></html>

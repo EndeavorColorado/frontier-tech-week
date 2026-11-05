@@ -9,7 +9,7 @@ v = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True,
 # 1. unwrap the artifact host shell: keep from the inner doctype
 i = s.index('<!doctype html><html lang="en">')
 s = s[i:]
-s = s.replace('<html lang="en">', '<html lang="en" data-theme="dark">', 1)
+s = s.replace('<html lang="en">', '<html lang="en" data-theme="light">', 1)
 s = s.replace('<title>Frontier Tech Week Plan</title>', '<title>Members · Endeavor Frontier Tech Summit</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/frontier-tech-summit/assets/favicon.svg">', 1)
 # fonts: site fonts
 s = re.sub(r'<link rel="stylesheet" href="https://fonts.googleapis.com/css2\?family=Playfair[^"]*">',
@@ -45,11 +45,22 @@ header = '''<header class="mh" id="mh">
     <nav class="mh-nav" id="mhNav" aria-label="Site">
       <a href="/frontier-tech-summit/#attend">Who Attends</a><a href="/frontier-tech-summit/#frontiers">Frontiers</a><a href="/frontier-tech-summit/#program">Program</a><a href="/frontier-tech-summit/#boulder">Boulder</a><a href="/frontier-tech-summit/#partners">Partners</a>
       <a class="mh-pill" href="/frontier-tech-summit/members/" aria-current="page">Members</a>
-      <div class="mh-acct" id="mhAcct" hidden><button class="mh-me" id="mhMe" aria-haspopup="true" aria-expanded="false"></button><div class="mh-drop" id="mhDrop"><button id="mhSettings" hidden>Settings</button><a href="/frontier-tech-summit/review/" id="mhReview" hidden>Review the site</a><button id="mhHelp">How this works</button><button id="mhOut">Sign out</button></div></div>
     </nav>
   </div>
 </header>
-<p class="stamp"><i></i>Members only &middot; not public</p>'''
+<div class="mbar" id="mbar" hidden><div class="mbar-in">
+<div class="tabs top" role="tablist">
+  <button role="tab" id="t-home" aria-selected="true">Home</button>
+  <button role="tab" id="t-inv" aria-selected="false">Investors</button>
+  <button role="tab" id="t-fdr" aria-selected="false">Founders</button>
+  <button role="tab" id="t-spk" aria-selected="false">Speakers</button>
+  <button role="tab" id="t-tours" aria-selected="false">Tours</button>
+  <button role="tab" id="t-budget" aria-selected="false">Budget</button>
+  <button role="tab" id="mhSettings" aria-selected="false" hidden>Settings</button>
+  <a role="tab" id="mhReview" href="/frontier-tech-summit/review/" hidden style="display:none">Review the site</a>
+</div>
+<div class="mbar-r"><span class="prog" id="mbProg"></span><span class="who">Logged in as <b id="mhMe"></b></span><span class="role" id="mbRole"></span><button id="mhOut">Sign out</button><button class="helpb" id="mhHelp" title="How this works">?</button></div>
+</div></div>'''
 s = s[:hdr_start] + header + s[hdr_end:]
 # the Endeavor wordmark paths from the public site
 site = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'frontier-tech-summit', 'index.html'), encoding='utf-8').read()
@@ -59,14 +70,7 @@ s = s.replace('__EWM__', m.group(1) if m else '')
 # purpose card -> removed (Home carries a short version)
 s = re.sub(r'<section class="card purpose">.*?</section>\n', '', s, flags=re.S)
 # tabs in Breanna's order, Home first
-s = re.sub(r'<div class="tabs" role="tablist">.*?</div>', '''<div class="tabs top" role="tablist">
-  <button role="tab" id="t-home" aria-selected="true">Home</button>
-  <button role="tab" id="t-inv" aria-selected="false">Investors</button>
-  <button role="tab" id="t-fdr" aria-selected="false">Founders</button>
-  <button role="tab" id="t-spk" aria-selected="false">Speakers</button>
-  <button role="tab" id="t-tours" aria-selected="false">Tours</button>
-  <button role="tab" id="t-budget" aria-selected="false">Budget</button>
-</div>''', s, count=1, flags=re.S)
+s = re.sub(r'<div class="tabs" role="tablist">.*?</div>', '', s, count=1, flags=re.S)
 # agenda pane -> home pane
 a0 = s.index('<div id="pane-agenda" role="tabpanel">'); a1 = s.index('<div id="pane-budget" role="tabpanel" hidden>')
 s = s[:a0] + '<div id="pane-home" role="tabpanel"><div class="card" id="home-body"></div></div>\n\n' + s[a1:]
@@ -77,7 +81,8 @@ s = s.replace('<footer>', '''<div id="pane-settings" role="tabpanel" hidden><div
 s = s.replace('Draft, October 2026 &middot; Brackets are placeholders &middot; Nothing is contracted &middot; Invitation only',
               'Members area &middot; Nothing here is public &middot; Ratings and notes save on their own')
 # 4. our CSS + JS
-i = s.index('</head>'); s = s[:i] + '<link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=%s">' % v + s[i:]
+# after the plan page's own <style> (which sits in <body>), so ours wins on equal specificity
+i = s.index('</style>', s.index('<style id="css">')) + len('</style>'); s = s[:i] + '<link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=%s">' % v + s[i:]
 i = s.rindex('</body>')  # the app's buildDoc() string also contains '</body>'
 s = s[:i] + '<script src="/frontier-tech-summit/assets/members.js?v=%s"></script>\n' % v + s[i:]
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'frontier-tech-summit', 'members', 'index.html')
