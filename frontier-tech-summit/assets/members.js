@@ -19,10 +19,13 @@
 
   /* ---------- gate ---------- */
   function gate(msg){
-    document.body.insertAdjacentHTML('beforeend','<div class="gate"><div class="gc"><h2>Members</h2><p>'+(msg||'Enter your email and we will send you your personal link.')+'</p><input type="email" id="gEmail" placeholder="you@company.com" autocomplete="email"><button id="gGo">Send my link</button><div class="gm" id="gMsg"></div></div></div>');
-    var go=document.getElementById('gGo'),em=document.getElementById('gEmail'),gm=document.getElementById('gMsg');
-    function send(){var v=em.value.trim();if(!v){em.focus();return}go.disabled=true;gm.textContent='Sending…';fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'signin',email:v})}).then(function(){gm.textContent='If that email is on the list, your link is on its way. Check your inbox (and spam).'}).catch(function(){gm.textContent='Could not send. Try again in a minute.';go.disabled=false})}
-    go.onclick=send;em.addEventListener('keydown',function(e){if(e.key==='Enter')send()});setTimeout(function(){em.focus()},50);
+    document.body.insertAdjacentHTML('beforeend','<div class="gate"><div class="gc"><p class="gk">Frontier Tech Summit</p><h2>Log In</h2><p>'+(msg||'For the host team and partners. Enter the email we have for you and we will send your personal link.')+'</p><input type="email" id="gEmail" placeholder="you@company.com" autocomplete="email"><button id="gGo">Email me my link</button><div class="gm" id="gMsg"></div><details class="gcode"><summary>Have an access code?</summary><input type="text" id="gCode" placeholder="Paste your access code" autocomplete="off"><button id="gCodeGo" class="ghost">Open</button></details><a class="gback" href="/frontier-tech-summit/">Back to the site</a></div></div>');
+    var go=document.getElementById('gGo'),em=document.getElementById('gEmail'),gm=document.getElementById('gMsg'),cd=document.getElementById('gCode');
+    function send(){var v=em.value.trim();if(!v){em.focus();return}go.disabled=true;gm.textContent='Sending\u2026';fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'signin',email:v})}).then(function(){gm.textContent='If that email is on the list, your link is on its way. Check your inbox and spam. Not there in a few minutes? Email Breanna.'}).catch(function(){gm.textContent='Could not send. Try again in a minute.';go.disabled=false})}
+    function code(){var v=cd.value.trim();var m=v.match(/[?&]t=([^&#]+)/);if(m)v=decodeURIComponent(m[1]);if(!v){cd.focus();return}localStorage.setItem('mb_t',v);location.href=location.pathname}
+    go.onclick=send;em.addEventListener('keydown',function(e){if(e.key==='Enter')send()});
+    document.getElementById('gCodeGo').onclick=code;cd.addEventListener('keydown',function(e){if(e.key==='Enter')code()});
+    setTimeout(function(){em.focus()},50);
   }
   if(!TOKEN){gate();return}
 

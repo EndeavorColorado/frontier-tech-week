@@ -126,3 +126,10 @@ tr.fitrow td{padding:4px 10px 12px;border-bottom:1px solid rgba(255,255,255,.08)
 .help ol{padding-left:20px;display:grid;gap:10px;line-height:1.5}
 .fitcol .pill{align-self:flex-start}
 @media (max-width:700px){tr.fitrow td{padding:4px 0 12px 0!important}tr.fitrow .fitbar{position:sticky;left:0;width:calc(100vw - 64px);grid-template-columns:1fr}}
+
+.gate .gk{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+.gate .gcode{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+.gate .gcode summary{cursor:pointer;font-size:13px;color:var(--body)}
+.gate .gcode input{margin-top:10px}
+.gate button.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);margin-top:8px}
+.gate .gback{display:block;margin-top:16px;font-size:13px;color:var(--muted)}
