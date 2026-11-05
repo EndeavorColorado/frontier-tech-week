@@ -239,7 +239,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 .frow .of .usr.solo{margin-top:0;font-size:12px;letter-spacing:.06em}.frow .of .usr{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.04em;color:var(--label);line-height:1.4}
 .fdr-foot p{margin:0 0 6px}
 @media (max-width:560px){.frow{grid-template-columns:1fr}.frow .sx{flex-direction:row;flex-wrap:wrap;gap:10px}}
-</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=926f5dc">
+</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=5f35480">
 
 <div class="wrap">
 <header class="mh" id="mh">
@@ -453,11 +453,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   </div>
 </div>
 <div id="pane-inv" role="tabpanel" hidden>
-  <div class="tabs sub2" role="tablist">
-    <button role="tab" id="t-ishort" aria-selected="true">Investors</button>
-    <button role="tab" id="t-ilong" aria-selected="false">Strategics</button>
-    <button role="tab" id="t-ico" aria-selected="false">Colorado</button>
-  </div>
+  
   <div class="card" id="inv-body" role="tabpanel"></div>
 </div>
 
@@ -566,10 +562,6 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   }
   var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-spk'),document.getElementById('t-tours'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-spk'),document.getElementById('pane-tours'),document.getElementById('pane-budget')],0);window.__showTop=showTop;
   var invView='inv';
-  group([document.getElementById('t-ishort'),document.getElementById('t-ilong'),document.getElementById('t-ico')],[{},{},{}],0);
-  document.getElementById('t-ishort').addEventListener('click',function(){ invView='inv'; renderInv(); });
-  document.getElementById('t-ilong').addEventListener('click',function(){ invView='str'; renderInv(); });
-  document.getElementById('t-ico').addEventListener('click',function(){ invView='co'; renderInv(); });
   
   
   group([document.getElementById('t-bshort'),document.getElementById('t-blong')],
@@ -631,43 +623,41 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   var COHQ={"Denver":1,"Boulder":1,"Louisville":1,"Broomfield":1,"Golden":1,"Fort Collins":1,"Littleton":1,"Centennial":1,"Englewood":1,"Colorado Springs":1,"Westminster":1,"Lafayette":1,"Lakewood":1,"Arvada":1,"Aurora, CO":1,"Durango":1,"Longmont":1,"Greenwood Village":1};
   function isCO(r){ var q=r.hq||''; return Object.keys(COHQ).some(function(k){ return q.indexOf(k)>-1; }); }
   function caps(r){ var txt=[r.co||'',r.warm||'',r.why||''].concat(r.deals||[]).join(' | '); var out=[]; COS.forEach(function(c){ if(new RegExp('\\b'+c.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(txt)) out.push(c); }); return out; }
+  /* investors: one ranked list, type chips, decision-first rows (members build) */
+  var invType='all';
+  function invTypeOf(r){ return (r.t==='CVC'||r.t==='Anchor')?'str':(isCO(r)?'co':'vc'); }
   function row(r,i){
-    var cv=cov(r), dots='<span class="dots">'; for(var f=0;f<6;f++){ dots+='<b class="'+(cv[f]==='p'?'p':cv[f]==='s'?'s':'')+'" style="--fc:'+fc(f)+'" title="'+FR[f]+'"></b>'; } dots+='</span>';
-    var cp=caps(r);
-    var tg=(r.zb?'<span class="st">Bench</span>':'')+(r.rel?'<span class="tier '+(r.rel==='Warm'?'t1':r.rel==='Known'?'t2':'t3')+'">'+esc(r.rel)+'</span>':'');
-    return '<tr><td class="rk">'+(i+1)+'</td><td class="nm">'+esc(r.n)+'<small>'+esc(r.t)+(r.hq?' · '+esc(r.hq):'')+'</small>'+dots+(tg?'<span class="tg" style="margin-top:6px">'+tg+'</span>':'')+'</td>'+
-      '<td class="num hide">'+(r.aum?('$'+(r.aum>=1000?(r.aum/1000).toFixed(r.aum>=10000?0:1)+'B':Math.round(r.aum)+'M')):'—')+'</td>'+
-      '<td class="why">'+esc(r.why||'')+(r.zp?'<span class="wp" style="color:var(--ink)">Invite: '+esc(r.zp)+'</span>':'')+(r.warm?'<span class="wp">'+esc(r.warm)+'</span>':'')+(r.op?'<span class="wp" style="color:var(--warn)">'+esc(r.op)+'</span>':'')+(r.deals&&r.deals.length?'<span class="wp" style="color:var(--muted)">'+r.deals.slice(0,2).map(esc).join(' · ')+'</span>':'')+(cp.length?'<span class="caps">'+cp.map(function(c){return '<span>'+esc(c)+'</span>';}).join('')+'</span>':'')+'</td></tr>';
+    var cv=cov(r), dots='<span class="dots">'; for(var f=0;f<6;f++){ dots+='<b class="'+(cv[f]==='p'?'p':cv[f]==='s'?'s':'')+'" style="--fc:'+fc(f)+'" title="'+FR[f]+(cv[f]==='p'?' · core':cv[f]==='s'?' · also active':'')+'"></b>'; } dots+='</span>';
+    var cp=caps(r), aum=r.aum?('$'+(r.aum>=1000?(r.aum/1000).toFixed(r.aum>=10000?0:1)+'B':Math.round(r.aum)+'M')):'';
+    var tl=invTypeOf(r)==='str'?'Strategic':invTypeOf(r)==='co'?'Colorado':'Venture';
+    var h='<div class="irow" data-n="'+esc(r.n)+'" data-type="'+invTypeOf(r)+'">';
+    h+='<div class="ir1"><span class="rk">'+(i+1)+'</span><span class="nm">'+esc(r.n)+'</span><span class="meta">'+esc(r.t)+(r.hq?' · '+esc(r.hq):'')+(aum?' · '+aum:'')+'</span>'+dots+(r.zb?'<span class="st">Bench</span>':'')+(r.zp?'<span class="inv">Invite: '+esc(r.zp)+'</span>':'')+'</div>';
+    h+='<div class="ir2">'+(r.warm?'<b>Warm path</b> '+esc(r.warm):'<span class="nowarm">No warm path yet</span>')+(r.op?'<span class="op">'+esc(r.op)+'</span>':'')+'</div>';
+    h+='<div class="irfit"></div>';
+    h+='<details class="irx"'+(i<20?' open':'')+'><summary>Why they matter · deals · cap table</summary><div class="irxb">'+(r.why?'<p>'+esc(r.why)+'</p>':'')+(r.deals&&r.deals.length?'<p class="deals">'+r.deals.slice(0,3).map(esc).join(' · ')+'</p>':'')+(cp.length?'<span class="caps">'+cp.map(function(c){return '<span>'+esc(c)+'</span>';}).join('')+'</span>':'')+'</div></details>';
+    return h+'</div>';
   }
-  function table(rows){
-    var h='<div class="scroll"><table class="inv"><thead><tr><th></th><th>Firm · Frontiers</th><th class="num hide">AUM</th><th>Why they matter · warm path · on the cap table</th></tr></thead><tbody>';
-    rows.forEach(function(r,i){ h+=row(r,i); }); return h+'</tbody></table></div>';
-  }
+  function table(rows){ var h='<div class="ilist">'; rows.forEach(function(r,i){ h+=row(r,i); }); return h+'</div>'; }
   function renderInv(){
     var rank=function(a,b){ return (b.score-a.score)||(span(b)-span(a))||((b.aum||0)-(a.aum||0)); };
-    var h='';
-    var filt=function(r){ return (invFilter===null || cov(r)[invFilter]) && (!invZ || r.z) && qhit(invQ,[r.n,r.who||'',r.zp||'',r.why||'',r.hq||'',(r.deals||[]).join(' ')]); };
-    h+='<div class="chips chips3" style="max-width:none;grid-template-columns:repeat(7,auto);justify-content:start">'; for(var i=0;i<6;i++){ h+='<button class="chip" data-f="'+i+'" aria-pressed="'+(invFilter===i)+'" style="--fc:'+fc(i)+'"><i></i>'+FRS[i]+'</button>'; } h+='<button class="chip" data-f="all" aria-pressed="'+(invFilter===null)+'">All</button></div>';
-    h+='<input type="search" id="inv-q" class="qbox" placeholder="Search firm, person or portfolio company" value="'+esc(invQ)+'" aria-label="Search investors" style="margin:0 0 10px">';
-    h+='<div class="legend"><span><b class="p"></b>Core Frontier</span><span><b></b>Also active</span><span><b class="o"></b>Not active</span></div>';
-    if(invView==='inv'){
-      var rows=INV.filter(function(r){ return r.t!=='CVC' && r.t!=='Anchor' && !isCO(r) && filt(r); }).sort(rank);
-      h+='<h3 class="sec">Investors, ranked</h3><p class="lede">'+rows.length+' funds outside Colorado, one list, best first. Score is capital weight, verified 2025 to 2026 frontier deals, ability to lead a $10M+ round and a warm path through our companies. The dots are the Frontiers each fund covers.</p>';
-      h+=table(rows);
-    } else if(invView==='str'){
-      var rows=INV.filter(function(r){ return (r.t==='CVC'||r.t==='Anchor') && filt(r); }).sort(rank);
-      h+='<h3 class="sec">Strategics and buyers, ranked</h3><p class="lede">'+rows.length+' corporate venture arms, primes, labs and Colorado anchors, best first. These are the seats that turn a meeting into a pilot or a purchase order.</p>';
-      h+=table(rows);
-    } else {
-      var rows=INV.filter(function(r){ return isCO(r) && filt(r); }).sort(rank);
-      h+='<h3 class="sec">Colorado investors</h3><p class="lede">'+rows.length+' Front Range funds, best first. Our own doors; lower priority than the lists above because we can reach them without help.</p>';
-      h+=table(rows);
-    }
-    h+='<p style="margin:28px 0 0;font-size:13.5px;color:var(--muted)">Public titles and company names only. Research input for human judgment, October 2026; about forty percent of fund sizes still want a confirming link.</p>';
-    document.getElementById('inv-body').innerHTML=h;
-    var root=document.getElementById('inv-body');
-    root.querySelectorAll('.chip[data-f]').forEach(function(b){ b.addEventListener('click',function(){ var f=b.dataset.f; invFilter=(f==='all'||invFilter===+f)?null:+f; renderInv(); }); });
-    root.querySelector('#inv-q').addEventListener('input',function(e){ invQ=e.target.value; renderInv(); var n=document.getElementById('inv-q'); n.focus(); n.setSelectionRange(invQ.length,invQ.length); });
+    var filt=function(r){ return (invFilter===null || cov(r)[invFilter]) && qhit(invQ,[r.n,r.who||'',r.zp||'',r.why||'',r.hq||'',(r.deals||[]).join(' ')]); };
+    var base=INV.filter(filt).sort(rank);
+    // Colorado funds rank after the national lists: our own doors
+    base=base.filter(function(r){return invTypeOf(r)!=='co'}).concat(base.filter(function(r){return invTypeOf(r)==='co'}));
+    var n={all:base.length,vc:0,str:0,co:0}; base.forEach(function(r){ n[invTypeOf(r)]++; });
+    var rows=invType==='all'?base:base.filter(function(r){return invTypeOf(r)===invType});
+    var h='<div class="ihead"><div class="itypes">';
+    [['all','All'],['vc','Venture'],['str','Strategics & buyers'],['co','Colorado']].forEach(function(t){ h+='<button class="chip" data-t="'+t[0]+'" aria-pressed="'+(invType===t[0])+'">'+t[1]+' <i>'+n[t[0]]+'</i></button>'; });
+    h+='</div><div class="ifr">'; for(var i=0;i<6;i++){ h+='<button class="chip fr" data-f="'+i+'" aria-pressed="'+(invFilter===i)+'" style="--fc:'+fc(i)+'" title="'+FR[i]+'"><i></i>'+FRS[i]+'</button>'; }
+    h+='</div><input type="search" id="inv-q" class="qbox" placeholder="Search firm, person or portfolio company" value="'+esc(invQ)+'" aria-label="Search investors"></div>';
+    h+='<div id="inv-funnel"></div>';
+    h+='<p class="ilede">Best first. Score is capital weight, verified 2025 to 2026 frontier deals, ability to lead $10M+, and a warm path through our companies.</p>';
+    h+=table(rows);
+    h+='<p class="ifoot">Public titles and company names only. Research input for human judgment, October 2026.</p>';
+    var root=document.getElementById('inv-body'); root.innerHTML=h;
+    root.querySelectorAll('.chip[data-t]').forEach(function(b){ b.addEventListener('click',function(){ invType=b.dataset.t; renderInv(); }); });
+    root.querySelectorAll('.chip[data-f]').forEach(function(b){ b.addEventListener('click',function(){ var f=+b.dataset.f; invFilter=(invFilter===f)?null:f; renderInv(); }); });
+    root.querySelector('#inv-q').addEventListener('input',function(e){ invQ=e.target.value; renderInv(); var q=document.getElementById('inv-q'); q.focus(); q.setSelectionRange(invQ.length,invQ.length); });
   }
   dark.addEventListener&&dark.addEventListener('change',renderInv);
   renderInv();
@@ -816,5 +806,5 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 })();
 };</script>
 
-<script src="/frontier-tech-summit/assets/members.js?v=926f5dc"></script>
+<script src="/frontier-tech-summit/assets/members.js?v=5f35480"></script>
 </body></html>

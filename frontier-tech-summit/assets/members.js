@@ -19,7 +19,9 @@
   }
   if(hp.get('error_description')){history.replaceState(null,'',location.pathname);gate('Google sign-in did not finish: '+esc(hp.get('error_description')));return}
   var D=null, ME=null, FIT={}, FINAL={}, BYID={}, VIEW={inv:'mine',fdr:'mine'};
-  var STAGES=['Identified','Evaluating','Approved to invite','Invited','Interested, dates tentative','Confirmed','Do not invite','Declined'];
+  var STAGES=['Approved','Reached out','In conversation','Soft yes','Confirmed','Declined','Do not invite'];
+  var FUNNEL=['Unrated','Rated','Approved','Reached out','In conversation','Soft yes','Confirmed','Out'];
+  var MODE={inv:localStorage.getItem('mb_mode_inv')||'work',fdr:localStorage.getItem('mb_mode_fdr')||'work'};var STAGE={inv:'all',fdr:'all'};var CUR={inv:null,fdr:null};
   var FITW={5:'Very High',4:'High',3:'Medium-High',2:'Medium',1:'Low',0:'Do not invite'};
   var DEFS=[[5,'Very High','We would change the agenda to get them'],[4,'High','Invite in the first wave'],[3,'Medium-High','Invite if there is room'],[2,'Medium','Only if they ask'],[1,'Low','No real fit'],[0,'Do not invite','A reason not to have them in the room']];
 
@@ -78,24 +80,24 @@
   document.querySelectorAll('.tabs.top button').forEach(function(b){b.addEventListener('click',function(){var m={'t-home':'#home','t-inv':'#investors','t-fdr':'#founders','t-spk':'#speakers','t-tours':'#tours','t-budget':'#budget'};if(!m[b.id])return;history.replaceState(null,'',m[b.id]);document.getElementById('pane-settings').hidden=true;document.getElementById('mhSettings').setAttribute('aria-selected','false');window.scrollTo(0,0)})});
 
   /* ---------- Fit ---------- */
-  function pid(el,kind){var nm=el.querySelector(kind==='inv'?'td.nm':'.co');if(!nm)return null;var t='';for(var i=0;i<nm.childNodes.length;i++){if(nm.childNodes[i].nodeType===3)t+=nm.childNodes[i].textContent}t=t.trim();var r=BYID[(kind==='inv'?'n:':'c:')+t];return r?r.id:null}
+  function pid(el,kind){var t='';if(kind==='inv'){t=el.getAttribute('data-n')||''}else{var nm=el.querySelector('.co');if(!nm)return null;for(var i=0;i<nm.childNodes.length;i++){if(nm.childNodes[i].nodeType===3)t+=nm.childNodes[i].textContent}}t=t.trim();var r=BYID[(kind==='inv'?'n:':'c:')+t];return r?r.id:null}
   function val(id,col){var f=FIT[id]&&FIT[id][col];return f&&f.v!=null?f.v:null}
   function finalOf(id){return FINAL[id]||{}}
+  function stageOf(id){var f=finalOf(id);if(f.stage==='Declined'||f.stage==='Do not invite'||f.fit===0)return 'Out';if(f.stage)return f.stage;if(f.fit!=null)return f.fit>=4?'Approved':'Rated';if(val(id,'endeavor')!=null||val(id,'dan')!=null)return 'Rated';return 'Unrated'}
   function pill(v,extra){if(v==null)return '<span class="pill none">not rated</span>';return '<span class="pill f'+v+(extra||'')+'">'+v+' · '+FITW[v]+'</span>'}
+  function chips(attr,v){var h='<div class="chips5">';[1,2,3,4,5].forEach(function(n){h+='<button '+attr+'="'+n+'" class="'+(v===n?'on':'')+'" title="'+FITW[n]+'">'+n+'</button>'});return h+'<button '+attr+'="0" class="no'+(v===0?' on':'')+'" title="Do not invite">No</button></div>'}
   function fitHTML(id){
     var mine=ME.column, canRate=ME.role==='admin';
     var e=val(id,'endeavor'), d=val(id,'dan'), f=finalOf(id);
     var agree=(e!=null&&e===d);
-    function col(label,key,v){var h='<div class="fitcol"><div class="fk">'+label+'</div>';
-      if(canRate&&mine===key){h+='<div class="chips5">';[5,4,3,2,1].forEach(function(n){h+='<button data-fit="'+n+'" class="'+(v===n?'on':'')+'" title="'+FITW[n]+'">'+n+'</button>'});h+='<button data-fit="0" class="no'+(v===0?' on':'')+'" title="Do not invite">No</button></div>'}
-      else h+=pill(v,agree&&v!=null?' agree':'');
+    function col(label,key,v){var h='<div class="fitcol'+(mine===key?' mine':'')+'"><div class="fk">'+label+(mine===key?' <b>you</b>':'')+'</div>';
+      if(canRate&&mine===key)h+=chips('data-fit',v);else h+=pill(v,agree&&v!=null?' agree':'');
       return h+'</div>'}
     var h='<div class="fitbar" data-fid="'+id+'">';
     h+=col('Endeavor','endeavor',e);
     h+=col('Dan','dan',d);
-    // Final
     h+='<div class="fitcol"><div class="fk">Final'+(f.by?' <b>'+esc(f.by)+' · '+when(f.at)+'</b>':'')+'</div>';
-    if(f.fit!=null||f.stage||f.owner){h+='<div class="finalctl">'+pill(f.fit)+(f.stage?'<span class="pill">'+esc(f.stage)+'</span>':'')+(f.owner?'<span class="pill">→ '+esc(f.owner)+'</span>':'')+(canRate?'<button class="edit" data-final="1">Edit</button>':'')+'</div>'+(f.note?'<div class="fnote">'+esc(f.note)+'</div>':'')}
+    if(f.fit!=null||f.stage){h+='<div class="finalctl">'+pill(f.fit)+'<span class="pill stg">'+esc(stageOf(id))+'</span>'+(canRate?'<button class="edit" data-final="1">Edit</button>':'')+'</div>'+(f.note?'<div class="fnote">'+esc(f.note)+'</div>':'')}
     else if(canRate){h+='<div class="finalctl">'+(agree?'<span class="pill f'+e+'">Both say '+e+' · '+FITW[e]+'</span>':'<span class="pill none">not set</span>')+'<button class="edit" data-final="1">'+(agree?'Confirm':'Set')+'</button></div>'}
     else h+=pill(null);
     return h+'</div></div>';
@@ -103,40 +105,54 @@
   function fillFit(el){var id=el.getAttribute('data-fid');el.outerHTML=fitHTML(id)}
   function augment(root,kind){
     if(!D.investors)return;
-    if(kind==='inv'){root.querySelectorAll('table.inv tbody tr:not(.fitrow)').forEach(function(tr){if(tr.nextElementSibling&&tr.nextElementSibling.classList.contains('fitrow'))return;var id=pid(tr,'inv');if(!id)return;tr.setAttribute('data-pid',id);var fr=E('tr','fitrow','<td colspan="4">'+fitHTML(id)+'</td>');tr.parentNode.insertBefore(fr,tr.nextSibling)})}
+    if(kind==='inv'){root.querySelectorAll('.irow').forEach(function(row){var slot=row.querySelector('.irfit');if(!slot||slot.firstChild)return;var id=pid(row,'inv');if(!id)return;row.setAttribute('data-pid',id);slot.innerHTML=fitHTML(id)})}
     else{root.querySelectorAll('.frow').forEach(function(row){if(row.querySelector('.fitbar'))return;var id=pid(row,'fdr');if(!id)return;row.setAttribute('data-pid',id);var fb=E('div','fitwrap',fitHTML(id));fb.style.gridColumn='1 / -1';row.appendChild(fb)})}
     viewbar(root,kind);applyView(root,kind);
   }
+  function rate(id,v){var cur=val(id,ME.column);var nv=(cur===v)?null:v;
+    FIT[id]=FIT[id]||{};FIT[id][ME.column]={v:nv,by:ME.name,at:new Date().toISOString()};var bar=document.querySelector('.fitbar[data-fid="'+id+'"]');if(bar)fillFit(bar);
+    api('POST',{action:'rate',id:id,fit:nv}).then(function(){toast(nv==null?'Cleared':'Saved: '+(nv===0?'Do not invite':nv+' · '+FITW[nv]));updateProg()}).catch(function(){toast('Did not save. Tap again.');FIT[id][ME.column]={v:cur,by:ME.name,at:''};var el=document.querySelector('.fitbar[data-fid="'+id+'"]');if(el)fillFit(el)})}
   document.addEventListener('click',function(e){
-    var b=e.target.closest('[data-fit]');if(b){var bar=b.closest('.fitbar'),id=bar.getAttribute('data-fid');var v=+b.getAttribute('data-fit');var cur=val(id,ME.column);var nv=(cur===v)?null:v;
-      FIT[id]=FIT[id]||{};FIT[id][ME.column]={v:nv,by:ME.name,at:new Date().toISOString()};fillFit(bar);
-      api('POST',{action:'rate',id:id,fit:nv}).then(function(){toast(nv==null?'Cleared':'Saved: '+FITW[nv]);updateProg()}).catch(function(){toast('Did not save. Tap again.');FIT[id][ME.column]={v:cur,by:ME.name,at:''};var el=document.querySelector('[data-fid="'+id+'"]');if(el)fillFit(el)});return}
+    var b=e.target.closest('[data-fit]');if(b){var id=b.closest('.fitbar').getAttribute('data-fid');rate(id,+b.getAttribute('data-fit'));setCur(b.closest('[data-pid]'));return}
     var fb=e.target.closest('[data-final]');if(fb){editFinal(fb.closest('.fitbar'));return}
+    var row=e.target.closest('[data-pid]');if(row&&!e.target.closest('a,button,input,select,summary'))setCur(row);
   });
   function editFinal(bar){var id=bar.getAttribute('data-fid'),f=finalOf(id),e=val(id,'endeavor'),d=val(id,'dan');var def=f.fit!=null?f.fit:(e!=null&&e===d?e:(e!=null?e:d));
-    var h='<div class="fitcol" style="grid-column:1/-1"><div class="fk">Final</div><div class="finalctl"><div class="chips5">';[5,4,3,2,1].forEach(function(n){h+='<button data-ff="'+n+'" class="'+(def===n?'on':'')+'">'+n+'</button>'});h+='<button data-ff="0" class="no'+(def===0?' on':'')+'">No</button></div>';
-    h+='<select data-fs>'+['<option value="">Stage…</option>'].concat(STAGES.map(function(s){return '<option'+(f.stage===s?' selected':'')+'>'+s+'</option>'})).join('')+'</select><input data-fo placeholder="Owner (who reaches out)" value="'+esc(f.owner||'')+'"><input data-fn placeholder="Note" value="'+esc(f.note||'')+'" style="max-width:260px"><button class="edit" data-fsave>Save</button><button class="edit" data-fcancel>Cancel</button>'+(f.fit!=null||f.stage?'<button class="edit" data-fclear>Clear</button>':'')+'</div></div>';
+    var h='<div class="fitcol" style="grid-column:1/-1"><div class="fk">Final</div><div class="finalctl">'+chips('data-ff',def);
+    h+='<select data-fs>'+['<option value="">Stage…</option>'].concat(STAGES.map(function(s){return '<option'+(f.stage===s?' selected':'')+'>'+s+'</option>'})).join('')+'</select><input data-fn placeholder="Note" value="'+esc(f.note||'')+'" style="max-width:260px"><button class="edit" data-fsave>Save</button><button class="edit" data-fcancel>Cancel</button>'+(f.fit!=null||f.stage?'<button class="edit" data-fclear>Clear</button>':'')+'</div></div>';
     bar.innerHTML=h;var sel=def;bar.querySelectorAll('[data-ff]').forEach(function(b){b.onclick=function(){sel=+b.getAttribute('data-ff');bar.querySelectorAll('[data-ff]').forEach(function(x){x.classList.toggle('on',x===b)})}});
     bar.querySelector('[data-fcancel]').onclick=function(){fillFit(bar)};
-    var cl=bar.querySelector('[data-fclear]');if(cl)cl.onclick=function(){delete FINAL[id];fillFit(bar);api('POST',{action:'final',id:id,fit:'',stage:'',owner:'',note:''}).then(function(){toast('Final cleared');renderHome()}).catch(function(){toast('Did not save. Try again.')})};
-    bar.querySelector('[data-fsave]').onclick=function(){var data={fit:sel,stage:bar.querySelector('[data-fs]').value,owner:bar.querySelector('[data-fo]').value.trim(),note:bar.querySelector('[data-fn]').value.trim()};FINAL[id]=Object.assign({},data,{by:ME.name,at:new Date().toISOString()});fillFit(bar);api('POST',Object.assign({action:'final',id:id},data)).then(function(){toast('Final saved');renderHome()}).catch(function(){toast('Did not save. Try again.')})};
+    var cl=bar.querySelector('[data-fclear]');if(cl)cl.onclick=function(){delete FINAL[id];fillFit(bar);api('POST',{action:'final',id:id,fit:'',stage:'',owner:'',note:''}).then(function(){toast('Final cleared');renderHome();updateProg()}).catch(function(){toast('Did not save. Try again.')})};
+    bar.querySelector('[data-fsave]').onclick=function(){var data={fit:sel,stage:bar.querySelector('[data-fs]').value,owner:f.owner||'',note:bar.querySelector('[data-fn]').value.trim()};FINAL[id]=Object.assign({},data,{by:ME.name,at:new Date().toISOString()});fillFit(bar);api('POST',Object.assign({action:'final',id:id},data)).then(function(){toast('Final saved');renderHome();updateProg()}).catch(function(){toast('Did not save. Try again.')})};
   }
-  /* views */
-  function viewbar(root,kind){if(root.querySelector('.viewbar'))return;var first=root.querySelector('.chips, .tb-head, h3.sec');var vb=E('div','viewbar','<div class="vb"><button data-v="mine">My ratings</button><button data-v="cmp">Compare</button><button data-v="final">Final</button></div><div class="prog"></div>');
-    var defs=E('div','fitdefs',DEFS.map(function(d){return '<span><b>'+d[0]+' '+d[1]+'</b>'+d[2]+'</span>'}).join(''));
-    var intro=E('p','m-intro',kind==='inv'?'<b>Investors.</b> Who we are inviting from the capital side, and how strongly. Tap a number in your column; it saves on its own.':'<b>Founders.</b> Who we are flying in. Stars are the research draw; the numbers are our call.');
-    root.insertBefore(intro,root.firstChild);root.insertBefore(vb,intro.nextSibling);root.insertBefore(defs,vb.nextSibling);
-    vb.querySelectorAll('[data-v]').forEach(function(b){b.onclick=function(){VIEW[kind]=b.getAttribute('data-v');applyView(root,kind)}});
-    if(ME.role!=='admin'){VIEW[kind]='final'}
+  /* funnel strip, modes, stage filter */
+  function viewbar(root,kind){if(root.querySelector('.viewbar'))return;
+    var vb=E('div','viewbar','<div class="vb"><button data-m="rate">Rate</button><button data-m="work">Work</button><span class="hint" id="hint-'+kind+'"></span></div><div class="vb2"><button data-s="all">All</button>'+FUNNEL.map(function(st){return '<button data-s="'+st+'">'+st+' <i></i></button>'}).join('')+'<button data-s="gap">Endeavor ≠ Dan <i></i></button></div>');
+    var intro=E('p','m-intro',kind==='inv'?'<b>Investors.</b> One list, best first. Rate in your column; it saves on its own.':'<b>Founders.</b> Who we are flying in. Stars are the research draw; the numbers are our call.');
+    var defs=E('div','fitdefs',DEFS.slice().reverse().map(function(d){return '<span><b>'+d[0]+' '+d[1]+'</b>'+d[2]+'</span>'}).join(''));
+    var anchor=root.querySelector('#inv-funnel')||root.firstChild;
+    if(kind==='inv'){root.insertBefore(intro,root.firstChild);anchor.appendChild(vb);anchor.appendChild(defs)}else{root.insertBefore(intro,root.firstChild);root.insertBefore(vb,intro.nextSibling);root.insertBefore(defs,vb.nextSibling)}
+    vb.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){MODE[kind]=b.getAttribute('data-m');localStorage.setItem('mb_mode_'+kind,MODE[kind]);applyView(root,kind)}});
+    vb.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){STAGE[kind]=b.getAttribute('data-s');applyView(root,kind)}});
+    if(ME.role!=='admin'){vb.querySelector('.vb').hidden=true}
+    var nb=E('button','nextun','Next unrated ↓');nb.onclick=function(){nextUnrated(root,kind)};root.appendChild(nb);
   }
-  function rowsOf(root,kind){return [].slice.call(root.querySelectorAll(kind==='inv'?'tr[data-pid]':'.frow[data-pid]'))}
+  function rowsOf(root,kind){return [].slice.call(root.querySelectorAll('[data-pid]'))}
   function barProg(){var p=document.getElementById('mbProg');if(!p||!D||!D.investors||ME.role!=='admin')return;var ni=D.investors.filter(function(r){return val(r.id,ME.column)!=null}).length,nf=D.founders.filter(function(r){return val(r.id,ME.column)!=null}).length;p.innerHTML='Investors <b>'+ni+'</b>/'+D.investors.length+' &middot; Founders <b>'+nf+'</b>/'+D.founders.length}
-  function updateProg(){barProg();['inv','fdr'].forEach(function(kind){var root=document.getElementById(kind==='inv'?'inv-body':'fdr-body');var p=root&&root.querySelector('.viewbar .prog');if(!p)return;var list=kind==='inv'?D.investors:D.founders;var n=list.filter(function(r){return val(r.id,ME.column)!=null}).length;var agree=list.filter(function(r){var e=val(r.id,'endeavor'),d=val(r.id,'dan');return e!=null&&e===d}).length;var fin=list.filter(function(r){return finalOf(r.id).fit!=null}).length;p.innerHTML=(ME.role==='admin'?'<b>'+ME.name+':</b> '+n+' of '+list.length+' rated · ':'')+'Agree on '+agree+' · Final set on '+fin})}
-  function applyView(root,kind){var v=VIEW[kind];root.querySelectorAll('.viewbar [data-v]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-v')===v)});updateProg();
-    var rows=rowsOf(root,kind);var mine=ME.column;
-    rows.forEach(function(r){var id=r.getAttribute('data-pid');var e=val(id,'endeavor'),d=val(id,'dan');var gap=(e!=null&&d!=null&&e!==d);r.classList.toggle('gap',gap&&v==='cmp');var hide=false;if(v==='cmp')hide=!(e!=null&&d!=null);r.classList.toggle('vh',hide);var fr=r.nextElementSibling;if(kind==='inv'&&fr&&fr.classList.contains('fitrow'))fr.classList.toggle('vh',hide)});
-    if(v==='final'){rows.forEach(function(r){var id=r.getAttribute('data-pid');r.classList.toggle('hasfinal',finalOf(id).fit!=null)})}else rows.forEach(function(r){r.classList.remove('hasfinal')});
+  function updateProg(){barProg();['inv','fdr'].forEach(function(kind){var root=document.getElementById(kind==='inv'?'inv-body':'fdr-body');var vb=root&&root.querySelector('.viewbar');if(!vb)return;var list=kind==='inv'?D.investors:D.founders;var c={};FUNNEL.forEach(function(s){c[s]=0});var gap=0;list.forEach(function(r){c[stageOf(r.id)]++;var e=val(r.id,'endeavor'),d=val(r.id,'dan');if(e!=null&&d!=null&&e!==d)gap++});vb.querySelectorAll('[data-s]').forEach(function(b){var st=b.getAttribute('data-s');var i=b.querySelector('i');if(!i)return;i.textContent=st==='gap'?gap:c[st]});var n=list.filter(function(r){return val(r.id,ME.column)!=null}).length;var hint=vb.querySelector('.hint');if(hint)hint.textContent=(ME.role==='admin'?'You: '+n+' of '+list.length+' rated':'')+(MODE[kind]==='rate'?' · keys 1–5, N, ↓':'')})}
+  function applyView(root,kind){var m=MODE[kind],st=STAGE[kind];root.querySelectorAll('.viewbar [data-m]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-m')===m)});root.querySelectorAll('.viewbar [data-s]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-s')===st)});root.classList.toggle('mode-rate',m==='rate');updateProg();
+    var vis=0;rowsOf(root,kind).forEach(function(r){var id=r.getAttribute('data-pid');var e=val(id,'endeavor'),d=val(id,'dan');var gap=(e!=null&&d!=null&&e!==d);r.classList.toggle('gap',gap);var hide=false;if(st==='gap')hide=!gap;else if(st!=='all')hide=stageOf(id)!==st;r.classList.toggle('vh',hide);if(!hide)vis++;r.classList.toggle('hasfinal',finalOf(id).fit!=null)});
+    var nb=root.querySelector('.nextun');if(nb)nb.hidden=!(m==='rate'&&ME.role==='admin');
   }
+  /* keyboard rating */
+  function setCur(row){if(!row)return;document.querySelectorAll('[data-pid].cur').forEach(function(r){r.classList.remove('cur')});row.classList.add('cur');var k=row.classList.contains('irow')?'inv':'fdr';CUR[k]=row}
+  function visRows(root){return rowsOf(root).filter(function(r){return !r.classList.contains('vh')})}
+  function nextUnrated(root,kind){var rows=visRows(root);var start=CUR[kind]?rows.indexOf(CUR[kind])+1:0;for(var i=0;i<rows.length;i++){var r=rows[(start+i)%rows.length];if(val(r.getAttribute('data-pid'),ME.column)==null){setCur(r);r.scrollIntoView({block:'center',behavior:'smooth'});return}}toast('Everything here is rated')}
+  function step(root,kind,dir){var rows=visRows(root);var i=CUR[kind]?rows.indexOf(CUR[kind]):-1;var n=rows[Math.max(0,Math.min(rows.length-1,i+dir))];if(n){setCur(n);n.scrollIntoView({block:'center',behavior:'smooth'})}}
+  document.addEventListener('keydown',function(e){if(ME.role!=='admin')return;if(e.target.matches('input,textarea,select'))return;var kind=document.getElementById('pane-inv').hidden?(document.getElementById('pane-fdr').hidden?null:'fdr'):'inv';if(!kind||MODE[kind]!=='rate')return;var root=document.getElementById(kind==='inv'?'inv-body':'fdr-body');
+    if(e.key==='ArrowDown'||e.key==='j'){e.preventDefault();step(root,kind,1);return}if(e.key==='ArrowUp'||e.key==='k'){e.preventDefault();step(root,kind,-1);return}
+    if(!CUR[kind]){nextUnrated(root,kind);return}
+    var v=null;if(/^[1-5]$/.test(e.key))v=+e.key;else if(e.key==='n'||e.key==='N'||e.key==='0')v=0;if(v==null)return;e.preventDefault();var id=CUR[kind].getAttribute('data-pid');rate(id,v);setTimeout(function(){nextUnrated(root,kind)},150)});
   function tidy(){document.querySelectorAll('h3.sec,h2,h4').forEach(function(h){var t=h.textContent;var n=t.replace(/\s*\.$/,'');if(n!==t)h.textContent=n})}
   function observe(){['inv-body','fdr-body'].forEach(function(id){var root=document.getElementById(id);var kind=id==='inv-body'?'inv':'fdr';var busy=false;new MutationObserver(function(){if(busy)return;busy=true;try{augment(root,kind);tidy()}finally{busy=false}}).observe(root,{childList:true});augment(root,kind)})}
 
@@ -148,10 +164,10 @@
   function renderHome(){var root=document.getElementById('home-body');if(!root)return;var h='';
     var isDan=ME.column==='dan';
     h+='<div class="home-top"><p class="m-intro"><b>'+esc(ME.name)+', here is where we are.</b> The numbers are the funnel, "Needs you" is your list, and the open questions are for Dan.</p>'+(ME.role==='admin'?'<a class="btn-start" href="#investors">Start rating &rarr;</a>':'')+'</div>';
-    if(D.investors){h+='<div class="home-grid">';[['Investors & buyers',D.investors,D.targets.investors],['Founders',D.founders,D.targets.founders]].forEach(function(x){var list=x[1];var rated=list.filter(function(r){return val(r.id,'endeavor')!=null||val(r.id,'dan')!=null}).length;var appr=stageCount(list,function(f){return f.fit>=4||/Approved|Invited|Interested|Confirmed/.test(f.stage||'')});var inv=stageCount(list,function(f){return /Invited|Interested|Confirmed/.test(f.stage||'')});var conf=stageCount(list,function(f){return f.stage==='Confirmed'});
-      h+='<div class="hnum"><p class="hk">'+x[0]+' · target '+x[2]+'</p><div class="hrow"><div><div class="hv">'+rated+'</div><div class="hl">rated</div></div><div><div class="hv">'+appr+'</div><div class="hl">approved</div></div><div><div class="hv">'+inv+'</div><div class="hl">invited</div></div><div><div class="hv">'+conf+'</div><div class="hl">confirmed</div></div></div><div class="ht">'+list.length+' on the list</div></div>'});h+='</div>';
-      if(ME.role==='admin'){h+='<h3 class="sec">Needs you</h3><div class="needs">';var ui=D.investors.filter(function(r){return val(r.id,ME.column)==null}).length,uf=D.founders.filter(function(r){return val(r.id,ME.column)==null}).length;var dis=D.investors.concat(D.founders).filter(function(r){var e=val(r.id,'endeavor'),d=val(r.id,'dan');return e!=null&&d!=null&&e!==d&&finalOf(r.id).fit==null}).length;var nof=D.investors.concat(D.founders).filter(function(r){var f=finalOf(r.id);return f.fit>=4&&!f.owner}).length;
-        h+='<a href="#investors">Investors you have not rated yet<b>'+ui+'</b></a><a href="#founders">Founders you have not rated yet<b>'+uf+'</b></a>'+(isDan?'':'<a href="#investors">Where Endeavor and Dan disagree, no Final yet<b>'+dis+'</b></a><a href="#investors">Final 4 or 5 with no one reaching out<b>'+nof+'</b></a>')+'</div>'}}
+    if(D.investors){h+='<div class="home-grid">';[['Investors & buyers',D.investors,D.targets.investors],['Founders',D.founders,D.targets.founders]].forEach(function(x){var list=x[1];var rated=list.filter(function(r){return val(r.id,'endeavor')!=null||val(r.id,'dan')!=null}).length;var ST=list.map(function(r){return stageOf(r.id)});var appr=ST.filter(function(x){return x!=='Unrated'&&x!=='Rated'&&x!=='Out'}).length;var inv=ST.filter(function(x){return x==='Reached out'||x==='In conversation'||x==='Soft yes'||x==='Confirmed'}).length;var conf=ST.filter(function(x){return x==='Confirmed'}).length;
+      h+='<div class="hnum"><p class="hk">'+x[0]+' · target '+x[2]+'</p><div class="hrow"><div><div class="hv">'+rated+'</div><div class="hl">rated</div></div><div><div class="hv">'+appr+'</div><div class="hl">approved</div></div><div><div class="hv">'+inv+'</div><div class="hl">reached out</div></div><div><div class="hv">'+conf+'</div><div class="hl">confirmed</div></div></div><div class="ht">'+list.length+' on the list</div></div>'});h+='</div>';
+      if(ME.role==='admin'){h+='<h3 class="sec">Needs you</h3><div class="needs">';var ui=D.investors.filter(function(r){return val(r.id,ME.column)==null}).length,uf=D.founders.filter(function(r){return val(r.id,ME.column)==null}).length;var dis=D.investors.concat(D.founders).filter(function(r){var e=val(r.id,'endeavor'),d=val(r.id,'dan');return e!=null&&d!=null&&e!==d&&finalOf(r.id).fit==null}).length;var nof=D.investors.concat(D.founders).filter(function(r){return stageOf(r.id)==='Approved'}).length;
+        h+='<a href="#investors">Investors you have not rated yet<b>'+ui+'</b></a><a href="#founders">Founders you have not rated yet<b>'+uf+'</b></a>'+(isDan?'':'<a href="#investors">Where Endeavor and Dan disagree, no Final yet<b>'+dis+'</b></a><a href="#investors">Approved, not yet reached out<b>'+nof+'</b></a>')+'</div>'}}
     else{h+='<p class="m-intro">The public program is on the main site; your partnership page and Thursday\'s tours are here.</p>'}
     h+='<h3 class="sec">Open questions for Dan</h3><div class="decs">';DECS.forEach(function(d){var cur=(D.decisions||{})[d.id];h+='<div class="dec"><p class="dk">'+d.k+'</p><h4>'+esc(d.t)+'</h4><p>'+esc(d.p)+'</p><ul>'+d.b.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'+(ME.role==='admin'?'<textarea data-dec="'+d.id+'" placeholder="Dan\'s call, or anyone\'s view">'+esc(cur?cur.body:'')+'</textarea><div class="dmeta">'+(cur?esc(cur.by)+' · '+when(cur.at)+' · ':'')+'saves when you click away</div>':(cur?'<p class="fnote">'+esc(cur.body)+'</p>':''))+'</div>'});h+='</div>';
     var seen=localStorage.getItem('mb_seen_'+ME.name);var ch=[];Object.keys(FIT).forEach(function(id){Object.keys(FIT[id]).forEach(function(c){var f=FIT[id][c];if(f.by!==ME.name&&(!seen||f.at>seen)){var r=BYID[id];if(r)ch.push('<li><b>'+esc(f.by)+'</b> rated '+esc(r.n||r.c)+' '+(f.v!=null?f.v+' · '+FITW[f.v]:'cleared')+'</li>')}})});
@@ -177,5 +193,5 @@
   }
 
   /* ---------- help ---------- */
-  function help(){localStorage.setItem('mb_help_'+ME.name,'1');var h=E('div','help','<div class="hc"><button class="hx" aria-label="Close">×</button><h2>How this works</h2><ol>'+(ME.role==='admin'?'<li><b>Investors</b> and <b>Founders</b>: every row has three columns, Endeavor · Dan · Final. Tap a number in your column (5 Very High down to 1 Low, or No). It saves on its own; no save button anywhere.</li><li><b>My ratings</b> is the full list, best first. <b>Compare</b> shows only the names both sides have rated, and marks where Endeavor and Dan differ. <b>Final</b> is the agreed call, with the stage and who reaches out.</li><li><b>Speakers</b>, <b>Tours</b> and <b>Budget</b> are the working plan. Budget edits save for everyone.</li>':'<li><b>Home</b> shows where the summit stands.</li><li><b>Speakers</b> and <b>Tours</b> are the working plan.</li><li>Nothing here is public.</li>')+'</ol><button class="go">Got it</button></div>');document.body.appendChild(h);h.querySelector('.hx').onclick=h.querySelector('.go').onclick=function(){h.remove()}}
+  function help(){localStorage.setItem('mb_help_'+ME.name,'1');var h=E('div','help','<div class="hc"><button class="hx" aria-label="Close">×</button><h2>How this works</h2><ol>'+(ME.role==='admin'?'<li><b>Investors</b> and <b>Founders</b>: every row has three columns, Endeavor · Dan · Final. Tap a number in your column (1 Low up to 5 Very High, or No). It saves on its own; no save button anywhere.</li><li><b>Rate</b> mode strips each row down and lets you use the keyboard: 1–5 or N to rate, ↓ for the next one. <b>Work</b> mode shows everything. The stage row at the top is the funnel; click a stage to see only those names. <b>Final</b> is the agreed call and its stage.</li><li><b>Speakers</b>, <b>Tours</b> and <b>Budget</b> are the working plan. Budget edits save for everyone.</li>':'<li><b>Home</b> shows where the summit stands.</li><li><b>Speakers</b> and <b>Tours</b> are the working plan.</li><li>Nothing here is public.</li>')+'</ol><button class="go">Got it</button></div>');document.body.appendChild(h);h.querySelector('.hx').onclick=h.querySelector('.go').onclick=function(){h.remove()}}
 })();

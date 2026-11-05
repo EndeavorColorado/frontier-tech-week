@@ -31,6 +31,12 @@ app = re.sub(r"if\(location\.hash==='#[a-z]+'\) showTop\(\d\);", "", app)
 app = re.sub(r"function save\(ev,ids\)\{[\s\S]*?\n  \}\n",
   "function save(ev,ids){ids=ids||{s:'status',b:'save'};var s=document.getElementById(ids.s),btn=document.getElementById(ids.b);btn.disabled=true;s.textContent='Saving\u2026';s.className='status';window.__saveBudget(S).then(function(){s.textContent='Saved';s.className='status ok';dirty=false;btn.disabled=false}).catch(function(){s.textContent='Could not save';s.className='status err';btn.disabled=false})}\n", app, count=1)
 app = re.sub(r"if\(window\.claude&&window\.claude\.use\)\{[\s\S]*?\}\s*else \{ canWrite=false; renderBudget\(\); \}", "canWrite=(window.__ME.role==='admin'); renderBudget();", app, count=1)
+# investors: replace the plan page's table render with the members list render
+i0 = app.index('  function row(r,i){\n    var cv=cov(r)'); i1 = app.index('  /* tours */')
+app = app[:i0] + open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build', 'inv-render.js'), encoding='utf-8').read() + app[i1:]
+# the three sub-tabs are gone
+app = re.sub(r"  group\(\[document\.getElementById\('t-ishort'\)[^\n]*\n(  document\.getElementById\('t-i[a-z]+'\)[^\n]*\n){3}", "", app)
+assert "t-ishort" not in app.split('function buildDoc')[0], 'sub-tab code still there'
 for must in ("window.__showTop=showTop", "window.__saveBudget(S)", "window.__ME.role", "window.__S=S"):
     assert must in app, 'app patch failed: ' + must
 assert "t-along" not in app.split('function buildDoc')[0]
@@ -71,6 +77,7 @@ s = s.replace('__EWM__', m.group(1) if m else '')
 s = re.sub(r'<section class="card purpose">.*?</section>\n', '', s, flags=re.S)
 # tabs in Breanna's order, Home first
 s = re.sub(r'<div class="tabs" role="tablist">.*?</div>', '', s, count=1, flags=re.S)
+s = re.sub(r'<div class="tabs sub2"[^>]*>\s*<button role="tab" id="t-ishort".*?</div>', '', s, count=1, flags=re.S)
 # agenda pane -> home pane
 a0 = s.index('<div id="pane-agenda" role="tabpanel">'); a1 = s.index('<div id="pane-budget" role="tabpanel" hidden>')
 s = s[:a0] + '<div id="pane-home" role="tabpanel"><div class="card" id="home-body"></div></div>\n\n' + s[a1:]
