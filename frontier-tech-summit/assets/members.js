@@ -94,21 +94,17 @@
   function pill(v,extra){if(v==null)return '<span class="pill none">not rated</span>';return '<span class="pill f'+v+(extra||'')+'">'+word(v)+'</span>'}
   function chips(attr,v){var h='<div class="chips5">';[1,2,3,4,5].forEach(function(n){h+='<button '+attr+'="'+n+'" class="'+(v===n?'on':'')+'" title="'+FITW[n]+'">'+n+'</button>'});return h+'<button '+attr+'="0" class="no'+(v===0?' on':'')+'" title="A reason not to have them in the room">Don’t invite</button></div>'}
   function fitHTML(id){
-    var mine=ME.column, other=mine==='dan'?'endeavor':'dan', canRate=ME.role==='admin';
-    var me=val(id,mine), them=val(id,other), f=finalOf(id);
-    var otherName=other==='dan'?'Dan':'Endeavor';
+    var mine=ME.column, canRate=ME.role==='admin';
+    var dv=val(id,'dan'),ev=val(id,'endeavor');var both=dv!=null&&ev!=null;
+    function row(label,col,v){var you=canRate&&mine===col;var h='<div class="frate'+(you?' you':' ro')+'"><span class="fk">'+label+'</span><div class="chips5'+(you?'':' ro')+'"'+(you?'':' aria-hidden="true"')+'>';
+      [1,2,3,4,5].forEach(function(n){h+='<button '+(you?'data-fit="'+n+'"':'disabled')+' class="'+(v===n?'on':'')+'" title="'+FITW[n]+'">'+n+'</button>'});
+      h+='<button '+(you?'data-fit="0"':'disabled')+' class="no'+(v===0?' on':'')+'" title="A reason not to have them in the room">Don\u2019t invite</button></div>';
+      h+='<span class="fnote2">'+(v==null?(you?'':'<span class="muted">not yet</span>'):(isResearch(id,col)?'<span class="rsrch">research</span>':''))+'</span></div>';return h}
     var h='<div class="fitbar" data-fid="'+id+'">';
-    var rs=isResearch(id,mine);
-    if(canRate){h+='<div class="fme"><span class="fk">Your rating</span>'+chips('data-fit',me)+(rs?'<span class="rsrch" title="Starts from the research stars. Click a number to make it yours.">from research</span>':'')+'</div>'}
-    else h+='<div class="fme"><span class="fk">Endeavor</span>'+pill(val(id,'endeavor'))+' <span class="fk">Dan</span>'+pill(val(id,'dan'))+'</div>';
-    h+='<div class="fside">';
-    var dv=val(id,'dan'),ev=val(id,'endeavor');var both=dv!=null&&ev!=null;var agree=both&&dv===ev;
-    function line(label,col,v){var you=col===mine&&canRate;return '<div class="fthem'+(you?' you':'')+'"><span class="fk">'+label+(you?' (you)':'')+':</span> '+(v==null?'<span class="muted">not yet</span>':'<b>'+word(v)+'</b>'+(isResearch(id,col)?' <span class="muted">(research)</span>':''))+'</div>'}
-    h+=line('Dan','dan',dv);
-    h+=line('Endeavor','endeavor',ev);
-    if(both)h+='<div class="fcmp">'+(agree?'<span class="ok">\u2713 agree</span>':'<span class="diff">differ by '+Math.abs(dv-ev)+'</span>')+'</div>';
-    h+='<div class="ffinal"><span class="fk">Final:</span> '+(f.fit!=null||f.stage?'<b>'+(f.fit!=null?word(f.fit):'')+(f.stage?(f.fit!=null?' — ':'')+esc(f.stage):'')+'</b>'+(f.note?' <span class="muted">'+esc(f.note)+'</span>':''):'<span class="muted">not yet</span>')+(canRate?' <button class="edit" data-final="1">'+(f.fit!=null||f.stage?'Edit':'Set')+'</button>':'')+'</div>';
-    return h+'</div></div>';
+    h+=row('Dan','dan',dv);
+    h+=row('Endeavor','endeavor',ev);
+    if(both)h+='<div class="fcmp">'+(dv===ev?'<span class="ok">\u2713 agree</span>':'<span class="diff">differ by '+Math.abs(dv-ev)+'</span>')+'</div>';
+    return h+'</div>';
   }
   function fillFit(el){var id=el.getAttribute('data-fid');el.outerHTML=fitHTML(id)}
   function augment(root,kind){
