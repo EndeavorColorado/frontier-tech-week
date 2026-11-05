@@ -48,7 +48,9 @@
     document.getElementById('mbar').hidden=false;
     document.getElementById('mhMe').textContent=ME.name;
     document.getElementById('mbRole').textContent=ME.role;
-    if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false}
+    if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false;document.getElementById('ddSettings').hidden=false}
+    var mm=document.getElementById('mhMem');mm.classList.add('in');mm.querySelector('.mh-pill').addEventListener('click',function(e){e.preventDefault();mm.classList.toggle('open');this.setAttribute('aria-expanded',mm.classList.contains('open'))});document.addEventListener('click',function(e){if(!mm.contains(e.target))mm.classList.remove('open')});mm.querySelectorAll('.mh-dd a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
+    document.getElementById('ddOut').onclick=function(e){e.preventDefault();document.getElementById('mhOut').click()};
     menu();
     document.getElementById('mhOut').onclick=function(){localStorage.removeItem('mb_t');sessionStorage.removeItem('mb_t');location.href='/frontier-tech-summit/'};
     document.getElementById('mhHelp').onclick=help;
