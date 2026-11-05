@@ -48,7 +48,7 @@
     document.getElementById('mbar').hidden=false;
     document.getElementById('mhMe').textContent=ME.name;
     document.getElementById('mbRole').textContent=ME.role;
-    if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false;document.getElementById('ddSettings').hidden=false}
+    if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false;document.getElementById('ddSettings').hidden=false;document.getElementById('ddReview').hidden=false}
     var mm=document.getElementById('mhMem');mm.classList.add('in');mm.querySelector('.mh-pill').addEventListener('click',function(e){e.preventDefault();mm.classList.toggle('open');this.setAttribute('aria-expanded',mm.classList.contains('open'))});document.addEventListener('click',function(e){if(!mm.contains(e.target))mm.classList.remove('open')});mm.querySelectorAll('.mh-dd a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
     document.getElementById('ddOut').onclick=function(e){e.preventDefault();document.getElementById('mhOut').click()};
     menu();
@@ -99,7 +99,7 @@
     function row(label,col,v){var you=canRate&&mine===col;var h='<div class="frate'+(you?' you':' ro')+'"><span class="fk">'+label+'</span><div class="chips5'+(you?'':' ro')+'"'+(you?'':' aria-hidden="true"')+'>';
       [1,2,3,4,5].forEach(function(n){h+='<button '+(you?'data-fit="'+n+'"':'disabled')+' class="'+(v===n?'on':'')+'" title="'+FITW[n]+'">'+n+'</button>'});
       h+='<button '+(you?'data-fit="0"':'disabled')+' class="no'+(v===0?' on':'')+'" title="A reason not to have them in the room">Don\u2019t invite</button></div>';
-      h+='<span class="fnote2">'+(v==null?(you?'':'<span class="muted">not yet</span>'):(isResearch(id,col)?'<span class="rsrch">research</span>':''))+'</span></div>';return h}
+      h+='<span class="fnote2">'+(v!=null&&isResearch(id,col)?'<span class="rsrch">research</span>':'')+'</span></div>';return h}
     var h='<div class="fitbar" data-fid="'+id+'">';
     h+=row('Dan','dan',dv);
     h+=row('Endeavor','endeavor',ev);
