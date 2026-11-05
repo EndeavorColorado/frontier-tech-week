@@ -1,4 +1,4 @@
-<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Members · Endeavor Frontier Tech Summit</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/frontier-tech-summit/assets/favicon.svg"><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=a9c80c9"></head><body>
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Members · Endeavor Frontier Tech Summit</title><meta name="robots" content="noindex,nofollow"><link rel="icon" href="/frontier-tech-summit/assets/favicon.svg"><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=47b71a1"></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
 <style id="css">
@@ -473,9 +473,9 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 <script id="invdata" type="application/json"></script>
 <script id="toursdata" type="application/json"></script>
 <script id="fdrdata" type="application/json"></script>
-<script id="app" type="text/plain">
+<script id="app">window.__runPlan=function(){
 (function(){
-  var S=JSON.parse(document.getElementById('state').textContent);
+  var S=JSON.parse(document.getElementById('state').textContent);window.__S=S;
   var artifactNS=null, canWrite=true, dirty=false;
   function money(n){ return (n<0?'−':'')+'$'+Math.round(Math.abs(n)).toLocaleString('en-US'); }
   function val(L){ return L.t==='ph' ? L.r*S.headcount : L.v; }
@@ -553,22 +553,20 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
     show(def);
     return show;
   }
-  var showTop=group([document.getElementById('t-agenda'),document.getElementById('t-budget'),document.getElementById('t-inv'),document.getElementById('t-tours'),document.getElementById('t-fdr'),document.getElementById('t-spk')],
-                    [document.getElementById('pane-agenda'),document.getElementById('pane-budget'),document.getElementById('pane-inv'),document.getElementById('pane-tours'),document.getElementById('pane-fdr'),document.getElementById('pane-spk')],0);
+  var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-spk'),document.getElementById('t-tours'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-spk'),document.getElementById('pane-tours'),document.getElementById('pane-budget')],0);window.__showTop=showTop;
   var invView='inv';
   group([document.getElementById('t-ishort'),document.getElementById('t-ilong'),document.getElementById('t-ico')],[{},{},{}],0);
   document.getElementById('t-ishort').addEventListener('click',function(){ invView='inv'; renderInv(); });
   document.getElementById('t-ilong').addEventListener('click',function(){ invView='str'; renderInv(); });
   document.getElementById('t-ico').addEventListener('click',function(){ invView='co'; renderInv(); });
-  if(location.hash==='#investors') showTop(2);
-  group([document.getElementById('t-along'),document.getElementById('t-ashort')],
-        [document.getElementById('agenda-long'),document.getElementById('agenda-short')],0);
+  
+  
   group([document.getElementById('t-bshort'),document.getElementById('t-blong')],
         [document.getElementById('budget-short'),document.getElementById('budget-long')],0);
-  if(location.hash==='#budget') showTop(1);
-  if(location.hash==='#tours') showTop(3);
-  if(location.hash==='#founders') showTop(4);
-  if(location.hash==='#speakers') showTop(5);
+  
+  
+  
+  
 
   function buildDoc(){
     var css=document.getElementById('css').textContent, app=document.getElementById('app').textContent;
@@ -591,17 +589,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
     var fonts='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">';
     return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Frontier Tech Week Plan</title>'+fonts+'<style id="css">'+css+'</style></head><body><div class="wrap">'+w.innerHTML+'</div><script id="state" type="application/json">'+json+'<\/script><script id="invdata" type="application/json">'+invj+'<\/script><script id="toursdata" type="application/json">'+toursj+'<\/script><script id="fdrdata" type="application/json">'+fdrj+'<\/script><script id="app">'+app+'<\/script></body></html>';
   }
-  function save(ev,ids){
-    ids=ids||{s:'status',b:'save'};
-    var s=document.getElementById(ids.s), btn=document.getElementById(ids.b);
-    if(!artifactNS){ s.textContent='Saving is not available in this view'; s.className='status err'; return; }
-    btn.disabled=true; s.textContent='Saving…'; s.className='status';
-    artifactNS.publish(buildDoc()).then(function(){ s.textContent='Saved'; s.className='status ok'; dirty=false; })
-    .catch(function(e){ btn.disabled=false;
-      if(e&&e.code==='conflict'){ s.textContent='Someone else saved first, reloading'; return; }
-      if(e&&(e.code==='not_writer'||e.code==='not_granted'||e.code==='not_declared')){ canWrite=false; renderBudget(); return; }
-      s.textContent='Could not save ('+(e&&e.code||'error')+')'; s.className='status err'; });
-  }
+  function save(ev,ids){ids=ids||{s:'status',b:'save'};var s=document.getElementById(ids.s),btn=document.getElementById(ids.b);btn.disabled=true;s.textContent='Saving…';s.className='status';window.__saveBudget(S).then(function(){s.textContent='Saved';s.className='status ok';dirty=false;btn.disabled=false}).catch(function(){s.textContent='Could not save';s.className='status err';btn.disabled=false})}
 
   /* investors */
   var INV=JSON.parse(document.getElementById('invdata').textContent);
@@ -813,10 +801,9 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   renderSpk();
 
   renderBudget();
-  if(window.claude&&window.claude.use){ window.claude.use('artifact').then(function(ns){ artifactNS=ns; if(!ns){ canWrite=false; renderBudget(); } }); }
-  else { canWrite=false; renderBudget(); }
+  canWrite=(window.__ME.role==='admin'); renderBudget();
 })();
-</script>
+};</script>
 
-<script src="/frontier-tech-summit/assets/members.js?v=a9c80c9"></script>
+<script src="/frontier-tech-summit/assets/members.js?v=47b71a1"></script>
 </body></html>

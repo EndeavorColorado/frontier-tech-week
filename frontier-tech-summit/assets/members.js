@@ -54,19 +54,9 @@
 
   /* ---------- run the plan page's app with patches ---------- */
   function runApp(){
-    var src=document.getElementById('app').textContent;
     window.__ME=ME;
-    src=src.replace("var S=JSON.parse(document.getElementById('state').textContent);","var S=JSON.parse(document.getElementById('state').textContent);window.__S=S;");
-    // tabs: Home replaces Agenda; Breanna's order
-    src=src.replace(/var showTop=group\(\[[\s\S]*?\],\s*\[[\s\S]*?\]\s*,\s*0\);/,"var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-spk'),document.getElementById('t-tours'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-spk'),document.getElementById('pane-tours'),document.getElementById('pane-budget')],0);window.__showTop=showTop;");
-    src=src.replace(/group\(\[document\.getElementById\('t-along'\)[\s\S]*?\],\s*\[[\s\S]*?\],0\);/,'');
-    src=src.replace(/if\(location\.hash==='#[a-z]+'\) showTop\(\d\);/g,'');
-    // budget save goes to the API
-    src=src.replace(/function save\(ev,ids\)\{[\s\S]*?\n  \}\n/,"function save(ev,ids){ids=ids||{s:'status',b:'save'};var s=document.getElementById(ids.s),btn=document.getElementById(ids.b);btn.disabled=true;s.textContent='Saving…';s.className='status';window.__saveBudget(S).then(function(){s.textContent='Saved';s.className='status ok';dirty=false;btn.disabled=false}).catch(function(){s.textContent='Could not save';s.className='status err';btn.disabled=false})}\n");
-    src=src.replace(/if\(window\.claude&&window\.claude\.use\)\{[\s\S]*?\}\s*else \{ canWrite=false; renderBudget\(\); \}/,"canWrite=(window.__ME.role==='admin'); renderBudget();");
-    var tabs=src.match(/var showTop=group/);if(!tabs)throw new Error('patch failed');
-    try{(new Function(src))()}catch(e){console.error('plan app failed',e);toast('Part of the page failed to load')}
     window.__saveBudget=function(S){return api('POST',{action:'budget',state:S})};
+    try{window.__runPlan()}catch(e){console.error('plan app failed',e);toast('Part of the page failed to load')}
   }
   function route(){var h=location.hash||'#home';var map={'#home':0,'#investors':1,'#founders':2,'#speakers':3,'#tours':4,'#budget':5};if(h==='#settings'){showSettings();return}document.getElementById('pane-settings').hidden=true;if(window.__showTop&&map[h]!=null)window.__showTop(map[h]);window.scrollTo(0,0)}
   document.querySelectorAll('.tabs.top button').forEach(function(b){b.addEventListener('click',function(){var m={'t-home':'#home','t-inv':'#investors','t-fdr':'#founders','t-spk':'#speakers','t-tours':'#tours','t-budget':'#budget'};history.replaceState(null,'',m[b.id]);document.getElementById('pane-settings').hidden=true})});

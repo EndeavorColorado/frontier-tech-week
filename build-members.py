@@ -20,7 +20,21 @@ for tid in ('state', 'invdata', 'toursdata', 'fdrdata'):
     # anchored at line start: the app's buildDoc() contains the same tag text inside a string
     s = re.sub(r'^(<script id="%s" type="application/json">).*?(</script>)' % tid, r'\1\2', s, count=1, flags=re.S | re.M)
 # the app runs later, after data arrives
-s = s.replace('<script id="app">', '<script id="app" type="text/plain">', 1)
+# the app becomes a function the members script calls once data has arrived (CSP forbids eval)
+a0 = s.index('<script id="app">') + len('<script id="app">'); a1 = s.index('</script>', a0)
+app = s[a0:a1]
+app = app.replace("var S=JSON.parse(document.getElementById('state').textContent);", "var S=JSON.parse(document.getElementById('state').textContent);window.__S=S;", 1)
+app = re.sub(r"var showTop=group\(\[[\s\S]*?\],\s*\[[\s\S]*?\]\s*,\s*0\);",
+  "var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-spk'),document.getElementById('t-tours'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-spk'),document.getElementById('pane-tours'),document.getElementById('pane-budget')],0);window.__showTop=showTop;", app, count=1)
+app = re.sub(r"group\(\[document\.getElementById\('t-along'\)[\s\S]*?\],\s*\[[\s\S]*?\],0\);", "", app, count=1)
+app = re.sub(r"if\(location\.hash==='#[a-z]+'\) showTop\(\d\);", "", app)
+app = re.sub(r"function save\(ev,ids\)\{[\s\S]*?\n  \}\n",
+  "function save(ev,ids){ids=ids||{s:'status',b:'save'};var s=document.getElementById(ids.s),btn=document.getElementById(ids.b);btn.disabled=true;s.textContent='Saving\u2026';s.className='status';window.__saveBudget(S).then(function(){s.textContent='Saved';s.className='status ok';dirty=false;btn.disabled=false}).catch(function(){s.textContent='Could not save';s.className='status err';btn.disabled=false})}\n", app, count=1)
+app = re.sub(r"if\(window\.claude&&window\.claude\.use\)\{[\s\S]*?\}\s*else \{ canWrite=false; renderBudget\(\); \}", "canWrite=(window.__ME.role==='admin'); renderBudget();", app, count=1)
+for must in ("window.__showTop=showTop", "window.__saveBudget(S)", "window.__ME.role", "window.__S=S"):
+    assert must in app, 'app patch failed: ' + must
+assert "t-along" not in app.split('function buildDoc')[0]
+s = s[:a0] + 'window.__runPlan=function(){' + app + '};' + s[a1:]
 
 # 3. header + tabs
 hdr_start = s.index('<header>'); hdr_end = s.index('</header>') + len('</header>')
