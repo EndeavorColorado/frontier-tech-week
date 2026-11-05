@@ -268,3 +268,9 @@ tr.vh,.frow.vh,.irow.vh{display:none!important}
 .sbs-chips button.on{background:var(--ink);color:#fff}.sbs-chips button.no{width:auto;padding:0 8px;font-size:12px;border-color:var(--line);color:var(--body)}.sbs-chips button.no.on{background:var(--warn);border-color:var(--warn);color:#fff}
 .lnk{font:inherit;font-size:14px;font-weight:600;color:var(--teal-ink);background:transparent;border:0;padding:2px 4px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:800px){.sbs-t th:first-child,.sbs-t td.sbs-n{width:40%}.sbs-chips button{width:28px;height:28px;font-size:12px}}
+
+.psec{margin:0 0 34px}
+.ptitle{font-family:var(--serif);font-weight:600;font-size:30px;margin:0 0 4px;color:var(--ink)}
+.plede{margin:0 0 14px;font-size:15px;color:var(--body)}
+#spk-body>.lede:first-child,#tours-body .tb-head .eyebrow{display:none}
+#spk-body>.tb-head,#spk-body>h3.sec:first-child{display:none}

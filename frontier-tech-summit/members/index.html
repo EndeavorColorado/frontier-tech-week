@@ -239,7 +239,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 .frow .of .usr.solo{margin-top:0;font-size:12px;letter-spacing:.06em}.frow .of .usr{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.04em;color:var(--label);line-height:1.4}
 .fdr-foot p{margin:0 0 6px}
 @media (max-width:560px){.frow{grid-template-columns:1fr}.frow .sx{flex-direction:row;flex-wrap:wrap;gap:10px}}
-</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=82ebb68">
+</style><link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=38beebc">
 
 <div class="wrap">
 <header class="mh" id="mh">
@@ -257,8 +257,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   <button role="tab" id="t-home" aria-selected="true">Home</button>
   <button role="tab" id="t-inv" aria-selected="false">Investors</button>
   <button role="tab" id="t-fdr" aria-selected="false">Founders</button>
-  <button role="tab" id="t-spk" aria-selected="false">Speakers</button>
-  <button role="tab" id="t-tours" aria-selected="false">Tours</button>
+  <button role="tab" id="t-prog" aria-selected="false">Program</button>
   <button role="tab" id="t-budget" aria-selected="false">Budget</button>
   <button role="tab" id="mhSettings" aria-selected="false" hidden>Settings</button>
   <a role="tab" id="mhReview" href="/frontier-tech-summit/review/" hidden style="display:none">Review the site</a>
@@ -457,18 +456,14 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   <div class="card" id="inv-body" role="tabpanel"></div>
 </div>
 
-<div id="pane-tours" role="tabpanel" hidden>
-  <div class="card" id="tours-body" role="tabpanel"></div>
-</div>
-
 <div id="pane-fdr" role="tabpanel" hidden>
   <div class="card" id="fdr-body" role="tabpanel"></div>
 </div>
 
-<div id="pane-spk" role="tabpanel" hidden>
-  <div class="card" id="spk-body" role="tabpanel"></div>
+<div id="pane-prog" role="tabpanel" hidden>
+  <div class="psec"><h2 class="ptitle">On Stage</h2><p class="plede">Who we would put on stage, and why they pull the room in.</p><div class="card" id="spk-body"></div></div>
+  <div class="psec"><h2 class="ptitle">Thursday Tours</h2><p class="plede">The sites, the drive times and the working route. The tours-or-showcase question is on Home.</p><div class="card" id="tours-body"></div></div>
 </div>
-
 <div id="pane-settings" role="tabpanel" hidden><div class="card" id="settings-body"></div></div>
 <footer>
   Hosted by Endeavor Colorado and Caruso Ventures &middot; June 16 to 17, 2027 &middot; Boulder, Colorado<br>
@@ -560,7 +555,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
     show(def);
     return show;
   }
-  var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-spk'),document.getElementById('t-tours'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-spk'),document.getElementById('pane-tours'),document.getElementById('pane-budget')],0);window.__showTop=showTop;
+  var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-prog'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-prog'),document.getElementById('pane-budget')],0);window.__showTop=showTop;
   var invView='inv';
   
   
@@ -802,5 +797,5 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
 })();
 };</script>
 
-<script src="/frontier-tech-summit/assets/members.js?v=82ebb68"></script>
+<script src="/frontier-tech-summit/assets/members.js?v=38beebc"></script>
 </body></html>

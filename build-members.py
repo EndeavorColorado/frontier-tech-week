@@ -25,7 +25,7 @@ a0 = s.index('<script id="app">') + len('<script id="app">'); a1 = s.index('</sc
 app = s[a0:a1]
 app = app.replace("var S=JSON.parse(document.getElementById('state').textContent);", "var S=JSON.parse(document.getElementById('state').textContent);window.__S=S;", 1)
 app = re.sub(r"var showTop=group\(\[[\s\S]*?\],\s*\[[\s\S]*?\]\s*,\s*0\);",
-  "var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-spk'),document.getElementById('t-tours'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-spk'),document.getElementById('pane-tours'),document.getElementById('pane-budget')],0);window.__showTop=showTop;", app, count=1)
+  "var showTop=group([document.getElementById('t-home'),document.getElementById('t-inv'),document.getElementById('t-fdr'),document.getElementById('t-prog'),document.getElementById('t-budget')],[document.getElementById('pane-home'),document.getElementById('pane-inv'),document.getElementById('pane-fdr'),document.getElementById('pane-prog'),document.getElementById('pane-budget')],0);window.__showTop=showTop;", app, count=1)
 app = re.sub(r"group\(\[document\.getElementById\('t-along'\)[\s\S]*?\],\s*\[[\s\S]*?\],0\);", "", app, count=1)
 app = re.sub(r"if\(location\.hash==='#[a-z]+'\) showTop\(\d\);", "", app)
 app = re.sub(r"function save\(ev,ids\)\{[\s\S]*?\n  \}\n",
@@ -62,8 +62,7 @@ header = '''<header class="mh" id="mh">
   <button role="tab" id="t-home" aria-selected="true">Home</button>
   <button role="tab" id="t-inv" aria-selected="false">Investors</button>
   <button role="tab" id="t-fdr" aria-selected="false">Founders</button>
-  <button role="tab" id="t-spk" aria-selected="false">Speakers</button>
-  <button role="tab" id="t-tours" aria-selected="false">Tours</button>
+  <button role="tab" id="t-prog" aria-selected="false">Program</button>
   <button role="tab" id="t-budget" aria-selected="false">Budget</button>
   <button role="tab" id="mhSettings" aria-selected="false" hidden>Settings</button>
   <a role="tab" id="mhReview" href="/frontier-tech-summit/review/" hidden style="display:none">Review the site</a>
@@ -85,6 +84,14 @@ s = re.sub(r'<div class="tabs sub2"[^>]*>\s*<button role="tab" id="t-ishort".*?<
 a0 = s.index('<div id="pane-agenda" role="tabpanel">'); a1 = s.index('<div id="pane-budget" role="tabpanel" hidden>')
 s = s[:a0] + '<div id="pane-home" role="tabpanel"><div class="card" id="home-body"></div></div>\n\n' + s[a1:]
 s = s.replace('<div id="pane-budget" role="tabpanel" hidden>', '<div id="pane-budget" role="tabpanel" hidden>', 1)
+# speakers + tours -> one Program pane
+tours = re.search(r'<div id="pane-tours" role="tabpanel" hidden>\s*<div class="card" id="tours-body" role="tabpanel"></div>\s*</div>\s*', s).group(0)
+spk = re.search(r'<div id="pane-spk" role="tabpanel" hidden>\s*<div class="card" id="spk-body" role="tabpanel"></div>\s*</div>\s*', s).group(0)
+s = s.replace(tours, '').replace(spk, '''<div id="pane-prog" role="tabpanel" hidden>
+  <div class="psec"><h2 class="ptitle">On Stage</h2><p class="plede">Who we would put on stage, and why they pull the room in.</p><div class="card" id="spk-body"></div></div>
+  <div class="psec"><h2 class="ptitle">Thursday Tours</h2><p class="plede">The sites, the drive times and the working route. The tours-or-showcase question is on Home.</p><div class="card" id="tours-body"></div></div>
+</div>
+''')
 # settings pane + sign-in gate + help, before footer
 s = s.replace('<footer>', '''<div id="pane-settings" role="tabpanel" hidden><div class="card" id="settings-body"></div></div>
 <footer>''', 1)
