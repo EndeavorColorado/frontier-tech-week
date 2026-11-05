@@ -139,7 +139,7 @@ tr.fitrow td{padding:4px 10px 12px;border-bottom:1px solid rgba(255,255,255,.08)
 .mh-nav a:hover{opacity:1}
 .mh-nav .mh-pill{opacity:1;background:var(--teal);color:#01000F;border-radius:999px;padding:8px 16px;font-weight:600;margin-left:6px}
 .mh-name{white-space:nowrap}
-body{padding-top:76px}
+body{padding-top:76px!important}
 .mh-acct{position:relative;margin-left:6px}
 .mh-me{font:inherit;font-size:14px;font-weight:500;color:#fff;background:transparent;border:0;padding:8px 10px;cursor:pointer;opacity:.85}.mh-me:hover{opacity:1}
 .mh-drop{display:none;position:absolute;right:0;top:100%;min-width:180px;background:#0b0a1a;border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 40px rgba(0,0,0,.5);padding:6px;z-index:60}
