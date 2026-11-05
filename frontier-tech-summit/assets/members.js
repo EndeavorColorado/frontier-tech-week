@@ -79,7 +79,7 @@
     h+=col('Dan','dan',d);
     // Final
     h+='<div class="fitcol"><div class="fk">Final'+(f.by?' <b>'+esc(f.by)+' · '+when(f.at)+'</b>':'')+'</div>';
-    if(f.fit!=null||f.stage){h+='<div class="finalctl">'+pill(f.fit)+(f.stage?'<span class="pill">'+esc(f.stage)+'</span>':'')+(f.owner?'<span class="pill">→ '+esc(f.owner)+'</span>':'')+(canRate?'<button class="edit" data-final="1">Edit</button>':'')+'</div>'+(f.note?'<div class="fnote">'+esc(f.note)+'</div>':'')}
+    if(f.fit!=null||f.stage||f.owner){h+='<div class="finalctl">'+pill(f.fit)+(f.stage?'<span class="pill">'+esc(f.stage)+'</span>':'')+(f.owner?'<span class="pill">→ '+esc(f.owner)+'</span>':'')+(canRate?'<button class="edit" data-final="1">Edit</button>':'')+'</div>'+(f.note?'<div class="fnote">'+esc(f.note)+'</div>':'')}
     else if(canRate){h+='<div class="finalctl">'+(agree?'<span class="pill f'+e+'">Both say '+e+' · '+FITW[e]+'</span>':'<span class="pill none">not set</span>')+'<button class="edit" data-final="1">'+(agree?'Confirm':'Set')+'</button></div>'}
     else h+=pill(null);
     return h+'</div></div>';
@@ -99,9 +99,10 @@
   });
   function editFinal(bar){var id=bar.getAttribute('data-fid'),f=finalOf(id),e=val(id,'endeavor'),d=val(id,'dan');var def=f.fit!=null?f.fit:(e!=null&&e===d?e:(e!=null?e:d));
     var h='<div class="fitcol" style="grid-column:1/-1"><div class="fk">Final</div><div class="finalctl"><div class="chips5">';[5,4,3,2,1].forEach(function(n){h+='<button data-ff="'+n+'" class="'+(def===n?'on':'')+'">'+n+'</button>'});h+='<button data-ff="0" class="no'+(def===0?' on':'')+'">No</button></div>';
-    h+='<select data-fs>'+['<option value="">Stage…</option>'].concat(STAGES.map(function(s){return '<option'+(f.stage===s?' selected':'')+'>'+s+'</option>'})).join('')+'</select><input data-fo placeholder="Owner (who reaches out)" value="'+esc(f.owner||'')+'"><input data-fn placeholder="Note" value="'+esc(f.note||'')+'" style="max-width:260px"><button class="edit" data-fsave>Save</button><button class="edit" data-fcancel>Cancel</button></div></div>';
+    h+='<select data-fs>'+['<option value="">Stage…</option>'].concat(STAGES.map(function(s){return '<option'+(f.stage===s?' selected':'')+'>'+s+'</option>'})).join('')+'</select><input data-fo placeholder="Owner (who reaches out)" value="'+esc(f.owner||'')+'"><input data-fn placeholder="Note" value="'+esc(f.note||'')+'" style="max-width:260px"><button class="edit" data-fsave>Save</button><button class="edit" data-fcancel>Cancel</button>'+(f.fit!=null||f.stage?'<button class="edit" data-fclear>Clear</button>':'')+'</div></div>';
     bar.innerHTML=h;var sel=def;bar.querySelectorAll('[data-ff]').forEach(function(b){b.onclick=function(){sel=+b.getAttribute('data-ff');bar.querySelectorAll('[data-ff]').forEach(function(x){x.classList.toggle('on',x===b)})}});
     bar.querySelector('[data-fcancel]').onclick=function(){fillFit(bar)};
+    var cl=bar.querySelector('[data-fclear]');if(cl)cl.onclick=function(){delete FINAL[id];fillFit(bar);api('POST',{action:'final',id:id,fit:'',stage:'',owner:'',note:''}).then(function(){toast('Final cleared');renderHome()}).catch(function(){toast('Did not save. Try again.')})};
     bar.querySelector('[data-fsave]').onclick=function(){var data={fit:sel,stage:bar.querySelector('[data-fs]').value,owner:bar.querySelector('[data-fo]').value.trim(),note:bar.querySelector('[data-fn]').value.trim()};FINAL[id]=Object.assign({},data,{by:ME.name,at:new Date().toISOString()});fillFit(bar);api('POST',Object.assign({action:'final',id:id},data)).then(function(){toast('Final saved');renderHome()}).catch(function(){toast('Did not save. Try again.')})};
   }
   /* views */
