@@ -274,3 +274,13 @@ tr.vh,.frow.vh,.irow.vh{display:none!important}
 .plede{margin:0 0 14px;font-size:15px;color:var(--body)}
 #spk-body>.lede:first-child,#tours-body .tb-head .eyebrow{display:none}
 #spk-body>.tb-head,#spk-body>h3.sec:first-child{display:none}
+
+table.tours tr.fitrow td{padding:6px 10px 14px 44px;background:var(--panel);border-bottom:1px solid var(--line)}
+table.tours tr.fitrow .fitbar{padding:0}
+table.tours tr.fitrow .chips5 button{width:38px;height:36px;font-size:14px}
+table.tours tr.fitrow .fside{min-width:220px;font-size:14px}
+.fside{min-width:280px;gap:3px}
+.fside .fthem .fk{display:inline-block;min-width:92px;margin-right:4px}
+.fside .fthem.you .fk{color:var(--teal-ink)}
+.fside .fcmp{font-size:14px;padding:2px 0 2px 96px}
+.fside .ffinal .fk{display:inline-block;min-width:92px;margin-right:4px}
