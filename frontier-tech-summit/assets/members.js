@@ -6,6 +6,18 @@
   var q=new URLSearchParams(location.search);
   var TOKEN=q.get('t')||localStorage.getItem('mb_t')||'';
   if(q.get('t')){ localStorage.setItem('mb_t',q.get('t')); history.replaceState(null,'',location.pathname+location.hash); }
+  var SB='https://kfbetohoebwefimdvrzo.supabase.co';
+  var HERE='https://www.endeavorcolorado.org/frontier-tech-summit/members/';
+  var hp=new URLSearchParams((location.hash||'').replace(/^#/,''));
+  if(hp.get('access_token')){
+    history.replaceState(null,'',location.pathname);
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'google',access_token:hp.get('access_token')})}).then(function(r){return r.json()}).then(function(d){
+      if(d.ok&&d.code){localStorage.setItem('mb_t',d.code);location.replace(location.pathname)}
+      else{gate((d.email?'<b>'+esc(d.email)+'</b> is not on the members list.':'That Google account is not on the members list.')+' If it should be, email Breanna at breanna.real@endeavor.org.')}
+    }).catch(function(){gate('Something went wrong signing in. Try again.')});
+    return;
+  }
+  if(hp.get('error_description')){history.replaceState(null,'',location.pathname);gate('Google sign-in did not finish: '+esc(hp.get('error_description')));return}
   var D=null, ME=null, FIT={}, FINAL={}, BYID={}, VIEW={inv:'mine',fdr:'mine'};
   var STAGES=['Identified','Evaluating','Approved to invite','Invited','Interested, dates tentative','Confirmed','Do not invite','Declined'];
   var FITW={5:'Very High',4:'High',3:'Medium-High',2:'Medium',1:'Low',0:'Do not invite'};
@@ -19,20 +31,27 @@
 
   /* ---------- gate ---------- */
   function gate(msg){
-    document.body.insertAdjacentHTML('beforeend','<div class="gate"><div class="gc"><p class="gk">Frontier Tech Summit</p><h2>Log In</h2><p>'+(msg||'For the host team and partners. Sign in with the Google account we have on file.')+'</p><a class="gbtn" href="/members/login"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.3l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.9l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Sign in with Google</a><details class="gcode"><summary>Have a personal link or access code?</summary><input type="text" id="gCode" placeholder="Paste it here" autocomplete="off"><button id="gCodeGo" class="ghost">Open</button></details><a class="gback" href="/frontier-tech-summit/">Back to the site</a></div></div>');
+    document.documentElement.classList.add('mb-gate');
+    var gurl=SB+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(HERE)+'&prompt=select_account';
+    document.body.insertAdjacentHTML('beforeend','<div class="gate"><div class="gc"><p class="gk">Members Only</p><h2>Log In</h2><p>'+(msg||'For the host team and partners. Sign in with the Google account we have on file.')+'</p><a class="gbtn" href="'+gurl+'"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.3l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.9l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Sign in with Google</a><details class="gcode"><summary>Have a personal link or access code?</summary><input type="text" id="gCode" placeholder="Paste it here" autocomplete="off"><button id="gCodeGo" class="ghost">Open</button></details><a class="gback" href="/frontier-tech-summit/">Back to the site</a></div></div>');
     var cd=document.getElementById('gCode');
     function code(){var v=cd.value.trim();var m=v.match(/[?&]t=([^&#]+)/);if(m)v=decodeURIComponent(m[1]);if(!v){cd.focus();return}localStorage.setItem('mb_t',v);location.href=location.pathname}
     document.getElementById('gCodeGo').onclick=code;cd.addEventListener('keydown',function(e){if(e.key==='Enter')code()});
+    menu();
   }
+  function menu(){var b=document.getElementById('mhMenu'),n=document.getElementById('mhNav');if(!b||b._on)return;b._on=1;b.onclick=function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)}}
   if(!TOKEN){gate();return}
 
   /* ---------- boot ---------- */
   api('GET').then(function(d){D=d;ME=d.me;FIT=d.fit||{};FINAL=d.final||{};start()}).catch(function(){localStorage.removeItem('mb_t');gate('That link is not working. Enter your email and we will send a fresh one.')});
 
   function start(){
-    document.getElementById('mhMe').textContent=ME.name+' · '+ME.role;
+    var me=document.getElementById('mhMe');me.textContent=ME.name+' \u25BE';document.getElementById('mhAcct').hidden=false;
+    me.onclick=function(e){e.stopPropagation();var o=document.getElementById('mhAcct').classList.toggle('open');me.setAttribute('aria-expanded',o)};
+    document.addEventListener('click',function(){document.getElementById('mhAcct').classList.remove('open')});
     if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false;document.getElementById('mhReview').hidden=false}
-    document.getElementById('mhOut').onclick=function(){localStorage.removeItem('mb_t');location.href=location.pathname};
+    menu();
+    document.getElementById('mhOut').onclick=function(){localStorage.removeItem('mb_t');location.href='/frontier-tech-summit/'};
     document.getElementById('mhHelp').onclick=help;
     (D.investors||[]).forEach(function(r){BYID[r.id]=r;BYID['n:'+r.n]=r});(D.founders||[]).forEach(function(r){BYID[r.id]=r;BYID['c:'+r.c]=r});
     // data into the plan page

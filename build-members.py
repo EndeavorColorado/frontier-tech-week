@@ -38,11 +38,18 @@ s = s[:a0] + 'window.__runPlan=function(){' + app + '};' + s[a1:]
 
 # 3. header + tabs
 hdr_start = s.index('<header>'); hdr_end = s.index('</header>') + len('</header>')
-header = '''<header class="mh">
-  <a class="mh-brand" href="/frontier-tech-summit/#home"><svg class="ewm" viewBox="0 0 216 28" role="img" aria-label="Endeavor" focusable="false">__EWM__</svg><span class="mh-lock"><span>Frontier Tech Summit</span><span>Members</span></span></a>
-  <div class="mh-right"><span class="mh-me" id="mhMe"></span><a class="mh-link" href="/frontier-tech-summit/review/" id="mhReview" hidden>Review the site</a><button class="mh-link" id="mhSettings" hidden>Settings</button><button class="mh-link" id="mhHelp" title="How this works">?</button><button class="mh-link" id="mhOut">Sign out</button></div>
+header = '''<header class="mh" id="mh">
+  <div class="mh-in">
+    <a class="mh-brand" href="/frontier-tech-summit/#home" aria-label="Endeavor Frontier Tech Summit, home"><span class="mh-lockup"><svg class="ewm" viewBox="0 0 216 28" role="img" aria-label="Endeavor" focusable="false">__EWM__</svg></span><span class="mh-name">Frontier Tech Summit<br>Boulder &middot; 2027</span></a>
+    <button class="mh-menu" id="mhMenu" aria-expanded="false" aria-controls="mhNav">Menu</button>
+    <nav class="mh-nav" id="mhNav" aria-label="Site">
+      <a href="/frontier-tech-summit/#attend">Who Attends</a><a href="/frontier-tech-summit/#frontiers">Frontiers</a><a href="/frontier-tech-summit/#program">Program</a><a href="/frontier-tech-summit/#boulder">Boulder</a><a href="/frontier-tech-summit/#partners">Partners</a>
+      <a class="mh-pill" href="/frontier-tech-summit/members/" aria-current="page">Members</a>
+      <div class="mh-acct" id="mhAcct" hidden><button class="mh-me" id="mhMe" aria-haspopup="true" aria-expanded="false"></button><div class="mh-drop" id="mhDrop"><button id="mhSettings" hidden>Settings</button><a href="/frontier-tech-summit/review/" id="mhReview" hidden>Review the site</a><button id="mhHelp">How this works</button><button id="mhOut">Sign out</button></div></div>
+    </nav>
+  </div>
 </header>
-<p class="stamp"><i></i>Members only · not public</p>'''
+<p class="stamp"><i></i>Members only &middot; not public</p>'''
 s = s[:hdr_start] + header + s[hdr_end:]
 # the Endeavor wordmark paths from the public site
 site = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'frontier-tech-summit', 'index.html'), encoding='utf-8').read()
