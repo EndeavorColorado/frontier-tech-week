@@ -53,13 +53,13 @@ header = '''<header class="mh" id="mh">
     <button class="mh-menu" id="mhMenu" aria-expanded="false" aria-controls="mhNav">Menu</button>
     <nav class="mh-nav" id="mhNav" aria-label="Site">
       <a href="/frontier-tech-summit/#attend">Who Attends</a><a href="/frontier-tech-summit/#frontiers">Frontiers</a><a href="/frontier-tech-summit/#program">Program</a><a href="/frontier-tech-summit/#boulder">Boulder</a><a href="/frontier-tech-summit/#partners">Partners</a>
-      <span class="mh-mem" id="mhMem"><a class="mh-pill" href="/frontier-tech-summit/members/#home" aria-current="page" aria-haspopup="true" aria-expanded="false">Members <i>&#9662;</i></a><span class="mh-dd"><span class="dd-who">Logged in as <b id="ddMe"></b></span><a href="#home">Home</a><a href="#investors">Investors</a><a href="#founders">Founders</a><a href="#program">Program</a><a href="#budget">Budget</a><a href="#settings" id="ddSettings" hidden>Settings</a><a href="/frontier-tech-summit/review/" id="ddReview" hidden>Review the site</a><a href="#" id="ddHelp">How this works</a><a href="#" id="ddOut" class="dd-out">Sign out</a></span></span>
+      <span class="mh-mem" id="mhMem"><a class="mh-pill" href="/frontier-tech-summit/members/#investors" aria-current="page" aria-haspopup="true" aria-expanded="false">Members <i>&#9662;</i></a><span class="mh-dd"><span class="dd-who">Logged in as <b id="ddMe"></b></span><a href="#investors">Investors</a><a href="#founders">Founders</a><a href="#program">Program</a><a href="#budget">Budget</a><a href="#settings" id="ddSettings" hidden>Settings</a><a href="/frontier-tech-summit/review/" id="ddReview" hidden>Review the site</a><a href="#" id="ddHelp">How this works</a><a href="#" id="ddOut" class="dd-out">Sign out</a></span></span>
     </nav>
   </div>
 </header>
 <div class="mbar" id="mbar" hidden><div class="mbar-in">
 <div class="tabs top" role="tablist">
-  <button role="tab" id="t-home" aria-selected="true">Home</button>
+  <button role="tab" id="t-home" aria-selected="true" hidden>Home</button>
   <button role="tab" id="t-inv" aria-selected="false">Investors</button>
   <button role="tab" id="t-fdr" aria-selected="false">Founders</button>
   <button role="tab" id="t-prog" aria-selected="false">Program</button>
