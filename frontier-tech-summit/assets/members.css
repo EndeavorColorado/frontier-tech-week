@@ -90,7 +90,7 @@ tr.gap td.nm,.frow.gap .co{box-shadow:inset 3px 0 0 var(--warn);padding-left:8px
 .changes{font-size:13px;color:var(--body);line-height:1.6}
 .changes li b{color:#fff}
 /* settings */
-.mem{display:grid;grid-template-columns:1.2fr 1.6fr .7fr auto auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.mem{display:grid;grid-template-columns:1fr 1.8fr .9fr auto auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
 .mem b{color:#fff}.mem .role{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
 .mem button{font:inherit;font-size:12px;background:transparent;border:1px solid var(--line);color:#fff;padding:5px 9px;cursor:pointer}
 .memadd{display:grid;grid-template-columns:1fr 1.4fr auto auto;gap:8px;margin:14px 0 6px}
@@ -133,3 +133,5 @@ tr.fitrow td{padding:4px 10px 12px;border-bottom:1px solid rgba(255,255,255,.08)
 .gate .gcode input{margin-top:10px}
 .gate button.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);margin-top:8px}
 .gate .gback{display:block;margin-top:16px;font-size:13px;color:var(--muted)}
+.mem input,.mem select{font:inherit;font-size:13px;background:var(--panel);color:#fff;border:1px solid var(--line);padding:6px 8px;min-width:0}
+.gate .gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font-weight:600;font-size:15px;background:var(--teal);color:#01000F;padding:12px;text-decoration:none}
