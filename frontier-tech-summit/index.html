@@ -333,24 +333,30 @@ p{margin:0}
 .nav-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--teal);text-decoration-thickness:2px}
 
 /* members login pop-up */
-.lgm{position:fixed;inset:0;z-index:2000;background:rgba(1,0,15,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.lgm{position:fixed;inset:0;z-index:2000;background:rgba(1,0,15,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;overflow:auto}
 .lgm.open{display:flex}
-.lgm .lgc{position:relative;max-width:440px;width:100%;background:#fff;color:#01000F;border-radius:14px;padding:40px 36px 32px;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center;font-family:Inter,-apple-system,system-ui,sans-serif;animation:lgIn .22s ease-out}
+.lgm .lgc{position:relative;max-width:560px;width:100%;background:#fff;color:#01000F;border-radius:22px;padding:56px 56px 48px;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center;font-family:Inter,-apple-system,system-ui,sans-serif;animation:lgIn .22s ease-out;margin:auto}
 @keyframes lgIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
-.lgm .lgx{position:absolute;top:10px;right:14px;background:transparent;border:0;font-size:24px;line-height:1;color:#7A7F8C;cursor:pointer;padding:4px 6px}
+.lgm .lgx{position:absolute;top:14px;right:18px;background:transparent;border:0;font-size:26px;line-height:1;color:#9aa0ab;cursor:pointer;padding:4px 6px}
 .lgm .lgx:hover{color:#01000F}
-.lgm .glogo{display:flex;justify-content:center;color:#01000F;margin:0 0 10px}.lgm .glogo svg{height:24px;width:auto}
-.lgm .gt{font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 14px}
-.lgm .gk{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#12958A;font-weight:600;margin:0 0 22px}
-.lgm p.lgp{margin:0 0 18px;font-size:15px;color:#3B3F4A;line-height:1.5}
-.lgm .gbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;font-weight:600;font-size:16px;background:#fff;color:#01000F;border:1px solid #d9d9d9;border-radius:10px;padding:14px;text-decoration:none}
+.lgm .glogo{display:flex;justify-content:center;color:#01000F;margin:0 0 12px}.lgm .glogo svg{height:30px;width:auto}
+.lgm .gt{font-family:var(--display);font-weight:500;font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 18px}
+.lgm .gk{font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:#12958A;font-weight:600;margin:0 0 30px}
+.lgm p.lgp{margin:0 0 26px;font-size:17px;color:#3B3F4A;line-height:1.5}
+.lgm .lgl{display:block;text-align:left;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#4a4f5a;margin:0 0 8px}
+.lgm .lgi{width:100%;font:inherit;font-size:18px;color:#01000F;background:#fff;border:1.5px solid #d6d9de;border-radius:10px;padding:16px 18px;margin:0 0 14px}
+.lgm .lgi:focus{outline:0;border-color:#01000F}
+.lgm .lgr{display:flex;align-items:center;gap:10px;font-size:16px;color:#3B3F4A;text-align:left;margin:0 0 22px;cursor:pointer}
+.lgm .lgr input{width:20px;height:20px;accent-color:#01000F;margin:0}
+.lgm .lgcont{width:100%;font:inherit;font-weight:600;font-size:19px;background:#01000F;color:#fff;border:0;border-radius:10px;padding:18px;cursor:pointer}
+.lgm .lgcont:hover{background:#1c1b33}.lgm .lgcont:disabled{opacity:.6;cursor:default}
+.lgm .lgm-msg{font-size:14px;color:#3B3F4A;line-height:1.45;margin:12px 0 0;text-align:left}
+.lgm .lgor{display:flex;align-items:center;gap:14px;margin:26px 0 22px;color:#8a8f9a;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.lgm .lgor::before,.lgm .lgor::after{content:"";flex:1;height:1px;background:#e3e6ea}
+.lgm .gbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;font-weight:500;font-size:19px;background:#fff;color:#01000F;border:1.5px solid #d6d9de;border-radius:10px;padding:16px;text-decoration:none}
 .lgm .gbtn:hover{border-color:#01000F}
-.lgm .gcode{margin-top:20px;border-top:1px solid #eee;padding-top:14px;text-align:left}
-.lgm .gcode summary{cursor:pointer;font-size:13px;color:#7A7F8C}
-.lgm .gcode input{width:100%;font:inherit;font-size:15px;background:#fff;color:#01000F;border:1px solid #d9d9d9;border-radius:8px;padding:11px 12px;margin:10px 0 8px}
-.lgm .gcode button{width:100%;font:inherit;font-weight:600;font-size:15px;background:#01000F;color:#fff;border:0;border-radius:8px;padding:12px;cursor:pointer}
-.lgm .lgerr{background:#FBE9E2;color:#B8431F;font-size:14px;padding:10px 12px;border-radius:8px;margin:0 0 16px;line-height:1.45}
-@media (max-width:480px){.lgm .lgc{padding:32px 22px 26px}}
+.lgm .lgerr{background:#FBE9E2;color:#B8431F;font-size:14px;padding:10px 12px;border-radius:8px;margin:0 0 16px;line-height:1.45;text-align:left}
+@media (max-width:600px){.lgm .lgc{padding:40px 24px 30px;border-radius:16px}.lgm .lgi,.lgm .lgcont,.lgm .gbtn{font-size:16px;padding:14px}.lgm p.lgp{font-size:15px}}
 .nav-login{display:inline-flex;align-items:center;gap:6px;opacity:.7!important}.nav-login.in{opacity:1!important;border:1px solid currentColor;border-radius:999px;padding:7px 15px;font-weight:600;margin-left:6px}.nav-login.in svg{display:none}.nav-login:hover{opacity:1!important}.nav-login svg{flex:none}
 .nav-cta{margin-left:10px;padding:10px 18px;font-size:14px;opacity:1!important;text-decoration:none!important}
 
@@ -1511,24 +1517,38 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
     <p class="gt">Frontier Tech Summit</p>
     <p class="gk">Members Only</p>
     <div class="lgerr" id="lgmErr" hidden></div>
-    <p class="lgp">For the host team and partners. Continue with the Google account we have on file.</p>
-    <a class="gbtn" id="lgmGoogle" href="https://kfbetohoebwefimdvrzo.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.endeavorcolorado.org%2Ffrontier-tech-summit%2Fmembers%2F&prompt=select_account"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.3l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.9l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continue with Google</a>
-    <details class="gcode"><summary>Have a personal link or access code?</summary><input type="text" id="lgmCode" placeholder="Paste it here" autocomplete="off"><button type="button" id="lgmCodeGo">Open</button></details>
+    <p class="lgp">Enter your email or access code to get started.</p>
+    <label class="lgl" for="lgmId">Login</label>
+    <input type="text" id="lgmId" class="lgi" placeholder="Enter your email or access code" autocomplete="email" autocapitalize="off" spellcheck="false">
+    <label class="lgr"><input type="checkbox" id="lgmRemember" checked> Remember me on this device</label>
+    <button type="button" class="lgcont" id="lgmGo">Continue &rarr;</button>
+    <div class="lgm-msg" id="lgmMsg" hidden></div>
+    <div class="lgor"><span>or</span></div>
+    <a class="gbtn" id="lgmGoogle" href="https://kfbetohoebwefimdvrzo.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.endeavorcolorado.org%2Ffrontier-tech-summit%2Fmembers%2F&prompt=select_account"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.3l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.9l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continue with Google</a>
   </div>
+</div>
 </div>
 <script>
 (function(){
   var M=document.getElementById('lgm'),ERR=document.getElementById('lgmErr');
-  function signedIn(){try{return !!localStorage.getItem('mb_t')}catch(e){return false}}
-  function open(msg){if(msg){ERR.textContent=msg;ERR.hidden=false}else{ERR.hidden=true}M.hidden=false;M.classList.add('open');document.documentElement.style.overflow='hidden';if(window.__lenis)window.__lenis.stop()}
+  function signedIn(){try{return !!(localStorage.getItem('mb_t')||sessionStorage.getItem('mb_t'))}catch(e){return false}}
+  function open(msg){if(msg){ERR.textContent=msg;ERR.hidden=false}else{ERR.hidden=true}M.hidden=false;M.classList.add('open');setTimeout(function(){document.getElementById('lgmId').focus()},200);document.documentElement.style.overflow='hidden';if(window.__lenis)window.__lenis.stop()}
   function close(){M.classList.remove('open');M.hidden=true;document.documentElement.style.overflow='';if(window.__lenis)window.__lenis.start()}
   document.querySelectorAll('[data-login]').forEach(function(a){a.addEventListener('click',function(e){if(signedIn())return;e.preventDefault();open()})});
   M.addEventListener('click',function(e){if(e.target===M)close()});
   document.getElementById('lgmX').onclick=close;
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&M.classList.contains('open'))close()});
-  var cd=document.getElementById('lgmCode');
-  function code(){var v=cd.value.trim();var m=v.match(/[?&]t=([^&#]+)/);if(m)v=decodeURIComponent(m[1]);if(!v){cd.focus();return}try{localStorage.setItem('mb_t',v)}catch(e){}location.href='/frontier-tech-summit/members/'}
-  document.getElementById('lgmCodeGo').onclick=code;cd.addEventListener('keydown',function(e){if(e.key==='Enter')code()});
+  var ID=document.getElementById('lgmId'),GO=document.getElementById('lgmGo'),MSG=document.getElementById('lgmMsg'),REM=document.getElementById('lgmRemember');
+  function say(t){MSG.textContent=t;MSG.hidden=!t}
+  function remember(){try{sessionStorage.setItem('mb_remember',REM.checked?'1':'0')}catch(e){}}
+  document.getElementById('lgmGoogle').addEventListener('click',remember);
+  function go(){var v=ID.value.trim();if(!v){ID.focus();return}
+    var m=v.match(/[?&]t=([^&#]+)/);if(m)v=decodeURIComponent(m[1]);
+    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){GO.disabled=true;say('Sending your link\u2026');
+      fetch('/api/summit-members',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'signin',email:v})}).then(function(){say('If that email is on the list, your link is on its way. Faster: use Continue with Google below.')}).catch(function(){say('Could not send. Use Continue with Google below.')}).then(function(){GO.disabled=false});return}
+    try{(REM.checked?localStorage:sessionStorage).setItem('mb_t',v);if(!REM.checked)localStorage.removeItem('mb_t')}catch(e){}
+    location.href='/frontier-tech-summit/members/'}
+  GO.onclick=go;ID.addEventListener('keydown',function(e){if(e.key==='Enter')go()});
   // signed in: the nav shows Members
   if(signedIn()){var nl=document.getElementById('navLogin');if(nl){nl.classList.add('in');nl.lastChild.textContent='Members';nl.title='Members area'}}
   // sent here to log in (from the members page)

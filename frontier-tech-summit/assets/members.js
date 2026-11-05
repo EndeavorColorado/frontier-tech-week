@@ -4,7 +4,7 @@
 (function(){
   var API='/api/summit-members';
   var q=new URLSearchParams(location.search);
-  var TOKEN=q.get('t')||localStorage.getItem('mb_t')||'';
+  var TOKEN=q.get('t')||localStorage.getItem('mb_t')||sessionStorage.getItem('mb_t')||'';
   if(q.get('t')){ localStorage.setItem('mb_t',q.get('t')); history.replaceState(null,'',location.pathname+location.hash); }
   var SB='https://kfbetohoebwefimdvrzo.supabase.co';
   var HERE='https://www.endeavorcolorado.org/frontier-tech-summit/members/';
@@ -12,7 +12,7 @@
   if(hp.get('access_token')){
     history.replaceState(null,'',location.pathname);
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'google',access_token:hp.get('access_token')})}).then(function(r){return r.json()}).then(function(d){
-      if(d.ok&&d.code){localStorage.setItem('mb_t',d.code);location.replace(location.pathname)}
+      if(d.ok&&d.code){var rem=sessionStorage.getItem('mb_remember')!=='0';(rem?localStorage:sessionStorage).setItem('mb_t',d.code);if(!rem)localStorage.removeItem('mb_t');location.replace(location.pathname)}
       else{gate((d.email?'<b>'+esc(d.email)+'</b> is not on the members list.':'That Google account is not on the members list.')+' If it should be, email Breanna at breanna.real@endeavor.org.')}
     }).catch(function(){gate('Something went wrong signing in. Try again.')});
     return;
@@ -48,7 +48,7 @@
     document.getElementById('mbRole').textContent=ME.role;
     if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false}
     menu();
-    document.getElementById('mhOut').onclick=function(){localStorage.removeItem('mb_t');location.href='/frontier-tech-summit/'};
+    document.getElementById('mhOut').onclick=function(){localStorage.removeItem('mb_t');sessionStorage.removeItem('mb_t');location.href='/frontier-tech-summit/'};
     document.getElementById('mhHelp').onclick=help;
     (D.investors||[]).forEach(function(r){BYID[r.id]=r;BYID['n:'+r.n]=r});(D.founders||[]).forEach(function(r){BYID[r.id]=r;BYID['c:'+r.c]=r});
     // data into the plan page
