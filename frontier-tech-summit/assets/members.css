@@ -19,7 +19,7 @@ input[type=number],.qbox,.fctl select,table.tours td.sel select{background:var(-
 .route{border-radius:0}.vc,.stat{border-radius:0}.flag{border-radius:0}
 .tier.t1{background:var(--teal);color:#01000F}
 /* header */
-.stamp{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(9,225,205,.4);padding:5px 10px;margin:0}
+.stamp{display:inline-flex;margin-top:18px!important;align-items:center;gap:8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(9,225,205,.4);padding:5px 10px;margin:0}
 .stamp i{width:7px;height:7px;border-radius:50%;background:var(--teal)}
 /* page intro line on each tab */
 .m-intro{margin:0 0 18px;color:var(--body);font-size:15px;line-height:1.5}
@@ -128,7 +128,7 @@ tr.fitrow td{padding:4px 10px 12px;border-bottom:1px solid rgba(255,255,255,.08)
 .gate .gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font-weight:600;font-size:15px;background:var(--teal);color:#01000F;padding:12px;text-decoration:none}
 
 /* header: the summit site's header */
-.mh{position:fixed;left:0;right:0;top:0;z-index:50;background:rgba(1,0,15,.86);backdrop-filter:blur(12px);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.08);padding-top:env(safe-area-inset-top,0px)}
+.mh{position:fixed!important;left:0;right:0;top:0;z-index:50;margin:0!important;padding:0!important;border:0!important;display:block!important;height:auto!important;background:rgba(1,0,15,.86);backdrop-filter:blur(12px);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.08);padding-top:env(safe-area-inset-top,0px)}
 .mh-in{max-width:1160px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
 .mh-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:#fff;min-width:0;min-height:40px}
 .mh-lockup{display:flex;align-items:center;line-height:0;color:var(--teal)}
