@@ -3,6 +3,25 @@
 Read this first. It is written for Dan Caruso and his Claude. Dan has full say over this site:
 change any layout, color, size or copy, add or remove anything.
 
+## Start here (Dan, or whoever is helping Dan)
+
+Dan describes changes in plain English. Claude does everything else.
+
+**One-time setup, about two minutes**
+1. Sign in to GitHub as **CarusoVentures** and accept the invite at
+   https://github.com/EndeavorColorado/frontier-tech-week/invitations (green Accept button).
+2. Make sure Dan's Claude is signed in to GitHub as CarusoVentures (in Claude Code: connect GitHub, or run `gh auth login`).
+3. Tell Claude: "Clone https://github.com/EndeavorColorado/frontier-tech-week and follow CLAUDE.md."
+
+**How every change works (Claude, follow this exactly)**
+1. `git pull` first.
+2. Make the change Dan asked for.
+3. Show Dan a screenshot of how it will look. Do not publish yet.
+4. Publish only when Dan says "ship it": run `python3 build-review.py`, commit, push to `main`.
+5. Tell Dan in one sentence what changed and confirm it shows on https://www.endeavorcolorado.org/frontier-tech-summit (allow about a minute).
+6. If Dan says "undo that", revert the last change, push, and confirm it's gone.
+7. Plain language only. No code unless Dan asks.
+
 ## What this is
 
 - Live at https://www.endeavorcolorado.org/frontier-tech-summit (also https://endeavorfrontiertech.vercel.app).
