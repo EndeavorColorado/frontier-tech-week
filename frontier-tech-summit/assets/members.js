@@ -141,7 +141,6 @@
     var sel=hs.querySelector('.ihs-sel');sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
     sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)};
     var q=hs.querySelector('.ihs-q');var inner=root.querySelector(isInv?'#inv-q':'#fdr-q');if(inner){q.value=inner.value;q.oninput=function(){inner.value=q.value;inner.dispatchEvent(new Event('input',{bubbles:true}));setTimeout(function(){var nq=root.querySelector('.ihs-q');if(nq){nq.focus();nq.setSelectionRange(nq.value.length,nq.value.length)}},0)}}else q.hidden=true;
-    var nb=E('button','nextun','Next one I haven’t rated ↓');nb.onclick=function(){nextUnrated(root,kind)};root.appendChild(nb);
   }
   var invTypeCur='all';function setType(t){invTypeCur=t;window.__invType(t)}
   function rowsOf(root,kind){return [].slice.call(root.querySelectorAll('[data-pid]'))}
