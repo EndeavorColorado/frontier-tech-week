@@ -367,3 +367,8 @@ table.tours tr.fitrow .chips5 button{width:64px;height:42px}
 @media (max-width:1100px){.frate .chips5 button{width:56px}.frate .chips5 button small{font-size:8px}}
 @media (max-width:700px){.frate .chips5 button{width:50px;height:40px}.frate .chips5 button small{display:none}.ihs-legend .lno{margin-left:0}}
 .frate .chips5 button.no{display:inline-flex;align-items:center;justify-content:center;line-height:1.2}
+
+/* compact scale: numbers only, word on hover */
+.frate .chips5 button,table.tours tr.fitrow .chips5 button{width:36px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;padding:0;border-radius:4px}
+.frate .chips5 button.no,table.tours tr.fitrow .chips5 button.no{width:auto;padding:0 10px;font-size:12px;font-weight:600;height:34px}
+.frate{grid-template-columns:84px auto 70px}
