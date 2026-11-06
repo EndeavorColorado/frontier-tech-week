@@ -1248,12 +1248,13 @@ h1[tabindex="-1"]:focus{outline:none}
   <button type="button" class="wn-more" id="wnMore">Read the long form</button>
 </div></section>
 <div id="wnL" hidden>
-<section class="wn-sec wn-essay"><div class="wn-in"><div class="wn-prose">
+<section class="wn-sec wn-essay"><div class="wn-in"><div class="wn-grid"><div class="wn-prose">
   <p>For most of history, the fortunes of nations, and of the cities within them, have turned on what they could build. Ships and canals, railroads and steel, the electrical grid, the transistor. Each era belonged to the places that learned to make the hard thing first, and to the people willing to finance it before anyone else believed it would work.</p>
   <p>For the last two decades, the center of gravity in venture capital sat in software, where a small team could reach millions of people with little more than code and a credit card. That era produced extraordinary companies. It also trained a generation of capital to prefer what is light, fast and cheap to scale.</p>
   <p>The next era is heavier. Artificial intelligence is pushing the cost of writing software toward zero, and in doing so it is moving value toward what software cannot conjure on its own: the power to run it, the chips to compute it, the minerals inside those chips, the machines that act in the physical world, the satellites that observe it, the quantum systems that will measure it more precisely than ever, and the biology that keeps us alive. These are the frontiers. They take longer to build, cost more to prove and are far harder to copy. Once they work, they tend to endure.</p>
   <p>Governments, utilities, manufacturers and the largest technology companies on earth have become buyers of frontier technology as well as funders of research. That shift, from grant to purchase order, is what makes this moment different. The founders building these companies are spread across the world, in Helsinki and Lisbon, Santiago and São Paulo, Bangalore and Boulder. The capital and the customers they need are concentrated in a handful of rooms, and most of these people have never been in the same one.</p>
-  <p class="wn-kick">The Endeavor Frontier Tech Summit exists to put them there.</p>
+</div>
+  <aside class="wn-pull" aria-label="In one line"><p>The Endeavor Frontier Tech Summit exists to put them there.</p></aside>
 </div></div></section>
 <section class="wn-fr" aria-label="The six frontiers"><div class="wn-in">
   <span class="wn-eb">Six frontiers, one room</span>
@@ -1267,7 +1268,7 @@ h1[tabindex="-1"]:focus{outline:none}
   </div>
 </div></section>
 <section class="wn-sec wn-vis"><div class="wn-in">
-  <div class="wn-head"><span class="wn-eb">§ 02 · Long-Term Vision</span><h2>Purpose and Long-Term Vision</h2></div>
+  <div class="wn-head"><span class="wn-eb">Long-Term Vision</span><h2>Purpose and Long-Term Vision</h2></div>
   <div class="wn-grid">
     <div class="wn-prose">
       <p>The Endeavor Frontier Tech Summit convenes the founders building frontier companies, the investors with the conviction and capital to back them, and the buyers whose decisions determine which of these technologies reach the world. It is organized around six frontiers: Aerospace and Defense, Energy and Compute, Critical Minerals, Quantum, Physical AI, and Bio and Health.</p>
@@ -1787,6 +1788,12 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
 #page-why-now .wn-short ol{max-width:44rem}
 #page-why-now .wn-close h3{font-family:var(--body);font-weight:700;text-transform:none;font-size:clamp(22px,2.4vw,30px);line-height:1.1;letter-spacing:-.01em}
 #page-why-now .wn-btn{font-size:15px;padding:12px 22px}
+/* both long-form sections share one grid: text column on the left at the same edge and width, a companion on the right */
+#page-why-now .wn-essay .wn-grid,#page-why-now .wn-vis .wn-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:start}
+#page-why-now .wn-essay .wn-prose{margin-inline:0;max-width:var(--wn-measure)}
+#page-why-now .wn-pull{position:sticky;top:calc(var(--hdr) + 24px);border-left:3px solid var(--teal);padding:4px 0 4px 24px}
+#page-why-now .wn-pull p{margin:0;font-family:var(--body);font-weight:600;font-size:clamp(22px,2.4vw,30px);line-height:1.2;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+@media (max-width:860px){#page-why-now .wn-essay .wn-grid,#page-why-now .wn-vis .wn-grid{grid-template-columns:1fr}#page-why-now .wn-pull{position:static}}
 .site-header.v2{transition:background .25s,color .25s,box-shadow .25s}
 .site-header.v2:not(.solid){background:linear-gradient(180deg,rgba(1,0,15,.5),rgba(1,0,15,0))}
 .site-header.v2 .hu{height:32px;border-bottom:1px solid rgba(255,255,255,.16);transition:height .3s ease,opacity .2s ease}
