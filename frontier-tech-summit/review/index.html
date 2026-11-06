@@ -257,7 +257,7 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .has-flow-top::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-flow.png) left top/min(110%,1500px) auto no-repeat;transform:scale(-1,-1);opacity:.16}
 @media (max-width:760px){.has-flow-top::before{background-size:160% auto;opacity:.13}}
 </style>
-<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=ec96bbc"></head>
+<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=5794841"></head>
 <body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -369,6 +369,18 @@ p{margin:0}
 .mh-mem .mh-dd .dd-out{border-top:1px solid rgba(255,255,255,.12);margin-top:4px;color:rgba(255,255,255,.7)}
 .nav-login.in::after{content:" \25BE";font-size:10px}
 @media (min-width:961px){.nav-links{flex-wrap:nowrap}.nav-links a{padding:8px 10px;white-space:nowrap}.brand .name{white-space:nowrap}.nav-login.in{padding:7px 13px}.nav-cta{margin-left:8px;padding:10px 14px}}
+
+/* agenda: short / long form (long form only when signed in) */
+.ag-forms{display:flex;align-items:center;gap:6px;margin:0 0 18px}
+.ag-forms[hidden]{display:none}
+.ag-forms button{font:600 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:10px 14px;background:transparent;border:1px solid var(--rule);color:var(--muted);cursor:pointer}
+.ag-forms button[aria-selected="true"]{background:var(--teal);color:#01000F;border-color:var(--teal)}
+.ag-forms .ag-lock{font-size:12px;color:var(--muted);margin-left:8px}
+.ag-long{display:none;margin-top:10px;padding:12px 14px;border:1px dashed var(--rule);background:rgba(255,255,255,.03)}
+.ag.long .ag-long{display:grid;gap:6px}
+.ag-long .ph{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ag-long .ph b{font-weight:600;color:var(--body);min-width:72px;letter-spacing:.1em}
+.ag-long .ph i{font-style:normal;border:1px dashed var(--rule);padding:2px 8px;color:var(--muted);letter-spacing:0;text-transform:none}
 .nav-login{display:inline-flex;align-items:center;gap:6px;opacity:.7!important}.nav-login.in{opacity:1!important;border:1px solid currentColor;border-radius:999px;padding:7px 15px;font-weight:600;margin-left:6px}.nav-login.in svg{display:none}.nav-login:hover{opacity:1!important}.nav-login svg{flex:none}
 .nav-cta{margin-left:10px;padding:10px 18px;font-size:14px;opacity:1!important;text-decoration:none!important}
 
@@ -1200,6 +1212,7 @@ h1[tabindex="-1"]:focus{outline:none}
   <style>.ag-lite .ag-day>.ag-dh{flex-direction:column;align-items:flex-start;gap:6px;padding:22px 22px 18px}.ag-lite .ag-day>.ag-dh h3{font-size:clamp(26px,2.8vw,36px)}.ag-lite .ag-row{grid-template-columns:118px minmax(0,1fr)}@media (max-width:760px){.ag-lite .ag-row{grid-template-columns:minmax(0,1fr)}}</style>
   <section class="tight ag ag-lite" id="agendaSec"><div class="wrap">
     <div class="section-head"><h2>The Agenda</h2></div>
+    <div class="ag-forms" id="agForms" role="tablist" aria-label="Agenda detail" hidden><button type="button" role="tab" data-form="short" aria-selected="true">Short form</button><button type="button" role="tab" data-form="long" aria-selected="false">Long form</button><span class="ag-lock">Long form is for the host team</span></div>
     <p class="ag-arrive">Arrive Tuesday, June 15. No program that night.</p><div class="ag-days" id="agDays">
 <div class="ag-day" aria-labelledby="agD1"><div class="ag-dh"><span class="d">Day 1</span><h3 id="agD1">Frontier Day</h3><span class="ag-sub">Wednesday, June 16, 2027</span></div><ol><li class="ag-row"><time>8:00 AM</time><div class="ag-main"><h4>Check-In and Breakfast</h4><p>Badges, coffee, first hellos.</p></div></li><li class="ag-row"><time>9:00 AM</time><div class="ag-main"><h4>Welcome and Opening Keynote</h4><p>Why frontier tech, why now.</p></div></li><li class="ag-row"><time>9:45 AM</time><div class="ag-main"><h4>Frontier Panels: Aerospace &amp; Defense; Energy, Compute &amp; Critical Minerals</h4><p>Founders on what they're building.</p></div></li><li class="ag-row"><time>11:30 AM</time><div class="ag-main"><h4>Roundtables and Buyer Briefing</h4><p>Small tables, one per Frontier.</p></div></li><li class="ag-row"><time>12:30 PM</time><div class="ag-main"><h4>Lunch</h4><p>Mix across Frontiers.</p></div></li><li class="ag-row"><time>2:30 PM</time><div class="ag-main"><h4>Frontier Panel: Quantum</h4><p>Quantum founders on stage.</p></div></li><li class="ag-row"><time>3:15 PM</time><div class="ag-main"><h4>Founder and Investor Matched Meetings</h4><p>Paired one on one.</p></div></li><li class="ag-row"><time>5:00 PM</time><div class="ag-main"><h4>Boulder Hour: Hike, Bike or Spa</h4><p>Get outside, or slow down.</p></div></li><li class="ag-row"><time>7:00 PM</time><div class="ag-main"><h4>Dinner at Corrida</h4><p>Rooftop dinner downtown.</p></div></li></ol></div>
 <div class="ag-day" aria-labelledby="agD2"><div class="ag-dh"><span class="d">Day 2</span><h3 id="agD2">Colorado Day</h3><span class="ag-sub">Thursday, June 17, 2027</span></div><ol><li class="ag-row"><time>7:45 AM</time><div class="ag-main"><h4>Breakfast</h4><p>Fuel up before the coaches.</p></div></li><li class="ag-row"><time>9:00 AM</time><div class="ag-main"><h4>Colorado Tours (Six Frontiers)</h4><p>See the work up close.</p></div></li><li class="ag-row"><time>12:00 PM</time><div class="ag-main"><h4>Lunch</h4><p>Trade notes from the road.</p></div></li><li class="ag-row"><time>2:00 PM</time><div class="ag-main"><h4>Keynote and Frontier Panels: Physical AI, Bio Tech</h4><p>Closing conversations on stage.</p></div></li><li class="ag-row"><time>3:45 PM</time><div class="ag-main"><h4>Second Look</h4><p>Pick up where you left off.</p></div></li><li class="ag-row"><time>6:30 PM</time><div class="ag-main"><h4>Dinner Under the Flatirons</h4><p>Live music and the closing party.</p></div></li></ol></div>
@@ -1568,6 +1581,19 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   if(q.has('login')){var msg=q.get('msg')||'';history.replaceState(null,'',location.pathname+location.hash);setTimeout(function(){open(msg)},150)}
 })();
 </script>
-<script src="/frontier-tech-summit/assets/review.js?v=ec96bbc"></script>
+<script>
+(function(){
+  var F=document.getElementById('agForms'),sec=document.getElementById('agendaSec');if(!F||!sec)return;
+  function signedIn(){try{return !!(localStorage.getItem('mb_t')||sessionStorage.getItem('mb_t'))}catch(e){return false}}
+  if(!signedIn())return;
+  F.hidden=false;
+  // long form: the same rows with placeholders for the detail we have not written yet
+  sec.querySelectorAll('.ag-row .ag-main').forEach(function(m){if(m.querySelector('.ag-long'))return;var d=document.createElement('div');d.className='ag-long';d.innerHTML='<span class="ph"><b>Where</b><i>[ room or venue ]</i></span><span class="ph"><b>Who</b><i>[ speakers, moderator ]</i></span><span class="ph"><b>Format</b><i>[ keynote · panel · roundtable ]</i></span><span class="ph"><b>Notes</b><i>[ run of show, AV, partner slot ]</i></span>';m.appendChild(d)});
+  function set(f){sec.classList.toggle('long',f==='long');F.querySelectorAll('[data-form]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.form===f)});try{localStorage.setItem('ag_form',f)}catch(e){}}
+  F.querySelectorAll('[data-form]').forEach(function(b){b.addEventListener('click',function(){set(b.dataset.form)})});
+  var saved='short';try{saved=localStorage.getItem('ag_form')||'short'}catch(e){}set(saved);
+})();
+</script>
+<script src="/frontier-tech-summit/assets/review.js?v=5794841"></script>
 </body>
 </html>
