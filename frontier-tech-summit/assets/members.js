@@ -27,7 +27,7 @@
 
   function E(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-  function toast(m){var t=document.querySelector('.mtoast');if(!t){t=E('div','mtoast');document.body.appendChild(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},1800)}
+  function toast(m){var t=document.querySelector('.mtoast');if(!t){t=E('div','mtoast');t.setAttribute('role','status');t.setAttribute('aria-live','polite');document.body.appendChild(t)}t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},1800)}
   function api(method,body){var o={method:method,headers:{'Content-Type':'application/json'}};var u=API+(method==='GET'?'?t='+encodeURIComponent(TOKEN):'');if(body){body.t=TOKEN;o.body=JSON.stringify(body)}return fetch(u,o).then(function(r){if(!r.ok)throw new Error('api '+r.status);return r.json()})}
   function when(s){var d=new Date(s);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
 
@@ -49,7 +49,13 @@
     document.getElementById('mhMe').textContent=ME.name;
     document.getElementById('mbRole').textContent=ME.role;
     if(ME.role==='admin'){document.getElementById('mhSettings').hidden=false;document.getElementById('ddSettings').hidden=false;document.getElementById('ddReview').hidden=false}
-    var mm=document.getElementById('mhMem');mm.classList.add('in');mm.querySelector('.mh-pill').addEventListener('click',function(e){e.preventDefault();mm.classList.toggle('open');this.setAttribute('aria-expanded',mm.classList.contains('open'))});document.addEventListener('click',function(e){if(!mm.contains(e.target))mm.classList.remove('open')});mm.querySelectorAll('.mh-dd a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open')})});
+    var mm=document.getElementById('mhMem');mm.classList.add('in');var mmT=null;
+    function mmOpen(){clearTimeout(mmT);mm.classList.add('open');mm.querySelector('.mh-pill').setAttribute('aria-expanded','true')}
+    function mmClose(){mm.classList.remove('open');mm.querySelector('.mh-pill').setAttribute('aria-expanded','false')}
+    mm.querySelector('.mh-pill').addEventListener('click',function(e){e.preventDefault();mm.classList.contains('open')?mmClose():mmOpen()});
+    mm.addEventListener('mouseenter',mmOpen);mm.addEventListener('mouseleave',function(){clearTimeout(mmT);mmT=setTimeout(mmClose,450)});
+    document.addEventListener('click',function(e){if(!mm.contains(e.target))mmClose()});document.addEventListener('keydown',function(e){if(e.key==='Escape')mmClose()});
+    mm.querySelectorAll('.mh-dd a').forEach(function(a){a.addEventListener('click',function(){mmClose()})});
     document.getElementById('ddOut').onclick=function(e){e.preventDefault();document.getElementById('mhOut').click()};
     document.getElementById('ddHelp').onclick=function(e){e.preventDefault();help()};document.getElementById('ddMe').textContent=ME.name+' · '+ME.role;
     menu();
@@ -97,9 +103,10 @@
   function fitHTML(id){
     var mine=ME.column, canRate=ME.role==='admin';
     var dv=val(id,'dan'),ev=val(id,'endeavor');var both=dv!=null&&ev!=null;
-    function row(label,col,v){var you=canRate&&mine===col;var h='<div class="frate'+(you?' you':' ro')+'"><span class="fk">'+label+'</span><div class="chips5'+(you?'':' ro')+'"'+(you?'':' aria-hidden="true"')+'>';
-      [1,2,3,4,5].forEach(function(n){h+='<button '+(you?'data-fit="'+n+'"':'disabled')+' class="'+(v===n?'on':'')+'" title="'+FITW[n]+'">'+n+'</button>'});
-      h+='<button '+(you?'data-fit="0"':'disabled')+' class="no'+(v===0?' on':'')+'" title="A reason not to have them in the room">Don\u2019t invite</button></div>';
+    var who=BYID[id]||{};var nm=who.n||who.c||id;
+    function row(label,col,v){var you=canRate&&mine===col;var h='<div class="frate'+(you?' you':' ro')+'" role="group" aria-label="'+esc(label)+(you?' (your rating)':'')+' for '+esc(nm)+': '+(v==null?'not rated':esc(word(v)))+'"><span class="fk">'+label+'</span><div class="chips5'+(you?'':' ro')+'">';
+      [1,2,3,4,5].forEach(function(n){h+='<button type="button" '+(you?'data-fit="'+n+'"':'disabled')+' class="'+(v===n?'on':'')+'" aria-pressed="'+(v===n)+'" aria-label="'+(you?'Rate '+esc(nm)+' '+n+', '+FITW[n]:label+' rated '+esc(nm)+' '+n+', '+FITW[n])+'" title="'+FITW[n]+'">'+n+'</button>'});
+      h+='<button type="button" '+(you?'data-fit="0"':'disabled')+' class="no'+(v===0?' on':'')+'" aria-pressed="'+(v===0)+'" aria-label="'+(you?'Mark '+esc(nm)+' as do not invite':label+' marked '+esc(nm)+' do not invite')+'" title="A reason not to have them in the room">Don\u2019t invite</button></div>';
       h+='<span class="fnote2">'+(v!=null&&isResearch(id,col)?'<span class="rsrch">research</span>':'')+'</span></div>';return h}
     var h='<div class="fitbar" data-fid="'+id+'">';
     h+=row('Dan','dan',dv);
@@ -116,7 +123,7 @@
   }
   function rate(id,v){var cur=valHand(id,ME.column);var nv=(cur===v)?null:v;
     FIT[id]=FIT[id]||{};FIT[id][ME.column]={v:nv,by:ME.name,at:new Date().toISOString()};var bar=document.querySelector('.fitbar[data-fid="'+id+'"]');if(bar)fillFit(bar);
-    api('POST',{action:'rate',id:id,fit:nv}).then(function(){toast(nv==null?'Cleared':'Saved: '+(nv===0?'Do not invite':nv+' · '+FITW[nv]));updateProg()}).catch(function(){toast('Did not save. Tap again.');FIT[id][ME.column]={v:cur,by:ME.name,at:''};var el=document.querySelector('.fitbar[data-fid="'+id+'"]');if(el)fillFit(el)})}
+    api('POST',{action:'rate',id:id,fit:nv}).then(function(){toast(nv==null?'Cleared '+(BYID[id]&&(BYID[id].n||BYID[id].c)||''):'Saved: '+(BYID[id]&&(BYID[id].n||BYID[id].c)||'')+' '+(nv===0?'Do not invite':nv+' · '+FITW[nv]));updateProg()}).catch(function(){toast('Did not save. Tap again.');FIT[id][ME.column]={v:cur,by:ME.name,at:''};var el=document.querySelector('.fitbar[data-fid="'+id+'"]');if(el)fillFit(el)})}
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-fit]');if(b){var id=b.closest('.fitbar').getAttribute('data-fid');rate(id,+b.getAttribute('data-fit'));setCur(b.closest('[data-pid]'));return}
     var fb=e.target.closest('[data-final]');if(fb){editFinal(fb.closest('.fitbar'));return}
@@ -135,7 +142,7 @@
   function viewbar(root,kind){if(root.querySelector('.ihs'))return;
     var isInv=kind==='inv';
     var opts=isInv?[['all','All'],['t:vc','Venture funds'],['t:str','Strategics & buyers'],['t:co','Colorado funds']]:[];
-    var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r">'+(opts.length?'<label>Show <select class="ihs-sel">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label>':'')+'<input type="search" class="ihs-q" placeholder="Search" aria-label="Search"></div>');
+    var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r">'+(opts.length?'<label>Show <select class="ihs-sel" aria-label="Show which '+(isInv?'investors':'founders')+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label>':'')+'<input type="search" class="ihs-q" placeholder="Search" aria-label="Search by name"></div>');
     var anchor=root.querySelector('#inv-head')||root.querySelector('#fdr-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);var off=root.querySelector('#fdr-off');if(off)hs.querySelector('.ihs-r').insertBefore(off,hs.querySelector('.ihs-q'));
     var sel=hs.querySelector('.ihs-sel');if(sel){sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
     sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)}}
