@@ -635,7 +635,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
       '<td class="why">'+esc2(r.why)+warm+'</td></tr>';
   }
   var COS=["Enveda","Watchmaker","Lunar Outpost","Maybell","Atom Computing","Ursa Major","True Anomaly","Electra","Alta Resource","Peak Energy","Xcimer","Crusoe","SonderMind","JumpCloud","Quantum Metric","Castelion","Albedo","Quindar","Muon Space","Vescent","Radia","Solid Power","Forge Nano","Terra CO2","USA Rare Earth","Sierra Space","Boom Supersonic","Infleqtion","Quantinuum","KoBold","Ceibo","Anduril","Varda","Impulse","Hadrian","Commonwealth Fusion","Helion","Fervo","Lilac","Sila","Group14","Nth Cycle","Boston Metal","Agility","Figure","Skild","Recursion","Illumina","Vantor","York Space"];
-  var COHQ={"Denver":1,"Boulder":1,"Louisville":1,"Broomfield":1,"Golden":1,"Fort Collins":1,"Littleton":1,"Centennial":1,"Englewood":1,"Colorado Springs":1,"Westminster":1,"Lafayette":1,"Lakewood":1,"Arvada":1,"Aurora, CO":1,"Durango":1,"Longmont":1,"Greenwood Village":1};
+  var COHQ={"Denver":1,"Boulder":1,"Louisville":1,"Broomfield":1,"Golden":1,"Fort Collins":1,"Littleton":1,"Centennial":1,"Englewood":1,"Colorado Springs":1,"Westminster":1,"Lafayette":1,"Lakewood":1,"Arvada":1,"Aurora, CO":1,"Durango":1,"Longmont":1,"Greenwood Village":1,"Vail":1,"Franktown":1};
   function isCO(r){ var q=r.hq||''; return Object.keys(COHQ).some(function(k){ return q.indexOf(k)>-1; }); }
   function caps(r){ var txt=[r.co||'',r.warm||'',r.why||''].concat(r.deals||[]).join(' | '); var out=[]; COS.forEach(function(c){ if(new RegExp('\\b'+c.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(txt)) out.push(c); }); return out; }
   /* investors: one plain list for the members build. The members script adds the rating line. */
