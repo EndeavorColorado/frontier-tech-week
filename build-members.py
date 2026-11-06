@@ -103,6 +103,18 @@ s = s.replace('Draft, October 2026 &middot; Brackets are placeholders &middot; N
 i = s.index('</style>', s.index('<style id="css">')) + len('</style>'); s = s[:i] + '<link rel="stylesheet" href="/frontier-tech-summit/assets/members.css?v=%s">' % v + s[i:]
 i = s.rindex('</body>')  # the app's buildDoc() string also contains '</body>'
 s = s[:i] + '<script src="/frontier-tech-summit/assets/members.js?v=%s"></script>\n' % v + s[i:]
+# 5. content edits made on the site that the plan artifact does not have yet (Blackbelly, bar, Vail...)
+# kept in build/members-patches.json so a rebuild never drops them; each patch is skipped once the source has it
+import json as _json
+for _p in _json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build', 'members-patches.json'), encoding='utf-8')):
+    if 'before' in _p:
+        if _p.get('once') and _p['once'] in s: continue
+        assert s.count(_p['before']) == 1, 'patch anchor missing: ' + _p['before'][:60]
+        s = s.replace(_p['before'], _p['insert'] + _p['before'], 1)
+    elif _p['old'] in s:
+        s = s.replace(_p['old'], _p['new'], 1)
+    elif _p['new'] not in s:
+        print('patch skipped, anchor gone:', _p['old'][:60])
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'frontier-tech-summit', 'members', 'index.html')
 open(out, 'w', encoding='utf-8').write(s)
 assert 'invdata' in s and '"n":"Eclipse"' not in s, 'data leaked into the page'
