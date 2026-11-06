@@ -17,7 +17,7 @@
     return h+'</div>';
   }
   function renderFdr(){
-    var rows=FDR.filter(function(r){ return qhit(fdrQ,[r.c,r.p||'',r.w||'',r.o]) && (!fdrOffice || (fdrOffice.indexOf('us:')===0 ? usHit(r) : r.o.split(' · ').indexOf(fdrOffice)>-1)); })
+    var rows=FDR.filter(function(r){ return qhit(fdrQ,[r.c,r.p||'',r.w||'',r.o]) && (!fdrOffice || (fdrOffice.indexOf('us:')===0 ? usHit(r) : (r.o||'').split(' · ').indexOf(fdrOffice)>-1)); })
       .sort(function(a,b){ return (b.r-a.r)||((b.s==='EE'?1:0)-(a.s==='EE'?1:0))||((b.x?1:0)-(a.x?1:0))||a.c.localeCompare(b.c); });
     var h='<div id="fdr-head"></div>';
     h+='<input type="search" id="fdr-q" class="qbox" value="'+esc(fdrQ)+'" aria-label="Search founders" hidden>';

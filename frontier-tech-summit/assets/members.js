@@ -67,7 +67,15 @@
     document.getElementById('fdrdata').textContent=JSON.stringify(D.founders||[]);
     document.getElementById('toursdata').textContent=JSON.stringify(D.tours||[]);
     var base=(D.budget&&D.budget.base)||{headcount:150,cont:10,lines:[],rev:{},price:{}};var saved=D.budget&&D.budget.saved;
-    document.getElementById('state').textContent=JSON.stringify(saved||base);
+    // the repo's plan.json owns the line list, labels, notes and every quoted figure;
+    // a saved budget keeps only its headcount, contingency, what-if counts and hand-edited estimates
+    var state=base;
+    if(saved){
+      var sl=saved.lines||[];
+      state={headcount:saved.headcount||base.headcount,cont:saved.cont!=null?saved.cont:base.cont,rev:saved.rev||base.rev,price:base.price||saved.price,
+        lines:(base.lines||[]).map(function(bl){var m=null;sl.forEach(function(x){if(x.l===bl.l)m=x});var o={};for(var k in bl)o[k]=bl[k];if(m&&bl.s!=='quote'){if(bl.t==='ph')o.r=m.r!=null?m.r:bl.r;else o.v=m.v!=null?m.v:bl.v}return o})};
+    }
+    document.getElementById('state').textContent=JSON.stringify(state);
     runApp();
     observe();
     tidy();renderHome();renderSettings();barProg();
@@ -145,7 +153,7 @@
     var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r">'+(opts.length?'<label>Show <select class="ihs-sel" aria-label="Show which '+(isInv?'investors':'founders')+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label>':'')+'<input type="search" class="ihs-q" placeholder="Search" aria-label="Search by name"></div>');
     var anchor=root.querySelector('#inv-head')||root.querySelector('#fdr-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);
     var lg=E('div','ihs-legend','<span class="lk">The scale</span>'+[1,2,3,4,5].map(function(n){return '<span class="l'+n+'"><b>'+n+'</b> '+FITW[n]+'</span>'}).join('<i>\u2192</i>')+'<span class="lno"><b>Pass</b> a reason not to have them in the room</span>');hs.insertAdjacentElement('afterend',lg);var off=root.querySelector('#fdr-off');if(off)hs.querySelector('.ihs-r').insertBefore(off,hs.querySelector('.ihs-q'));
-    var sel=hs.querySelector('.ihs-sel');if(sel){sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
+    var sel=hs.querySelector('.ihs-sel:not(.ihs-off)');if(sel){sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
     sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)}}
     var q=hs.querySelector('.ihs-q');var inner=root.querySelector(isInv?'#inv-q':'#fdr-q');if(inner){q.value=inner.value;q.oninput=function(){inner.value=q.value;inner.dispatchEvent(new Event('input',{bubbles:true}));setTimeout(function(){var nq=root.querySelector('.ihs-q');if(nq){nq.focus();nq.setSelectionRange(nq.value.length,nq.value.length)}},0)}}else q.hidden=true;
   }
