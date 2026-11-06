@@ -32,7 +32,7 @@ blocked by endeavorcolorado.org's security policy unless the main site's CSP all
 ## Rules
 - Content only. No attendee data, prices, budget or unconfirmed names in this public repo.
   Registration runs through Luma; contacts live in Salesforce.
-- Every change saved to `main` goes live automatically. Bre approves before anything is merged.
+- Every change saved to `main` goes live automatically. Dan Caruso has full say over the site and can push directly; see CLAUDE.md.
 - Footer "Team login" opens the internal plan in Claude; access is by named email invite only.
 - Keep it static: plain HTML, no build step, no framework.
 - endeavorcolorado.org's content security policy covers /frontier-tech-summit. Anything loaded from another
