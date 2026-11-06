@@ -67,7 +67,15 @@
     document.getElementById('fdrdata').textContent=JSON.stringify(D.founders||[]);
     document.getElementById('toursdata').textContent=JSON.stringify(D.tours||[]);
     var base=(D.budget&&D.budget.base)||{headcount:150,cont:10,lines:[],rev:{},price:{}};var saved=D.budget&&D.budget.saved;
-    document.getElementById('state').textContent=JSON.stringify(saved||base);
+    // the repo's plan.json owns the line list, labels, notes and every quoted figure;
+    // a saved budget keeps only its headcount, contingency, what-if counts and hand-edited estimates
+    var state=base;
+    if(saved){
+      var sl=saved.lines||[];
+      state={headcount:saved.headcount||base.headcount,cont:saved.cont!=null?saved.cont:base.cont,rev:saved.rev||base.rev,price:base.price||saved.price,
+        lines:(base.lines||[]).map(function(bl){var m=null;sl.forEach(function(x){if(x.l===bl.l)m=x});var o={};for(var k in bl)o[k]=bl[k];if(m&&bl.s!=='quote'){if(bl.t==='ph')o.r=m.r!=null?m.r:bl.r;else o.v=m.v!=null?m.v:bl.v}return o})};
+    }
+    document.getElementById('state').textContent=JSON.stringify(state);
     runApp();
     observe();
     tidy();renderHome();renderSettings();barProg();
