@@ -376,18 +376,27 @@ p{margin:0}
 .ag-forms button{font:600 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:10px 14px;background:transparent;border:1px solid var(--rule);color:var(--muted);cursor:pointer}
 .ag-forms button[aria-selected="true"]{background:var(--teal);color:#01000F;border-color:var(--teal)}
 .ag-forms .ag-lk{margin-right:7px;vertical-align:-1px;opacity:.8}.ag-forms.in .ag-lk{display:none}
-.ag-long{display:none;margin-top:14px;padding:18px 20px;border:1px solid var(--rule);background:rgba(255,255,255,.03);border-radius:4px}
-.ag.long .ag-long{display:grid;gap:12px}
-.al-row{display:grid;grid-template-columns:84px 1fr;gap:14px;align-items:baseline}
+.ag-long{display:none;grid-column:1/-1;margin-top:6px;padding:22px 24px;border:1px solid var(--rule);background:rgba(255,255,255,.03);border-radius:4px}
+.ag.long .ag-long{display:grid;gap:16px}
+.ag.long .ag-days{grid-template-columns:minmax(0,1fr)}
+.al-row{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:baseline}
 .al-k{font-family:var(--display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);padding-top:3px}
 .al-v{font-size:15px;line-height:1.6;color:var(--body)}
 .al-v.ph i{font-style:normal;border:1px dashed var(--rule);padding:2px 8px;color:var(--muted);font-size:12px}
-.al-boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:4px 0}
-.al-box{display:grid;gap:8px;align-content:start;padding:16px 18px;border:1px solid var(--rule);border-left:3px solid var(--teal);background:rgba(255,255,255,.04)}
-.al-bt{font-family:var(--display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--body)}
-.al-bw{font-size:16px;line-height:1.55;font-weight:500;color:var(--body)}
+.al-boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:4px 0}
+.al-box{display:grid;gap:14px;align-content:start;padding:18px 20px;border:1px solid var(--rule);border-left:3px solid var(--teal);background:rgba(255,255,255,.04)}
+.al-bt{font-family:var(--display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--body)}
 .al-bm{font-size:13px;line-height:1.5;color:var(--muted)}
-@media (max-width:600px){.al-row{grid-template-columns:1fr;gap:4px}.ag-long{padding:14px}}
+.al-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px 18px}
+.al-row .al-people{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.al-p{display:grid;gap:3px;align-content:start}
+.al-pn{font-family:var(--display);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--body);line-height:1.3}
+.al-pt{font-size:13px;line-height:1.45;color:var(--muted)}
+.al-pc{font-size:13px;line-height:1.45;color:var(--muted)}
+.al-li{font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);text-decoration:none;margin-top:2px}
+.al-li i{font-style:normal}
+.al-mod{display:grid;gap:6px;padding-top:12px;border-top:1px dashed var(--rule)}
+@media (max-width:600px){.al-row{grid-template-columns:1fr;gap:4px}.ag-long{padding:16px}}
 .nav-login{display:inline-flex;align-items:center;gap:6px;opacity:.7!important}.nav-login.in{opacity:1!important;border:1px solid currentColor;border-radius:999px;padding:7px 15px;font-weight:600;margin-left:6px}.nav-login.in svg{display:none}.nav-login:hover{opacity:1!important}.nav-login svg{flex:none}
 .nav-cta{margin-left:10px;padding:10px 18px;font-size:14px;opacity:1!important;text-decoration:none!important}
 
@@ -1598,16 +1607,21 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   var PH={where:'[ room or venue ]',who:'[ speakers, moderator ]',format:'[ keynote · panel · roundtable ]',notes:'[ run of show, AV, partner slot ]'};
   function line(k,label,row){var v=row&&row[k];return '<div class="al-row"><span class="al-k">'+label+'</span>'+(v?'<span class="al-v">'+esc(v)+'</span>':'<span class="al-v ph"><i>'+PH[k]+'</i></span>')+'</div>'}
-  function fill(m,row){row=row||{};var h=line('where','Where',row)+line('format','Format',row);
-    if(row.boxes&&row.boxes.length){h+='<div class="al-boxes">'+row.boxes.map(function(b){return '<div class="al-box"><span class="al-bt">'+esc(b.t)+'</span><span class="al-bw">'+esc(b.who)+'</span>'+(b.mod?'<span class="al-bm">'+esc(b.mod)+'</span>':'')+'</div>'}).join('')+'</div>';if(row.who)h+=line('who','Who',row)}
-    else h+=line('who','Who',row);
+  function person(x){if(x.site)return '<div class="al-p al-site"><span class="al-pn">'+esc(x.n)+'</span><span class="al-pt">'+esc(x.t)+'</span><span class="al-pc">'+esc(x.c)+'</span></div>';
+    return '<div class="al-p"><span class="al-pn">'+esc(x.n)+'</span><span class="al-pt">'+esc(x.t)+', '+esc(x.c)+'</span>'+(x.li?'<a class="al-li" href="'+esc(x.li)+'" target="_blank" rel="noopener">LinkedIn <i>&#8599;</i></a>':'')+'</div>'}
+  function people(list){return '<div class="al-people">'+list.map(person).join('')+'</div>'}
+  function box(b){var h='<div class="al-box"><span class="al-bt">'+esc(b.t)+'</span>';if(b.people&&b.people.length)h+=people(b.people);if(b.mod)h+='<div class="al-mod"><span class="al-k">Moderator</span>'+person(b.mod)+'</div>';if(b.note)h+='<span class="al-bm">'+esc(b.note)+'</span>';return h+'</div>'}
+  function fill(li,row){row=row||{};var h=line('where','Where',row)+line('format','Format',row);
+    if(row.people&&row.people.length)h+='<div class="al-row"><span class="al-k">Who</span>'+people(row.people)+'</div>';
+    else if(row.who||!row.boxes)h+=line('who','Who',row);
+    if(row.boxes&&row.boxes.length)h+='<div class="al-boxes">'+row.boxes.map(box).join('')+'</div>';
     if(row.notes||!row.boxes)h+=line('notes','Notes',row);
-    var d=m.querySelector('.ag-long');if(!d){d=document.createElement('div');d.className='ag-long';m.appendChild(d)}d.innerHTML=h}
+    var d=li.querySelector('.ag-long');if(!d){d=document.createElement('div');d.className='ag-long';li.appendChild(d)}d.innerHTML=h}
   var days=sec.querySelectorAll('.ag-day');
-  days.forEach(function(day){day.querySelectorAll('.ag-row .ag-main').forEach(function(m){fill(m,null)})});
+  days.forEach(function(day){day.querySelectorAll('.ag-row').forEach(function(m){fill(m,null)})});
   // the written detail lives behind the members API; placeholders stay where nothing is written yet
   var tok='';try{tok=localStorage.getItem('mb_t')||sessionStorage.getItem('mb_t')||''}catch(e){}
-  if(tok)fetch('/api/summit-members?t='+encodeURIComponent(tok)).then(function(r){return r.ok?r.json():null}).then(function(d){var A=d&&d.agenda;if(!A)return;days.forEach(function(day,di){var rows=A[di===0?'d1':'d2']||[];day.querySelectorAll('.ag-row .ag-main').forEach(function(m,i){fill(m,rows[i])})})}).catch(function(){});
+  if(tok)fetch('/api/summit-members?t='+encodeURIComponent(tok)).then(function(r){return r.ok?r.json():null}).then(function(d){var A=d&&d.agenda;if(!A)return;days.forEach(function(day,di){var rows=A[di===0?'d1':'d2']||[];day.querySelectorAll('.ag-row').forEach(function(m,i){fill(m,rows[i])})})}).catch(function(){});
   function set(f){sec.classList.toggle('long',f==='long');F.querySelectorAll('[data-form]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.form===f)});try{localStorage.setItem('ag_form',f)}catch(e){}}
   F.querySelectorAll('[data-form]').forEach(function(b){b.addEventListener('click',function(){set(b.dataset.form)})});
   var saved='short';try{saved=localStorage.getItem('ag_form')||'short'}catch(e){}set(saved);
