@@ -257,7 +257,7 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .has-flow-top::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-flow.png) left top/min(110%,1500px) auto no-repeat;transform:scale(-1,-1);opacity:.16}
 @media (max-width:760px){.has-flow-top::before{background-size:160% auto;opacity:.13}}
 </style>
-<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=9689afb"></head>
+<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=9508303"></head>
 <body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1588,12 +1588,12 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   if(!signedIn()){var L=document.getElementById('agLong');L.title='Log in to see the long form';L.setAttribute('aria-label','Long form, members only. Log in to see it.');L.addEventListener('click',function(){var m=document.getElementById('lgm');if(m){m.hidden=false;m.classList.add('open');document.documentElement.style.overflow='hidden';if(window.__lenis)window.__lenis.stop();setTimeout(function(){var i=document.getElementById('lgmId');if(i)i.focus()},200)}});return}
   F.classList.add('in');
   // long form: the same rows with placeholders for the detail we have not written yet
-  sec.querySelectorAll('.ag-row .ag-main').forEach(function(m){if(m.querySelector('.ag-long'))return;var d=document.createElement('div');d.className='ag-long';d.innerHTML='<span class="ph"><b>Where</b><i>[ room or venue ]</i></span><span class="ph"><b>Who</b><i>[ speakers, moderator ]</i></span><span class="ph"><b>Format</b><i>[ keynote · panel · roundtable ]</i></span><span class="ph"><b>Notes</b><i>[ run of show, AV, partner slot ]</i></span>';m.appendChild(d)});
+  sec.querySelectorAll('.ag-row .ag-main').forEach(function(m){if(m.querySelector('.ag-long'))return;var d=document.createElement('div');d.className='ag-long';d.innerHTML='<span class="ph"><b>Where</b><i>[ room or venue ]</i></span><span class="ph"><b>Who</b><i>[ speakers, moderator ]</i></span><span class="ph"><b>Format</b><i>[ keynote · panel · roundtable ]</i></span>';m.appendChild(d)});
   function set(f){sec.classList.toggle('long',f==='long');F.querySelectorAll('[data-form]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.form===f)});try{localStorage.setItem('ag_form',f)}catch(e){}}
   F.querySelectorAll('[data-form]').forEach(function(b){b.addEventListener('click',function(){set(b.dataset.form)})});
   var saved='short';try{saved=localStorage.getItem('ag_form')||'short'}catch(e){}set(saved);
 })();
 </script>
-<script src="/frontier-tech-summit/assets/review.js?v=9689afb"></script>
+<script src="/frontier-tech-summit/assets/review.js?v=9508303"></script>
 </body>
 </html>
