@@ -134,12 +134,11 @@
   var SHOW={inv:'all',fdr:'all'};
   function viewbar(root,kind){if(root.querySelector('.ihs'))return;
     var isInv=kind==='inv';
-    var opts=[['all','All'],['side','Side by side: Endeavor · Dan · Final'],['unrated','Not yet rated by me'],['rated','Rated by me'],['gap','Where Bre and Dan disagree'],['waiting','Waiting on '+(ME.column==='dan'?'Bre':'Dan')],['Approved','Approved'],['Reached out','Reached out'],['Confirmed','Confirmed'],['Out','Not inviting']];if(!isInv&&ME.column==='endeavor')opts.splice(4,0,['research','Still on the research rating']);
-    if(isInv)opts=opts.concat([['-','──────'],['t:vc','Venture funds only'],['t:str','Strategics & buyers only'],['t:co','Colorado funds only']]);
-    var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r"><label>Show <select class="ihs-sel">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label><input type="search" class="ihs-q" placeholder="Search" aria-label="Search"></div>');
+    var opts=isInv?[['all','All'],['t:vc','Venture funds'],['t:str','Strategics & buyers'],['t:co','Colorado funds']]:[];
+    var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r">'+(opts.length?'<label>Show <select class="ihs-sel">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label>':'')+'<input type="search" class="ihs-q" placeholder="Search" aria-label="Search"></div>');
     var anchor=root.querySelector('#inv-head')||root.querySelector('#fdr-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);var off=root.querySelector('#fdr-off');if(off)hs.querySelector('.ihs-r').insertBefore(off,hs.querySelector('.ihs-q'));
-    var sel=hs.querySelector('.ihs-sel');sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
-    sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)};
+    var sel=hs.querySelector('.ihs-sel');if(sel){sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
+    sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)}}
     var q=hs.querySelector('.ihs-q');var inner=root.querySelector(isInv?'#inv-q':'#fdr-q');if(inner){q.value=inner.value;q.oninput=function(){inner.value=q.value;inner.dispatchEvent(new Event('input',{bubbles:true}));setTimeout(function(){var nq=root.querySelector('.ihs-q');if(nq){nq.focus();nq.setSelectionRange(nq.value.length,nq.value.length)}},0)}}else q.hidden=true;
   }
   var invTypeCur='all';function setType(t){invTypeCur=t;window.__invType(t)}
