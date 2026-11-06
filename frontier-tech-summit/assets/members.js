@@ -105,7 +105,7 @@
     var dv=val(id,'dan'),ev=val(id,'endeavor');var both=dv!=null&&ev!=null;
     var who=BYID[id]||{};var nm=who.n||who.c||id;
     function row(label,col,v){var you=canRate&&mine===col;var h='<div class="frate'+(you?' you':' ro')+'" role="group" aria-label="'+esc(label)+(you?' (your rating)':'')+' for '+esc(nm)+': '+(v==null?'not rated':esc(word(v)))+'"><span class="fk">'+label+'</span><div class="chips5'+(you?'':' ro')+'">';
-      [1,2,3,4,5].forEach(function(n){h+='<button type="button" '+(you?'data-fit="'+n+'"':'disabled')+' class="'+(v===n?'on':'')+'" aria-pressed="'+(v===n)+'" aria-label="'+(you?'Rate '+esc(nm)+' '+n+', '+FITW[n]:label+' rated '+esc(nm)+' '+n+', '+FITW[n])+'" title="'+FITW[n]+'">'+n+'</button>'});
+      [1,2,3,4,5].forEach(function(n){h+='<button type="button" '+(you?'data-fit="'+n+'"':'disabled')+' class="l'+n+(v===n?' on':'')+'" aria-pressed="'+(v===n)+'" aria-label="'+(you?'Rate '+esc(nm)+' '+n+', '+FITW[n]:label+' rated '+esc(nm)+' '+n+', '+FITW[n])+'" title="'+n+' = '+FITW[n]+'"><b>'+n+'</b><small>'+FITW[n]+'</small></button>'});
       h+='<button type="button" '+(you?'data-fit="0"':'disabled')+' class="no'+(v===0?' on':'')+'" aria-pressed="'+(v===0)+'" aria-label="'+(you?'Mark '+esc(nm)+' as do not invite':label+' marked '+esc(nm)+' do not invite')+'" title="A reason not to have them in the room">Don\u2019t invite</button></div>';
       h+='<span class="fnote2">'+(v!=null&&isResearch(id,col)?'<span class="rsrch">research</span>':'')+'</span></div>';return h}
     var h='<div class="fitbar" data-fid="'+id+'">';
@@ -143,7 +143,8 @@
     var isInv=kind==='inv';
     var opts=isInv?[['all','All'],['t:vc','Venture funds'],['t:str','Strategics & buyers'],['t:co','Colorado funds']]:[];
     var hs=E('div','ihs','<div class="ihs-l"><span class="ihs-n" id="ihsn-'+kind+'"></span></div><div class="ihs-r">'+(opts.length?'<label>Show <select class="ihs-sel" aria-label="Show which '+(isInv?'investors':'founders')+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==='-'?' disabled':'')+'>'+o[1]+'</option>'}).join('')+'</select></label>':'')+'<input type="search" class="ihs-q" placeholder="Search" aria-label="Search by name"></div>');
-    var anchor=root.querySelector('#inv-head')||root.querySelector('#fdr-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);var off=root.querySelector('#fdr-off');if(off)hs.querySelector('.ihs-r').insertBefore(off,hs.querySelector('.ihs-q'));
+    var anchor=root.querySelector('#inv-head')||root.querySelector('#fdr-head');if(anchor)anchor.appendChild(hs);else root.insertBefore(hs,root.firstChild);
+    var lg=E('div','ihs-legend','<span class="lk">The scale</span>'+[1,2,3,4,5].map(function(n){return '<span class="l'+n+'"><b>'+n+'</b> '+FITW[n]+'</span>'}).join('<i>\u2192</i>')+'<span class="lno"><b>Don\u2019t invite</b> a reason not to have them in the room</span>');hs.insertAdjacentElement('afterend',lg);var off=root.querySelector('#fdr-off');if(off)hs.querySelector('.ihs-r').insertBefore(off,hs.querySelector('.ihs-q'));
     var sel=hs.querySelector('.ihs-sel');if(sel){sel.value=(isInv&&invTypeCur!=='all')?'t:'+invTypeCur:SHOW[kind];
     sel.onchange=function(){var v=sel.value;if(v.indexOf('t:')===0){SHOW[kind]='all';setType(v.slice(2));return}SHOW[kind]=v;if(isInv&&invTypeCur!=='all'){setType('all');return}applyView(root,kind)}}
     var q=hs.querySelector('.ihs-q');var inner=root.querySelector(isInv?'#inv-q':'#fdr-q');if(inner){q.value=inner.value;q.oninput=function(){inner.value=q.value;inner.dispatchEvent(new Event('input',{bubbles:true}));setTimeout(function(){var nq=root.querySelector('.ihs-q');if(nq){nq.focus();nq.setSelectionRange(nq.value.length,nq.value.length)}},0)}}else q.hidden=true;

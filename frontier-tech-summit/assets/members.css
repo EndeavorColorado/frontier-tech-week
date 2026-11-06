@@ -345,3 +345,25 @@ table.tours tr.fitrow .chips5 button.no{width:auto;padding:0 10px;white-space:no
 .ihs-r label{gap:10px}
 @media (min-width:961px){.mh-nav{flex-wrap:nowrap}.mh-nav a{padding:8px 10px;white-space:nowrap}.mh-nav .mh-pill{padding:7px 13px}.mh-cta{margin-left:8px;padding:10px 14px}}
 .ihs-sel,.ihs-q,.ihs-off{height:46px;border:1.5px solid var(--line);box-sizing:border-box}.ihs-sel:focus,.ihs-q:focus{border-color:var(--ink)}
+
+/* the scale: number + word on every button, shaded low to high */
+.frate .chips5 button{width:64px;height:42px;display:grid;align-content:center;justify-items:center;gap:1px;line-height:1;padding:0 4px;border-radius:5px}
+.frate .chips5 button b{font-size:15px;font-weight:700}
+.frate .chips5 button small{font-size:9px;letter-spacing:.02em;font-weight:600;white-space:nowrap}
+.frate .chips5 button.l1{background:#fff}.frate .chips5 button.l2{background:#F3FBFA}.frate .chips5 button.l3{background:#E4F7F4}.frate .chips5 button.l4{background:#CDF2EC}.frate .chips5 button.l5{background:#B4ECE3}
+.frate .chips5 button.on{background:var(--ink)!important;color:#fff}
+.frate .chips5.ro button{color:var(--muted);border-color:var(--line)}
+.frate .chips5.ro button.l2,.frate .chips5.ro button.l3,.frate .chips5.ro button.l4,.frate .chips5.ro button.l5{background:#fff}
+.frate .chips5.ro button.on{background:var(--ink)!important;color:#fff;border-color:var(--ink)}
+.frate .chips5 button.no{display:inline-flex;height:42px;padding:0 10px;font-size:12px}
+.frate{grid-template-columns:84px auto 80px}
+.ihs-legend{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--body);margin:0 0 6px;padding:10px 0 12px;border-bottom:1px solid var(--line)}
+.ihs-legend .lk{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.ihs-legend span b{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;border:1px solid var(--line);border-radius:3px;font-weight:700;color:var(--ink);margin-right:4px}
+.ihs-legend .l5 b{background:#B4ECE3}.ihs-legend .l4 b{background:#CDF2EC}.ihs-legend .l3 b{background:#E4F7F4}.ihs-legend .l2 b{background:#F3FBFA}
+.ihs-legend i{color:var(--muted);font-style:normal}
+.ihs-legend .lno{margin-left:10px;color:var(--muted)}.ihs-legend .lno b{min-width:0;padding:0 6px;color:var(--body)}
+table.tours tr.fitrow .chips5 button{width:64px;height:42px}
+@media (max-width:1100px){.frate .chips5 button{width:56px}.frate .chips5 button small{font-size:8px}}
+@media (max-width:700px){.frate .chips5 button{width:50px;height:40px}.frate .chips5 button small{display:none}.ihs-legend .lno{margin-left:0}}
+.frate .chips5 button.no{display:inline-flex;align-items:center;justify-content:center;line-height:1.2}
