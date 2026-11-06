@@ -152,7 +152,7 @@
       var other=mine==='dan'?'endeavor':'dan';
       if(v==='unrated')hide=valHand(id,mine)!=null&&!isResearch(id,mine)?true:(valHand(id,mine)!=null);else if(v==='rated')hide=valHand(id,mine)==null;else if(v==='research')hide=!isResearch(id,'endeavor');else if(v==='gap')hide=!gap;else if(v==='waiting')hide=!(val(id,mine)!=null&&val(id,other)==null);else if(v!=='all'&&v!=='side')hide=st!==v;
       r.classList.toggle('vh',hide);r.classList.toggle('hasfinal',finalOf(id).fit!=null)});
-    var nb=root.querySelector('.nextun');if(nb)nb.hidden=ME.role!=='admin'||v==='side';root.classList.toggle('side-on',v==='side');if(v==='side')renderSide(root,kind);else{var sb=root.querySelector('.sbs');if(sb)sb.remove()}updateProg();
+    root.classList.toggle('side-on',v==='side');if(v==='side')renderSide(root,kind);else{var sb=root.querySelector('.sbs');if(sb)sb.remove()}updateProg();
   }
   /* side by side */
   function renderSide(root,kind){var list=(kind==='inv'?D.investors:D.founders).slice();var mine=ME.column,canRate=ME.role==='admin';
