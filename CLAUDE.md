@@ -13,13 +13,19 @@ Dan describes changes in plain English. Claude does everything else.
 2. Make sure Dan's Claude is signed in to GitHub as CarusoVentures (in Claude Code: connect GitHub, or run `gh auth login`).
 3. Tell Claude: "Clone https://github.com/EndeavorColorado/frontier-tech-week and follow CLAUDE.md."
 
+**Two ways to work. Dan picks each time; ask if it isn't clear.**
+- **Live:** changes go to the `main` branch and appear on https://www.endeavorcolorado.org/frontier-tech-summit about a minute after publishing.
+- **Dan's version:** changes go to the `dans-version` branch only. The live site doesn't change. Each push gets its own preview, always at
+  https://endeavorfrontiertech-git-dans-version-endeavor-colorado.vercel.app/frontier-tech-summit/
+  When Dan likes his version, "make my version live" merges `dans-version` into `main`.
+
 **How every change works (Claude, follow this exactly)**
-1. `git pull` first.
+1. `git pull` first, on the branch you're working on.
 2. Make the change Dan asked for.
 3. Show Dan a screenshot of how it will look. Do not publish yet.
-4. Publish only when Dan says "ship it": run `python3 build-review.py`, commit, push to `main`.
-5. Tell Dan in one sentence what changed and confirm it shows on https://www.endeavorcolorado.org/frontier-tech-summit (allow about a minute).
-6. If Dan says "undo that", revert the last change, push, and confirm it's gone.
+4. Publish only when Dan says "ship it": run `python3 build-review.py`, commit, and push to the branch he chose (`main` for live, `dans-version` for his version).
+5. Tell Dan in one sentence what changed and where to see it (the live site or his preview link; allow about a minute).
+6. If Dan says "undo that", revert the last change on that branch, push, and confirm it's gone.
 7. Plain language only. No code unless Dan asks.
 
 ## What this is
