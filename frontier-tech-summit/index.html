@@ -393,8 +393,9 @@ p{margin:0}
 .al-pn{font-family:var(--display);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--body);line-height:1.3}
 .al-pt{font-size:13px;line-height:1.45;color:var(--muted)}
 .al-pc{font-size:13px;line-height:1.45;color:var(--muted)}
-.al-li{font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);text-decoration:none;margin-top:2px}
-.al-li i{font-style:normal}
+.al-pn{display:inline-flex;align-items:center;gap:8px}
+.al-li{display:inline-flex;color:var(--teal);opacity:.85;line-height:0;transition:opacity .15s}
+.al-li:hover{opacity:1}
 .al-mod{display:grid;gap:6px;padding-top:12px;border-top:1px dashed var(--rule)}
 @media (max-width:600px){.al-row{grid-template-columns:1fr;gap:4px}.ag-long{padding:16px}}
 .nav-login{display:inline-flex;align-items:center;gap:6px;opacity:.7!important}.nav-login.in{opacity:1!important;border:1px solid currentColor;border-radius:999px;padding:7px 15px;font-weight:600;margin-left:6px}.nav-login.in svg{display:none}.nav-login:hover{opacity:1!important}.nav-login svg{flex:none}
@@ -1608,7 +1609,8 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   var PH={where:'[ room or venue ]',who:'[ speakers, moderator ]',format:'[ keynote · panel · roundtable ]',notes:'[ run of show, AV, partner slot ]'};
   function line(k,label,row){var v=row&&row[k];return '<div class="al-row"><span class="al-k">'+label+'</span>'+(v?'<span class="al-v">'+esc(v)+'</span>':'<span class="al-v ph"><i>'+PH[k]+'</i></span>')+'</div>'}
   function person(x){if(x.site)return '<div class="al-p al-site"><span class="al-pn">'+esc(x.n)+'</span><span class="al-pt">'+esc(x.t)+'</span><span class="al-pc">'+esc(x.c)+'</span></div>';
-    return '<div class="al-p"><span class="al-pn">'+esc(x.n)+'</span><span class="al-pt">'+esc(x.t)+', '+esc(x.c)+'</span>'+(x.li?'<a class="al-li" href="'+esc(x.li)+'" target="_blank" rel="noopener">LinkedIn <i>&#8599;</i></a>':'')+'</div>'}
+    var ic=x.li?'<a class="al-li" href="'+esc(x.li)+'" target="_blank" rel="noopener" aria-label="'+esc(x.n)+' on LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>':'';
+    return '<div class="al-p"><span class="al-pn">'+esc(x.n)+ic+'</span><span class="al-pt">'+esc(x.t)+', '+esc(x.c)+'</span></div>'}
   function people(list){return '<div class="al-people">'+list.map(person).join('')+'</div>'}
   function box(b){var h='<div class="al-box"><span class="al-bt">'+esc(b.t)+'</span>';if(b.people&&b.people.length)h+=people(b.people);if(b.mod)h+='<div class="al-mod"><span class="al-k">Moderator</span>'+person(b.mod)+'</div>';if(b.note)h+='<span class="al-bm">'+esc(b.note)+'</span>';return h+'</div>'}
   function fill(li,row){row=row||{};var h=line('where','Where',row)+line('format','Format',row);
