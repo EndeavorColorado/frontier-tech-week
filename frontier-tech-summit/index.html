@@ -381,6 +381,8 @@ p{margin:0}
 .ag-long .ph{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .ag-long .ph b{font-weight:600;color:var(--body);min-width:72px;letter-spacing:.1em}
 .ag-long .ph i{font-style:normal;border:1px dashed var(--rule);padding:2px 8px;color:var(--muted);letter-spacing:0;text-transform:none}
+.ag-long .ph .tx{letter-spacing:0;text-transform:none;font-size:14px;line-height:1.5;color:var(--body)}
+.ag-long .ph{align-items:flex-start}.ag-long .ph b{padding-top:2px}
 .nav-login{display:inline-flex;align-items:center;gap:6px;opacity:.7!important}.nav-login.in{opacity:1!important;border:1px solid currentColor;border-radius:999px;padding:7px 15px;font-weight:600;margin-left:6px}.nav-login.in svg{display:none}.nav-login:hover{opacity:1!important}.nav-login svg{flex:none}
 .nav-cta{margin-left:10px;padding:10px 18px;font-size:14px;opacity:1!important;text-decoration:none!important}
 
@@ -1588,7 +1590,14 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   if(!signedIn()){var L=document.getElementById('agLong');L.title='Log in to see the long form';L.setAttribute('aria-label','Long form, members only. Log in to see it.');L.addEventListener('click',function(){var m=document.getElementById('lgm');if(m){m.hidden=false;m.classList.add('open');document.documentElement.style.overflow='hidden';if(window.__lenis)window.__lenis.stop();setTimeout(function(){var i=document.getElementById('lgmId');if(i)i.focus()},200)}});return}
   F.classList.add('in');
   // long form: the same rows with placeholders for the detail we have not written yet
-  sec.querySelectorAll('.ag-row .ag-main').forEach(function(m){if(m.querySelector('.ag-long'))return;var d=document.createElement('div');d.className='ag-long';d.innerHTML='<span class="ph"><b>Where</b><i>[ room or venue ]</i></span><span class="ph"><b>Who</b><i>[ speakers, moderator ]</i></span><span class="ph"><b>Format</b><i>[ keynote · panel · roundtable ]</i></span><span class="ph"><b>Notes</b><i>[ run of show, AV, partner slot ]</i></span>';m.appendChild(d)});
+  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  var PH={where:'[ room or venue ]',who:'[ speakers, moderator ]',format:'[ keynote · panel · roundtable ]',notes:'[ run of show, AV, partner slot ]'};
+  function fill(m,row){row=row||{};var h='';[['where','Where'],['who','Who'],['format','Format'],['notes','Notes']].forEach(function(k){h+='<span class="ph"><b>'+k[1]+'</b>'+(row[k[0]]?'<span class="tx">'+esc(row[k[0]])+'</span>':'<i>'+PH[k[0]]+'</i>')+'</span>'});var d=m.querySelector('.ag-long');if(!d){d=document.createElement('div');d.className='ag-long';m.appendChild(d)}d.innerHTML=h}
+  var days=sec.querySelectorAll('.ag-day');
+  days.forEach(function(day){day.querySelectorAll('.ag-row .ag-main').forEach(function(m){fill(m,null)})});
+  // the written detail lives behind the members API; placeholders stay where nothing is written yet
+  var tok='';try{tok=localStorage.getItem('mb_t')||sessionStorage.getItem('mb_t')||''}catch(e){}
+  if(tok)fetch('/api/summit-members?t='+encodeURIComponent(tok)).then(function(r){return r.ok?r.json():null}).then(function(d){var A=d&&d.agenda;if(!A)return;days.forEach(function(day,di){var rows=A[di===0?'d1':'d2']||[];day.querySelectorAll('.ag-row .ag-main').forEach(function(m,i){fill(m,rows[i])})})}).catch(function(){});
   function set(f){sec.classList.toggle('long',f==='long');F.querySelectorAll('[data-form]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.form===f)});try{localStorage.setItem('ag_form',f)}catch(e){}}
   F.querySelectorAll('[data-form]').forEach(function(b){b.addEventListener('click',function(){set(b.dataset.form)})});
   var saved='short';try{saved=localStorage.getItem('ag_form')||'short'}catch(e){}set(saved);
