@@ -41,7 +41,7 @@
 
   /* ---- apply edits ---- */
   function latestEdits(){var m={};ROWS.forEach(function(r){if(r.kind==='edit'&&r.key)m[r.key]=r});return m}
-  function applyMode(){
+  function applyMode(){danFrame();
     EDITS=latestEdits();
     document.documentElement.setAttribute('data-rvmode',MODE);
     [].slice.call(document.querySelectorAll('[data-rvk]')).forEach(function(el){var k=el.getAttribute('data-rvk');var e=EDITS[k];
@@ -99,7 +99,7 @@
 
   /* ---- compare ---- */
   function compare(){var base=location.pathname+'?t='+encodeURIComponent(TOKEN)+'&embed=1&mode=';var h=location.hash||'#home';
-    var w=E('div','rvx-cmp','<div><span>Live</span><iframe src="'+base+'live'+h+'"></iframe></div><div><span>Dan\'s Version</span><iframe src="'+base+'dan'+h+'"></iframe></div>');document.body.appendChild(w);document.documentElement.classList.add('rvx-cmpon');
+    var w=E('div','rvx-cmp','<div><span>Live</span><iframe src="'+base+'live'+h+'"></iframe></div><div><span>Dan\'s Version</span><iframe src="'+DANURL+h+'"></iframe></div>');document.body.appendChild(w);document.documentElement.classList.add('rvx-cmpon');
     var fr=w.querySelectorAll('iframe');var lock=false;function sync(a,b){try{a.contentWindow.addEventListener('scroll',function(){if(lock)return;lock=true;b.contentWindow.scrollTo(0,a.contentWindow.scrollY);setTimeout(function(){lock=false},30)})}catch(e){}}
     fr[0].onload=function(){sync(fr[0],fr[1])};fr[1].onload=function(){sync(fr[1],fr[0])};
     window.addEventListener('hashchange',function(){fr.forEach(function(f){try{f.contentWindow.location.hash=location.hash}catch(e){}})});
@@ -121,6 +121,11 @@
     document.addEventListener('click',function(e){if(placing&&!e.target.closest('.rvx-bar,.rvx-panel,.rvx-box,.rvx-pin')){e.preventDefault();e.stopPropagation();placeAt(e);return}var pin=e.target.closest('.rvx-pin');if(pin){e.preventDefault();if(pin._moved&&Date.now()-pin._moved<400)return;var c=comments().filter(function(z){return z.id===pin.getAttribute('data-cid')})[0];if(c)openBox(container(),c.x,c.y,c.id)}},true);
     if(!localStorage.getItem('rv_help'))showHelp();
   }
+  /* Dan's Version shows Dan's own build (dans-version branch preview) */
+  var DANURL='https://endeavorfrontiertech-git-dans-version-endeavor-colorado.vercel.app/frontier-tech-summit';
+  function danFrame(){var f=document.querySelector('.rvx-danframe');
+    if(MODE==='dan'&&!EMBED){if(!f){f=E('div','rvx-danframe','<iframe title="Dan\'s Version" src="'+DANURL+(location.hash||'')+'"></iframe>');f.style.cssText='position:fixed;left:0;right:0;top:48px;bottom:0;z-index:999;background:#0a0b1a';f.firstChild.style.cssText='width:100%;height:100%;border:0;display:block';document.body.appendChild(f)}}
+    else if(f){f.remove()}}
   function setMode(m){uncompare();MODE=m;localStorage.setItem('rv_mode',m);if(m==='dan'){document.documentElement.classList.add('rvx-pulse');setTimeout(function(){document.documentElement.classList.remove('rvx-pulse')},2200);toast('Click any text to change it')}if(m==='cmp'){document.querySelectorAll('.rvx-bar [data-m]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-m')==='cmp')});compare();return}applyMode();renderPins()}
   function showHelp(){localStorage.setItem('rv_help','1');var h=E('div','rvx-help','<div class="rvx-hc"><button class="rvx-x" aria-label="Close">×</button><p class="rvx-hk">Frontier Tech Summit · Site Review</p><h2>How this works</h2><ol><li><b>Dan\'s Version</b> is yours to edit. Click any headline, sentence, bullet or button label, type your change, then click anywhere else. It saves on its own and gets a small <i>Edited</i> tag. Click the tag to put the original wording back.</li><li><b>+ Comment</b> lets you pin a note anywhere. Click the button, then click the spot on the page, type, and post. Your pins stay where you put them; drag one if it is in the way. <b>Comments</b> lists every one.</li><li><b>Compare</b> shows the live site and your version side by side. <b>Live</b> shows the site exactly as the public sees it today.</li></ol><p class="rvx-hf">Nothing here changes the public site until Breanna combines the two versions.</p><button class="rvx-go">Got it</button></div>');document.body.appendChild(h);h.querySelector('.rvx-x').onclick=h.querySelector('.rvx-go').onclick=function(){h.remove()}}
 
