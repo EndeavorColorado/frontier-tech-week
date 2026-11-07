@@ -67,6 +67,8 @@
     document.getElementById('fdrdata').textContent=JSON.stringify(D.founders||[]);
     document.getElementById('toursdata').textContent=JSON.stringify(D.tours||[]);
     var base=(D.budget&&D.budget.base)||{headcount:150,cont:10,lines:[],rev:{},price:{}};var saved=D.budget&&D.budget.saved;
+    // the budget long form and target live behind the members login (plan.json), not in this public repo
+    (function(){var bl=document.getElementById('budget-long');if(bl)bl.innerHTML=base.long_html||'<p class="lede">The long form is available to admins.</p>';window.__bTarget=base.target||0;var c={};for(var k in base)if(k!=='long_html'&&k!=='target')c[k]=base[k];base=c})();
     // the repo's plan.json owns the line list, labels, notes and every quoted figure;
     // a saved budget keeps only its headcount, contingency, what-if counts and hand-edited estimates
     var state=base;

@@ -46,7 +46,7 @@ Dan describes changes in plain English. Claude does everything else.
 1. **After changing `index.html`, run `python3 build-review.py`.** It regenerates `frontier-tech-summit/review/index.html` (Dan's review link) from the live page. Commit both.
 2. **Never run `build-members.py`.** Its source file is not in this repo, so running it breaks the members area. Leave `frontier-tech-summit/members/` alone unless you mean to change the members area by hand.
 3. **No new outside scripts, embeds or trackers.** The site runs under endeavorcolorado.org's security policy, which only allows Google Fonts from other domains. Anything else (a new script, iframe, analytics tag) is silently blocked until it is added to that policy in the main site.
-4. **Keep data out of this repo.** It is public. Investor and founder lists, ratings and budgets live behind the members login, not in these files.
+4. **Keep data out of this repo.** It is public. Investor and founder lists, ratings and budgets live behind the members login, not in these files. The Budget tab's figures, long form and cost target come from the members API; never paste dollar amounts into `members/index.html` or `build/members-patches.json`.
 5. **Every link opens in a new tab** (`target="_blank" rel="noopener"`).
 6. **Pull before you start** (`git pull`), since Bre may also be editing.
 7. **Commit as Endeavor Colorado, or the push won't go live.** Vercel's plan only deploys commits saved under the account's own author. Run this once in the clone:

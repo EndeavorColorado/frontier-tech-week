@@ -116,6 +116,18 @@ for _p in _json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)
         s = s.replace(_p['old'], _p['new'], 1)
     elif _p['new'] not in s:
         print('patch skipped, anchor gone:', _p['old'][:60])
+# 6. budget figures stay out of this public repo: the long form and target come from plan.json via the members API
+import re as _re
+_o = '<div class="card" id="budget-long" role="tabpanel" hidden>'
+_a = s.index(_o) + len(_o); _b = s.index('<div id="pane-inv" role="tabpanel" hidden>')
+_in = s[_a:_b]; _e = _in.rindex('</div>'); _e = _in.rindex('</div>', 0, _e)
+s = s[:_a] + '\n<p class="lede" id="budget-long-wait">Loading…</p>\n  ' + _in[_e:] + s[_b:]
+s = s.replace("if(P.investor==null) P.investor=2000; if(P.corporate==null) P.corporate=2500;", "if(P.investor==null) P.investor=0; if(P.corporate==null) P.corporate=0;")
+s = s.replace("var h='';\n    h+='<div class=\"hero\">", "var h='',TG=window.__bTarget||0;\n    h+='<div class=\"hero\">", 1)
+s = s.replace("Target is about $1,000 a head ('+(total/S.headcount>1000?money(total/S.headcount-1000)+' over, '+money((total/S.headcount-1000)*S.headcount)+' in all':'on target')+')",
+              "'+(TG?'Target is about '+money(TG)+' a head ('+(total/S.headcount>TG?money(total/S.headcount-TG)+' over, '+money((total/S.headcount-TG)*S.headcount)+' in all':'on target')+')':'')+'")
+s = _re.sub(r"'\$[0-9,]+ all-in", lambda m: {"'$750":"money(P.founder)+' ", "'$2,000":"money(P.investor)+' ", "'$2,500":"money(P.corporate)+' "}.get(m.group(0).split(' ')[0], m.group(0).split(' ')[0]+' ') + "all-in", s)
+assert not _re.search(r'id="budget-long"[^>]*>\s*<h3', s), 'budget long form leaked into the page'
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'frontier-tech-summit', 'members', 'index.html')
 open(out, 'w', encoding='utf-8').write(s)
 assert 'invdata' in s and '"n":"Eclipse"' not in s, 'data leaked into the page'
