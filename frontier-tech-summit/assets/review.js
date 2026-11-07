@@ -122,7 +122,7 @@
     if(!localStorage.getItem('rv_help'))showHelp();
   }
   /* Dan's Version shows Dan's own build (dans-version branch preview) */
-  var DANURL='https://endeavorfrontiertech-git-dans-version-endeavor-colorado.vercel.app/frontier-tech-summit';
+  var DANURL='/frontier-tech-summit/dan';
   function danFrame(){var f=document.querySelector('.rvx-danframe');
     if(MODE==='dan'&&!EMBED){if(!f){f=E('div','rvx-danframe','<iframe title="Dan\'s Version" src="'+DANURL+(location.hash||'')+'"></iframe>');f.style.cssText='position:fixed;left:0;right:0;top:48px;bottom:0;z-index:999;background:#0a0b1a';f.firstChild.style.cssText='width:100%;height:100%;border:0;display:block';document.body.appendChild(f)}}
     else if(f){f.remove()}}
