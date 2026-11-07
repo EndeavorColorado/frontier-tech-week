@@ -257,7 +257,7 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .has-flow-top::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-flow.png) left top/min(110%,1500px) auto no-repeat;transform:scale(-1,-1);opacity:.16}
 @media (max-width:760px){.has-flow-top::before{background-size:160% auto;opacity:.13}}
 </style>
-<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=61b1360"></head>
+<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=605614c"></head>
 <body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1769,6 +1769,17 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
 /* hero tagline under the title (Bre, 11/7) */
 .hero .tag{max-width:60ch!important;text-wrap:balance}
 .hero .tagline{font-family:var(--body);font-weight:500;font-size:clamp(18px,1.7vw,24px);line-height:1.35;color:#fff;margin:18px 0 0;max-width:34ch;text-shadow:0 1px 14px rgba(6,4,30,.4)}
+/* hero type and pacing (Bre, 11/7): three levels, one title block, 8px rhythm */
+.hero .tag{font-size:clamp(14px,1.12vw,16px)!important;font-weight:500!important;color:rgba(255,255,255,.8)!important;opacity:1!important;line-height:1.4;margin:0 0 24px!important}
+.hero .title{font-size:clamp(48px,8.33vw,120px)!important;line-height:.92!important;margin:0!important}
+.hero .title small{font-size:.75em!important;font-weight:600!important;letter-spacing:.005em!important;line-height:.95!important}
+.hero .tagline{max-width:46ch!important;font-weight:400!important;font-size:clamp(19px,1.8vw,26px)!important;letter-spacing:-.02em;margin:28px 0 0!important}
+.hero p.date{margin:32px 0 0!important;font-size:clamp(14px,1.18vw,17px)!important;letter-spacing:.1em!important}
+.hero p.date b{line-height:1.6!important}
+.hero .hosted{font-size:clamp(13px,1vw,14px)!important;color:rgba(255,255,255,.75)!important;margin:16px 0 0!important}
+.hero .actions{margin-top:32px!important}
+@media (min-width:761px) and (max-height:860px){.hero .title{font-size:clamp(48px,min(8.33vw,12.5vh),120px)!important}.hero .tag{margin-bottom:16px!important}.hero .tagline{margin-top:22px!important}.hero p.date{margin-top:22px!important}.hero .actions{margin-top:24px!important}}
+@media (max-width:760px){.hero .tag{margin-bottom:16px!important}.hero .tagline{margin-top:20px!important}.hero p.date{margin-top:24px!important}.hero .hosted{margin-top:12px!important}.hero .actions{margin-top:24px!important}}
 /* Who Attends cards line up */
 @media (min-width:761px){.seg2 .seg-line{min-height:3.2em}}
 /* Frontier names only, no descriptions */
@@ -1908,6 +1919,6 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
 })();
 </script>
 
-<script src="/frontier-tech-summit/assets/review.js?v=61b1360"></script>
+<script src="/frontier-tech-summit/assets/review.js?v=605614c"></script>
 </body>
 </html>
