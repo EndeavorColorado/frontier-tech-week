@@ -258,23 +258,25 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 @media (max-width:760px){.has-flow-top::before{background-size:160% auto;opacity:.13}}
 </style>
 <style id="dan-version">
-/* Dan's Version: hero overrides */
-.hero .tag{max-width:none;border:0;padding-left:0;font-size:16px;letter-spacing:.14em;line-height:1.7}
+/* Dan's Version: hero (11/7 pass: one accent per line, quieter supporting type) */
+.hero .tag{max-width:none;border:0;padding-left:0;font-size:13px;letter-spacing:.2em;line-height:1.9;margin:0}
 .hero .tag::before,.hero .tag::after{content:none;display:none}
-.hero .tag span{display:block;white-space:nowrap}
-.hero .tag span{color:var(--teal)!important}
-.hero h1.title{white-space:nowrap;font-size:clamp(48px,8.4vw,128px);line-height:.95;margin-top:20px}
-.hero h1.title small{display:block;white-space:nowrap;font-size:clamp(17px,2.35vw,34px);font-weight:500;letter-spacing:.12em;color:var(--teal);margin-top:.6em}
-.hero p.date{display:block;margin-top:28px}
-.hero p.date b{display:block;color:var(--peach)!important;font-weight:500;line-height:1.75}
-.hero .hosted{white-space:nowrap;color:rgba(255,255,255,.88);letter-spacing:.08em!important}
+.hero .tag span{display:block;white-space:nowrap;color:var(--teal)!important;opacity:.95}
+.hero h1.title{white-space:nowrap;font-size:clamp(48px,8.4vw,128px);line-height:.92;margin-top:18px}
+.hero h1.title small{display:block;white-space:nowrap;font-size:clamp(13px,1.25vw,18px);font-weight:500;letter-spacing:.22em;color:rgba(255,255,255,.9);margin-top:1.1em}
+.hero p.date{display:flex;flex-wrap:wrap;gap:0 14px;margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);width:max-content;max-width:100%}
+.hero p.date b{display:inline;color:var(--peach)!important;font-weight:500;line-height:1.6}
+.hero p.date b+b::before{content:"·";margin-right:14px;opacity:.6}
+.hero .hosted{white-space:nowrap;color:rgba(255,255,255,.7);font-size:12px!important;letter-spacing:.14em!important;margin-top:10px}
+.hero .actions{margin-top:30px}
 @media (max-width:760px){
   .hero .tag span,.hero h1.title small,.hero .hosted{white-space:normal}
-  .hero .tag{font-size:13px}
+  .hero .tag{font-size:11px}
+  .hero p.date{width:auto}
 }
 
 /* fit */
-.hero .tag span,.hero h1.title small,.hero .hosted{width:max-content;max-width:none}
+.hero .tag span,.hero h1.title small,.hero .hosted{width:auto;max-width:none}
 
 /* Long Form placeholders */
 .lf-themes{max-width:760px}
@@ -356,7 +358,7 @@ section.ww{padding-top:0!important;padding-bottom:0!important}
 .ww-grid>.ww-col:first-child{order:2}
 
 </style>
-<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=08011e0"></head>
+<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=086918d"></head>
 <body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1957,7 +1959,7 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
   }
   function run(){
     var tags=[].slice.call(document.querySelectorAll('.hero .tag span')), hosted=document.querySelector('.hero .hosted');
-    if(innerWidth<760){tags.concat([hosted]).forEach(function(e){e.style.fontSize=''});return}
+    tags.concat([hosted]).forEach(function(e){e.style.fontSize=''});return; // 11/7: fixed sizes, no stretch
     fit(tags,settledRight(document.querySelector('.hero .t-main')));
     fit([hosted],settledRight(document.querySelector('.hero h1.title small')));
   }
@@ -1978,6 +1980,6 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
 })();
 
 </script>
-<script src="/frontier-tech-summit/assets/review.js?v=08011e0"></script>
+<script src="/frontier-tech-summit/assets/review.js?v=086918d"></script>
 </body>
 </html>
