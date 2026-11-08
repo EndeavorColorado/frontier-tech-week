@@ -257,7 +257,7 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .has-flow-top::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-flow.png) left top/min(110%,1500px) auto no-repeat;transform:scale(-1,-1);opacity:.16}
 @media (max-width:760px){.has-flow-top::before{background-size:160% auto;opacity:.13}}
 </style>
-<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=cd6fa6a"></head>
+<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=b5012f5"></head>
 <body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1295,7 +1295,7 @@ h1[tabindex="-1"]:focus{outline:none}
 
 <div class="page has-reel" id="page-program"><div class="reel" aria-hidden="true"></div>
   <section class="page-hero prog-hero"><div class="wrap"><h1>How the Summit Works</h1></div></section><h2 class="vh">The Formats</h2>
-  <section class="tight program-acts"><div class="wrap"><div class="acts"><div class="act"><div class="act-h"><h3>Group Sessions</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Main Stage</span></div><h4>Key Note Panels</h4><p class="fmt-what">Two Keynotes</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Multiple Stages</span></div><h4>Frontier Panels</h4><p class="fmt-what">Six in Total &nbsp;·&nbsp; One per Frontier</p></article></div><div class="act"><div class="act-h"><h3>Curated Conversations</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Founders · Investors · Strategics</span></div><h4>Roundtable Conversations</h4><p class="fmt-what">12–15 Attendees per Session · Intimate</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Founders + Investors or Strategics</span></div><h4>1:1 Private Discussions</h4><p class="fmt-what">20–30 Minutes · Wednesday and Thursday</p></article></div><div class="act"><div class="act-h"><h3>Evening Gatherings</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Tuesday · Welcome Dinner</span></div><h4>Dinner at Corrida</h4><p class="fmt-what">The Whole Room · Rooftop, Downtown</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday · Dinner</span></div><h4>Dinner at the Caruso Residence</h4><p class="fmt-what">Under the Flatirons · Live Music</p></article></div><div class="act"><div class="act-h"><h3>Activities</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Tuesday Afternoon</span></div><h4>Hike · Bike · Pearl Street Stroll · Workout · Yoga</h4></article></div></div></div></section>
+  <section class="tight program-acts"><div class="wrap"><div class="acts"><div class="act"><div class="act-h"><h3>On Stage</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wed &amp; Thu Mornings</span></div><h4>Two Keynotes</h4><p class="fmt-what">The whole room, one stage</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday</span></div><h4>Six Frontier Panels</h4><p class="fmt-what">One per Frontier</p></article></div><div class="act"><div class="act-h"><h3>Small Rooms</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wed Lunch · Thu Breakfast</span></div><h4>Roundtables</h4><p class="fmt-what">12–15 per table, off the record</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wed &amp; Thu Afternoons</span></div><h4>One on Ones</h4><p class="fmt-what">20–30 minutes, set in advance</p></article></div><div class="act"><div class="act-h"><h3>Evenings</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Tuesday · 6:30 PM</span></div><h4>Corrida Rooftop</h4><p class="fmt-what">Welcome dinner for all 150</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Wednesday · 6:00 PM</span></div><h4>Caruso Residence</h4><p class="fmt-what">Dinner and live music</p></article></div><div class="act"><div class="act-h"><h3>Out in Boulder</h3></div><article class="fmt"><div class="fmt-head"><span class="fmt-when">Tuesday Afternoon</span></div><h4>Into the Foothills</h4><p class="fmt-what">Hike or bike the Flatirons trails</p></article><article class="fmt"><div class="fmt-head"><span class="fmt-when">Tuesday Afternoon</span></div><h4>Around Town</h4><p class="fmt-what">Pearl Street, a workout or yoga</p></article></div></div></div></section>
   <style>
 /* Full agenda: one ruled list per day, time / session / place; a role filter dims rows that are not yours. */
 .ag{padding-bottom:clamp(48px,7vw,96px)}
@@ -1819,7 +1819,7 @@ figure[data-chill]:focus-visible{outline:2px solid var(--teal);outline-offset:2p
 #page-partners .sx-link{margin:auto 24px 24px;padding-top:14px}
 
 /* 11/8 How page: four groups */
-@media (min-width:901px){#page-program .acts{grid-template-columns:repeat(4,minmax(0,1fr))}#page-program .act:nth-child(4)>*{grid-column:4}}
+@media (min-width:901px){#page-program .acts{grid-template-columns:repeat(4,minmax(0,1fr))}}
 #page-program .fmt-head{white-space:normal;overflow:visible}
 
 /* Who & Why: Who Attends block under Why Now (Bre, 11/8) */
@@ -1854,6 +1854,8 @@ html.mo #page-why-now .wn-who .seg.seg2.rv{transition:opacity .42s cubic-bezier(
 /* first load: nothing below the banner shows before the banner lines finish */
 html.mo #page-home .hero:not(.hero-in) ~ section .rv{opacity:0!important;transform:translateY(44px)!important}
 html.mo #page-home .hero.hero-in ~ section .rv.in{transition-delay:.5s}
+/* How grid: same structure in every tile so titles line up across rows (Bre, 11/8) */
+@media (min-width:901px) and (max-width:1279px){#page-program .fmt-what{min-height:3em;display:flex;align-items:flex-end}}
 /* Who & Why order: Who Attends first, then Why (Bre, 11/8) */
 .wn-who{padding:clamp(48px,7vw,96px) 0 0!important}
 .wn-who .section-head{margin-bottom:0!important}
@@ -2004,6 +2006,6 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
 })();
 </script>
 
-<script src="/frontier-tech-summit/assets/review.js?v=cd6fa6a"></script>
+<script src="/frontier-tech-summit/assets/review.js?v=b5012f5"></script>
 </body>
 </html>
