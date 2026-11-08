@@ -36,7 +36,7 @@ Dan describes changes in plain English. Claude does everything else.
 
 ## Where things are
 
-- `frontier-tech-summit/index.html` is the whole public site, one file. Each nav page is a `<div class="page" id="page-…">`, switched by the URL hash (`#why-now`, `#attend`, `#frontiers`, `#program`, `#boulder`, `#partners`; `#home` is the default).
+- `frontier-tech-summit/index.html` is the whole public site, one file. Each nav page is a `<div class="page" id="page-…">`, switched by the URL hash: `#frontiers`, `#why-now` (Who & Why), `#program` (How), `#agenda`, `#partners`, `#boulder`; `#home` is the default and old `#attend` links land on `#why-now`.
 - The header is near the top of the body (`<header class="site-header v2">`). Its styles and scroll script sit at the very end of the file in `<style id="hdr-v2">` and `<script id="hdr-v2-js">`.
 - Images live in `frontier-tech-summit/assets/`. Keep new images under about 400 KB (WebP or JPEG); git keeps every version forever.
 - Fonts are Oswald (display) and Inter (body) from Google Fonts.

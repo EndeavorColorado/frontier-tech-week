@@ -417,7 +417,7 @@ html:not(.mb-gate) .mh.v2 .mh-lockup{color:var(--ink)}
   .mh.v2 .nav-more.open .nm-dd{display:flex}
 }
 @media (hover:hover) and (min-width:1024px){.mh.v2 .nav-more:hover .nm-dd{display:flex}}
-@media (min-width:1024px) and (max-width:1215px){
+@media (min-width:1024px) and (max-width:1299px){
   .mh.v2 .p-low{display:none!important}
   .mh.v2 .nav-more{display:inline-flex}
   .mh.v2 .nm-dd .p-mid{display:none}
@@ -425,7 +425,7 @@ html:not(.mb-gate) .mh.v2 .mh-lockup{color:var(--ink)}
   .mh.v2 .cta-short{display:inline}
   .mh.v2 .mh-nav > a:not(.mh-cta),.mh.v2 .nm-btn{padding-left:12px;padding-right:12px}
 }
-@media (min-width:1024px) and (max-width:1135px){
+@media (min-width:1024px) and (max-width:1179px){
   .mh.v2 .mh-main{gap:32px}
   .mh.v2 .p-mid{display:none!important}
   .mh.v2 .nm-dd .p-mid{display:block!important}
