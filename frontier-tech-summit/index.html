@@ -1229,9 +1229,8 @@ h1[tabindex="-1"]:focus{outline:none}
 </style>
 <section class="wn-hero" aria-label="Why Now"><div class="wn-in">
   <h1>Who &amp; Why</h1>
-  <span class="wn-meta">June 15 – 17, 2027 · Boulder, Colorado</span>
 </div></section>
-<section class="wn-who" aria-labelledby="wnWho"><div class="wrap"><div class="section-head compact"><div class="top"><p class="eyebrow">Who Attends</p></div><h2 id="wnWho">150 People: Founders, Investors and Partners</h2></div></div><section class="tight"><div class="wrap">
+<section class="wn-who" aria-labelledby="wnWho"><div class="wrap"><div class="section-head compact"><h2 id="wnWho">150 People: Founders, Investors and Partners</h2></div></div><section class="tight"><div class="wrap">
     <div class="segs segs2">
       <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-founder-v2.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Builders</span><h3>Tech Founders</h3><p class="seg-line">Series A and Beyond</p><ul class="seg-checks"><li>Soonicorns and Unicorns</li><li>Globally Significant</li><li>Seeking Capital</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
       <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-investor.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Investors</span><h3>Managing Directors</h3><p class="seg-line">Growth Stage Funds and High Impact Leaders</p><ul class="seg-checks"><li>Deep Tech Mandate</li><li>Global Focus</li><li>Active Funds</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
@@ -1239,7 +1238,7 @@ h1[tabindex="-1"]:focus{outline:none}
     </div>
     
   </div></section></section>
-<div class="wn-whyhead"><div class="wrap"><div class="section-head compact"><div class="top"><p class="eyebrow">Why</p></div><h2 id="wnWhy">Why Now</h2></div></div></div>
+<div class="wn-whyhead"><div class="wrap"><div class="section-head compact"><h2 id="wnWhy">Why Now</h2></div></div></div>
 <div class="wn-tog"><div class="wn-in">
   <div class="wn-seg" role="group" aria-label="Reading length">
     <button type="button" id="wnShort" aria-pressed="true">Short Form</button>
@@ -1938,10 +1937,11 @@ html.mo .agl-rv.in{opacity:1;transform:none}
 @media (max-width:1000px){.agl-panels{grid-template-columns:1fr}}
 @media (max-width:700px){.agl-row{grid-template-columns:1fr;gap:8px;padding:22px 0}.agl-row time{padding-top:0}.agl-bar a{padding:8px 12px;font-size:14px}.agl-bar a span{display:none}.agl-meta i{margin:0 6px}}
 /* Who & Why order: Who Attends first, then Why (Bre, 11/8) */
-.wn-who{padding:clamp(48px,7vw,96px) 0 0!important}
+.wn-who{padding:var(--wn-gap) 0 0!important}
 .wn-who .section-head{margin-bottom:0!important}
-.wn-who section.tight{padding-top:clamp(20px,2.4vw,32px)!important;padding-bottom:clamp(48px,6vw,80px)!important}
-.wn-whyhead{padding:clamp(48px,6vw,80px) 0 4px;border-top:1px solid var(--rule)}
+.wn-who section.tight{padding-top:clamp(20px,2.4vw,32px)!important;padding-bottom:var(--wn-gap)!important}
+#page-why-now{--wn-gap:clamp(40px,5vw,64px)}
+.wn-whyhead{padding:var(--wn-gap) 0 calc(clamp(20px,2.4vw,32px) - 18px);border-top:1px solid var(--rule)}
 .wn-whyhead .section-head{margin-bottom:0}
 </style>
 <style id="hdr-v2">
