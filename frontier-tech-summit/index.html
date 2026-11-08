@@ -161,11 +161,11 @@ html.mo .rv.from-l{transform:translateX(-80px)}
 html.mo .rv.from-r{transform:translateX(80px)}
 html.mo .rv.from-l,html.mo .rv.from-r{transition-duration:.9s;transition-timing-function:cubic-bezier(.45,0,.2,1);transition-delay:.2s}
 html.mo .rv.in{opacity:1;transform:none}
-html.mo .hero .tag,html.mo .hero .title,html.mo .hero .year,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
-html.mo .hero.hero-in .tag,html.mo .hero.hero-in .title,html.mo .hero.hero-in .year,html.mo .hero.hero-in .date,html.mo .hero.hero-in .hosted,html.mo .hero.hero-in .actions{opacity:1;transform:none}
-html.mo .hero .title{transition-delay:.18s}html.mo .hero .year{transition-delay:.24s}html.mo .hero .date{transition-delay:.3s}html.mo .hero .hosted{transition-delay:.36s}html.mo .hero .actions{transition-delay:.42s}html.mo .hero .tag{transition-delay:.12s}
+html.mo .hero .tag,html.mo .hero .title,html.mo .hero .tagline,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
+html.mo .hero.hero-in .tag,html.mo .hero.hero-in .title,html.mo .hero.hero-in .tagline,html.mo .hero.hero-in .date,html.mo .hero.hero-in .hosted,html.mo .hero.hero-in .actions{opacity:1;transform:none}
+html.mo .hero .title{transition-delay:.18s}html.mo .hero .tagline{transition-delay:.26s}html.mo .hero .date{transition-delay:.34s}html.mo .hero .hosted{transition-delay:.4s}html.mo .hero .actions{transition-delay:.46s}html.mo .hero .tag{transition-delay:.12s}
 html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:hidden}
-@media (prefers-reduced-motion:reduce){html.mo .rv,html.mo .hero .tag,html.mo .hero .title,html.mo .hero .year,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:1!important;transform:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){html.mo .rv,html.mo .hero .tag,html.mo .hero .title,html.mo .hero .tagline,html.mo .hero .date,html.mo .hero .hosted,html.mo .hero .actions{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
 <style>
 .tight-hero{padding-bottom:clamp(8px,1.2vw,18px)!important}
@@ -1231,6 +1231,15 @@ h1[tabindex="-1"]:focus{outline:none}
   <h1>Who &amp; Why</h1>
   <span class="wn-meta">June 15 – 17, 2027 · Boulder, Colorado</span>
 </div></section>
+<section class="wn-who" aria-labelledby="wnWho"><div class="wrap"><div class="section-head compact"><div class="top"><p class="eyebrow">Who Attends</p></div><h2 id="wnWho">150 People: Founders, Investors and Partners</h2></div></div><section class="tight"><div class="wrap">
+    <div class="segs segs2">
+      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-founder-v2.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Builders</span><h3>Tech Founders</h3><p class="seg-line">Series A and Beyond</p><ul class="seg-checks"><li>Soonicorns and Unicorns</li><li>Globally Significant</li><li>Seeking Capital</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
+      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-investor.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Investors</span><h3>Managing Directors</h3><p class="seg-line">Growth Stage Funds and High Impact Leaders</p><ul class="seg-checks"><li>Deep Tech Mandate</li><li>Global Focus</li><li>Active Funds</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
+      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-corp-v2.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Partners</span><h3>Executives</h3><p class="seg-line">Leaders looking to buy, partner or pilot.</p><ul class="seg-checks"><li>Hyper Scalers</li><li>AI Leaders</li><li>Corporate Innovators</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
+    </div>
+    
+  </div></section></section>
+<div class="wn-whyhead"><div class="wrap"><div class="section-head compact"><div class="top"><p class="eyebrow">Why</p></div><h2 id="wnWhy">Why Now</h2></div></div></div>
 <div class="wn-tog"><div class="wn-in">
   <div class="wn-seg" role="group" aria-label="Reading length">
     <button type="button" id="wnShort" aria-pressed="true">Short Form</button>
@@ -1264,14 +1273,6 @@ h1[tabindex="-1"]:focus{outline:none}
     <p>Boulder also keeps time. NIST’s atomic clocks here help set the world’s, and five physicists with ties to Boulder’s labs have won the Nobel Prize since 2001. See the frontier in a day, then hike the Flatirons before dinner.</p></article>
 </div></div></section>
 </div>
-<section class="wn-who" aria-labelledby="wnWho"><div class="wrap"><div class="section-head compact"><div class="top"><p class="eyebrow">Who Attends</p></div><h2 id="wnWho">150 People: Founders, Investors and Partners</h2></div></div><section class="tight"><div class="wrap">
-    <div class="segs segs2">
-      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-founder-v2.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Builders</span><h3>Tech Founders</h3><p class="seg-line">Series A and Beyond</p><ul class="seg-checks"><li>Soonicorns and Unicorns</li><li>Globally Significant</li><li>Seeking Capital</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
-      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-investor.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Investors</span><h3>Managing Directors</h3><p class="seg-line">Growth Stage Funds and High Impact Leaders</p><ul class="seg-checks"><li>Deep Tech Mandate</li><li>Global Focus</li><li>Active Funds</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
-      <div class="seg seg2"><div class="seg-art"><img src="/frontier-tech-summit/assets/who-corp-v2.webp" alt="" loading="eager" width="1456" height="819"></div><div class="seg-body"><span class="seg-tag">Partners</span><h3>Executives</h3><p class="seg-line">Leaders looking to buy, partner or pilot.</p><ul class="seg-checks"><li>Hyper Scalers</li><li>AI Leaders</li><li>Corporate Innovators</li></ul><div class="seg-foot"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a></div></div></div>
-    </div>
-    
-  </div></section></section>
 <section class="wn-close"><div class="wn-in">
   <div><h3>150 seats. Three days. One room in Boulder.</h3><span class="wn-cm">Invitation only · June 15 – 17, 2027</span></div>
   <a class="wn-btn" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation</a>
@@ -1639,7 +1640,7 @@ d.querySelectorAll('[data-inquire]').forEach(function(a){a.addEventListener('cli
   document.querySelectorAll('#page-home .who .w').forEach(function(e){e.classList.add('from-r')});
   // other pages
   tag('.page-hero .wrap > *');
-  tag('#page-attend .seg2');
+  tag('#page-why-now .wn-who .section-head');tag('#page-why-now .wn-who .seg2');tag('#page-why-now .wn-whyhead .section-head');tag('#page-why-now .wn-tog .wn-in');tag('#page-why-now .wn-short li');tag('#page-why-now .wn-close .wn-in');tag('#page-program .act-h');tag('#page-program .act .fmt');
   tag('#allFrontiers .ftile');
   tag('#agDays .ag-day');tag('.ag-arrive');
   tag('#page-partners .tier4');tag('#page-partners .sx-head');tag('#page-partners .sx-tile');tag('#page-partners .sp-contact');
@@ -1842,19 +1843,23 @@ figure[data-chill]:focus-visible{outline:2px solid var(--teal);outline-offset:2p
 #page-why-now .wn-who .seg2 .btn{padding-block:12px}
 #page-why-now .wn-who .seg2 .seg-checks{gap:4px}
 #page-why-now .wn-who .seg2 .btn{padding-block:10px}
-#page-why-now .wn-who .seg2');
-  tag('#allFrontiers .ftile');
-  tag('#agDays .ag-day');tag('.ag-arrive');
-  tag('#page-partners .tier4');tag('#page-partners .sx-head');tag('#page-partners .sx-tile');tag('#page-partners .sp-contact');
-  tag('#page-boulder .venue');tag('#page-boulder .vbanner');tag('#page-boulder .gather-info .section-head');tag('#page-boulder .gcard');
-  // --- observer: fire at 85% of viewport, once, 15ms sibling stagger ---
-  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var el=en.target;var sibs=[].slice.call(el.parentNode.children).filter(function(c){return c.classList&&c.classList.contains('rv')&&!c.classList.contains('in')}
 #page-why-now .wn-who .seg2 h3{font-size:clamp(22px,1.9vw,26px);white-space:nowrap}
 #page-why-now .wn-who .seg2 .seg-foot{border-top:0;padding-top:0}
 #page-why-now .wn-who .seg2{background:rgba(11,11,34,.85)}
 .wn-who{padding:clamp(48px,7vw,96px) 0 clamp(24px,4vw,48px)}
 .wn-who .section-head{margin-bottom:28px}
 
+
+html.mo #page-why-now .wn-who .seg.seg2.rv{transition:opacity .42s cubic-bezier(.2,.8,.2,1),transform .42s cubic-bezier(.2,.8,.2,1),border-color .3s ease,box-shadow .3s ease}
+/* first load: nothing below the banner shows before the banner lines finish */
+html.mo #page-home .hero:not(.hero-in) ~ section .rv{opacity:0!important;transform:translateY(44px)!important}
+html.mo #page-home .hero.hero-in ~ section .rv.in{transition-delay:.5s}
+/* Who & Why order: Who Attends first, then Why (Bre, 11/8) */
+.wn-who{padding:clamp(48px,7vw,96px) 0 0!important}
+.wn-who .section-head{margin-bottom:0!important}
+.wn-who section.tight{padding-top:clamp(20px,2.4vw,32px)!important;padding-bottom:clamp(48px,6vw,80px)!important}
+.wn-whyhead{padding:clamp(48px,6vw,80px) 0 4px;border-top:1px solid var(--rule)}
+.wn-whyhead .section-head{margin-bottom:0}
 </style>
 <style id="hdr-v2">
 /* Header v2: thin top bar (dates, Partners, Log in) over one 64px row (lockup, 5 links, one button). Tucks to 64px on scroll. */
