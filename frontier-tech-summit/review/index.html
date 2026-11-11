@@ -20,6 +20,17 @@
 /* hero, Nov 11: name + one line. Eyebrow hidden (kept in the DOM so review edit keys stay stable). */
 .hero .tag:not(.rvx-edited){display:none!important}
 .hero .title:not(.rvx-edited){font-size:clamp(44px,min(7.8vw,14.4vh),112px)!important;line-height:.92!important}
+
+/* host credit, Nov 11: Endeavor family in partnership with Caruso Ventures. Kept as a <p> so review edit keys stay stable. */
+.hero .hosted.hx-b:not(.rvx-edited){display:flex!important;align-items:center;flex-wrap:wrap;gap:14px 26px;margin-top:26px!important;color:#fff!important;letter-spacing:0!important}
+.hero .hx-b:not(.rvx-edited) .fam,.hero .hx-b:not(.rvx-edited) .cv{display:grid;gap:4px}
+.hero .hx-b:not(.rvx-edited) .big{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.32em;font-size:20px;line-height:1.1;color:#fff}
+.hero .hx-b:not(.rvx-edited) .cv .big{letter-spacing:.2em}
+.hero .hx-b:not(.rvx-edited) .sub{font-family:var(--body);font-size:14px;letter-spacing:.02em;color:rgba(255,255,255,.82)}
+.hero .hx-b:not(.rvx-edited) .sub i{font-style:normal;color:var(--teal);padding:0 7px}
+.hero .hx-b:not(.rvx-edited) .k{font-family:var(--body);font-size:12px;font-style:italic;color:rgba(255,255,255,.65)}
+.hero .hx-b:not(.rvx-edited) .vr{width:1px;height:46px;background:rgba(255,255,255,.35)}
+@media(max-width:560px){.hero .hx-b:not(.rvx-edited) .vr{display:none}.hero .hx-b:not(.rvx-edited) .big{font-size:17px}}
 </style>
 <style>.gather .vlab,.gather h3,.gather p{text-shadow:0 1px 2px rgba(1,0,15,.55),0 0 18px rgba(1,0,15,.45)}</style>
 <style>
@@ -261,7 +272,7 @@ html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis
 .has-flow-top::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url(/frontier-tech-summit/assets/brand-flow.png) left top/min(110%,1500px) auto no-repeat;transform:scale(-1,-1);opacity:.16}
 @media (max-width:760px){.has-flow-top::before{background-size:160% auto;opacity:.13}}
 </style>
-<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=e5baa2f"></head>
+<link rel="stylesheet" href="/frontier-tech-summit/assets/review.css?v=a3fbfda"></head>
 <body>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1085,7 +1096,7 @@ h1[tabindex="-1"]:focus{outline:none}
       <p class="tag">Entrepreneurs and investors shaping the human journey</p>
       <h1 class="title">Endeavor<br>Frontier Forum</h1>
       <p class="tagline">Where the world's frontier founders meet the capital to scale.</p>
-      <p class="date"><b>June 15–17, 2027</b><b>Invite-Only · Boulder, Colorado</b></p><p class="hosted">A collaboration between Endeavor Global, Endeavor Catalyst, Endeavor Colorado, and Caruso Ventures</p>
+      <p class="date"><b>June 15–17, 2027 · Boulder, Colorado</b></p><p class="hosted hx-b" aria-label="Endeavor Global, Endeavor Catalyst and Endeavor Colorado, in partnership with Caruso Ventures"><span class="fam" aria-hidden="true"><span class="big">Endeavor</span><span class="sub">Global<i>·</i>Catalyst<i>·</i>Colorado</span></span><span class="vr" aria-hidden="true"></span><span class="cv" aria-hidden="true"><span class="k">in partnership with</span><span class="big">Caruso Ventures</span></span></p>
       <div class="actions"><a class="btn btn-primary" href="https://luma.com/vlq9qh1d" target="_blank" rel="noopener">Request an Invitation <span class="arrow">→</span></a><a class="btn btn-ghost onhero" href="#partners" data-inquire="">Become a Partner</a></div>
           </div>
   </section>
@@ -2091,6 +2102,6 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
 })();
 </script>
 
-<script src="/frontier-tech-summit/assets/review.js?v=e5baa2f"></script>
+<script src="/frontier-tech-summit/assets/review.js?v=a3fbfda"></script>
 </body>
 </html>
