@@ -2069,6 +2069,15 @@ html{scroll-padding-top:calc(var(--hdr-now,var(--hdr)) + 12px)}
   .site-header.v2 .nav-cta{margin:12px 0 0;justify-content:center;text-align:center;display:flex}
 }
 </style>
+<style id="nov11-ask">
+/* Nov 11: one quiet ask. Header button slimmer and the only teal block; hero gets one outlined button.
+   "Become a Partner" is hidden, not deleted, so review edit keys stay stable. */
+.site-header.v2 .nav-cta{padding:7px 16px!important;font-size:14px!important;line-height:20px!important}
+#page-home .hero .actions .btn-ghost{display:none!important}
+#page-home .hero .actions .btn-primary{background:rgba(1,0,15,.18)!important;color:#fff!important;border:1px solid rgba(255,255,255,.75)!important;padding:11px 20px!important;font-size:14px!important;font-weight:500!important;letter-spacing:.02em;box-shadow:none!important;min-height:0!important}
+#page-home .hero .actions .btn-primary .arrow{color:var(--teal)}
+#page-home .hero .actions .btn-primary:hover{border-color:var(--teal)!important;background:rgba(1,0,15,.32)!important}
+</style>
 <script id="chill-js">
 /* Clicking the Chill House card opens the three-up photo rotation */
 (function(){
