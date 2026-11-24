@@ -276,10 +276,14 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   <div class="tabs sub2" role="tablist">
     <button role="tab" id="t-bshort" aria-selected="true">Short form</button>
     <button role="tab" id="t-blong" aria-selected="false">Long form</button>
+    <button role="tab" id="t-bhotels" aria-selected="false">Hotels</button>
   </div>
   <div class="card" id="budget-short" role="tabpanel"></div>
   <div class="card" id="budget-long" role="tabpanel" hidden>
 <p class="lede" id="budget-long-wait">Loading…</p>
+  </div>
+  <div class="card" id="budget-hotels" role="tabpanel" hidden>
+<p class="lede">Loading…</p>
   </div>
 </div>
 <div id="pane-inv" role="tabpanel" hidden>
@@ -390,8 +394,8 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
   var invView='inv';
   
   
-  group([document.getElementById('t-bshort'),document.getElementById('t-blong')],
-        [document.getElementById('budget-short'),document.getElementById('budget-long')],0);
+  group([document.getElementById('t-bshort'),document.getElementById('t-blong'),document.getElementById('t-bhotels')],
+        [document.getElementById('budget-short'),document.getElementById('budget-long'),document.getElementById('budget-hotels')],0);
   
   
   
@@ -413,7 +417,7 @@ table.tours tr.bench-head td{font-family:var(--mono);font-size:10px;letter-spaci
     w.querySelector('#budget-short').hidden=false; w.querySelector('#budget-long').hidden=true;
     w.querySelector('#t-agenda').setAttribute('aria-selected','true'); w.querySelector('#t-budget').setAttribute('aria-selected','false');
     w.querySelector('#t-along').setAttribute('aria-selected','true'); w.querySelector('#t-ashort').setAttribute('aria-selected','false');
-    w.querySelector('#t-bshort').setAttribute('aria-selected','true'); w.querySelector('#t-blong').setAttribute('aria-selected','false');
+    w.querySelector('#t-bshort').setAttribute('aria-selected','true'); w.querySelector('#t-blong').setAttribute('aria-selected','false'); if(w.querySelector('#t-bhotels')){w.querySelector('#t-bhotels').setAttribute('aria-selected','false');w.querySelector('#budget-hotels').hidden=true;}
     var json=JSON.stringify(S).replace(/<\//g,'<\\/');
     var fonts='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">';
     return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Frontier Tech Week Plan</title>'+fonts+'<style id="css">'+css+'</style></head><body><div class="wrap">'+w.innerHTML+'</div><script id="state" type="application/json">'+json+'<\/script><script id="invdata" type="application/json">'+invj+'<\/script><script id="toursdata" type="application/json">'+toursj+'<\/script><script id="fdrdata" type="application/json">'+fdrj+'<\/script><script id="app">'+app+'<\/script></body></html>';
